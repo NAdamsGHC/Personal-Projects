@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T18:02:08Z",
+  "generatedAt": "2026-06-14T22:56:06Z",
   "competition": "FIFA World Cup 2026",
   "rules": {
     "ownGoalsCount": true,
@@ -7,15 +7,87 @@
     "penaltyShootoutsCount": false
   },
   "meta": {
-    "matchesPlayed": 8,
+    "matchesPlayed": 10,
     "matchesTotal": 104,
     "teamsInTournament": 48
   },
   "friends": [
     {
       "rank": 1,
+      "name": "Chabba",
+      "totalGoals": 8,
+      "teamsLeft": 9,
+      "teamsTotal": 9,
+      "teams": [
+        {
+          "name": "Germany",
+          "goals": 7,
+          "played": 1,
+          "alive": true,
+          "code": "de"
+        },
+        {
+          "name": "Morocco",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "ma"
+        },
+        {
+          "name": "Algeria",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "dz"
+        },
+        {
+          "name": "Austria",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "at"
+        },
+        {
+          "name": "Cape Verde",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "cv"
+        },
+        {
+          "name": "DR Congo",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "cd"
+        },
+        {
+          "name": "France",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "fr"
+        },
+        {
+          "name": "Ivory Coast",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "ci"
+        },
+        {
+          "name": "Uruguay",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "uy"
+        }
+      ]
+    },
+    {
+      "rank": 2,
       "name": "Jez",
-      "totalGoals": 6,
+      "totalGoals": 7,
       "teamsLeft": 9,
       "teamsTotal": 9,
       "teams": [
@@ -34,18 +106,18 @@
           "code": "br"
         },
         {
+          "name": "Curaçao",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "cw"
+        },
+        {
           "name": "Switzerland",
           "goals": 1,
           "played": 1,
           "alive": true,
           "code": "ch"
-        },
-        {
-          "name": "Curaçao",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "cw"
         },
         {
           "name": "Egypt",
@@ -85,7 +157,79 @@
       ]
     },
     {
-      "rank": 2,
+      "rank": 3,
+      "name": "Toz",
+      "totalGoals": 6,
+      "teamsLeft": 9,
+      "teamsTotal": 9,
+      "teams": [
+        {
+          "name": "Japan",
+          "goals": 2,
+          "played": 1,
+          "alive": true,
+          "code": "jp"
+        },
+        {
+          "name": "Canada",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "ca"
+        },
+        {
+          "name": "Paraguay",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "py"
+        },
+        {
+          "name": "Qatar",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "qa"
+        },
+        {
+          "name": "Scotland",
+          "goals": 1,
+          "played": 1,
+          "alive": true,
+          "code": "gb-sct"
+        },
+        {
+          "name": "Belgium",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "be"
+        },
+        {
+          "name": "Iran",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "ir"
+        },
+        {
+          "name": "Panama",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "pa"
+        },
+        {
+          "name": "Portugal",
+          "goals": 0,
+          "played": 0,
+          "alive": true,
+          "code": "pt"
+        }
+      ]
+    },
+    {
+      "rank": 4,
       "name": "Adam",
       "totalGoals": 5,
       "teamsLeft": 9,
@@ -157,84 +301,19 @@
       ]
     },
     {
-      "rank": 3,
-      "name": "Toz",
-      "totalGoals": 4,
-      "teamsLeft": 9,
-      "teamsTotal": 9,
-      "teams": [
-        {
-          "name": "Canada",
-          "goals": 1,
-          "played": 1,
-          "alive": true,
-          "code": "ca"
-        },
-        {
-          "name": "Paraguay",
-          "goals": 1,
-          "played": 1,
-          "alive": true,
-          "code": "py"
-        },
-        {
-          "name": "Qatar",
-          "goals": 1,
-          "played": 1,
-          "alive": true,
-          "code": "qa"
-        },
-        {
-          "name": "Scotland",
-          "goals": 1,
-          "played": 1,
-          "alive": true,
-          "code": "gb-sct"
-        },
-        {
-          "name": "Belgium",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "be"
-        },
-        {
-          "name": "Iran",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "ir"
-        },
-        {
-          "name": "Japan",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "jp"
-        },
-        {
-          "name": "Panama",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "pa"
-        },
-        {
-          "name": "Portugal",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "pt"
-        }
-      ]
-    },
-    {
       "rank": 4,
       "name": "Baz",
-      "totalGoals": 3,
+      "totalGoals": 5,
       "teamsLeft": 9,
       "teamsTotal": 9,
       "teams": [
+        {
+          "name": "Netherlands",
+          "goals": 2,
+          "played": 1,
+          "alive": true,
+          "code": "nl"
+        },
         {
           "name": "South Korea",
           "goals": 2,
@@ -278,13 +357,6 @@
           "code": "iq"
         },
         {
-          "name": "Netherlands",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "nl"
-        },
-        {
           "name": "Saudi Arabia",
           "goals": 0,
           "played": 0,
@@ -297,78 +369,6 @@
           "played": 1,
           "alive": true,
           "code": "tr"
-        }
-      ]
-    },
-    {
-      "rank": 5,
-      "name": "Chabba",
-      "totalGoals": 1,
-      "teamsLeft": 9,
-      "teamsTotal": 9,
-      "teams": [
-        {
-          "name": "Morocco",
-          "goals": 1,
-          "played": 1,
-          "alive": true,
-          "code": "ma"
-        },
-        {
-          "name": "Algeria",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "dz"
-        },
-        {
-          "name": "Austria",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "at"
-        },
-        {
-          "name": "Cape Verde",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "cv"
-        },
-        {
-          "name": "DR Congo",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "cd"
-        },
-        {
-          "name": "France",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "fr"
-        },
-        {
-          "name": "Germany",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "de"
-        },
-        {
-          "name": "Ivory Coast",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "ci"
-        },
-        {
-          "name": "Uruguay",
-          "goals": 0,
-          "played": 0,
-          "alive": true,
-          "code": "uy"
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-14T18:02:08Z",
+  "generatedAt": "2026-06-14T22:56:06Z",
   "matches": [
     {
       "num": 1,
@@ -446,9 +446,9 @@
       "owner2": "Jez",
       "code1": "de",
       "code2": "cw",
-      "played": false,
-      "score1": null,
-      "score2": null,
+      "played": true,
+      "score1": 7,
+      "score2": 1,
       "pens": null
     },
     {
@@ -554,9 +554,9 @@
       "owner2": "Toz",
       "code1": "nl",
       "code2": "jp",
-      "played": false,
-      "score1": null,
-      "score2": null,
+      "played": true,
+      "score1": 2,
+      "score2": 2,
       "pens": null
     },
     {
