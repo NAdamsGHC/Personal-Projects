@@ -136,6 +136,32 @@
   footer a { color: var(--blue); font-weight: 600; }
   .err { background: #fff2f2; border: 1px solid #ffc9c9; color: #b42318; padding: 14px; border-radius: 12px; margin: 14px; }
 
+  /* clickable results counter + modal */
+  .pill-btn { font: inherit; cursor: pointer; border: 1px solid rgba(39,71,230,.35); color: var(--muted);
+              display: inline-flex; align-items: center; gap: 6px; transition: transform .12s, box-shadow .12s; }
+  .pill-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(20,40,80,.16); }
+  .pill-caret { color: var(--blue); font-weight: 900; }
+
+  .modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-end; justify-content: center; }
+  .modal[hidden] { display: none; }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(10,20,40,.55); }
+  .modal-card { position: relative; background: var(--card); width: 100%; max-width: 560px; max-height: 86vh;
+                display: flex; flex-direction: column; border-radius: 18px 18px 0 0; box-shadow: var(--shadow); }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 15px 18px;
+                border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .modal-head .ttl { display: flex; align-items: center; gap: 10px; }
+  .modal-head .ttl::before { content: ""; width: 5px; height: 17px; border-radius: 3px; background: linear-gradient(var(--orange), var(--gold)); }
+  .modal-close { border: none; background: #f0f4fa; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 13px; color: var(--muted); }
+  .modal-close:hover { background: #e4eaf2; color: var(--ink); }
+  .modal-body { overflow: auto; padding: 2px 18px 16px; }
+  .resday { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; color: var(--muted);
+            padding: 14px 0 6px; position: sticky; top: 0; background: var(--card); }
+  .resrow { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .resrow:last-child { border-bottom: 0; }
+  .resrow .rt { display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; padding: 2px 0; }
+  .resscore { text-align: right; }
+
+  @media (min-width: 560px) { .modal { align-items: center; } .modal-card { border-radius: 18px; } }
   @media (max-width: 460px) {
     .hero h1 { font-size: 23px; }
     .goals { font-size: 19px; }
@@ -174,6 +200,17 @@
     <div>Goals counted: own goals ✓ &nbsp;·&nbsp; extra time ✓ &nbsp;·&nbsp; penalty shootouts ✗</div>
     <div>Updated daily at lunchtime · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
   </footer>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="ttl">Latest results</span>
+      <button class="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="results"></div>
+  </div>
 </div>
 
 <script>
@@ -223,7 +260,7 @@ function fmtDate(dateStr) {
 function renderStatus(s) {
   const m = s.meta || {};
   document.getElementById("status").innerHTML =
-    `<span class="pill"><b>${m.matchesPlayed ?? "–"}</b> / ${m.matchesTotal ?? "–"} matches played</span>` +
+    `<button class="pill pill-btn" id="resultsBtn" title="See the latest results"><b>${m.matchesPlayed ?? "–"}</b> / ${m.matchesTotal ?? "–"} matches played <span class="pill-caret">›</span></button>` +
     `<span class="pill">Updated <b>${timeAgo(s.generatedAt)}</b></span>`;
 }
 
@@ -314,6 +351,45 @@ function renderFixtures(feed) {
   el.innerHTML = list.map(fixtureRow).join("");
 }
 
+function resultRow(mt) {
+  const isKO = mt.group == null;
+  const owner = o => (o && o !== "TBD") ? `<span class="own">${esc(o)}</span>` : "";
+  const stage = isKO ? `<span class="stage ko">${esc(mt.round)}</span>` : `<span class="stage">${esc(mt.group)}</span>`;
+  const pens = mt.pens ? `<div class="pens">pens ${esc(mt.pens)}</div>` : ``;
+  return `<div class="resrow">
+      <div>
+        <div class="rt">${flag(mt.code1)} <span>${esc(mt.team1)}</span> ${owner(mt.owner1)}</div>
+        <div class="rt">${flag(mt.code2)} <span>${esc(mt.team2)}</span> ${owner(mt.owner2)}</div>
+        ${stage}
+      </div>
+      <div class="resscore"><div class="score">${mt.score1}–${mt.score2}</div>${pens}</div>
+    </div>`;
+}
+
+function renderResults(feed) {
+  const el = document.getElementById("results");
+  const played = (feed.matches || []).filter(m => m.played);
+  played.sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.time || "").localeCompare(a.time || "") || (b.num - a.num));
+  if (!played.length) { el.innerHTML = `<div class="empty">No results yet — the tournament hasn't kicked off.</div>`; return; }
+  let html = "", lastDate = null;
+  for (const m of played) {
+    if (m.date !== lastDate) { html += `<div class="resday">${fmtDate(m.date)}</div>`; lastDate = m.date; }
+    html += resultRow(m);
+  }
+  el.innerHTML = html;
+}
+
+function wireModal() {
+  const modal = document.getElementById("modal");
+  const open = () => { modal.hidden = false; document.body.style.overflow = "hidden"; modal.querySelector(".modal-body").scrollTop = 0; };
+  const close = () => { modal.hidden = true; document.body.style.overflow = ""; };
+  const btn = document.getElementById("resultsBtn");
+  if (btn) btn.onclick = open;
+  modal.querySelector(".modal-close").onclick = close;
+  modal.querySelector(".modal-backdrop").onclick = close;
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) close(); });
+}
+
 Promise.all([
   fetch("./data/standings.json" + bust, opts).then(r => r.json()),
   fetch("./data/matches.json" + bust, opts).then(r => r.json())
@@ -322,6 +398,8 @@ Promise.all([
   renderFixtures(matches);
   renderTable(standings);
   renderUnassigned(standings);
+  renderResults(matches);
+  wireModal();
 }).catch(err => {
   document.getElementById("table").innerHTML =
     `<div class="err">Couldn't load the data. If you just published, give it a minute and refresh.<br><small>${esc(err.message || err)}</small></div>`;
