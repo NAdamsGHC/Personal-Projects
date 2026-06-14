@@ -2,9 +2,12 @@ name: Update World Cup 2026 dashboard
 
 on:
   schedule:
-    # 11:00 UTC = 12:00 UK lunchtime during the tournament (BST). GitHub runs
-    # scheduled jobs in UTC and may delay them by a few minutes under load.
-    - cron: "0 11 * * *"
+    # Four times a day (UTC). UK is +1 during the tournament, so these land at
+    # 08:00, 14:00, 20:00 and 00:00 UK — the 08:00 run scoops up the overnight
+    # games. GitHub runs scheduled jobs in UTC and may delay them under load.
+    # The job only commits when a score actually changes, so the extra runs are
+    # free no-ops the rest of the time.
+    - cron: "0 7,13,19,23 * * *"
   workflow_dispatch: {}        # lets you run it manually from the Actions tab
 
 permissions:
