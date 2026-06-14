@@ -1,0 +1,42 @@
+{
+  "competition": "FIFA World Cup 2026",
+  "dataSource": "https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json",
+  "rules": {
+    "ownGoalsCount": true,
+    "extraTimeCounts": true,
+    "penaltyShootoutsCount": false
+  },
+  "friends": {
+    "Baz": ["Iraq", "Saudi Arabia", "South Korea", "Bosnia & Herzegovina", "Turkey", "Croatia", "Colombia", "Netherlands", "England"],
+    "Adam": ["New Zealand", "Australia", "Tunisia", "Czech Republic", "Senegal", "Ecuador", "Mexico", "Norway", "Argentina"],
+    "Chabba": ["Cape Verde", "DR Congo", "Algeria", "Ivory Coast", "Austria", "Uruguay", "Morocco", "Germany", "France"],
+    "Toz": ["Panama", "Qatar", "Iran", "Scotland", "Paraguay", "Canada", "Japan", "Belgium", "Portugal"],
+    "Jez": ["Curacao", "South Africa", "Ghana", "Egypt", "Sweden", "Switzerland", "USA", "Brazil", "Spain"]
+  },
+  "aliases": {
+    "South Korea": ["Korea Republic", "Korea, South", "Republic of Korea"],
+    "Iran": ["IR Iran"],
+    "USA": ["United States", "United States of America"],
+    "Turkey": ["Turkiye", "Türkiye"],
+    "Ivory Coast": ["Cote d'Ivoire", "Côte d'Ivoire"],
+    "Cape Verde": ["Cabo Verde"],
+    "Czech Republic": ["Czechia"],
+    "Bosnia & Herzegovina": ["Bosnia and Herzegovina", "Bosnia-Herzegovina"],
+    "DR Congo": ["Congo DR", "Democratic Republic of the Congo", "Congo (DR)"],
+    "Curacao": ["Curaçao"]
+  },
+  "flags": {
+    "Algeria": "dz", "Argentina": "ar", "Australia": "au", "Austria": "at",
+    "Belgium": "be", "Bosnia & Herzegovina": "ba", "Brazil": "br", "Canada": "ca",
+    "Cape Verde": "cv", "Colombia": "co", "Croatia": "hr", "Curacao": "cw",
+    "Czech Republic": "cz", "DR Congo": "cd", "Ecuador": "ec", "Egypt": "eg",
+    "England": "gb-eng", "France": "fr", "Germany": "de", "Ghana": "gh",
+    "Haiti": "ht", "Iran": "ir", "Iraq": "iq", "Ivory Coast": "ci",
+    "Japan": "jp", "Jordan": "jo", "Mexico": "mx", "Morocco": "ma",
+    "Netherlands": "nl", "New Zealand": "nz", "Norway": "no", "Panama": "pa",
+    "Paraguay": "py", "Portugal": "pt", "Qatar": "qa", "Saudi Arabia": "sa",
+    "Scotland": "gb-sct", "Senegal": "sn", "South Africa": "za", "South Korea": "kr",
+    "Spain": "es", "Sweden": "se", "Switzerland": "ch", "Tunisia": "tn",
+    "Turkey": "tr", "Uruguay": "uy", "USA": "us", "Uzbekistan": "uz"
+  }
+}
