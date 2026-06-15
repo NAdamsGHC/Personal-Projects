@@ -1,5 +1,5 @@
 {
-    "generatedAt":  "2026-06-15T09:01:27Z",
+    "generatedAt":  "2026-06-15T18:42:02Z",
     "matches":  [
                     {
                         "num":  1,
@@ -770,9 +770,9 @@
                         "owner2":  "Chabba",
                         "code1":  "es",
                         "code2":  "cv",
-                        "played":  false,
-                        "score1":  null,
-                        "score2":  null,
+                        "played":  true,
+                        "score1":  0,
+                        "score2":  0,
                         "pens":  null
                     },
                     {

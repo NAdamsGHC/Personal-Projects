@@ -256,7 +256,7 @@
 
   <footer>
     <div>Goals counted: own goals ✓ &nbsp;·&nbsp; extra time ✓ &nbsp;·&nbsp; penalty shootouts ✗</div>
-    <div>Updated daily at lunchtime · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
+    <div>Refreshes automatically through the day · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
   </footer>
 </div>
 
@@ -319,7 +319,7 @@ function renderStatus(s) {
   const m = s.meta || {};
   document.getElementById("status").innerHTML =
     `<button class="pill pill-btn" id="resultsBtn" title="See the latest results"><b>${m.matchesPlayed ?? "–"}</b> / ${m.matchesTotal ?? "–"} matches played <span class="pill-caret">›</span></button>` +
-    `<span class="pill">Updated <b>${timeAgo(s.generatedAt)}</b></span>`;
+    `<span class="pill">Refreshed <b>${timeAgo(s.generatedAt)}</b></span>`;
 }
 
 function teamCard(t) {

@@ -1,5 +1,5 @@
 {
-    "generatedAt":  "2026-06-15T09:01:27Z",
+    "generatedAt":  "2026-06-15T18:42:02Z",
     "competition":  "FIFA World Cup 2026",
     "rules":  {
                   "ownGoalsCount":  true,
@@ -7,7 +7,7 @@
                   "penaltyShootoutsCount":  false
               },
     "meta":  {
-                 "matchesPlayed":  12,
+                 "matchesPlayed":  13,
                  "matchesTotal":  104,
                  "teamsInTournament":  48,
                  "groupStageComplete":  false
@@ -79,12 +79,12 @@
                                       {
                                           "name":  "Spain",
                                           "goals":  0,
-                                          "played":  0,
+                                          "played":  1,
                                           "alive":  true,
                                           "code":  "es"
                                       }
                                   ],
-                        "teamsThrough":  5
+                        "teamsThrough":  6
                     },
                     {
                         "rank":  2,
@@ -131,7 +131,7 @@
                                       {
                                           "name":  "Cape Verde",
                                           "goals":  0,
-                                          "played":  0,
+                                          "played":  1,
                                           "alive":  true,
                                           "code":  "cv"
                                       },
@@ -376,7 +376,7 @@
                                           "code":  "tr"
                                       }
                                   ],
-                        "teamsThrough":  8
+                        "teamsThrough":  7
                     }
                 ],
     "unassigned":  {
@@ -842,34 +842,34 @@
                                          "name":  "Cape Verde",
                                          "code":  "cv",
                                          "owner":  "Chabba",
-                                         "P":  0,
+                                         "P":  1,
                                          "W":  0,
-                                         "D":  0,
+                                         "D":  1,
                                          "L":  0,
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0,
-                                         "through":  true
-                                     },
-                                     {
-                                         "name":  "Saudi Arabia",
-                                         "code":  "sa",
-                                         "owner":  "Baz",
-                                         "P":  0,
-                                         "W":  0,
-                                         "D":  0,
-                                         "L":  0,
-                                         "GF":  0,
-                                         "GA":  0,
-                                         "GD":  0,
-                                         "Pts":  0,
+                                         "Pts":  1,
                                          "through":  true
                                      },
                                      {
                                          "name":  "Spain",
                                          "code":  "es",
                                          "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  1,
+                                         "through":  true
+                                     },
+                                     {
+                                         "name":  "Saudi Arabia",
+                                         "code":  "sa",
+                                         "owner":  "Baz",
                                          "P":  0,
                                          "W":  0,
                                          "D":  0,
@@ -1457,9 +1457,9 @@
                                                        },
                                              "side2":  {
                                                            "slot":  "2H",
-                                                           "name":  "Saudi Arabia",
-                                                           "code":  "sa",
-                                                           "owner":  "Baz",
+                                                           "name":  "Spain",
+                                                           "code":  "es",
+                                                           "owner":  "Jez",
                                                            "projected":  true
                                                        },
                                              "played":  false,
