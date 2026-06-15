@@ -2,12 +2,12 @@ name: Update World Cup 2026 dashboard
 
 on:
   schedule:
-    # Four times a day (UTC). UK is +1 during the tournament, so these land at
-    # 08:00, 14:00, 20:00 and 00:00 UK — the 08:00 run scoops up the overnight
-    # games. GitHub runs scheduled jobs in UTC and may delay them under load.
-    # The job only commits when a score actually changes, so the extra runs are
-    # free no-ops the rest of the time.
-    - cron: "0 7,13,19,23 * * *"
+    # Every 3 hours (UTC): 00:00, 03:00, 06:00 ... 21:00 — eight runs a day.
+    # GitHub runs scheduled jobs in UTC and may delay them under load. The job
+    # only commits when a score actually changes, so the extra runs are free
+    # no-ops; the real freshness limit is how often the openfootball source
+    # itself updates (a few times a day).
+    - cron: "0 */3 * * *"
   workflow_dispatch: {}        # lets you run it manually from the Actions tab
 
 permissions:
