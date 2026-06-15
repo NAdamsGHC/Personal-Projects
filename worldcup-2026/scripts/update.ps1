@@ -220,6 +220,44 @@ $unTeams = @($unTeams | Sort-Object @{Expression = 'goals'; Descending = $true},
 $unList = @()
 foreach ($t in $unTeams) { $unList += [ordered]@{ name = $t.name; goals = $t.goals; played = $t.played; alive = $t.alive; code = $t.code } }
 
+# Assign the 8 qualifying third-placed teams to their candidate knockout slots
+# (each slot, e.g. "3A/B/C/D/F", can take a third from one of several groups).
+# Backtracking bipartite matching - returns a valid assignment respecting groups.
+function Find-ThirdAssignment {
+    param([object[]]$Slots, [string[]]$Groups, [int]$Index, [hashtable]$Used, [string[]]$Assign)
+    if ($Index -ge $Slots.Count) { return $true }
+    foreach ($g in $Slots[$Index]) {
+        if (($Groups -contains $g) -and -not $Used.ContainsKey($g)) {
+            $Used[$g] = $true; $Assign[$Index] = $g
+            if (Find-ThirdAssignment -Slots $Slots -Groups $Groups -Index ($Index + 1) -Used $Used -Assign $Assign) { return $true }
+            [void]$Used.Remove($g); $Assign[$Index] = $null
+        }
+    }
+    return $false
+}
+
+# Resolve a knockout slot label to a current/projected team (or leave as a
+# "winner of match N" placeholder). Reads $groupByLetter / $thirdSlotTeam.
+function Resolve-Side {
+    param([string]$label)
+    $out = [ordered]@{ slot = $label; name = $null; code = $null; owner = $null; projected = $false }
+    if ($label -match '^([12])([A-L])$') {
+        $pos = [int]$Matches[1]; $L = $Matches[2]; $rows = $groupByLetter[$L]
+        if ($rows -and $rows.Count -ge $pos) { $t = $rows[$pos - 1]; $out.name = $t.name; $out.code = $t.code; $out.owner = $t.owner; $out.projected = $true }
+    }
+    elseif ($label -match '^3[A-L/]+$') {
+        if ($thirdSlotTeam.ContainsKey($label)) { $t = $thirdSlotTeam[$label]; $out.name = $t.name; $out.code = $t.code; $out.owner = $t.owner; $out.projected = $true }
+    }
+    elseif ($label -match '^[WL]\d+$') {
+        # winner/loser of an earlier match - structural placeholder, leave unresolved
+    }
+    else {
+        $n = Normalize-Name $label; $out.slot = $null; $out.name = $label; $out.code = (Get-Code $n)
+        $out.owner = $(if ($ownerOf.ContainsKey($n)) { $ownerOf[$n] } else { 'Unassigned' })
+    }
+    return $out
+}
+
 # ---------- group tables (A-L) ----------------------------------------------
 # Standings within each FIFA group, from group-stage matches only.
 $groupStats = @{}
@@ -295,6 +333,53 @@ foreach ($g in $groupSorted) {
     $groupsOut += [ordered]@{ name = $g.name; teams = @($rowList) }
 }
 
+# ---------- knockout bracket (projected "as it stands") ---------------------
+$groupByLetter = @{}
+foreach ($g in $groupSorted) { $groupByLetter[(($g.name -split ' ')[-1])] = $g.rows }
+$qualThirdGroups = @()
+foreach ($g in $groupSorted) {
+    $letter = ($g.name -split ' ')[-1]
+    if ($g.rows.Count -ge 3 -and $g.rows[2].through) { $qualThirdGroups += $letter }
+}
+
+$koRoundOrder = @('Round of 32', 'Round of 16', 'Quarter-final', 'Semi-final', 'Final', 'Match for third place')
+$koMatches = @($data.matches | Where-Object { $koRoundOrder -contains $_.round })
+
+# collect the best-third slots in match order and assign the qualifying thirds
+$thirdSlotLabels = @()
+foreach ($m in $koMatches) {
+    foreach ($lab in @([string]$m.team1, [string]$m.team2)) {
+        if ($lab -match '^3[A-L/]+$' -and ($thirdSlotLabels -notcontains $lab)) { $thirdSlotLabels += $lab }
+    }
+}
+$slotCands = @()
+foreach ($lab in $thirdSlotLabels) { $slotCands += , @($lab.Substring(1) -split '/') }
+$assign = New-Object 'string[]' ($slotCands.Count)
+$thirdSlotTeam = @{}
+if ($slotCands.Count -gt 0 -and (Find-ThirdAssignment -Slots $slotCands -Groups $qualThirdGroups -Index 0 -Used (@{}) -Assign $assign)) {
+    for ($i = 0; $i -lt $thirdSlotLabels.Count; $i++) {
+        if ($assign[$i]) { $thirdSlotTeam[$thirdSlotLabels[$i]] = $groupByLetter[$assign[$i]][2] }
+    }
+}
+
+$koOut = @()
+foreach ($rn in $koRoundOrder) {
+    $matchList = @()
+    foreach ($m in @($koMatches | Where-Object { $_.round -eq $rn })) {
+        $isP = Test-Played $m; $sc1 = $null; $sc2 = $null; $pens = $null
+        if ($isP) {
+            $fs = Score-Final $m.score; $sc1 = $fs[0]; $sc2 = $fs[1]
+            if (($m.score.PSObject.Properties.Name -contains 'p') -and $m.score.p) { $pens = "$([int]$m.score.p[0])-$([int]$m.score.p[1])" }
+        }
+        $matchList += [ordered]@{
+            num = $m.num; round = $rn; date = $m.date
+            side1 = (Resolve-Side ([string]$m.team1)); side2 = (Resolve-Side ([string]$m.team2))
+            played = [bool]$isP; score1 = $sc1; score2 = $sc2; pens = $pens
+        }
+    }
+    $koOut += [ordered]@{ round = $rn; matches = @($matchList) }
+}
+
 $played = @($data.matches | Where-Object { Test-Played $_ }).Count
 $now    = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
 
@@ -306,6 +391,7 @@ $standings = [ordered]@{
     friends     = @($friendsOut)
     unassigned  = [ordered]@{ totalGoals = $unTotal; teamsLeft = $unLeft; teamsTotal = @($unTeams).Count; teams = @($unList) }
     groups      = @($groupsOut)
+    knockout    = @($koOut)
 }
 
 # ---------- build matches feed ----------------------------------------------

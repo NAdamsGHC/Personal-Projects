@@ -163,6 +163,27 @@
   .grp-legend .sw-t { background: var(--teal); }
   .grp-legend .sw-3 { background: var(--gold); }
 
+  /* collapsible section header */
+  .card h2.collapsible { cursor: pointer; user-select: none; }
+  .h2chev { margin-left: auto; color: var(--muted); font-size: 11px; transition: transform .18s; }
+  .collapsed .h2chev { transform: rotate(-90deg); }
+
+  /* knockout bracket */
+  .bracket { display: flex; gap: 10px; overflow-x: auto; padding: 14px 18px 6px; }
+  .bround { display: flex; flex-direction: column; justify-content: space-around; gap: 8px; min-width: 158px; flex: 0 0 auto; }
+  .bround-h { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); text-align: center; }
+  .bmatch { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; box-shadow: var(--shadow-sm); background: var(--card); }
+  .bside { display: flex; align-items: center; gap: 6px; padding: 5px 8px; min-height: 30px; }
+  .bside + .bside { border-top: 1px solid var(--line); }
+  .bside .bnames { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; flex: 1; }
+  .bside .bn { font-size: 12.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bside .bo { font-size: 9px; color: var(--muted); }
+  .bside.tbd { color: var(--muted); }
+  .bside.tbd .bn { font-weight: 600; font-size: 11.5px; }
+  .bsc { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--ink); }
+  .bpens { font-size: 9px; color: var(--muted); text-align: right; padding: 0 8px 3px; }
+  .ko-note { font-size: 11.5px; color: var(--muted); padding: 2px 18px 16px; }
+
   /* clickable results counter + modal */
   .pill-btn { font: inherit; cursor: pointer; border: 1px solid rgba(39,71,230,.35); color: var(--muted);
               display: inline-flex; align-items: center; gap: 6px; transition: transform .12s, box-shadow .12s; }
@@ -219,8 +240,13 @@
   </section>
 
   <section class="card" id="groups-card">
-    <h2>World Cup groups</h2>
+    <h2 class="collapsible" id="groups-h">World Cup groups <span class="h2chev">▾</span></h2>
     <div id="groups"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section class="card" id="ko-card">
+    <h2>Knockout bracket</h2>
+    <div id="knockout"><div class="empty">Loading…</div></div>
   </section>
 
   <section class="card" id="unassigned-card" style="display:none">
@@ -385,6 +411,40 @@ function renderFixtures(feed) {
   el.innerHTML = list.map(fixtureRow).join("");
 }
 
+const ROUND_SHORT = { "Round of 32": "R32", "Round of 16": "R16", "Quarter-final": "QF", "Semi-final": "SF", "Final": "Final", "Match for third place": "3rd place" };
+
+function koSide(side, score) {
+  if (!side || !side.name) {
+    const raw = side && side.slot ? side.slot : "";
+    const lbl = raw.replace(/^W(\d+)/, "Winner $1").replace(/^L(\d+)/, "Loser $1") || "TBD";
+    return `<div class="bside tbd"><span class="bn">${esc(lbl)}</span></div>`;
+  }
+  const own = (side.owner && side.owner !== "TBD") ? `<span class="bo">${esc(side.owner)}</span>` : "";
+  const right = (score != null) ? `<span class="bsc">${score}</span>` : "";
+  return `<div class="bside">${flag(side.code)}<span class="bnames"><span class="bn">${esc(side.name)}</span>${own}</span>${right}</div>`;
+}
+
+function koMatch(m) {
+  return `<div class="bmatch">
+      ${koSide(m.side1, m.played ? m.score1 : null)}
+      ${koSide(m.side2, m.played ? m.score2 : null)}
+      ${m.pens ? `<div class="bpens">pens ${esc(m.pens)}</div>` : ""}
+    </div>`;
+}
+
+function renderKnockout(s) {
+  const ko = s.knockout || [];
+  const card = document.getElementById("ko-card");
+  if (!ko.length) { card.style.display = "none"; return; }
+  const cols = ko.map(r =>
+    `<div class="bround"><div class="bround-h">${esc(ROUND_SHORT[r.round] || r.round)}</div>${r.matches.map(koMatch).join("")}</div>`
+  ).join("");
+  const note = (s.meta && s.meta.groupStageComplete)
+    ? ""
+    : `<div class="ko-note">Round of 32 is projected from current group positions — <b>as it stands</b>. Later rounds fill in as results come through.</div>`;
+  document.getElementById("knockout").innerHTML = `<div class="bracket">${cols}</div>${note}`;
+}
+
 function groupTable(g) {
   const rows = (g.teams || []).map((t, i) => {
     const cls = t.through ? (i === 2 ? "thru thru3" : "thru") : "";
@@ -444,6 +504,16 @@ function renderResults(feed) {
   el.innerHTML = html;
 }
 
+function wireCollapse(headerId, bodyId) {
+  const h = document.getElementById(headerId), body = document.getElementById(bodyId);
+  if (!h || !body) return;
+  h.addEventListener("click", () => {
+    const hide = body.style.display !== "none";   // open by default
+    body.style.display = hide ? "none" : "";
+    h.classList.toggle("collapsed", hide);
+  });
+}
+
 function wireModal() {
   const modal = document.getElementById("modal");
   const open = () => { modal.hidden = false; document.body.style.overflow = "hidden"; modal.querySelector(".modal-body").scrollTop = 0; };
@@ -463,9 +533,11 @@ Promise.all([
   renderFixtures(matches);
   renderTable(standings);
   renderGroups(standings);
+  renderKnockout(standings);
   renderUnassigned(standings);
   renderResults(matches);
   wireModal();
+  wireCollapse("groups-h", "groups");
 }).catch(err => {
   document.getElementById("table").innerHTML =
     `<div class="err">Couldn't load the data. If you just published, give it a minute and refresh.<br><small>${esc(err.message || err)}</small></div>`;
