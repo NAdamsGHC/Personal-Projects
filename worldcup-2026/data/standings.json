@@ -1,5 +1,5 @@
 {
-    "generatedAt":  "2026-06-15T08:33:17Z",
+    "generatedAt":  "2026-06-15T08:41:47Z",
     "competition":  "FIFA World Cup 2026",
     "rules":  {
                   "ownGoalsCount":  true,
@@ -400,5 +400,691 @@
                                          "code":  "uz"
                                      }
                                  ]
+                   },
+    "groups":  [
+                   {
+                       "name":  "Group A",
+                       "teams":  [
+                                     {
+                                         "name":  "Mexico",
+                                         "code":  "mx",
+                                         "owner":  "Adam",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  2,
+                                         "GA":  0,
+                                         "GD":  2,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "South Korea",
+                                         "code":  "kr",
+                                         "owner":  "Baz",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  2,
+                                         "GA":  1,
+                                         "GD":  1,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Czech Republic",
+                                         "code":  "cz",
+                                         "owner":  "Adam",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  1,
+                                         "GA":  2,
+                                         "GD":  -1,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "South Africa",
+                                         "code":  "za",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  0,
+                                         "GA":  2,
+                                         "GD":  -2,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group B",
+                       "teams":  [
+                                     {
+                                         "name":  "Bosnia \u0026 Herzegovina",
+                                         "code":  "ba",
+                                         "owner":  "Baz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Canada",
+                                         "code":  "ca",
+                                         "owner":  "Toz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Qatar",
+                                         "code":  "qa",
+                                         "owner":  "Toz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Switzerland",
+                                         "code":  "ch",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group C",
+                       "teams":  [
+                                     {
+                                         "name":  "Scotland",
+                                         "code":  "gb-sct",
+                                         "owner":  "Toz",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  0,
+                                         "GD":  1,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Brazil",
+                                         "code":  "br",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Morocco",
+                                         "code":  "ma",
+                                         "owner":  "Chabba",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  1,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Haiti",
+                                         "code":  "ht",
+                                         "owner":  "Unassigned",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  0,
+                                         "GA":  1,
+                                         "GD":  -1,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group D",
+                       "teams":  [
+                                     {
+                                         "name":  "USA",
+                                         "code":  "us",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  4,
+                                         "GA":  1,
+                                         "GD":  3,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Australia",
+                                         "code":  "au",
+                                         "owner":  "Adam",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  2,
+                                         "GA":  0,
+                                         "GD":  2,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Turkey",
+                                         "code":  "tr",
+                                         "owner":  "Baz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  0,
+                                         "GA":  2,
+                                         "GD":  -2,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Paraguay",
+                                         "code":  "py",
+                                         "owner":  "Toz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  1,
+                                         "GA":  4,
+                                         "GD":  -3,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group E",
+                       "teams":  [
+                                     {
+                                         "name":  "Germany",
+                                         "code":  "de",
+                                         "owner":  "Chabba",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  7,
+                                         "GA":  1,
+                                         "GD":  6,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Ivory Coast",
+                                         "code":  "ci",
+                                         "owner":  "Chabba",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  1,
+                                         "GA":  0,
+                                         "GD":  1,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Ecuador",
+                                         "code":  "ec",
+                                         "owner":  "Adam",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  0,
+                                         "GA":  1,
+                                         "GD":  -1,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Curaçao",
+                                         "code":  "cw",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  1,
+                                         "GA":  7,
+                                         "GD":  -6,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group F",
+                       "teams":  [
+                                     {
+                                         "name":  "Sweden",
+                                         "code":  "se",
+                                         "owner":  "Jez",
+                                         "P":  1,
+                                         "W":  1,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  5,
+                                         "GA":  1,
+                                         "GD":  4,
+                                         "Pts":  3
+                                     },
+                                     {
+                                         "name":  "Japan",
+                                         "code":  "jp",
+                                         "owner":  "Toz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  2,
+                                         "GA":  2,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Netherlands",
+                                         "code":  "nl",
+                                         "owner":  "Baz",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  1,
+                                         "L":  0,
+                                         "GF":  2,
+                                         "GA":  2,
+                                         "GD":  0,
+                                         "Pts":  1
+                                     },
+                                     {
+                                         "name":  "Tunisia",
+                                         "code":  "tn",
+                                         "owner":  "Adam",
+                                         "P":  1,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  1,
+                                         "GF":  1,
+                                         "GA":  5,
+                                         "GD":  -4,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group G",
+                       "teams":  [
+                                     {
+                                         "name":  "Belgium",
+                                         "code":  "be",
+                                         "owner":  "Toz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Egypt",
+                                         "code":  "eg",
+                                         "owner":  "Jez",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Iran",
+                                         "code":  "ir",
+                                         "owner":  "Toz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "New Zealand",
+                                         "code":  "nz",
+                                         "owner":  "Adam",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group H",
+                       "teams":  [
+                                     {
+                                         "name":  "Cape Verde",
+                                         "code":  "cv",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Saudi Arabia",
+                                         "code":  "sa",
+                                         "owner":  "Baz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Spain",
+                                         "code":  "es",
+                                         "owner":  "Jez",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Uruguay",
+                                         "code":  "uy",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group I",
+                       "teams":  [
+                                     {
+                                         "name":  "France",
+                                         "code":  "fr",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Iraq",
+                                         "code":  "iq",
+                                         "owner":  "Baz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Norway",
+                                         "code":  "no",
+                                         "owner":  "Adam",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Senegal",
+                                         "code":  "sn",
+                                         "owner":  "Adam",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group J",
+                       "teams":  [
+                                     {
+                                         "name":  "Algeria",
+                                         "code":  "dz",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Argentina",
+                                         "code":  "ar",
+                                         "owner":  "Adam",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Austria",
+                                         "code":  "at",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Jordan",
+                                         "code":  "jo",
+                                         "owner":  "Unassigned",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group K",
+                       "teams":  [
+                                     {
+                                         "name":  "Colombia",
+                                         "code":  "co",
+                                         "owner":  "Baz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "DR Congo",
+                                         "code":  "cd",
+                                         "owner":  "Chabba",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Portugal",
+                                         "code":  "pt",
+                                         "owner":  "Toz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Uzbekistan",
+                                         "code":  "uz",
+                                         "owner":  "Unassigned",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
+                   },
+                   {
+                       "name":  "Group L",
+                       "teams":  [
+                                     {
+                                         "name":  "Croatia",
+                                         "code":  "hr",
+                                         "owner":  "Baz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "England",
+                                         "code":  "gb-eng",
+                                         "owner":  "Baz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Ghana",
+                                         "code":  "gh",
+                                         "owner":  "Jez",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     },
+                                     {
+                                         "name":  "Panama",
+                                         "code":  "pa",
+                                         "owner":  "Toz",
+                                         "P":  0,
+                                         "W":  0,
+                                         "D":  0,
+                                         "L":  0,
+                                         "GF":  0,
+                                         "GA":  0,
+                                         "GD":  0,
+                                         "Pts":  0
+                                     }
+                                 ]
                    }
+               ]
 }

@@ -220,6 +220,46 @@ $unTeams = @($unTeams | Sort-Object @{Expression = 'goals'; Descending = $true},
 $unList = @()
 foreach ($t in $unTeams) { $unList += [ordered]@{ name = $t.name; goals = $t.goals; played = $t.played; alive = $t.alive; code = $t.code } }
 
+# ---------- group tables (A-L) ----------------------------------------------
+# Standings within each FIFA group, from group-stage matches only.
+$groupStats = @{}
+foreach ($m in $data.matches) {
+    $grp = if ($m.PSObject.Properties.Name -contains 'group') { $m.group } else { $null }
+    if (-not $grp) { continue }
+    $t1 = [string]$m.team1; $t2 = [string]$m.team2
+    if ((Test-Placeholder $t1) -or (Test-Placeholder $t2)) { continue }
+    $n1 = Normalize-Name $t1; $n2 = Normalize-Name $t2
+    if (-not $groupStats.ContainsKey($grp)) { $groupStats[$grp] = @{} }
+    foreach ($p in @(@($n1, $t1), @($n2, $t2))) {
+        if (-not $groupStats[$grp].ContainsKey($p[0])) {
+            $groupStats[$grp][$p[0]] = [pscustomobject]@{ name = $p[1]; norm = $p[0]; P = 0; W = 0; D = 0; L = 0; GF = 0; GA = 0 }
+        }
+    }
+    if (Test-Played $m) {
+        $fs = Score-Final $m.score; $g1 = $fs[0]; $g2 = $fs[1]
+        $s1 = $groupStats[$grp][$n1]; $s2 = $groupStats[$grp][$n2]
+        $s1.P++; $s2.P++; $s1.GF += $g1; $s1.GA += $g2; $s2.GF += $g2; $s2.GA += $g1
+        if ($g1 -gt $g2) { $s1.W++; $s2.L++ } elseif ($g1 -lt $g2) { $s2.W++; $s1.L++ } else { $s1.D++; $s2.D++ }
+    }
+}
+$groupsOut = @()
+foreach ($grpName in ($groupStats.Keys | Sort-Object)) {
+    $rows = @()
+    foreach ($st in $groupStats[$grpName].Values) {
+        $rows += [pscustomobject]@{
+            name = $st.name; code = (Get-Code $st.norm)
+            owner = $(if ($ownerOf.ContainsKey($st.norm)) { $ownerOf[$st.norm] } else { 'Unassigned' })
+            P = $st.P; W = $st.W; D = $st.D; L = $st.L; GF = $st.GF; GA = $st.GA; GD = ($st.GF - $st.GA); Pts = ($st.W * 3 + $st.D)
+        }
+    }
+    $rows = @($rows | Sort-Object @{e = 'Pts'; Descending = $true}, @{e = 'GD'; Descending = $true}, @{e = 'GF'; Descending = $true}, @{e = 'name'})
+    $rowList = @()
+    foreach ($r in $rows) {
+        $rowList += [ordered]@{ name = $r.name; code = $r.code; owner = $r.owner; P = $r.P; W = $r.W; D = $r.D; L = $r.L; GF = $r.GF; GA = $r.GA; GD = $r.GD; Pts = $r.Pts }
+    }
+    $groupsOut += [ordered]@{ name = $grpName; teams = @($rowList) }
+}
+
 $played = @($data.matches | Where-Object { Test-Played $_ }).Count
 $now    = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
 
@@ -230,6 +270,7 @@ $standings = [ordered]@{
     meta        = [ordered]@{ matchesPlayed = $played; matchesTotal = @($data.matches).Count; teamsInTournament = $realTeams.Count }
     friends     = @($friendsOut)
     unassigned  = [ordered]@{ totalGoals = $unTotal; teamsLeft = $unLeft; teamsTotal = @($unTeams).Count; teams = @($unList) }
+    groups      = @($groupsOut)
 }
 
 # ---------- build matches feed ----------------------------------------------

@@ -136,6 +136,22 @@
   footer a { color: var(--blue); font-weight: 600; }
   .err { background: #fff2f2; border: 1px solid #ffc9c9; color: #b42318; padding: 14px; border-radius: 12px; margin: 14px; }
 
+  /* World Cup group tables */
+  .grpgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; padding: 14px 18px 18px; }
+  .grp { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .grp-h { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; padding: 9px 12px;
+           background: linear-gradient(100deg, rgba(39,71,230,.10), rgba(18,205,189,.12)); color: var(--ink); }
+  .grp-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .grp-tbl th { font-size: 9.5px; text-transform: uppercase; letter-spacing: .3px; color: var(--muted); font-weight: 700; padding: 6px 5px 4px; text-align: center; }
+  .grp-tbl td { padding: 7px 5px; text-align: center; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .grp-tbl td.pos { color: var(--muted); font-weight: 800; width: 16px; }
+  .grp-tbl td.pts { font-weight: 800; color: var(--blue); }
+  .gtcell { text-align: left; }
+  .gtrow { display: flex; align-items: center; gap: 8px; }
+  .gtnames { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+  .gtn { font-weight: 700; }
+  .gto { font-size: 10.5px; color: var(--muted); }
+
   /* clickable results counter + modal */
   .pill-btn { font: inherit; cursor: pointer; border: 1px solid rgba(39,71,230,.35); color: var(--muted);
               display: inline-flex; align-items: center; gap: 6px; transition: transform .12s, box-shadow .12s; }
@@ -189,6 +205,11 @@
   <section class="card">
     <h2>League table</h2>
     <div id="table"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section class="card" id="groups-card">
+    <h2>World Cup groups</h2>
+    <div id="groups"><div class="empty">Loading…</div></div>
   </section>
 
   <section class="card" id="unassigned-card" style="display:none">
@@ -351,6 +372,29 @@ function renderFixtures(feed) {
   el.innerHTML = list.map(fixtureRow).join("");
 }
 
+function groupTable(g) {
+  const rows = (g.teams || []).map((t, i) => `
+    <tr>
+      <td class="pos">${i + 1}</td>
+      <td class="gtcell"><div class="gtrow">${flag(t.code)}<div class="gtnames"><span class="gtn">${esc(t.name)}</span><span class="gto">${esc(t.owner)}</span></div></div></td>
+      <td>${t.P}</td><td>${t.GF}</td><td>${t.GA}</td><td class="pts">${t.Pts}</td>
+    </tr>`).join("");
+  return `<div class="grp">
+      <div class="grp-h">${esc(g.name)}</div>
+      <table class="grp-tbl">
+        <thead><tr><th></th><th></th><th>P</th><th>GF</th><th>GA</th><th>Pts</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderGroups(s) {
+  const groups = s.groups || [];
+  const card = document.getElementById("groups-card");
+  if (!groups.length) { card.style.display = "none"; return; }
+  document.getElementById("groups").innerHTML = `<div class="grpgrid">${groups.map(groupTable).join("")}</div>`;
+}
+
 function resultRow(mt) {
   const isKO = mt.group == null;
   const owner = o => (o && o !== "TBD") ? `<span class="own">${esc(o)}</span>` : "";
@@ -397,6 +441,7 @@ Promise.all([
   renderStatus(standings);
   renderFixtures(matches);
   renderTable(standings);
+  renderGroups(standings);
   renderUnassigned(standings);
   renderResults(matches);
   wireModal();
