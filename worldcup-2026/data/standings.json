@@ -1,5 +1,5 @@
 {
-    "generatedAt":  "2026-06-15T08:41:47Z",
+    "generatedAt":  "2026-06-15T08:50:16Z",
     "competition":  "FIFA World Cup 2026",
     "rules":  {
                   "ownGoalsCount":  true,
@@ -9,7 +9,8 @@
     "meta":  {
                  "matchesPlayed":  12,
                  "matchesTotal":  104,
-                 "teamsInTournament":  48
+                 "teamsInTournament":  48,
+                 "groupStageComplete":  false
              },
     "friends":  [
                     {
@@ -82,7 +83,8 @@
                                           "alive":  true,
                                           "code":  "es"
                                       }
-                                  ]
+                                  ],
+                        "teamsThrough":  5
                     },
                     {
                         "rank":  2,
@@ -154,7 +156,8 @@
                                           "alive":  true,
                                           "code":  "uy"
                                       }
-                                  ]
+                                  ],
+                        "teamsThrough":  8
                     },
                     {
                         "rank":  3,
@@ -226,7 +229,8 @@
                                           "alive":  true,
                                           "code":  "sn"
                                       }
-                                  ]
+                                  ],
+                        "teamsThrough":  4
                     },
                     {
                         "rank":  3,
@@ -298,7 +302,8 @@
                                           "alive":  true,
                                           "code":  "pt"
                                       }
-                                  ]
+                                  ],
+                        "teamsThrough":  7
                     },
                     {
                         "rank":  5,
@@ -370,7 +375,8 @@
                                           "alive":  true,
                                           "code":  "tr"
                                       }
-                                  ]
+                                  ],
+                        "teamsThrough":  8
                     }
                 ],
     "unassigned":  {
@@ -416,7 +422,8 @@
                                          "GF":  2,
                                          "GA":  0,
                                          "GD":  2,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "South Korea",
@@ -429,7 +436,8 @@
                                          "GF":  2,
                                          "GA":  1,
                                          "GD":  1,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Czech Republic",
@@ -442,7 +450,8 @@
                                          "GF":  1,
                                          "GA":  2,
                                          "GD":  -1,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      },
                                      {
                                          "name":  "South Africa",
@@ -455,7 +464,8 @@
                                          "GF":  0,
                                          "GA":  2,
                                          "GD":  -2,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -473,7 +483,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Canada",
@@ -486,7 +497,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Qatar",
@@ -499,7 +511,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Switzerland",
@@ -512,7 +525,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -530,7 +544,8 @@
                                          "GF":  1,
                                          "GA":  0,
                                          "GD":  1,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Brazil",
@@ -543,7 +558,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Morocco",
@@ -556,7 +572,8 @@
                                          "GF":  1,
                                          "GA":  1,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Haiti",
@@ -569,7 +586,8 @@
                                          "GF":  0,
                                          "GA":  1,
                                          "GD":  -1,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -587,7 +605,8 @@
                                          "GF":  4,
                                          "GA":  1,
                                          "GD":  3,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Australia",
@@ -600,7 +619,8 @@
                                          "GF":  2,
                                          "GA":  0,
                                          "GD":  2,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Turkey",
@@ -613,7 +633,8 @@
                                          "GF":  0,
                                          "GA":  2,
                                          "GD":  -2,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      },
                                      {
                                          "name":  "Paraguay",
@@ -626,7 +647,8 @@
                                          "GF":  1,
                                          "GA":  4,
                                          "GD":  -3,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -644,7 +666,8 @@
                                          "GF":  7,
                                          "GA":  1,
                                          "GD":  6,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Ivory Coast",
@@ -657,7 +680,8 @@
                                          "GF":  1,
                                          "GA":  0,
                                          "GD":  1,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Ecuador",
@@ -670,7 +694,8 @@
                                          "GF":  0,
                                          "GA":  1,
                                          "GD":  -1,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      },
                                      {
                                          "name":  "Curaçao",
@@ -683,7 +708,8 @@
                                          "GF":  1,
                                          "GA":  7,
                                          "GD":  -6,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -701,7 +727,8 @@
                                          "GF":  5,
                                          "GA":  1,
                                          "GD":  4,
-                                         "Pts":  3
+                                         "Pts":  3,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Japan",
@@ -714,7 +741,8 @@
                                          "GF":  2,
                                          "GA":  2,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Netherlands",
@@ -727,7 +755,8 @@
                                          "GF":  2,
                                          "GA":  2,
                                          "GD":  0,
-                                         "Pts":  1
+                                         "Pts":  1,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Tunisia",
@@ -740,7 +769,8 @@
                                          "GF":  1,
                                          "GA":  5,
                                          "GD":  -4,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -758,7 +788,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Egypt",
@@ -771,7 +802,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Iran",
@@ -784,7 +816,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "New Zealand",
@@ -797,7 +830,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -815,7 +849,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Saudi Arabia",
@@ -828,7 +863,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Spain",
@@ -841,7 +877,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      },
                                      {
                                          "name":  "Uruguay",
@@ -854,7 +891,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -872,7 +910,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Iraq",
@@ -885,7 +924,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Norway",
@@ -898,7 +938,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Senegal",
@@ -911,7 +952,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -929,7 +971,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Argentina",
@@ -942,7 +985,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Austria",
@@ -955,7 +999,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Jordan",
@@ -968,7 +1013,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -986,7 +1032,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "DR Congo",
@@ -999,7 +1046,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Portugal",
@@ -1012,7 +1060,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Uzbekistan",
@@ -1025,7 +1074,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    },
@@ -1043,7 +1093,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "England",
@@ -1056,7 +1107,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Ghana",
@@ -1069,7 +1121,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  true
                                      },
                                      {
                                          "name":  "Panama",
@@ -1082,7 +1135,8 @@
                                          "GF":  0,
                                          "GA":  0,
                                          "GD":  0,
-                                         "Pts":  0
+                                         "Pts":  0,
+                                         "through":  false
                                      }
                                  ]
                    }

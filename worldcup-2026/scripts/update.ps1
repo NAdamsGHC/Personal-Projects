@@ -242,22 +242,57 @@ foreach ($m in $data.matches) {
         if ($g1 -gt $g2) { $s1.W++; $s2.L++ } elseif ($g1 -lt $g2) { $s2.W++; $s1.L++ } else { $s1.D++; $s2.D++ }
     }
 }
-$groupsOut = @()
+# Sorted standings per group (keep the normalized name for later lookups).
+$groupSorted = @()
 foreach ($grpName in ($groupStats.Keys | Sort-Object)) {
     $rows = @()
     foreach ($st in $groupStats[$grpName].Values) {
         $rows += [pscustomobject]@{
-            name = $st.name; code = (Get-Code $st.norm)
+            name = $st.name; norm = $st.norm; code = (Get-Code $st.norm)
             owner = $(if ($ownerOf.ContainsKey($st.norm)) { $ownerOf[$st.norm] } else { 'Unassigned' })
             P = $st.P; W = $st.W; D = $st.D; L = $st.L; GF = $st.GF; GA = $st.GA; GD = ($st.GF - $st.GA); Pts = ($st.W * 3 + $st.D)
+            through = $false
         }
     }
     $rows = @($rows | Sort-Object @{e = 'Pts'; Descending = $true}, @{e = 'GD'; Descending = $true}, @{e = 'GF'; Descending = $true}, @{e = 'name'})
+    $groupSorted += [pscustomobject]@{ name = $grpName; rows = $rows }
+}
+
+# Top two of each group go through; the 8 best third-placed teams also go through (as it stands).
+$thirds = @()
+foreach ($g in $groupSorted) {
+    if ($g.rows.Count -ge 1) { $g.rows[0].through = $true }
+    if ($g.rows.Count -ge 2) { $g.rows[1].through = $true }
+    if ($g.rows.Count -ge 3) { $thirds += $g.rows[2] }
+}
+$thirds = @($thirds | Sort-Object @{e = 'Pts'; Descending = $true}, @{e = 'GD'; Descending = $true}, @{e = 'GF'; Descending = $true}, @{e = 'name'})
+for ($i = 0; $i -lt [Math]::Min(8, $thirds.Count); $i++) { $thirds[$i].through = $true }
+
+# Set of teams currently advancing.
+$advancing = New-Object System.Collections.Generic.HashSet[string]
+foreach ($g in $groupSorted) { foreach ($r in $g.rows) { if ($r.through) { [void]$advancing.Add($r.norm) } } }
+
+# Is the group stage finished? (all group-stage matches played)
+$grpMatches = @($data.matches | Where-Object { ($_.PSObject.Properties.Name -contains 'group') -and $_.group })
+$grpPlayed  = @($grpMatches | Where-Object { Test-Played $_ })
+$groupStageComplete = ($grpMatches.Count -gt 0 -and $grpPlayed.Count -eq $grpMatches.Count)
+
+# Per-friend "teams through as it stands" projection.
+foreach ($f in $friendsOut) {
+    $teamList = ($config.friends.PSObject.Properties | Where-Object { $_.Name -eq $f.name }).Value
+    $cnt = 0
+    foreach ($team in $teamList) { if ($advancing.Contains((Normalize-Name $team))) { $cnt++ } }
+    $f['teamsThrough'] = $cnt
+}
+
+# Serialise groups for the dashboard.
+$groupsOut = @()
+foreach ($g in $groupSorted) {
     $rowList = @()
-    foreach ($r in $rows) {
-        $rowList += [ordered]@{ name = $r.name; code = $r.code; owner = $r.owner; P = $r.P; W = $r.W; D = $r.D; L = $r.L; GF = $r.GF; GA = $r.GA; GD = $r.GD; Pts = $r.Pts }
+    foreach ($r in $g.rows) {
+        $rowList += [ordered]@{ name = $r.name; code = $r.code; owner = $r.owner; P = $r.P; W = $r.W; D = $r.D; L = $r.L; GF = $r.GF; GA = $r.GA; GD = $r.GD; Pts = $r.Pts; through = $r.through }
     }
-    $groupsOut += [ordered]@{ name = $grpName; teams = @($rowList) }
+    $groupsOut += [ordered]@{ name = $g.name; teams = @($rowList) }
 }
 
 $played = @($data.matches | Where-Object { Test-Played $_ }).Count
@@ -267,7 +302,7 @@ $standings = [ordered]@{
     generatedAt = $now
     competition = $config.competition
     rules       = $config.rules
-    meta        = [ordered]@{ matchesPlayed = $played; matchesTotal = @($data.matches).Count; teamsInTournament = $realTeams.Count }
+    meta        = [ordered]@{ matchesPlayed = $played; matchesTotal = @($data.matches).Count; teamsInTournament = $realTeams.Count; groupStageComplete = $groupStageComplete }
     friends     = @($friendsOut)
     unassigned  = [ordered]@{ totalGoals = $unTotal; teamsLeft = $unLeft; teamsTotal = @($unTeams).Count; teams = @($unList) }
     groups      = @($groupsOut)
