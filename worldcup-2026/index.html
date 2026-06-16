@@ -59,6 +59,7 @@
     font-size: 12.5px; color: var(--muted); box-shadow: var(--shadow-sm);
   }
   .pill b { color: var(--ink); font-weight: 800; }
+  .pill.live { color: #0a9e92; border-color: rgba(18,205,189,.55); font-weight: 700; }
 
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
   .card + .card { margin-top: 16px; }
@@ -315,11 +316,14 @@ function fmtDate(dateStr) {
   return new Date(+dm[1], +dm[2] - 1, +dm[3]).toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
 }
 
-function renderStatus(s) {
+function renderStatus(s, live) {
   const m = s.meta || {};
+  const freshness = live
+    ? `<span class="pill live" title="Recalculated from the latest data every time you open the page">● Live</span>`
+    : `<span class="pill" title="Live data was unavailable, showing the last saved snapshot">Showing saved data</span>`;
   document.getElementById("status").innerHTML =
     `<button class="pill pill-btn" id="resultsBtn" title="See the latest results"><b>${m.matchesPlayed ?? "–"}</b> / ${m.matchesTotal ?? "–"} matches played <span class="pill-caret">›</span></button>` +
-    `<span class="pill">Refreshed <b>${timeAgo(s.generatedAt)}</b></span>`;
+    freshness;
 }
 
 function teamCard(t) {
@@ -525,24 +529,198 @@ function wireModal() {
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) close(); });
 }
 
-Promise.all([
-  fetch("./data/standings.json" + bust, opts).then(r => r.json()),
-  fetch("./data/matches.json" + bust, opts).then(r => r.json())
-]).then(([standings, matches]) => {
-  renderStatus(standings);
-  renderFixtures(matches);
-  renderTable(standings);
-  renderGroups(standings);
-  renderKnockout(standings);
-  renderUnassigned(standings);
-  renderResults(matches);
-  wireModal();
-  wireCollapse("groups-h", "groups");
-}).catch(err => {
-  document.getElementById("table").innerHTML =
-    `<div class="err">Couldn't load the data. If you just published, give it a minute and refresh.<br><small>${esc(err.message || err)}</small></div>`;
-  document.getElementById("fixtures").innerHTML = "";
-});
+// ---- live calculation (everything is computed in the browser) -------------
+const SOURCE_URL = "https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json";
+const KO_ROUNDS = ["Round of 32", "Round of 16", "Quarter-final", "Semi-final", "Final", "Match for third place"];
+
+function normName(s) {
+  if (!s) return "";
+  let r = String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  r = r.replace(/&/g, " and ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+  return r;
+}
+function isPlaceholder(s) { return /^[123][A-L]$/.test(s) || /^3[A-L/]+$/.test(s) || /^[WL]\d{1,3}$/.test(s); }
+function isPlayed(m) { return !!(m.score && m.score.ft); }
+function scoreFinal(score) { const fs = score.et ? score.et : score.ft; return [parseInt(fs[0], 10), parseInt(fs[1], 10)]; }
+function rowSort(a, b) { return b.Pts - a.Pts || b.GD - a.GD || b.GF - a.GF || a.name.localeCompare(b.name); }
+
+function computeAll(config, src) {
+  const ownerOf = Object.create(null), codeOf = Object.create(null);
+  for (const [friend, teams] of Object.entries(config.friends)) {
+    for (const t of teams) {
+      ownerOf[normName(t)] = friend;
+      const al = (config.aliases || {})[t];
+      if (al) for (const a of al) ownerOf[normName(a)] = friend;
+    }
+  }
+  for (const [name, code] of Object.entries(config.flags || {})) codeOf[normName(name)] = code;
+  const getCode = n => codeOf[n] || null;
+
+  const teamGoals = Object.create(null), teamPlayed = Object.create(null), officialName = Object.create(null), lostKnockout = Object.create(null);
+  const realTeams = new Set(), knockoutTeams = new Set();
+  let knockoutResolved = false;
+
+  for (const m of src.matches) {
+    const t1 = String(m.team1), t2 = String(m.team2), n1 = normName(t1), n2 = normName(t2);
+    const t1real = !isPlaceholder(t1), t2real = !isPlaceholder(t2), isKO = KO_ROUNDS.includes(m.round);
+    if (t1real) { realTeams.add(n1); officialName[n1] = t1; }
+    if (t2real) { realTeams.add(n2); officialName[n2] = t2; }
+    if (isKO) { if (t1real) { knockoutTeams.add(n1); knockoutResolved = true; } if (t2real) { knockoutTeams.add(n2); knockoutResolved = true; } }
+    if (isPlayed(m)) {
+      const [g1, g2] = scoreFinal(m.score);
+      if (t1real) { teamGoals[n1] = (teamGoals[n1] || 0) + g1; teamPlayed[n1] = (teamPlayed[n1] || 0) + 1; }
+      if (t2real) { teamGoals[n2] = (teamGoals[n2] || 0) + g2; teamPlayed[n2] = (teamPlayed[n2] || 0) + 1; }
+      if (isKO && t1real && t2real) {
+        let loser = null;
+        if (g1 !== g2) loser = g1 < g2 ? n1 : n2;
+        else if (m.score.p) { const p1 = +m.score.p[0], p2 = +m.score.p[1]; if (p1 !== p2) loser = p1 < p2 ? n1 : n2; }
+        if (loser) lostKnockout[loser] = true;
+      }
+    }
+  }
+  const isAlive = n => !(lostKnockout[n]) && !(knockoutResolved && !knockoutTeams.has(n));
+
+  // group tables
+  const groupStats = Object.create(null);
+  for (const m of src.matches) {
+    const grp = m.group; if (!grp) continue;
+    const t1 = String(m.team1), t2 = String(m.team2); if (isPlaceholder(t1) || isPlaceholder(t2)) continue;
+    const n1 = normName(t1), n2 = normName(t2);
+    if (!groupStats[grp]) groupStats[grp] = Object.create(null);
+    for (const [nn, disp] of [[n1, t1], [n2, t2]]) if (!groupStats[grp][nn]) groupStats[grp][nn] = { name: disp, norm: nn, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0 };
+    if (isPlayed(m)) {
+      const [g1, g2] = scoreFinal(m.score), s1 = groupStats[grp][n1], s2 = groupStats[grp][n2];
+      s1.P++; s2.P++; s1.GF += g1; s1.GA += g2; s2.GF += g2; s2.GA += g1;
+      if (g1 > g2) { s1.W++; s2.L++; } else if (g1 < g2) { s2.W++; s1.L++; } else { s1.D++; s2.D++; }
+    }
+  }
+  const groupSorted = [];
+  for (const grp of Object.keys(groupStats).sort()) {
+    const rows = Object.values(groupStats[grp]).map(st => ({
+      name: st.name, norm: st.norm, code: getCode(st.norm), owner: ownerOf[st.norm] || "Unassigned",
+      P: st.P, W: st.W, D: st.D, L: st.L, GF: st.GF, GA: st.GA, GD: st.GF - st.GA, Pts: st.W * 3 + st.D, through: false
+    })).sort(rowSort);
+    groupSorted.push({ name: grp, rows });
+  }
+  const thirds = [];
+  for (const g of groupSorted) { if (g.rows[0]) g.rows[0].through = true; if (g.rows[1]) g.rows[1].through = true; if (g.rows[2]) thirds.push(g.rows[2]); }
+  thirds.sort(rowSort);
+  for (let i = 0; i < Math.min(8, thirds.length); i++) thirds[i].through = true;
+  const advancing = new Set();
+  for (const g of groupSorted) for (const r of g.rows) if (r.through) advancing.add(r.norm);
+  const grpMatches = src.matches.filter(m => m.group), grpPlayed = grpMatches.filter(isPlayed);
+  const groupStageComplete = grpMatches.length > 0 && grpPlayed.length === grpMatches.length;
+
+  // friends
+  let friends = Object.entries(config.friends).map(([friend, teams]) => {
+    let total = 0, left = 0, through = 0;
+    const rows = teams.map(t => {
+      const n = normName(t), g = teamGoals[n] || 0, p = teamPlayed[n] || 0, alive = isAlive(n);
+      if (alive) left++; total += g; if (advancing.has(n)) through++;
+      return { name: officialName[n] || t, goals: g, played: p, alive, code: getCode(n) };
+    }).sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+    return { name: friend, totalGoals: total, teamsLeft: left, teamsTotal: teams.length, teams: rows, teamsThrough: through };
+  }).sort((a, b) => b.totalGoals - a.totalGoals || b.teamsLeft - a.teamsLeft || a.name.localeCompare(b.name));
+  let rank = 0, seen = 0, prev = null;
+  for (const f of friends) { seen++; if (f.totalGoals !== prev) { rank = seen; prev = f.totalGoals; } f.rank = rank; }
+
+  // unassigned
+  const unTeams = []; let unTotal = 0, unLeft = 0;
+  for (const n of realTeams) if (!(n in ownerOf)) {
+    const g = teamGoals[n] || 0, p = teamPlayed[n] || 0, alive = isAlive(n);
+    if (alive) unLeft++; unTotal += g;
+    unTeams.push({ name: officialName[n], goals: g, played: p, alive, code: getCode(n) });
+  }
+  unTeams.sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+
+  // knockout projection
+  const groupByLetter = Object.create(null), qualThirdGroups = [];
+  for (const g of groupSorted) { const L = g.name.split(" ").pop(); groupByLetter[L] = g.rows; if (g.rows[2] && g.rows[2].through) qualThirdGroups.push(L); }
+  const koMatches = src.matches.filter(m => KO_ROUNDS.includes(m.round));
+  const thirdSlotLabels = [];
+  for (const m of koMatches) for (const lab of [String(m.team1), String(m.team2)]) if (/^3[A-L/]+$/.test(lab) && !thirdSlotLabels.includes(lab)) thirdSlotLabels.push(lab);
+  const slotCands = thirdSlotLabels.map(lab => lab.slice(1).split("/")), assign = new Array(slotCands.length).fill(null), used = new Set();
+  (function solve(i) {
+    if (i >= slotCands.length) return true;
+    for (const L of slotCands[i]) if (qualThirdGroups.includes(L) && !used.has(L)) { used.add(L); assign[i] = L; if (solve(i + 1)) return true; used.delete(L); assign[i] = null; }
+    return false;
+  })(0);
+  const thirdSlotTeam = Object.create(null);
+  for (let i = 0; i < thirdSlotLabels.length; i++) if (assign[i]) thirdSlotTeam[thirdSlotLabels[i]] = groupByLetter[assign[i]][2];
+  function resolveSide(label) {
+    const out = { slot: label, name: null, code: null, owner: null, projected: false };
+    let mm;
+    if ((mm = label.match(/^([12])([A-L])$/))) { const rows = groupByLetter[mm[2]], pos = +mm[1]; if (rows && rows.length >= pos) { const t = rows[pos - 1]; Object.assign(out, { name: t.name, code: t.code, owner: t.owner, projected: true }); } }
+    else if (/^3[A-L/]+$/.test(label)) { const t = thirdSlotTeam[label]; if (t) Object.assign(out, { name: t.name, code: t.code, owner: t.owner, projected: true }); }
+    else if (/^[WL]\d+$/.test(label)) { /* structural */ }
+    else { const n = normName(label); out.slot = null; out.name = label; out.code = getCode(n); out.owner = ownerOf[n] || "Unassigned"; }
+    return out;
+  }
+  const koOut = KO_ROUNDS.map(rn => ({
+    round: rn,
+    matches: koMatches.filter(m => m.round === rn).map(m => {
+      const played = isPlayed(m); let s1 = null, s2 = null, pens = null;
+      if (played) { const [a, b] = scoreFinal(m.score); s1 = a; s2 = b; if (m.score.p) pens = `${+m.score.p[0]}-${+m.score.p[1]}`; }
+      return { num: m.num, round: rn, date: m.date, side1: resolveSide(String(m.team1)), side2: resolveSide(String(m.team2)), played, score1: s1, score2: s2, pens };
+    })
+  }));
+
+  // matches feed
+  let idx = 0;
+  const matchesOut = src.matches.map(m => {
+    idx++;
+    const t1 = String(m.team1), t2 = String(m.team2), n1 = normName(t1), n2 = normName(t2);
+    const played = isPlayed(m); let s1 = null, s2 = null, pens = null;
+    if (played) { const [a, b] = scoreFinal(m.score); s1 = a; s2 = b; if (m.score.p) pens = `${+m.score.p[0]}-${+m.score.p[1]}`; }
+    return {
+      num: m.num != null ? m.num : idx, round: m.round, group: m.group || null, date: m.date, time: m.time, ground: m.ground,
+      team1: t1, team2: t2, owner1: isPlaceholder(t1) ? "TBD" : (ownerOf[n1] || "Unassigned"), owner2: isPlaceholder(t2) ? "TBD" : (ownerOf[n2] || "Unassigned"),
+      code1: isPlaceholder(t1) ? null : getCode(n1), code2: isPlaceholder(t2) ? null : getCode(n2), played, score1: s1, score2: s2, pens
+    };
+  });
+
+  const generatedAt = new Date().toISOString();
+  const standings = {
+    generatedAt, competition: config.competition, rules: config.rules,
+    meta: { matchesPlayed: src.matches.filter(isPlayed).length, matchesTotal: src.matches.length, teamsInTournament: realTeams.size, groupStageComplete },
+    friends, unassigned: { totalGoals: unTotal, teamsLeft: unLeft, teamsTotal: unTeams.length, teams: unTeams },
+    groups: groupSorted.map(g => ({ name: g.name, teams: g.rows.map(r => ({ name: r.name, code: r.code, owner: r.owner, P: r.P, W: r.W, D: r.D, L: r.L, GF: r.GF, GA: r.GA, GD: r.GD, Pts: r.Pts, through: r.through })) })),
+    knockout: koOut
+  };
+  return { standings, matches: { generatedAt, matches: matchesOut } };
+}
+
+async function loadSource() {
+  try {
+    const r = await fetch(SOURCE_URL, opts);
+    if (!r.ok) throw new Error("source " + r.status);
+    return { src: await r.json(), live: true };
+  } catch (e) {
+    const r = await fetch("./data/source.json" + bust, opts);   // bundled fallback
+    return { src: await r.json(), live: false };
+  }
+}
+
+async function init() {
+  try {
+    const config = await fetch("./teams.json" + bust, opts).then(r => r.json());
+    const { src, live } = await loadSource();
+    const { standings, matches } = computeAll(config, src);
+    renderStatus(standings, live);
+    renderFixtures(matches);
+    renderTable(standings);
+    renderGroups(standings);
+    renderKnockout(standings);
+    renderUnassigned(standings);
+    renderResults(matches);
+    wireModal();
+    wireCollapse("groups-h", "groups");
+  } catch (err) {
+    document.getElementById("table").innerHTML = `<div class="err">Couldn't load the data — please refresh in a moment.<br><small>${esc(err.message || err)}</small></div>`;
+    document.getElementById("fixtures").innerHTML = "";
+  }
+}
+init();
 </script>
 </body>
 </html>
