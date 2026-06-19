@@ -135,6 +135,16 @@
   .score .pens { display: block; font-size: 10px; color: var(--muted); font-weight: 700; }
   .empty { color: var(--muted); padding: 18px; font-size: 14px; text-align: center; }
 
+  /* yesterday's results */
+  .ydayrow { padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .ydayrow:last-child { border-bottom: 0; }
+  .ydt { display: flex; align-items: center; gap: 8px; font-size: 14.5px; padding: 1px 0; }
+  .ydt .ydn { font-weight: 700; }
+  .ydt .own { color: var(--muted); font-size: 11.5px; font-weight: 600; }
+  .ydsc { margin-left: auto; font-weight: 900; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .scorers { font-size: 11px; color: var(--muted); margin: 1px 0 2px 30px; line-height: 1.45; }
+  .ydstage { margin-top: 5px; }
+
   footer { color: var(--muted); font-size: 11.5px; text-align: center; margin-top: 26px; line-height: 1.8; }
   footer a { color: var(--blue); font-weight: 600; }
   .err { background: #fff2f2; border: 1px solid #ffc9c9; color: #b42318; padding: 14px; border-radius: 12px; margin: 14px; }
@@ -231,12 +241,17 @@
   <div class="status" id="status"></div>
 
   <section class="card fxcard">
-    <h2 id="fxtitle">Today's fixtures</h2>
+    <h2 class="collapsible" id="fx-h"><span id="fxtitle">Today's fixtures</span><span class="h2chev">▾</span></h2>
     <div class="fx" id="fixtures"><div class="empty">Loading…</div></div>
   </section>
 
+  <section class="card fxcard">
+    <h2 class="collapsible" id="yday-h"><span id="ydaytitle">Yesterday's results</span><span class="h2chev">▾</span></h2>
+    <div class="fx" id="yesterday"><div class="empty">Loading…</div></div>
+  </section>
+
   <section class="card">
-    <h2>League table</h2>
+    <h2 class="collapsible" id="table-h">League table<span class="h2chev">▾</span></h2>
     <div id="table"><div class="empty">Loading…</div></div>
   </section>
 
@@ -246,12 +261,12 @@
   </section>
 
   <section class="card" id="ko-card">
-    <h2>Knockout bracket</h2>
+    <h2 class="collapsible" id="ko-h">Knockout bracket<span class="h2chev">▾</span></h2>
     <div id="knockout"><div class="empty">Loading…</div></div>
   </section>
 
   <section class="card" id="unassigned-card" style="display:none">
-    <h2>Unassigned — not competing</h2>
+    <h2 class="collapsible" id="un-h">Unassigned — not competing<span class="h2chev">▾</span></h2>
     <div id="unassigned"></div>
   </section>
 
@@ -300,15 +315,18 @@ function localDateStr(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-function localKickoff(dateStr, timeStr) {
-  if (!dateStr || !timeStr) return null;
-  const mt = timeStr.match(/^(\d{1,2}):(\d{2})\s*UTC([+-]\d{1,2})/);
-  const dm = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!mt || !dm) return null;
-  const utcHour = parseInt(mt[1], 10) - parseInt(mt[3], 10);
-  const d = new Date(Date.UTC(+dm[1], +dm[2] - 1, +dm[3], utcHour, +mt[2]));
-  return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+// true UTC instant of kickoff (handles each host city's offset, e.g. "20:00 UTC-6")
+function kickoffTs(dateStr, timeStr) {
+  const mt = (timeStr || "").match(/^(\d{1,2}):(\d{2})\s*UTC([+-]\d{1,2})/);
+  const dm = (dateStr || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!mt || !dm) return NaN;
+  return Date.UTC(+dm[1], +dm[2] - 1, +dm[3], parseInt(mt[1], 10) - parseInt(mt[3], 10), +mt[2]);
 }
+function localKickoff(dateStr, timeStr) {
+  const ts = kickoffTs(dateStr, timeStr);
+  return isNaN(ts) ? null : new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+function byKickoff(a, b) { return (kickoffTs(a.date, a.time) || 0) - (kickoffTs(b.date, b.time) || 0) || a.num - b.num; }
 
 function fmtDate(dateStr) {
   const dm = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -329,9 +347,10 @@ function renderStatus(s, live) {
 function teamCard(t) {
   const cls = t.alive ? "team" : "team out";
   const badge = t.alive ? "" : `<span class="badge-out">OUT</span>`;
+  const rank = t.rank != null ? ` · FIFA #${t.rank}` : "";
   return `<div class="${cls}">
       ${flag(t.code, true)}
-      <div><div class="tn">${esc(t.name)}${badge}</div><div class="meta">${t.played} played</div></div>
+      <div><div class="tn">${esc(t.name)}${badge}</div><div class="meta">${t.played} played${rank}</div></div>
       <div class="tg">${t.goals}</div>
     </div>`;
 }
@@ -342,13 +361,16 @@ function renderTable(s) {
   const groupStageDone = s.meta && s.meta.groupStageComplete;
   (s.friends || []).forEach(f => {
     const rkcls = f.rank <= 3 ? " r" + f.rank : "";
-    const asit = groupStageDone ? "" : `<div class="asit">${f.teamsThrough}/${f.teamsTotal} through · as it stands</div>`;
+    const parts = [];
+    if (f.avgRank != null) parts.push(`avg FIFA rank <b>${f.avgRank}</b>`);
+    if (!groupStageDone) parts.push(`${f.teamsThrough}/${f.teamsTotal} through (as it stands)`);
+    const sub = parts.length ? `<div class="asit" title="Average FIFA ranking of this player's remaining teams — lower is stronger">${parts.join(" · ")}</div>` : "";
     const btn = document.createElement("button");
     btn.className = "row";
     btn.setAttribute("aria-expanded", "false");
     btn.innerHTML =
       `<div class="rankb${rkcls}">${f.rank}</div>` +
-      `<div class="pcell"><div class="pname"><span class="chev">▶</span>${esc(f.name)}</div>${asit}</div>` +
+      `<div class="pcell"><div class="pname"><span class="chev">▶</span>${esc(f.name)}</div>${sub}</div>` +
       `<div class="goals">${f.totalGoals}<small>goals</small></div>` +
       `<div class="left"><b>${f.teamsLeft}</b> / ${f.teamsTotal}<br>teams left</div>`;
     const detail = document.createElement("div");
@@ -394,6 +416,34 @@ function fixtureRow(mt) {
     </div>`;
 }
 
+function scorerLine(goals) {
+  if (!goals || !goals.length) return "";
+  return "⚽ " + goals.map(g => `${esc(g.name)} ${esc(g.minute)}'${g.og ? " (OG)" : ""}${g.pen ? " (pen)" : ""}`).join(", ");
+}
+
+function ydayRow(mt) {
+  const isKO = mt.group == null;
+  const stage = isKO ? `<span class="stage ko">${esc(mt.round)}</span>` : `<span class="stage">${esc(mt.group)}</span>`;
+  const owner = o => (o && o !== "TBD") ? `<span class="own">${esc(o)}</span>` : "";
+  const s1 = scorerLine(mt.goals1), s2 = scorerLine(mt.goals2);
+  return `<div class="ydayrow">
+      <div class="ydt">${flag(mt.code1)}<span class="ydn">${esc(mt.team1)}</span> ${owner(mt.owner1)}<span class="ydsc">${mt.score1}</span></div>
+      ${s1 ? `<div class="scorers">${s1}</div>` : ""}
+      <div class="ydt">${flag(mt.code2)}<span class="ydn">${esc(mt.team2)}</span> ${owner(mt.owner2)}<span class="ydsc">${mt.score2}</span></div>
+      ${s2 ? `<div class="scorers">${s2}</div>` : ""}
+      <div class="ydstage">${stage}${mt.pens ? ` <span class="pens">pens ${esc(mt.pens)}</span>` : ""}</div>
+    </div>`;
+}
+
+function renderYesterday(feed) {
+  const d = new Date(); d.setDate(d.getDate() - 1);
+  const yday = localDateStr(d);
+  document.getElementById("ydaytitle").textContent = "Yesterday · " + fmtDate(yday);
+  const el = document.getElementById("yesterday");
+  const list = feed.matches.filter(m => m.date === yday && m.played).sort(byKickoff);
+  el.innerHTML = list.length ? list.map(ydayRow).join("") : `<div class="empty">No matches yesterday.</div>`;
+}
+
 function renderFixtures(feed) {
   const el = document.getElementById("fixtures");
   const today = localDateStr(new Date());
@@ -411,7 +461,7 @@ function renderFixtures(feed) {
   }
   document.getElementById("fxtitle").textContent = title;
   if (list.length === 0) { el.innerHTML = `<div class="empty">No more fixtures — tournament complete.</div>`; return; }
-  list.sort((a, b) => (a.time || "").localeCompare(b.time || "") || a.num - b.num);
+  list.sort(byKickoff);
   el.innerHTML = list.map(fixtureRow).join("");
 }
 
@@ -498,7 +548,7 @@ function resultRow(mt) {
 function renderResults(feed) {
   const el = document.getElementById("results");
   const played = (feed.matches || []).filter(m => m.played);
-  played.sort((a, b) => (b.date || "").localeCompare(a.date || "") || (b.time || "").localeCompare(a.time || "") || (b.num - a.num));
+  played.sort((a, b) => byKickoff(b, a));
   if (!played.length) { el.innerHTML = `<div class="empty">No results yet — the tournament hasn't kicked off.</div>`; return; }
   let html = "", lastDate = null;
   for (const m of played) {
@@ -555,6 +605,9 @@ function computeAll(config, src) {
   }
   for (const [name, code] of Object.entries(config.flags || {})) codeOf[normName(name)] = code;
   const getCode = n => codeOf[n] || null;
+  const rankOf = Object.create(null);
+  for (const [name, rk] of Object.entries(config.fifaRank || {})) rankOf[normName(name)] = rk;
+  const getRank = n => (rankOf[n] != null ? rankOf[n] : null);
 
   const teamGoals = Object.create(null), teamPlayed = Object.create(null), officialName = Object.create(null), lostKnockout = Object.create(null);
   const realTeams = new Set(), knockoutTeams = new Set();
@@ -613,13 +666,15 @@ function computeAll(config, src) {
 
   // friends
   let friends = Object.entries(config.friends).map(([friend, teams]) => {
-    let total = 0, left = 0, through = 0;
+    let total = 0, left = 0, through = 0, rankSum = 0, rankCount = 0;
     const rows = teams.map(t => {
-      const n = normName(t), g = teamGoals[n] || 0, p = teamPlayed[n] || 0, alive = isAlive(n);
-      if (alive) left++; total += g; if (advancing.has(n)) through++;
-      return { name: officialName[n] || t, goals: g, played: p, alive, code: getCode(n) };
+      const n = normName(t), g = teamGoals[n] || 0, p = teamPlayed[n] || 0, alive = isAlive(n), rk = getRank(n);
+      if (alive) { left++; if (rk != null) { rankSum += rk; rankCount++; } }
+      total += g; if (advancing.has(n)) through++;
+      return { name: officialName[n] || t, goals: g, played: p, alive, code: getCode(n), rank: rk };
     }).sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
-    return { name: friend, totalGoals: total, teamsLeft: left, teamsTotal: teams.length, teams: rows, teamsThrough: through };
+    const avgRank = rankCount ? Math.round(rankSum / rankCount) : null;
+    return { name: friend, totalGoals: total, teamsLeft: left, teamsTotal: teams.length, teams: rows, teamsThrough: through, avgRank };
   }).sort((a, b) => b.totalGoals - a.totalGoals || b.teamsLeft - a.teamsLeft || a.name.localeCompare(b.name));
   let rank = 0, seen = 0, prev = null;
   for (const f of friends) { seen++; if (f.totalGoals !== prev) { rank = seen; prev = f.totalGoals; } f.rank = rank; }
@@ -675,7 +730,9 @@ function computeAll(config, src) {
     return {
       num: m.num != null ? m.num : idx, round: m.round, group: m.group || null, date: m.date, time: m.time, ground: m.ground,
       team1: t1, team2: t2, owner1: isPlaceholder(t1) ? "TBD" : (ownerOf[n1] || "Unassigned"), owner2: isPlaceholder(t2) ? "TBD" : (ownerOf[n2] || "Unassigned"),
-      code1: isPlaceholder(t1) ? null : getCode(n1), code2: isPlaceholder(t2) ? null : getCode(n2), played, score1: s1, score2: s2, pens
+      code1: isPlaceholder(t1) ? null : getCode(n1), code2: isPlaceholder(t2) ? null : getCode(n2), played, score1: s1, score2: s2, pens,
+      goals1: (m.goals1 || []).map(x => ({ name: x.name, minute: x.minute, og: !!x.owngoal, pen: !!x.penalty })),
+      goals2: (m.goals2 || []).map(x => ({ name: x.name, minute: x.minute, og: !!x.owngoal, pen: !!x.penalty }))
     };
   });
 
@@ -708,13 +765,15 @@ async function init() {
     const { standings, matches } = computeAll(config, src);
     renderStatus(standings, live);
     renderFixtures(matches);
+    renderYesterday(matches);
     renderTable(standings);
     renderGroups(standings);
     renderKnockout(standings);
     renderUnassigned(standings);
     renderResults(matches);
     wireModal();
-    wireCollapse("groups-h", "groups");
+    ["fx-h:fixtures", "yday-h:yesterday", "table-h:table", "groups-h:groups", "ko-h:knockout", "un-h:unassigned"]
+      .forEach(pair => { const [h, b] = pair.split(":"); wireCollapse(h, b); });
   } catch (err) {
     document.getElementById("table").innerHTML = `<div class="err">Couldn't load the data — please refresh in a moment.<br><small>${esc(err.message || err)}</small></div>`;
     document.getElementById("fixtures").innerHTML = "";
