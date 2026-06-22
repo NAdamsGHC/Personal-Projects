@@ -160,6 +160,7 @@
   .stage.ko { background: rgba(255,90,31,.15); color: #d8430f; }
   .teams2 .tl { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: 14.5px; font-weight: 600; }
   .teams2 .own { color: var(--muted); font-size: 11.5px; font-weight: 600; }
+  .trank { font-size: 10.5px; color: var(--muted); font-weight: 700; margin-left: 1px; }
   .score { font-weight: 900; font-size: 18px; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; color: var(--ink); }
   .score.vs { color: var(--muted); font-weight: 700; font-size: 13px; }
   .score .pens { display: block; font-size: 10px; color: var(--muted); font-weight: 700; }
@@ -270,6 +271,11 @@
 
   <div class="status" id="status"></div>
 
+  <section class="card">
+    <h2 class="collapsible" id="table-h">League table<button class="info-btn" id="info-btn" type="button" aria-label="What do these mean?">i</button><span class="h2chev">▾</span></h2>
+    <div id="table"><div class="empty">Loading…</div></div>
+  </section>
+
   <section class="card fxcard">
     <h2 class="collapsible" id="fx-h"><span id="fxtitle">Today's fixtures</span><span class="h2chev">▾</span></h2>
     <div class="fx" id="fixtures"><div class="empty">Loading…</div></div>
@@ -278,11 +284,6 @@
   <section class="card fxcard">
     <h2 class="collapsible" id="yday-h"><span id="ydaytitle">Yesterday's results</span><span class="h2chev">▾</span></h2>
     <div class="fx" id="yesterday"><div class="empty">Loading…</div></div>
-  </section>
-
-  <section class="card">
-    <h2 class="collapsible" id="table-h">League table<button class="info-btn" id="info-btn" type="button" aria-label="What do these mean?">i</button><span class="h2chev">▾</span></h2>
-    <div id="table"><div class="empty">Loading…</div></div>
   </section>
 
   <section class="card" id="groups-card">
@@ -355,6 +356,8 @@ function flag(code, lg) {
   if (!code) return `<span class="${cls} ph"></span>`;
   return `<img class="${cls}" src="./flags/${esc(code)}.svg" alt="" onerror="this.classList.add('ph');this.removeAttribute('src')">`;
 }
+
+function rankTag(r) { return r != null ? `<span class="trank">#${r}</span>` : ""; }
 
 function timeAgo(iso) {
   const then = new Date(iso).getTime();
@@ -471,8 +474,8 @@ function fixtureRow(mt) {
   return `<div class="fixrow">
       <div class="fxtime">${ko || ""}<br>${stage}</div>
       <div class="teams2">
-        <div class="tl">${flag(mt.code1)} <span>${esc(mt.team1)}</span> ${owner(mt.owner1)}</div>
-        <div class="tl">${flag(mt.code2)} <span>${esc(mt.team2)}</span> ${owner(mt.owner2)}</div>
+        <div class="tl">${flag(mt.code1)} <span>${esc(mt.team1)}</span>${rankTag(mt.rank1)} ${owner(mt.owner1)}</div>
+        <div class="tl">${flag(mt.code2)} <span>${esc(mt.team2)}</span>${rankTag(mt.rank2)} ${owner(mt.owner2)}</div>
       </div>
       ${right}
     </div>`;
@@ -489,9 +492,9 @@ function ydayRow(mt) {
   const owner = o => (o && o !== "TBD") ? `<span class="own">${esc(o)}</span>` : "";
   const s1 = scorerLine(mt.goals1), s2 = scorerLine(mt.goals2);
   return `<div class="ydayrow">
-      <div class="ydt">${flag(mt.code1)}<span class="ydn">${esc(mt.team1)}</span> ${owner(mt.owner1)}<span class="ydsc">${mt.score1}</span></div>
+      <div class="ydt">${flag(mt.code1)}<span class="ydn">${esc(mt.team1)}</span>${rankTag(mt.rank1)} ${owner(mt.owner1)}<span class="ydsc">${mt.score1}</span></div>
       ${s1 ? `<div class="scorers">${s1}</div>` : ""}
-      <div class="ydt">${flag(mt.code2)}<span class="ydn">${esc(mt.team2)}</span> ${owner(mt.owner2)}<span class="ydsc">${mt.score2}</span></div>
+      <div class="ydt">${flag(mt.code2)}<span class="ydn">${esc(mt.team2)}</span>${rankTag(mt.rank2)} ${owner(mt.owner2)}<span class="ydsc">${mt.score2}</span></div>
       ${s2 ? `<div class="scorers">${s2}</div>` : ""}
       <div class="ydstage">${stage}${mt.pens ? ` <span class="pens">pens ${esc(mt.pens)}</span>` : ""}</div>
     </div>`;
@@ -738,7 +741,12 @@ function computeAll(config, src) {
       }
     }
   }
-  const isAlive = n => !(lostKnockout[n]) && !(knockoutResolved && !knockoutTeams.has(n));
+  // A team is out only when it loses a knockout match, or once the GROUP STAGE IS
+  // COMPLETE and it didn't make the knockouts. (openfootball fills confirmed group
+  // winners into the R32 early, so a real KO name appearing is NOT a valid trigger.)
+  const grpAll = src.matches.filter(m => m.group);
+  const groupStageComplete = grpAll.length > 0 && grpAll.every(isPlayed);
+  const isAlive = n => !(lostKnockout[n]) && !(groupStageComplete && !knockoutTeams.has(n));
 
   // group tables
   const groupStats = Object.create(null);
@@ -768,9 +776,6 @@ function computeAll(config, src) {
   for (let i = 0; i < Math.min(8, thirds.length); i++) thirds[i].through = true;
   const advancing = new Set();
   for (const g of groupSorted) for (const r of g.rows) if (r.through) advancing.add(r.norm);
-  const grpMatches = src.matches.filter(m => m.group), grpPlayed = grpMatches.filter(isPlayed);
-  const groupStageComplete = grpMatches.length > 0 && grpPlayed.length === grpMatches.length;
-
   // current phase + per-friend "games remaining" in that phase
   const groupPlayedByTeam = Object.create(null);
   for (const g of groupSorted) for (const r of g.rows) groupPlayedByTeam[r.norm] = r.P;
@@ -874,7 +879,8 @@ function computeAll(config, src) {
     return {
       num: m.num != null ? m.num : idx, round: m.round, group: m.group || null, date: m.date, time: m.time, ground: m.ground,
       team1: t1, team2: t2, owner1: isPlaceholder(t1) ? "TBD" : (ownerOf[n1] || "Unassigned"), owner2: isPlaceholder(t2) ? "TBD" : (ownerOf[n2] || "Unassigned"),
-      code1: isPlaceholder(t1) ? null : getCode(n1), code2: isPlaceholder(t2) ? null : getCode(n2), played, score1: s1, score2: s2, pens,
+      code1: isPlaceholder(t1) ? null : getCode(n1), code2: isPlaceholder(t2) ? null : getCode(n2),
+      rank1: isPlaceholder(t1) ? null : getRank(n1), rank2: isPlaceholder(t2) ? null : getRank(n2), played, score1: s1, score2: s2, pens,
       goals1: (m.goals1 || []).map(x => ({ name: x.name, minute: x.minute, og: !!x.owngoal, pen: !!x.penalty })),
       goals2: (m.goals2 || []).map(x => ({ name: x.name, minute: x.minute, og: !!x.owngoal, pen: !!x.penalty }))
     };
