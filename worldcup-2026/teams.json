@@ -53,5 +53,8 @@
     "Scotland": 42, "Senegal": 15, "South Africa": 60, "South Korea": 25,
     "Spain": 2, "Sweden": 38, "Switzerland": 19, "Tunisia": 45,
     "Turkey": 22, "Uruguay": 16, "USA": 17, "Uzbekistan": 50
+  },
+  "colours": {
+    "Baz": "#2563eb", "Adam": "#f97316", "Chabba": "#e11d48", "Jez": "#16a34a", "Toz": "#7c3aed"
   }
 }

@@ -225,6 +225,64 @@
   .bsc { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--ink); }
   .bpens { font-size: 9px; color: var(--muted); text-align: right; padding: 0 8px 3px; }
   .ko-note { font-size: 11.5px; color: var(--muted); padding: 2px 18px 16px; }
+  .bracket-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 2px 18px 12px; font-size: 11.5px; color: var(--muted); }
+  .lg-item { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; }
+  .lg-sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .ko-open { margin: 2px 18px 14px; text-align: center; font-size: 12px; font-weight: 800; color: var(--blue);
+    border: 1px solid rgba(39,71,230,.3); border-radius: 999px; padding: 9px; cursor: pointer; }
+  .ko-open:hover { background: rgba(39,71,230,.06); }
+  #bracket-inline { cursor: pointer; }
+  .modal-wide .modal-card { max-width: 96vw; width: 96vw; max-height: 92vh; border-radius: 18px 18px 0 0; }
+  @media (min-width: 560px) { .modal-wide .modal-card { border-radius: 18px; } }
+  .bracket-legend-slot { padding: 10px 18px 0; }
+  .bracket-legend-slot .bracket-legend { padding: 0; }
+  .bracket-body { padding: 10px 14px 16px; }
+  .bracket-full .bround { min-width: 172px; }
+
+  /* 2-sided full draw with connector lines */
+  .draw { display: flex; align-items: stretch; width: max-content; margin: 0 auto; padding: 6px 0; }
+  .draw .half { display: flex; }
+  .draw .rnd { display: flex; flex-direction: column; min-width: 150px; flex: 0 0 auto; }
+  .draw .rnd .tie { flex: 1 0 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .draw .bmatch { margin: 6px 0; }
+  .draw .final-col { justify-content: center; min-width: 164px; }
+  .draw .final-col .tie { flex: 0 0 auto; }
+  .draw .final-cap, .draw .third-cap { text-align: center; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+  .draw .third-cap { margin-top: 20px; }
+  .draw .tie-final .bmatch { border: 2px solid var(--gold); }
+  /* connectors */
+  .draw .half.left .rnd { padding-right: 22px; }
+  .draw .half.right .rnd { padding-left: 22px; }
+  .draw .half.left .rnd .tie::after, .draw .half.right .rnd .tie::after {
+    content: ""; position: absolute; top: 50%; width: 22px; height: 2px; background: var(--line);
+  }
+  .draw .half.left .rnd .tie::after { left: 100%; }
+  .draw .half.right .rnd .tie::after { right: 100%; }
+  .draw .half.left .rnd:not(.sf) .tie:nth-child(odd)::before, .draw .half.right .rnd:not(.sf) .tie:nth-child(odd)::before {
+    content: ""; position: absolute; top: 50%; width: 2px; height: 100%; background: var(--line);
+  }
+  .draw .half.left .rnd:not(.sf) .tie:nth-child(odd)::before { left: calc(100% + 22px); }
+  .draw .half.right .rnd:not(.sf) .tie:nth-child(odd)::before { right: calc(100% + 22px); }
+
+  /* third-placed teams table */
+  .tp-wrap { padding: 10px 14px 16px; }
+  .tp-tbl { width: 100%; }
+  .tp-tbl tr.tp-q td { background: rgba(18,205,189,.12); }
+  .tp-tbl tr.tp-q td.pos { box-shadow: inset 3px 0 0 var(--teal); color: var(--teal); }
+  .tp-mark { color: var(--teal); font-weight: 900; }
+  .tp-note { font-size: 11.5px; color: var(--muted); margin-top: 10px; }
+  .yddate { font-size: 10px; color: var(--muted); font-weight: 600; }
+
+  /* all eliminated teams */
+  .elim-wrap { padding: 8px 14px 14px; }
+  .elim-row { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid var(--line); }
+  .elim-row:last-child { border-bottom: 0; }
+  .elim-pos { width: 22px; text-align: center; font-weight: 800; color: var(--muted); font-size: 12px; flex: 0 0 auto; }
+  .elim-names { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; flex: 1; }
+  .elim-tn { font-weight: 700; font-size: 14px; }
+  .elim-own { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+  .elim-g { font-weight: 900; font-size: 17px; font-variant-numeric: tabular-nums; color: var(--ink); flex: 0 0 auto; }
+  .elim-g small { font-size: 10px; color: var(--muted); font-weight: 700; margin-left: 1px; }
 
   /* clickable results counter + modal */
   .pill-btn { font: inherit; cursor: pointer; border: 1px solid rgba(39,71,230,.35); color: var(--muted);
@@ -301,6 +359,16 @@
     <div id="unassigned"></div>
   </section>
 
+  <section class="card" id="third-card" style="display:none">
+    <h2 class="collapsible" id="third-h">Third-placed teams<span class="h2chev">▾</span></h2>
+    <div id="thirdplace"></div>
+  </section>
+
+  <section class="card" id="elim-card" style="display:none">
+    <h2 class="collapsible" id="elim-h">All eliminated teams<span class="h2chev">▾</span></h2>
+    <div id="eliminated"></div>
+  </section>
+
   <footer>
     <div>Goals counted: own goals ✓ &nbsp;·&nbsp; extra time ✓ &nbsp;·&nbsp; penalty shootouts ✗</div>
     <div>Refreshes automatically through the day · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
@@ -334,6 +402,15 @@
   </div>
 </div>
 
+<div class="modal modal-wide" id="bracketmodal" hidden>
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <div class="modal-head"><span class="ttl">Full draw</span><button class="modal-close" aria-label="Close">✕</button></div>
+    <div class="bracket-legend-slot"></div>
+    <div class="modal-body bracket-body"></div>
+  </div>
+</div>
+
 <div id="splash" hidden>
   <canvas id="confetti"></canvas>
   <div class="splash-inner">
@@ -348,6 +425,8 @@
 <script>
 const bust = "?v=" + Date.now();
 const opts = { cache: "no-store" };
+let OWNER_COLOURS = {};
+function ownerColour(o) { return (o && OWNER_COLOURS[o]) || null; }
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 
@@ -392,6 +471,12 @@ function fmtDate(dateStr) {
   const dm = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!dm) return dateStr;
   return new Date(+dm[1], +dm[2] - 1, +dm[3]).toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
+}
+
+function shortDate(dateStr) {
+  const dm = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!dm) return dateStr;
+  return new Date(+dm[1], +dm[2] - 1, +dm[3]).toLocaleDateString([], { weekday: "short", day: "numeric", month: "short" });
 }
 
 function renderStatus(s, live) {
@@ -471,11 +556,15 @@ function fixtureRow(mt) {
   } else {
     right = `<div class="score vs">vs</div>`;
   }
+  const s1 = mt.played ? scorerLine(mt.goals1) : "";
+  const s2 = mt.played ? scorerLine(mt.goals2) : "";
   return `<div class="fixrow">
       <div class="fxtime">${ko || ""}<br>${stage}</div>
       <div class="teams2">
         <div class="tl">${flag(mt.code1)} <span>${esc(mt.team1)}</span>${rankTag(mt.rank1)} ${owner(mt.owner1)}</div>
+        ${s1 ? `<div class="scorers">${s1}</div>` : ""}
         <div class="tl">${flag(mt.code2)} <span>${esc(mt.team2)}</span>${rankTag(mt.rank2)} ${owner(mt.owner2)}</div>
+        ${s2 ? `<div class="scorers">${s2}</div>` : ""}
       </div>
       ${right}
     </div>`;
@@ -496,17 +585,23 @@ function ydayRow(mt) {
       ${s1 ? `<div class="scorers">${s1}</div>` : ""}
       <div class="ydt">${flag(mt.code2)}<span class="ydn">${esc(mt.team2)}</span>${rankTag(mt.rank2)} ${owner(mt.owner2)}<span class="ydsc">${mt.score2}</span></div>
       ${s2 ? `<div class="scorers">${s2}</div>` : ""}
-      <div class="ydstage">${stage}${mt.pens ? ` <span class="pens">pens ${esc(mt.pens)}</span>` : ""}</div>
+      <div class="ydstage">${stage} <span class="yddate">${esc(shortDate(mt.date))}</span>${mt.pens ? ` <span class="pens">pens ${esc(mt.pens)}</span>` : ""}</div>
     </div>`;
 }
 
-function renderYesterday(feed) {
-  const d = new Date(); d.setDate(d.getDate() - 1);
-  const yday = localDateStr(d);
-  document.getElementById("ydaytitle").textContent = "Yesterday · " + fmtDate(yday);
+// the 3 most recent results before the matches currently shown in "Today"
+function renderPrevious(feed) {
+  const today = localDateStr(new Date());
+  let todaySet = feed.matches.filter(m => m.date === today);
+  if (!todaySet.length) {
+    const up = feed.matches.filter(m => m.date > today).map(m => m.date).sort();
+    if (up.length) todaySet = feed.matches.filter(m => m.date === up[0]);
+  }
+  const cutoff = todaySet.length ? Math.min(...todaySet.map(m => kickoffTs(m.date, m.time) || Infinity)) : Infinity;
+  const prev = feed.matches.filter(m => m.played && (kickoffTs(m.date, m.time) || 0) < cutoff).sort((a, b) => byKickoff(b, a)).slice(0, 3);
+  document.getElementById("ydaytitle").textContent = "Previous results";
   const el = document.getElementById("yesterday");
-  const list = feed.matches.filter(m => m.date === yday && m.played).sort(byKickoff);
-  el.innerHTML = list.length ? list.map(ydayRow).join("") : `<div class="empty">No matches yesterday.</div>`;
+  el.innerHTML = prev.length ? prev.map(ydayRow).join("") : `<div class="empty">No previous results yet.</div>`;
 }
 
 function renderFixtures(feed) {
@@ -538,9 +633,11 @@ function koSide(side, score) {
     const lbl = raw.replace(/^W(\d+)/, "Winner $1").replace(/^L(\d+)/, "Loser $1") || "TBD";
     return `<div class="bside tbd"><span class="bn">${esc(lbl)}</span></div>`;
   }
-  const own = (side.owner && side.owner !== "TBD") ? `<span class="bo">${esc(side.owner)}</span>` : "";
+  const col = ownerColour(side.owner);
+  const own = (side.owner && side.owner !== "TBD") ? `<span class="bo"${col ? ` style="color:${col}"` : ""}>${esc(side.owner)}</span>` : "";
   const right = (score != null) ? `<span class="bsc">${score}</span>` : "";
-  return `<div class="bside">${flag(side.code)}<span class="bnames"><span class="bn">${esc(side.name)}</span>${own}</span>${right}</div>`;
+  const style = col ? ` style="border-left:4px solid ${col}"` : "";
+  return `<div class="bside"${style}>${flag(side.code)}<span class="bnames"><span class="bn">${esc(side.name)}</span>${own}</span>${right}</div>`;
 }
 
 function koMatch(m) {
@@ -551,17 +648,94 @@ function koMatch(m) {
     </div>`;
 }
 
+function bracketCols(ko) {
+  return ko.map(r => `<div class="bround"><div class="bround-h">${esc(ROUND_SHORT[r.round] || r.round)}</div>${r.matches.map(koMatch).join("")}</div>`).join("");
+}
+function colourLegend() {
+  const items = Object.entries(OWNER_COLOURS).map(([name, col]) => `<span class="lg-item"><span class="lg-sw" style="background:${col}"></span>${esc(name)}</span>`).join("");
+  return items ? `<div class="bracket-legend">${items}</div>` : "";
+}
 function renderKnockout(s) {
   const ko = s.knockout || [];
   const card = document.getElementById("ko-card");
   if (!ko.length) { card.style.display = "none"; return; }
-  const cols = ko.map(r =>
-    `<div class="bround"><div class="bround-h">${esc(ROUND_SHORT[r.round] || r.round)}</div>${r.matches.map(koMatch).join("")}</div>`
-  ).join("");
-  const note = (s.meta && s.meta.groupStageComplete)
-    ? ""
-    : `<div class="ko-note">Round of 32 is projected from current group positions — <b>as it stands</b>. Later rounds fill in as results come through.</div>`;
-  document.getElementById("knockout").innerHTML = `<div class="bracket">${cols}</div>${note}`;
+  const note = (s.meta && s.meta.groupStageComplete) ? "" :
+    `<div class="ko-note">Round of 32 is projected from current group positions — <b>as it stands</b>. Later rounds fill in as results come through.</div>`;
+  document.getElementById("knockout").innerHTML =
+    `<div class="bracket" id="bracket-inline">${bracketCols(ko)}</div>${colourLegend()}<div class="ko-open">⤢ Open full draw view</div>${note}`;
+  const open = () => openBracket(s);
+  document.querySelector("#knockout .ko-open").onclick = open;
+  document.getElementById("bracket-inline").onclick = open;
+}
+// fixed 2026 bracket wiring, top-to-bottom, split into the two halves of the draw
+const DRAW = {
+  left:  { r32: [74, 77, 73, 75, 83, 84, 81, 82], r16: [89, 90, 93, 94], qf: [97, 98], sf: [101] },
+  right: { r32: [76, 78, 79, 80, 86, 88, 85, 87], r16: [91, 92, 95, 96], qf: [99, 100], sf: [102] }
+};
+function drawHTML(ko) {
+  const byNum = {};
+  ko.forEach(r => r.matches.forEach(m => { byNum[m.num] = m; }));
+  const tie = num => `<div class="tie">${byNum[num] ? koMatch(byNum[num]) : ""}</div>`;
+  const column = (nums, cls) => `<div class="rnd ${cls}">${nums.map(tie).join("")}</div>`;
+  const L = DRAW.left, R = DRAW.right, finalM = byNum[104], thirdM = byNum[103];
+  return `<div class="draw">
+      <div class="half left">${column(L.r32, "r32")}${column(L.r16, "r16")}${column(L.qf, "qf")}${column(L.sf, "sf")}</div>
+      <div class="rnd final-col">
+        <div class="final-cap">🏆 Final</div>
+        <div class="tie tie-final">${finalM ? koMatch(finalM) : ""}</div>
+        ${thirdM ? `<div class="third-cap">3rd place</div><div class="tie">${koMatch(thirdM)}</div>` : ""}
+      </div>
+      <div class="half right">${column(R.sf, "sf")}${column(R.qf, "qf")}${column(R.r16, "r16")}${column(R.r32, "r32")}</div>
+    </div>`;
+}
+function openBracket(s) {
+  const modal = document.getElementById("bracketmodal");
+  modal.querySelector(".bracket-legend-slot").innerHTML = colourLegend();
+  modal.querySelector(".bracket-body").innerHTML = drawHTML(s.knockout || []);
+  modal.hidden = false; document.body.style.overflow = "hidden";
+}
+function wireBracketModal() {
+  const modal = document.getElementById("bracketmodal");
+  const close = () => { modal.hidden = true; document.body.style.overflow = ""; };
+  modal.querySelector(".modal-close").onclick = close;
+  modal.querySelector(".modal-backdrop").onclick = close;
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) close(); });
+}
+
+function renderThirdPlace(s) {
+  const tp = s.thirdPlace || [];
+  const card = document.getElementById("third-card");
+  if (!tp.length || !(s.meta && s.meta.groupStageComplete)) { card.style.display = "none"; return; }
+  card.style.display = "";
+  const rows = tp.map(t => {
+    const col = ownerColour(t.owner);
+    return `<tr class="${t.qualified ? "tp-q" : ""}">
+      <td class="pos">${t.pos}</td>
+      <td class="gtcell"><div class="gtrow">${flag(t.code)}<div class="gtnames"><span class="gtn">${esc(t.name)}</span><span class="gto"${col ? ` style="color:${col}"` : ""}>${esc(t.owner)} · ${esc(t.group)}</span></div></div></td>
+      <td>${t.P}</td><td>${t.GF}</td><td>${t.GA}</td><td class="pts">${t.Pts}</td>
+      <td class="tp-mark">${t.qualified ? "✓" : ""}</td>
+    </tr>`;
+  }).join("");
+  document.getElementById("thirdplace").innerHTML =
+    `<div class="tp-wrap"><table class="grp-tbl tp-tbl"><thead><tr><th></th><th></th><th>P</th><th>GF</th><th>GA</th><th>Pts</th><th></th></tr></thead><tbody>${rows}</tbody></table>` +
+    `<div class="tp-note">Top 8 (✓) qualified for the Round of 32 as best third-placed teams.</div></div>`;
+}
+
+function renderEliminated(s) {
+  const list = s.eliminated || [];
+  const card = document.getElementById("elim-card");
+  if (!list.length) { card.style.display = "none"; return; }
+  card.style.display = "";
+  const rows = list.map((t, i) => {
+    const col = ownerColour(t.owner);
+    return `<div class="elim-row">
+        <span class="elim-pos">${i + 1}</span>
+        ${flag(t.code)}
+        <div class="elim-names"><span class="elim-tn">${esc(t.name)}</span><span class="elim-own"${col ? ` style="color:${col}"` : ""}>${esc(t.owner)}${t.rank != null ? ` · FIFA #${t.rank}` : ""}</span></div>
+        <span class="elim-g">${t.goals}<small>g</small></span>
+      </div>`;
+  }).join("");
+  document.getElementById("eliminated").innerHTML = `<div class="elim-wrap">${rows}</div>`;
 }
 
 function groupTable(g) {
@@ -741,12 +915,8 @@ function computeAll(config, src) {
       }
     }
   }
-  // A team is out only when it loses a knockout match, or once the GROUP STAGE IS
-  // COMPLETE and it didn't make the knockouts. (openfootball fills confirmed group
-  // winners into the R32 early, so a real KO name appearing is NOT a valid trigger.)
   const grpAll = src.matches.filter(m => m.group);
   const groupStageComplete = grpAll.length > 0 && grpAll.every(isPlayed);
-  const isAlive = n => !(lostKnockout[n]) && !(groupStageComplete && !knockoutTeams.has(n));
 
   // group tables
   const groupStats = Object.create(null);
@@ -771,11 +941,22 @@ function computeAll(config, src) {
     groupSorted.push({ name: grp, rows });
   }
   const thirds = [];
-  for (const g of groupSorted) { if (g.rows[0]) g.rows[0].through = true; if (g.rows[1]) g.rows[1].through = true; if (g.rows[2]) thirds.push(g.rows[2]); }
+  for (const g of groupSorted) { if (g.rows[0]) g.rows[0].through = true; if (g.rows[1]) g.rows[1].through = true; if (g.rows[2]) { g.rows[2].grp = g.name; thirds.push(g.rows[2]); } }
   thirds.sort(rowSort);
   for (let i = 0; i < Math.min(8, thirds.length); i++) thirds[i].through = true;
   const advancing = new Set();
   for (const g of groupSorted) for (const r of g.rows) if (r.through) advancing.add(r.norm);
+
+  // A team is out only when it loses a knockout match, or once the group stage is
+  // complete and it didn't qualify. Qualified = top-2/best-third (from group results)
+  // OR already placed into a real knockout fixture by the source — lag-proof either way.
+  const isAlive = n => !(lostKnockout[n]) && !(groupStageComplete && !(advancing.has(n) || knockoutTeams.has(n)));
+
+  // static table of the 12 third-placed teams (ranked; top 8 qualify)
+  const thirdPlace = thirds.map((r, i) => ({
+    pos: i + 1, group: r.grp, name: r.name, code: r.code, owner: r.owner,
+    P: r.P, W: r.W, D: r.D, L: r.L, GF: r.GF, GA: r.GA, GD: r.GD, Pts: r.Pts, qualified: i < 8
+  }));
   // current phase + per-friend "games remaining" in that phase
   const groupPlayedByTeam = Object.create(null);
   for (const g of groupSorted) for (const r of g.rows) groupPlayedByTeam[r.norm] = r.P;
@@ -837,6 +1018,11 @@ function computeAll(config, src) {
   }
   unTeams.sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
 
+  // every eliminated team (any owner), ranked by goals
+  const eliminated = [...realTeams].filter(n => !isAlive(n)).map(n => ({
+    name: officialName[n], code: getCode(n), owner: ownerOf[n] || "Unassigned", goals: teamGoals[n] || 0, played: teamPlayed[n] || 0, rank: getRank(n)
+  })).sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+
   // knockout projection
   const groupByLetter = Object.create(null), qualThirdGroups = [];
   for (const g of groupSorted) { const L = g.name.split(" ").pop(); groupByLetter[L] = g.rows; if (g.rows[2] && g.rows[2].through) qualThirdGroups.push(L); }
@@ -893,7 +1079,7 @@ function computeAll(config, src) {
     winner: tournamentOver && friends[0] ? friends[0].name : null,
     friends, unassigned: { totalGoals: unTotal, teamsLeft: unLeft, teamsTotal: unTeams.length, teams: unTeams },
     groups: groupSorted.map(g => ({ name: g.name, teams: g.rows.map(r => ({ name: r.name, code: r.code, owner: r.owner, P: r.P, W: r.W, D: r.D, L: r.L, GF: r.GF, GA: r.GA, GD: r.GD, Pts: r.Pts, through: r.through })) })),
-    knockout: koOut
+    knockout: koOut, thirdPlace, eliminated
   };
   return { standings, matches: { generatedAt, matches: matchesOut } };
 }
@@ -912,24 +1098,30 @@ async function loadSource() {
 async function init() {
   try {
     const config = await fetch("./teams.json" + bust, opts).then(r => r.json());
+    OWNER_COLOURS = config.colours || {};
     const { src, live } = await loadSource();
     const { standings, matches } = computeAll(config, src);
     renderStatus(standings, live);
     renderFixtures(matches);
-    renderYesterday(matches);
+    renderPrevious(matches);
     renderTable(standings);
     renderGroups(standings);
     renderKnockout(standings);
+    renderThirdPlace(standings);
     renderUnassigned(standings);
+    renderEliminated(standings);
     renderResults(matches);
     wireModal();
     wireInfo();
-    ["fx-h:fixtures", "yday-h:yesterday", "table-h:table", "groups-h:groups", "ko-h:knockout", "un-h:unassigned"]
+    wireBracketModal();
+    ["fx-h:fixtures", "yday-h:yesterday", "table-h:table", "groups-h:groups", "ko-h:knockout", "un-h:unassigned", "third-h:thirdplace", "elim-h:eliminated"]
       .forEach(pair => { const [h, b] = pair.split(":"); wireCollapse(h, b); });
-    // once the group stage is done, push the group tables to the bottom (knockout moves up)
+    // once the group stage is done, push the reference sections to the bottom in this order
     if (standings.meta.groupStageComplete) {
-      const wrap = document.querySelector(".wrap"), gc = document.getElementById("groups-card"), ft = wrap.querySelector("footer");
-      if (wrap && gc && ft) wrap.insertBefore(gc, ft);
+      const wrap = document.querySelector(".wrap"), ft = wrap.querySelector("footer");
+      ["groups-card", "third-card", "unassigned-card", "elim-card"].forEach(id => {
+        const el = document.getElementById(id); if (wrap && el && ft) wrap.insertBefore(el, ft);
+      });
     }
     // tournament finished → winner celebration (once per browser session)
     if (standings.meta.tournamentOver && standings.winner && !sessionStorage.getItem("wc26-splash")) {
