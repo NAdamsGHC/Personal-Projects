@@ -145,6 +145,11 @@
   .left b { color: var(--orange); font-size: 16px; font-weight: 900; }
   .left.share-good b { color: #16a34a; }
   .left.share-low b { color: #dc2626; }
+  .share-note { font-size: 11px; color: var(--muted); padding: 12px 18px 14px; border-top: 1px solid var(--line); line-height: 1.6; }
+  .share-note b { color: var(--ink); }
+  .sdot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 3px; }
+  .sdot.good { background: #16a34a; }
+  .sdot.low { background: #dc2626; }
 
   .detail { display: none; padding: 6px 14px 16px; background: #f5f8fd; border-bottom: 1px solid var(--line); }
   .detail.open { display: block; }
@@ -561,6 +566,10 @@ function renderTable(s) {
     el.appendChild(btn);
     el.appendChild(detail);
   });
+  if (colourShare && (s.friends || []).length) {
+    el.insertAdjacentHTML("beforeend",
+      `<div class="share-note"><span class="sdot good"></span>above · <span class="sdot low"></span>below the even share of teams still in: <b>${fairShare.toFixed(1)}</b> (${totalRemaining} ÷ ${(s.friends || []).length}) — drops each round</div>`);
+  }
 }
 
 function renderUnassigned(s) {
