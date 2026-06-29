@@ -61,6 +61,14 @@
   .pill b { color: var(--ink); font-weight: 800; }
   .pill.live { color: #0a9e92; border-color: rgba(18,205,189,.55); font-weight: 700; }
 
+  /* section tabs */
+  .tabs { position: sticky; top: 0; z-index: 30; display: flex; gap: 6px; overflow-x: auto; padding: 8px 2px; margin: 0 0 14px;
+    background: rgba(243,247,252,.92); backdrop-filter: blur(6px); -webkit-overflow-scrolling: touch; }
+  .tab { flex: 0 0 auto; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 7px 13px;
+    font: inherit; font-size: 12.5px; font-weight: 700; color: var(--ink); cursor: pointer; white-space: nowrap; }
+  .tab:hover { border-color: var(--blue); color: var(--blue); }
+  .card { scroll-margin-top: 56px; }
+
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
   .card + .card { margin-top: 16px; }
   .card h2 {
@@ -135,6 +143,8 @@
   .goals small { font-size: 10px; color: var(--muted); font-weight: 700; display: block; text-align: right; text-transform: uppercase; letter-spacing: .5px; }
   .left { font-size: 12px; color: var(--muted); text-align: right; min-width: 62px; font-weight: 600; }
   .left b { color: var(--orange); font-size: 16px; font-weight: 900; }
+  .left.share-good b { color: #16a34a; }
+  .left.share-low b { color: #dc2626; }
 
   .detail { display: none; padding: 6px 14px 16px; background: #f5f8fd; border-bottom: 1px solid var(--line); }
   .detail.open { display: block; }
@@ -301,6 +311,17 @@
   .modal-head .ttl::before { content: ""; width: 5px; height: 17px; border-radius: 3px; background: linear-gradient(var(--orange), var(--gold)); }
   .modal-close { border: none; background: #f0f4fa; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 13px; color: var(--muted); }
   .modal-close:hover { background: #e4eaf2; color: var(--ink); }
+  .head-actions { display: flex; align-items: center; gap: 10px; }
+  .flip-btn { border: 1px solid var(--blue); background: none; color: var(--blue); font: inherit; font-weight: 800; font-size: 12px; padding: 6px 13px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .flip-btn:hover { background: rgba(39,71,230,.07); }
+  .flip-btn.ghost { border-color: var(--line); color: var(--muted); }
+  .flip-btn.ghost:hover { background: #f3f7fc; }
+  .ko-toolbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 4px; flex-wrap: wrap; }
+  .ko-hint { font-size: 11px; color: var(--muted); }
+  .draw-scroll { overflow: auto; max-height: 66vh; cursor: grab; padding: 4px 8px 8px; -webkit-overflow-scrolling: touch; }
+  .draw-scroll.grabbing, .bracket-body.grabbing { cursor: grabbing; }
+  .draw-scroll .draw { margin: 0; }
+  .bracket-body { cursor: grab; }
   .modal-body { overflow: auto; padding: 2px 18px 16px; }
   .resday { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; color: var(--muted);
             padding: 14px 0 6px; position: sticky; top: 0; background: var(--card); }
@@ -329,17 +350,19 @@
 
   <div class="status" id="status"></div>
 
-  <section class="card">
+  <nav id="tabs" class="tabs"></nav>
+
+  <section class="card" id="table-card">
     <h2 class="collapsible" id="table-h">League table<button class="info-btn" id="info-btn" type="button" aria-label="What do these mean?">i</button><span class="h2chev">▾</span></h2>
     <div id="table"><div class="empty">Loading…</div></div>
   </section>
 
-  <section class="card fxcard">
+  <section class="card fxcard" id="today-card">
     <h2 class="collapsible" id="fx-h"><span id="fxtitle">Today's fixtures</span><span class="h2chev">▾</span></h2>
     <div class="fx" id="fixtures"><div class="empty">Loading…</div></div>
   </section>
 
-  <section class="card fxcard">
+  <section class="card fxcard" id="prev-card">
     <h2 class="collapsible" id="yday-h"><span id="ydaytitle">Yesterday's results</span><span class="h2chev">▾</span></h2>
     <div class="fx" id="yesterday"><div class="empty">Loading…</div></div>
   </section>
@@ -396,7 +419,7 @@
         <dt>AGS — Advancing from Group Stage</dt><dd>How many of their teams are currently in a qualifying spot (top 2 of a group, or one of the 8 best third-placed teams), as it stands.</dd>
         <dt>GSMR — Group Stage Matches Remaining</dt><dd>Group games their teams still have to play, out of 27 (9 teams × 3 games each).</dd>
         <dt>R32 / R16 / QF / SF / Final</dt><dd>After the group stage, the matches their teams have left to play in the current knockout round.</dd>
-        <dt>Teams left</dt><dd>How many of their teams are still in the tournament.</dd>
+        <dt>Teams left</dt><dd>How many of their teams are still in the tournament. In the knockouts it turns <span style="color:#16a34a;font-weight:800">green</span> if you hold more than your even share of the teams still in (total remaining ÷ players) and <span style="color:#dc2626;font-weight:800">red</span> if fewer.</dd>
       </dl>
     </div>
   </div>
@@ -405,7 +428,7 @@
 <div class="modal modal-wide" id="bracketmodal" hidden>
   <div class="modal-backdrop"></div>
   <div class="modal-card">
-    <div class="modal-head"><span class="ttl">Full draw</span><button class="modal-close" aria-label="Close">✕</button></div>
+    <div class="modal-head"><span class="ttl">Full draw</span><span class="head-actions"><button class="flip-btn" type="button">⇄ Flip</button><button class="modal-close" aria-label="Close">✕</button></span></div>
     <div class="bracket-legend-slot"></div>
     <div class="modal-body bracket-body"></div>
   </div>
@@ -505,6 +528,10 @@ function renderTable(s) {
   el.innerHTML = "";
   const over = s.meta && s.meta.tournamentOver;
   const phase = s.meta && s.meta.phase;
+  // even share of the teams still in the tournament (total remaining ÷ players)
+  const totalRemaining = (s.friends || []).reduce((a, f) => a + f.teamsLeft, 0) + (s.unassigned ? (s.unassigned.teamsLeft || 0) : 0);
+  const fairShare = totalRemaining / Math.max(1, (s.friends || []).length);
+  const colourShare = !over && phase !== "group";   // only once teams start dropping out
   (s.friends || []).forEach(f => {
     const rkcls = f.rank <= 3 ? " r" + f.rank : "";
     const subLines = [];
@@ -515,6 +542,7 @@ function renderTable(s) {
     }
     if (!over && f.gamesRem) subLines.push(`${esc(f.gamesRem.label)} · <b>${f.gamesRem.remaining}</b>/${f.gamesRem.total}`);
     const sub = subLines.length ? `<div class="substat">${subLines.map(x => `<div>${x}</div>`).join("")}</div>` : "";
+    const leftCls = colourShare ? (f.teamsLeft > fairShare ? " share-good" : f.teamsLeft < fairShare ? " share-low" : "") : "";
     const btn = document.createElement("button");
     btn.className = "row";
     btn.setAttribute("aria-expanded", "false");
@@ -522,7 +550,7 @@ function renderTable(s) {
       `<div class="rankb${rkcls}">${f.rank}</div>` +
       `<div class="pcell"><div class="pname"><span class="chev">▶</span>${esc(f.name)}</div>${sub}</div>` +
       `<div class="goals">${f.totalGoals}<small>goals</small></div>` +
-      `<div class="left"><b>${f.teamsLeft}</b> / ${f.teamsTotal}<br>teams left</div>`;
+      `<div class="left${leftCls}" title="${colourShare ? "Even share of the teams still in is " + fairShare.toFixed(1) : ""}"><b>${f.teamsLeft}</b> / ${f.teamsTotal}<br>teams left</div>`;
     const detail = document.createElement("div");
     detail.className = "detail";
     detail.innerHTML = `<div class="teamgrid">${(f.teams || []).map(teamCard).join("")}</div>`;
@@ -655,29 +683,46 @@ function colourLegend() {
   const items = Object.entries(OWNER_COLOURS).map(([name, col]) => `<span class="lg-item"><span class="lg-sw" style="background:${col}"></span>${esc(name)}</span>`).join("");
   return items ? `<div class="bracket-legend">${items}</div>` : "";
 }
+let INLINE_KO = [], INLINE_FLIPPED = false;
+function renderInlineDraw() {
+  const el = document.getElementById("inline-draw");
+  if (el) { el.innerHTML = drawHTML(INLINE_KO, INLINE_FLIPPED); el.scrollLeft = 0; }
+}
 function renderKnockout(s) {
   const ko = s.knockout || [];
   const card = document.getElementById("ko-card");
   if (!ko.length) { card.style.display = "none"; return; }
+  INLINE_KO = ko; INLINE_FLIPPED = false;
   const note = (s.meta && s.meta.groupStageComplete) ? "" :
     `<div class="ko-note">Round of 32 is projected from current group positions — <b>as it stands</b>. Later rounds fill in as results come through.</div>`;
   document.getElementById("knockout").innerHTML =
-    `<div class="bracket" id="bracket-inline">${bracketCols(ko)}</div>${colourLegend()}<div class="ko-open">⤢ Open full draw view</div>${note}`;
-  const open = () => openBracket(s);
-  document.querySelector("#knockout .ko-open").onclick = open;
-  document.getElementById("bracket-inline").onclick = open;
+    `<div class="ko-toolbar"><button class="flip-btn" id="inline-flip" type="button">⇄ Flip</button>` +
+    `<button class="flip-btn ghost" id="inline-full" type="button">⤢ Full draw</button>` +
+    `<span class="ko-hint">drag to move around</span></div>` +
+    colourLegend() +
+    `<div class="draw-scroll" id="inline-draw">${drawHTML(ko, false)}</div>${note}`;
+  document.getElementById("inline-flip").onclick = () => { INLINE_FLIPPED = !INLINE_FLIPPED; renderInlineDraw(); };
+  document.getElementById("inline-full").onclick = () => openBracket(s);
+  enableDragScroll(document.getElementById("inline-draw"));
+}
+function enableDragScroll(el) {
+  if (!el || el._dragBound) return; el._dragBound = true;
+  let down = false, sx = 0, sy = 0, sl = 0, st = 0;
+  el.addEventListener("mousedown", e => { down = true; el.classList.add("grabbing"); sx = e.pageX; sy = e.pageY; sl = el.scrollLeft; st = el.scrollTop; });
+  window.addEventListener("mouseup", () => { down = false; el.classList.remove("grabbing"); });
+  el.addEventListener("mousemove", e => { if (!down) return; e.preventDefault(); el.scrollLeft = sl - (e.pageX - sx); el.scrollTop = st - (e.pageY - sy); });
 }
 // fixed 2026 bracket wiring, top-to-bottom, split into the two halves of the draw
 const DRAW = {
   left:  { r32: [74, 77, 73, 75, 83, 84, 81, 82], r16: [89, 90, 93, 94], qf: [97, 98], sf: [101] },
   right: { r32: [76, 78, 79, 80, 86, 88, 85, 87], r16: [91, 92, 95, 96], qf: [99, 100], sf: [102] }
 };
-function drawHTML(ko) {
+function drawHTML(ko, flipped) {
   const byNum = {};
   ko.forEach(r => r.matches.forEach(m => { byNum[m.num] = m; }));
   const tie = num => `<div class="tie">${byNum[num] ? koMatch(byNum[num]) : ""}</div>`;
   const column = (nums, cls) => `<div class="rnd ${cls}">${nums.map(tie).join("")}</div>`;
-  const L = DRAW.left, R = DRAW.right, finalM = byNum[104], thirdM = byNum[103];
+  const L = flipped ? DRAW.right : DRAW.left, R = flipped ? DRAW.left : DRAW.right, finalM = byNum[104], thirdM = byNum[103];
   return `<div class="draw">
       <div class="half left">${column(L.r32, "r32")}${column(L.r16, "r16")}${column(L.qf, "qf")}${column(L.sf, "sf")}</div>
       <div class="rnd final-col">
@@ -688,10 +733,18 @@ function drawHTML(ko) {
       <div class="half right">${column(R.sf, "sf")}${column(R.qf, "qf")}${column(R.r16, "r16")}${column(R.r32, "r32")}</div>
     </div>`;
 }
+let DRAW_KO = [], DRAW_FLIPPED = false;
+function renderDraw() {
+  const el = document.querySelector("#bracketmodal .bracket-body");
+  el.innerHTML = drawHTML(DRAW_KO, DRAW_FLIPPED);
+  el.scrollLeft = 0;
+  enableDragScroll(el);
+}
 function openBracket(s) {
   const modal = document.getElementById("bracketmodal");
+  DRAW_KO = s.knockout || []; DRAW_FLIPPED = false;
   modal.querySelector(".bracket-legend-slot").innerHTML = colourLegend();
-  modal.querySelector(".bracket-body").innerHTML = drawHTML(s.knockout || []);
+  renderDraw();
   modal.hidden = false; document.body.style.overflow = "hidden";
 }
 function wireBracketModal() {
@@ -699,6 +752,7 @@ function wireBracketModal() {
   const close = () => { modal.hidden = true; document.body.style.overflow = ""; };
   modal.querySelector(".modal-close").onclick = close;
   modal.querySelector(".modal-backdrop").onclick = close;
+  modal.querySelector(".flip-btn").onclick = () => { DRAW_FLIPPED = !DRAW_FLIPPED; renderDraw(); };
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) close(); });
 }
 
@@ -804,6 +858,25 @@ function wireCollapse(headerId, bodyId) {
     const hide = body.style.display !== "none";   // open by default
     body.style.display = hide ? "none" : "";
     h.classList.toggle("collapsed", hide);
+  });
+}
+
+const TAB_LABELS = { "table-h": "Table", "fx-h": "Today", "yday-h": "Previous", "ko-h": "Draw", "groups-h": "Groups", "third-h": "3rd place", "un-h": "Unassigned", "elim-h": "Out" };
+function buildTabs() {
+  const tabs = document.getElementById("tabs");
+  if (!tabs) return;
+  const sections = [...document.querySelector(".wrap").children].filter(c => c.tagName === "SECTION" && c.id && getComputedStyle(c).display !== "none");
+  tabs.innerHTML = sections.map(sec => {
+    const h = sec.querySelector("h2");
+    const label = (h && TAB_LABELS[h.id]) || (h ? h.textContent.replace(/[▾i]/g, "").trim() : sec.id);
+    return `<button class="tab" data-target="${sec.id}">${esc(label)}</button>`;
+  }).join("");
+  tabs.querySelectorAll(".tab").forEach(t => t.onclick = () => {
+    const sec = document.getElementById(t.dataset.target);
+    if (!sec) return;
+    const h = sec.querySelector("h2.collapsible");
+    if (h && h.classList.contains("collapsed")) h.click();   // expand if collapsed before jumping
+    sec.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
@@ -1123,6 +1196,7 @@ async function init() {
         const el = document.getElementById(id); if (wrap && el && ft) wrap.insertBefore(el, ft);
       });
     }
+    buildTabs();
     // tournament finished → winner celebration (once per browser session)
     if (standings.meta.tournamentOver && standings.winner && !sessionStorage.getItem("wc26-splash")) {
       sessionStorage.setItem("wc26-splash", "1");
