@@ -237,6 +237,9 @@
   .bside .bo { font-size: 9px; color: var(--muted); }
   .bside.tbd { color: var(--muted); }
   .bside.tbd .bn { font-weight: 600; font-size: 11.5px; }
+  .bside.win { background: rgba(22,163,74,.10); }
+  .bside.win .bn { font-weight: 900; }
+  .bside.win .bn::after { content: " ✓"; color: #16a34a; }
   .bsc { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--ink); }
   .bpens { font-size: 9px; color: var(--muted); text-align: right; padding: 0 8px 3px; }
   .ko-note { font-size: 11.5px; color: var(--muted); padding: 2px 18px 16px; }
@@ -664,7 +667,7 @@ function renderFixtures(feed) {
 
 const ROUND_SHORT = { "Round of 32": "R32", "Round of 16": "R16", "Quarter-final": "QF", "Semi-final": "SF", "Final": "Final", "Match for third place": "3rd place" };
 
-function koSide(side, score) {
+function koSide(side, score, isWinner) {
   if (!side || !side.name) {
     const raw = side && side.slot ? side.slot : "";
     const lbl = raw.replace(/^W(\d+)/, "Winner $1").replace(/^L(\d+)/, "Loser $1") || "TBD";
@@ -674,13 +677,18 @@ function koSide(side, score) {
   const own = (side.owner && side.owner !== "TBD") ? `<span class="bo"${col ? ` style="color:${col}"` : ""}>${esc(side.owner)}</span>` : "";
   const right = (score != null) ? `<span class="bsc">${score}</span>` : "";
   const style = col ? ` style="border-left:4px solid ${col}"` : "";
-  return `<div class="bside"${style}>${flag(side.code)}<span class="bnames"><span class="bn">${esc(side.name)}</span>${own}</span>${right}</div>`;
+  return `<div class="bside${isWinner ? " win" : ""}"${style}>${flag(side.code)}<span class="bnames"><span class="bn">${esc(side.name)}</span>${own}</span>${right}</div>`;
 }
 
 function koMatch(m) {
+  let w = 0;
+  if (m.played) {
+    if (m.score1 > m.score2) w = 1; else if (m.score2 > m.score1) w = 2;
+    else if (m.pens) { const pp = String(m.pens).split("-").map(Number); w = pp[0] > pp[1] ? 1 : pp[1] > pp[0] ? 2 : 0; }
+  }
   return `<div class="bmatch">
-      ${koSide(m.side1, m.played ? m.score1 : null)}
-      ${koSide(m.side2, m.played ? m.score2 : null)}
+      ${koSide(m.side1, m.played ? m.score1 : null, w === 1)}
+      ${koSide(m.side2, m.played ? m.score2 : null, w === 2)}
       ${m.pens ? `<div class="bpens">pens ${esc(m.pens)}</div>` : ""}
     </div>`;
 }
@@ -1119,12 +1127,32 @@ function computeAll(config, src) {
   })(0);
   const thirdSlotTeam = Object.create(null);
   for (let i = 0; i < thirdSlotLabels.length; i++) if (assign[i]) thirdSlotTeam[thirdSlotLabels[i]] = groupByLetter[assign[i]][2];
+  // resolve W##/L## slots from actual results (full time -> extra time -> penalties)
+  const byNumAll = {};
+  src.matches.forEach(m => { if (m.num != null) byNumAll[m.num] = m; });
+  function resolveTeam(label) {
+    if (!isPlaceholder(label)) return label;
+    const mm = label.match(/^([WL])(\d+)$/);
+    if (mm) { const r = matchResult(+mm[2]); return r ? (mm[1] === "W" ? r.win : r.lose) : null; }
+    return null;
+  }
+  function matchResult(num) {
+    const m = byNumAll[num];
+    if (!m || !isPlayed(m)) return null;
+    const t1 = resolveTeam(String(m.team1)), t2 = resolveTeam(String(m.team2));
+    if (!t1 || !t2) return null;
+    const [g1, g2] = scoreFinal(m.score);
+    if (g1 > g2) return { win: t1, lose: t2 };
+    if (g2 > g1) return { win: t2, lose: t1 };
+    if (m.score.p) { const p1 = +m.score.p[0], p2 = +m.score.p[1]; if (p1 > p2) return { win: t1, lose: t2 }; if (p2 > p1) return { win: t2, lose: t1 }; }
+    return null;
+  }
   function resolveSide(label) {
     const out = { slot: label, name: null, code: null, owner: null, projected: false };
     let mm;
     if ((mm = label.match(/^([12])([A-L])$/))) { const rows = groupByLetter[mm[2]], pos = +mm[1]; if (rows && rows.length >= pos) { const t = rows[pos - 1]; Object.assign(out, { name: t.name, code: t.code, owner: t.owner, projected: true }); } }
     else if (/^3[A-L/]+$/.test(label)) { const t = thirdSlotTeam[label]; if (t) Object.assign(out, { name: t.name, code: t.code, owner: t.owner, projected: true }); }
-    else if (/^[WL]\d+$/.test(label)) { /* structural */ }
+    else if (/^[WL]\d+$/.test(label)) { const t = resolveTeam(label); if (t) { const n = normName(t); out.slot = null; out.name = t; out.code = getCode(n); out.owner = ownerOf[n] || "Unassigned"; } }
     else { const n = normName(label); out.slot = null; out.name = label; out.code = getCode(n); out.owner = ownerOf[n] || "Unassigned"; }
     return out;
   }
