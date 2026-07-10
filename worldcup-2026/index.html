@@ -145,6 +145,20 @@
   .left b { color: var(--orange); font-size: 16px; font-weight: 900; }
   .left.share-good b { color: #16a34a; }
   .left.share-low b { color: #dc2626; }
+  /* eliminated player */
+  .row.out { background: rgba(220,38,38,.09); cursor: default; }
+  .row.out:hover { background: rgba(220,38,38,.09); }
+  .pname-out { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .elim-tag { font-family: "Impact", "Haettenschweiler", "Franklin Gothic Bold", "Arial Black", sans-serif;
+    color: #dc2626; font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; transform: skewX(-7deg);
+    margin: 3px 0 0 21px; text-shadow: 1.5px 1.5px 0 rgba(220,38,38,.25); }
+  /* champion (permanent, once the tournament is over) */
+  .row.champ { background: linear-gradient(90deg, rgba(245,180,0,.18), rgba(245,180,0,.04)); }
+  .row.champ:hover, .row.champ[aria-expanded="true"] { background: linear-gradient(90deg, rgba(245,180,0,.26), rgba(245,180,0,.07)); }
+  .row.champ .rankb { background: linear-gradient(135deg, var(--gold), #e69a00); color: #3a2a00; box-shadow: 0 2px 8px rgba(245,180,0,.45); }
+  .champ-tag { font-family: "Impact", "Haettenschweiler", "Franklin Gothic Bold", "Arial Black", sans-serif;
+    color: #a67c00; font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; transform: skewX(-7deg);
+    margin: 3px 0 0 21px; text-shadow: 1.5px 1.5px 0 rgba(245,180,0,.35); }
   .share-note { font-size: 11px; color: var(--muted); padding: 12px 18px 14px; border-top: 1px solid var(--line); line-height: 1.6; }
   .share-note b { color: var(--ink); }
   .sdot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 3px; }
@@ -437,7 +451,7 @@
 <div class="modal modal-wide" id="bracketmodal" hidden>
   <div class="modal-backdrop"></div>
   <div class="modal-card">
-    <div class="modal-head"><span class="ttl">Full draw</span><span class="head-actions"><button class="flip-btn" type="button">⇄ Flip</button><button class="modal-close" aria-label="Close">✕</button></span></div>
+    <div class="modal-head"><span class="ttl">Full draw</span><span class="head-actions"><button class="flip-btn" id="draw-flip" type="button">⇄ Flip</button><button class="flip-btn ghost" id="draw-hide" type="button">Hide done</button><button class="modal-close" aria-label="Close">✕</button></span></div>
     <div class="bracket-legend-slot"></div>
     <div class="modal-body bracket-body"></div>
   </div>
@@ -543,6 +557,19 @@ function renderTable(s) {
   const colourShare = !over && phase !== "group";   // only once teams start dropping out
   (s.friends || []).forEach(f => {
     const rkcls = f.rank <= 3 ? " r" + f.rank : "";
+    const knockedOut = !over && phase !== "group" && f.teamsLeft === 0;
+    if (knockedOut) {
+      const kb = document.createElement("button");
+      kb.className = "row out";
+      kb.setAttribute("aria-expanded", "false");
+      kb.innerHTML =
+        `<div class="rankb${rkcls}">${f.rank}</div>` +
+        `<div class="pcell"><div class="pname pname-out">${esc(f.name)}</div><div class="elim-tag">ELIMINATED 💀</div></div>` +
+        `<div class="goals">${f.totalGoals}<small>goals</small></div>` +
+        `<div class="left share-low"><b>0</b> / ${f.teamsTotal}<br>teams left</div>`;
+      el.appendChild(kb);
+      return;
+    }
     const subLines = [];
     if (f.avgRank != null) {
       let l1 = `Avg Rank #<b>${f.avgRank}</b>`;
@@ -552,12 +579,14 @@ function renderTable(s) {
     if (!over && f.gamesRem) subLines.push(`${esc(f.gamesRem.label)} · <b>${f.gamesRem.remaining}</b>/${f.gamesRem.total}`);
     const sub = subLines.length ? `<div class="substat">${subLines.map(x => `<div>${x}</div>`).join("")}</div>` : "";
     const leftCls = colourShare ? (f.teamsLeft > fairShare ? " share-good" : f.teamsLeft < fairShare ? " share-low" : "") : "";
+    const champ = over && f.rank === 1;
+    const champTag = champ ? `<div class="champ-tag">CHAMPION 👑</div>` : "";
     const btn = document.createElement("button");
-    btn.className = "row";
+    btn.className = champ ? "row champ" : "row";
     btn.setAttribute("aria-expanded", "false");
     btn.innerHTML =
       `<div class="rankb${rkcls}">${f.rank}</div>` +
-      `<div class="pcell"><div class="pname"><span class="chev">▶</span>${esc(f.name)}</div>${sub}</div>` +
+      `<div class="pcell"><div class="pname"><span class="chev">▶</span>${esc(f.name)}</div>${champTag}${sub}</div>` +
       `<div class="goals">${f.totalGoals}<small>goals</small></div>` +
       `<div class="left${leftCls}" title="${colourShare ? "Even share of the teams still in is " + fairShare.toFixed(1) : ""}"><b>${f.teamsLeft}</b> / ${f.teamsTotal}<br>teams left</div>`;
     const detail = document.createElement("div");
@@ -701,25 +730,29 @@ function colourLegend() {
   const items = Object.entries(OWNER_COLOURS).map(([name, col]) => `<span class="lg-item"><span class="lg-sw" style="background:${col}"></span>${esc(name)}</span>`).join("");
   return items ? `<div class="bracket-legend">${items}</div>` : "";
 }
-let INLINE_KO = [], INLINE_FLIPPED = false;
+let INLINE_KO = [], INLINE_FLIPPED = false, INLINE_HIDE = false;
 function renderInlineDraw() {
   const el = document.getElementById("inline-draw");
-  if (el) { el.innerHTML = drawHTML(INLINE_KO, INLINE_FLIPPED); el.scrollLeft = 0; }
+  if (el) { el.innerHTML = drawHTML(INLINE_KO, INLINE_FLIPPED, INLINE_HIDE); el.scrollLeft = 0; }
+  const hb = document.getElementById("inline-hide"); if (hb) hb.textContent = INLINE_HIDE ? "Show all rounds" : "Hide completed";
 }
 function renderKnockout(s) {
   const ko = s.knockout || [];
   const card = document.getElementById("ko-card");
   if (!ko.length) { card.style.display = "none"; return; }
-  INLINE_KO = ko; INLINE_FLIPPED = false;
+  INLINE_KO = ko; INLINE_FLIPPED = false; INLINE_HIDE = false;
   const note = (s.meta && s.meta.groupStageComplete) ? "" :
     `<div class="ko-note">Round of 32 is projected from current group positions — <b>as it stands</b>. Later rounds fill in as results come through.</div>`;
+  const hideBtn = completedRoundCount(ko) ? `<button class="flip-btn ghost" id="inline-hide" type="button">Hide completed</button>` : "";
   document.getElementById("knockout").innerHTML =
     `<div class="ko-toolbar"><button class="flip-btn" id="inline-flip" type="button">⇄ Flip</button>` +
+    hideBtn +
     `<button class="flip-btn ghost" id="inline-full" type="button">⤢ Full draw</button>` +
     `<span class="ko-hint">drag to move around</span></div>` +
     colourLegend() +
-    `<div class="draw-scroll" id="inline-draw">${drawHTML(ko, false)}</div>${note}`;
+    `<div class="draw-scroll" id="inline-draw">${drawHTML(ko, false, false)}</div>${note}`;
   document.getElementById("inline-flip").onclick = () => { INLINE_FLIPPED = !INLINE_FLIPPED; renderInlineDraw(); };
+  const ih = document.getElementById("inline-hide"); if (ih) ih.onclick = () => { INLINE_HIDE = !INLINE_HIDE; renderInlineDraw(); };
   document.getElementById("inline-full").onclick = () => openBracket(s);
   enableDragScroll(document.getElementById("inline-draw"));
 }
@@ -735,33 +768,48 @@ const DRAW = {
   left:  { r32: [74, 77, 73, 75, 83, 84, 81, 82], r16: [89, 90, 93, 94], qf: [97, 98], sf: [101] },
   right: { r32: [76, 78, 79, 80, 86, 88, 85, 87], r16: [91, 92, 95, 96], qf: [99, 100], sf: [102] }
 };
-function drawHTML(ko, flipped) {
+function drawRoundDone(byNum, key) {
+  const nums = [...DRAW.left[key], ...DRAW.right[key]];
+  return nums.length > 0 && nums.every(n => byNum[n] && byNum[n].played);
+}
+function drawHTML(ko, flipped, hideDone) {
   const byNum = {};
   ko.forEach(r => r.matches.forEach(m => { byNum[m.num] = m; }));
+  const show = key => !(hideDone && drawRoundDone(byNum, key));
   const tie = num => `<div class="tie">${byNum[num] ? koMatch(byNum[num]) : ""}</div>`;
   const column = (nums, cls) => `<div class="rnd ${cls}">${nums.map(tie).join("")}</div>`;
   const L = flipped ? DRAW.right : DRAW.left, R = flipped ? DRAW.left : DRAW.right, finalM = byNum[104], thirdM = byNum[103];
+  const leftCols = ["r32", "r16", "qf", "sf"].filter(show).map(k => column(L[k], k)).join("");
+  const rightCols = ["sf", "qf", "r16", "r32"].filter(show).map(k => column(R[k], k)).join("");
   return `<div class="draw">
-      <div class="half left">${column(L.r32, "r32")}${column(L.r16, "r16")}${column(L.qf, "qf")}${column(L.sf, "sf")}</div>
+      <div class="half left">${leftCols}</div>
       <div class="rnd final-col">
         <div class="final-cap">🏆 Final</div>
         <div class="tie tie-final">${finalM ? koMatch(finalM) : ""}</div>
         ${thirdM ? `<div class="third-cap">3rd place</div><div class="tie">${koMatch(thirdM)}</div>` : ""}
       </div>
-      <div class="half right">${column(R.sf, "sf")}${column(R.qf, "qf")}${column(R.r16, "r16")}${column(R.r32, "r32")}</div>
+      <div class="half right">${rightCols}</div>
     </div>`;
 }
-let DRAW_KO = [], DRAW_FLIPPED = false;
+// how many of r32/r16/qf/sf are fully complete (drives whether the hide toggle is offered)
+function completedRoundCount(ko) {
+  const byNum = {};
+  ko.forEach(r => r.matches.forEach(m => { byNum[m.num] = m; }));
+  return ["r32", "r16", "qf", "sf"].filter(k => drawRoundDone(byNum, k)).length;
+}
+let DRAW_KO = [], DRAW_FLIPPED = false, DRAW_HIDE = false;
 function renderDraw() {
   const el = document.querySelector("#bracketmodal .bracket-body");
-  el.innerHTML = drawHTML(DRAW_KO, DRAW_FLIPPED);
+  el.innerHTML = drawHTML(DRAW_KO, DRAW_FLIPPED, DRAW_HIDE);
   el.scrollLeft = 0;
   enableDragScroll(el);
+  const hb = document.getElementById("draw-hide"); if (hb) hb.textContent = DRAW_HIDE ? "Show all" : "Hide done";
 }
 function openBracket(s) {
   const modal = document.getElementById("bracketmodal");
-  DRAW_KO = s.knockout || []; DRAW_FLIPPED = false;
+  DRAW_KO = s.knockout || []; DRAW_FLIPPED = false; DRAW_HIDE = false;
   modal.querySelector(".bracket-legend-slot").innerHTML = colourLegend();
+  modal.querySelector("#draw-hide").style.display = completedRoundCount(DRAW_KO) ? "" : "none";
   renderDraw();
   modal.hidden = false; document.body.style.overflow = "hidden";
 }
@@ -770,7 +818,8 @@ function wireBracketModal() {
   const close = () => { modal.hidden = true; document.body.style.overflow = ""; };
   modal.querySelector(".modal-close").onclick = close;
   modal.querySelector(".modal-backdrop").onclick = close;
-  modal.querySelector(".flip-btn").onclick = () => { DRAW_FLIPPED = !DRAW_FLIPPED; renderDraw(); };
+  modal.querySelector("#draw-flip").onclick = () => { DRAW_FLIPPED = !DRAW_FLIPPED; renderDraw(); };
+  modal.querySelector("#draw-hide").onclick = () => { DRAW_HIDE = !DRAW_HIDE; renderDraw(); };
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) close(); });
 }
 
