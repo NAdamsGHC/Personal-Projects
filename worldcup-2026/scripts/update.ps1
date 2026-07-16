@@ -99,6 +99,7 @@ $knockoutRounds = @('Round of 32', 'Round of 16', 'Quarter-final', 'Semi-final',
 # ---------- tally ------------------------------------------------------------
 
 $teamGoals    = @{}   # normalized -> goals scored (across all matches)
+$teamGA       = @{}   # normalized -> goals conceded (across all matches)
 $teamPlayed   = @{}   # normalized -> matches played
 $officialName = @{}   # normalized -> official display name from the data
 $realTeams    = New-Object System.Collections.Generic.HashSet[string]
@@ -138,18 +139,53 @@ foreach ($m in $data.matches) {
     if (Test-Played $m) {
         $fs = Score-Final $m.score
         $g1 = $fs[0]; $g2 = $fs[1]
-        if ($t1real) { $teamGoals[$n1] = [int]$teamGoals[$n1] + $g1; $teamPlayed[$n1] = [int]$teamPlayed[$n1] + 1 }
-        if ($t2real) { $teamGoals[$n2] = [int]$teamGoals[$n2] + $g2; $teamPlayed[$n2] = [int]$teamPlayed[$n2] + 1 }
+        if ($t1real) { $teamGoals[$n1] = [int]$teamGoals[$n1] + $g1; $teamGA[$n1] = [int]$teamGA[$n1] + $g2; $teamPlayed[$n1] = [int]$teamPlayed[$n1] + 1 }
+        if ($t2real) { $teamGoals[$n2] = [int]$teamGoals[$n2] + $g2; $teamGA[$n2] = [int]$teamGA[$n2] + $g1; $teamPlayed[$n2] = [int]$teamPlayed[$n2] + 1 }
 
         if ($isKO -and $t1real -and $t2real) {
-            $loser = $null
-            if ($g1 -ne $g2) {
-                if ($g1 -lt $g2) { $loser = $n1 } else { $loser = $n2 }
-            } elseif (($m.score.PSObject.Properties.Name -contains 'p') -and $m.score.p) {
-                $p1 = [int]$m.score.p[0]; $p2 = [int]$m.score.p[1]
-                if ($p1 -lt $p2) { $loser = $n1 } elseif ($p2 -lt $p1) { $loser = $n2 }
+            if ($m.round -eq 'Match for third place') {
+                # both are done after the play-off
+                $lostKnockout[$n1] = $true; $lostKnockout[$n2] = $true
+            } elseif ($m.round -ne 'Semi-final') {
+                # semi-final losers still have the third-place play-off
+                $loser = $null
+                if ($g1 -ne $g2) {
+                    if ($g1 -lt $g2) { $loser = $n1 } else { $loser = $n2 }
+                } elseif (($m.score.PSObject.Properties.Name -contains 'p') -and $m.score.p) {
+                    $p1 = [int]$m.score.p[0]; $p2 = [int]$m.score.p[1]
+                    if ($p1 -lt $p2) { $loser = $n1 } elseif ($p2 -lt $p1) { $loser = $n2 }
+                }
+                if ($loser) { $lostKnockout[$loser] = $true }
             }
-            if ($loser) { $lostKnockout[$loser] = $true }
+        }
+    }
+}
+
+# How far each team got, as a placement ladder for the tie-break:
+# champion (60) > runner-up (50) > third (45) > fourth (42) > lost SF (40)
+# > lost QF (30) > lost R16 (20) > lost R32 (10) > group stage (0)
+$reachScore = @{ 'Round of 32' = 10; 'Round of 16' = 20; 'Quarter-final' = 30; 'Semi-final' = 40; 'Match for third place' = 41; 'Final' = 50 }
+$reach = @{}
+foreach ($m in $data.matches) {
+    $rn = [string]$m.round
+    if (-not $reachScore.ContainsKey($rn)) { continue }
+    $sc = $reachScore[$rn]
+    $t1 = [string]$m.team1; $t2 = [string]$m.team2
+    $n1 = Normalize-Name $t1; $n2 = Normalize-Name $t2
+    $r1 = -not (Test-Placeholder $t1); $r2 = -not (Test-Placeholder $t2)
+    if ($r1 -and [int]$reach[$n1] -lt $sc) { $reach[$n1] = $sc }
+    if ($r2 -and [int]$reach[$n2] -lt $sc) { $reach[$n2] = $sc }
+    if ($r1 -and $r2 -and (Test-Played $m) -and ($rn -eq 'Final' -or $rn -eq 'Match for third place')) {
+        $fs = Score-Final $m.score; $g1 = $fs[0]; $g2 = $fs[1]
+        $w = $null
+        if ($g1 -ne $g2) { $w = if ($g1 -gt $g2) { $n1 } else { $n2 } }
+        elseif (($m.score.PSObject.Properties.Name -contains 'p') -and $m.score.p) {
+            $p1 = [int]$m.score.p[0]; $p2 = [int]$m.score.p[1]
+            if ($p1 -ne $p2) { $w = if ($p1 -gt $p2) { $n1 } else { $n2 } }
+        }
+        if ($w) {
+            if ($rn -eq 'Final') { $reach[$w] = 60 }
+            else { $reach[$w] = 45; $l = if ($w -eq $n1) { $n2 } else { $n1 }; $reach[$l] = 42 }
         }
     }
 }
@@ -169,41 +205,59 @@ function Test-Alive {
 $friendObjs = @()
 foreach ($friend in $config.friends.PSObject.Properties) {
     $teamRows = @()
-    $total = 0; $left = 0
+    $total = 0; $ga = 0; $left = 0; $furthest = 0
     foreach ($team in $friend.Value) {
         $n = Normalize-Name $team
         $g = [int]$teamGoals[$n]
         $p = [int]$teamPlayed[$n]
         $alive = [bool](Test-Alive $n)
         if ($alive) { $left++ }
-        $total += $g
+        $total += $g; $ga += [int]$teamGA[$n]
+        if ([int]$reach[$n] -gt $furthest) { $furthest = [int]$reach[$n] }
         $disp = if ($officialName.ContainsKey($n)) { $officialName[$n] } else { $team }
         $teamRows += [pscustomobject]@{ name = $disp; goals = $g; played = $p; alive = $alive; code = (Get-Code $n) }
     }
     $teamRows = @($teamRows | Sort-Object @{Expression = 'goals'; Descending = $true}, @{Expression = 'name'})
     $friendObjs += [pscustomobject]@{
-        name = $friend.Name; totalGoals = $total; teamsLeft = $left; teamsTotal = @($friend.Value).Count; teams = $teamRows
+        name = $friend.Name; totalGoals = $total; gd = ($total - $ga); furthest = $furthest
+        teamsLeft = $left; teamsTotal = @($friend.Value).Count; teams = $teamRows
     }
 }
 
-$friendObjs = @($friendObjs | Sort-Object `
-    @{Expression = 'totalGoals'; Descending = $true}, `
-    @{Expression = 'teamsLeft';  Descending = $true}, `
-    @{Expression = 'name'})
+# Tie-break (agreed by group vote, 16 Jul 2026): goals, then goal difference,
+# then furthest-advanced team (champion > runner-up > 3rd > 4th > ...), then shared.
+# Only applied once the tournament is over - during the event ties share a rank.
+$tournamentOver = (@($data.matches | Where-Object { Test-Played $_ }).Count -eq @($data.matches).Count)
+if ($tournamentOver) {
+    $friendObjs = @($friendObjs | Sort-Object `
+        @{Expression = 'totalGoals'; Descending = $true}, `
+        @{Expression = 'gd';         Descending = $true}, `
+        @{Expression = 'furthest';   Descending = $true}, `
+        @{Expression = 'name'})
+} else {
+    $friendObjs = @($friendObjs | Sort-Object `
+        @{Expression = 'totalGoals'; Descending = $true}, `
+        @{Expression = 'teamsLeft';  Descending = $true}, `
+        @{Expression = 'name'})
+}
 
 $friendsOut = @()
-$rank = 0; $prevGoals = $null; $seen = 0
+$rank = 0; $prevKey = $null; $seen = 0
 foreach ($f in $friendObjs) {
     $seen++
-    if ($f.totalGoals -ne $prevGoals) { $rank = $seen; $prevGoals = $f.totalGoals }
+    $key = if ($tournamentOver) { "$($f.totalGoals)|$($f.gd)|$($f.furthest)" } else { "$($f.totalGoals)" }
+    if ($key -ne $prevKey) { $rank = $seen; $prevKey = $key }
     $teamsList = @()
     foreach ($t in $f.teams) {
         $teamsList += [ordered]@{ name = $t.name; goals = $t.goals; played = $t.played; alive = $t.alive; code = $t.code }
     }
-    $friendsOut += [ordered]@{
+    $row = [ordered]@{
         rank = $rank; name = $f.name; totalGoals = $f.totalGoals
         teamsLeft = $f.teamsLeft; teamsTotal = $f.teamsTotal; teams = @($teamsList)
     }
+    # GD stays out of the published data until the tournament is over
+    if ($tournamentOver) { $row.Insert(3, 'gd', $f.gd) }
+    $friendsOut += $row
 }
 
 # Unassigned = real tournament teams nobody drew

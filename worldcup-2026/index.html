@@ -146,8 +146,8 @@
   .left.share-good b { color: #16a34a; }
   .left.share-low b { color: #dc2626; }
   /* eliminated player */
-  .row.out { background: rgba(220,38,38,.09); cursor: default; }
-  .row.out:hover { background: rgba(220,38,38,.09); }
+  .row.out { background: rgba(220,38,38,.09); }
+  .row.out:hover, .row.out[aria-expanded="true"] { background: rgba(220,38,38,.14); }
   .pname-out { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
   .elim-tag { font-family: "Impact", "Haettenschweiler", "Franklin Gothic Bold", "Arial Black", sans-serif;
     color: #dc2626; font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; transform: skewX(-7deg);
@@ -443,6 +443,8 @@
         <dt>GSMR — Group Stage Matches Remaining</dt><dd>Group games their teams still have to play, out of 27 (9 teams × 3 games each).</dd>
         <dt>R32 / R16 / QF / SF / Final</dt><dd>After the group stage, the matches their teams have left to play in the current knockout round.</dd>
         <dt>Teams left</dt><dd>How many of their teams are still in the tournament. In the knockouts it turns <span style="color:#16a34a;font-weight:800">green</span> if you hold more than your even share of the teams still in (total remaining ÷ players) and <span style="color:#dc2626;font-weight:800">red</span> if fewer.</dd>
+        <dt>GD — Goal Difference</dt><dd>Goals scored minus goals conceded across all of a player's teams' matches. First tie-break when players finish level on goals.</dd>
+        <dt>Tie-break rules</dt><dd>If players finish level on goals: 1) goal difference, 2) holding the World Cup winner, 3) furthest-advanced team (champion &gt; runner-up &gt; 3rd &gt; 4th &gt; QF &gt; …), 4) title shared. Agreed by group vote, 16 July 2026.</dd>
       </dl>
     </div>
   </div>
@@ -535,13 +537,14 @@ function renderStatus(s, live) {
     freshness;
 }
 
-function teamCard(t) {
+function teamCard(t, owner) {
   const cls = t.alive ? "team" : "team out";
   const badge = t.alive ? "" : `<span class="badge-out">OUT</span>`;
   const rank = t.rank != null ? ` · FIFA #${t.rank}` : "";
+  const egg = (owner === "Baz" && t.name === "England") ? " 🐔" : "";
   return `<div class="${cls}">
       ${flag(t.code, true)}
-      <div class="tinfo"><div class="tn">${esc(t.name)}${badge}</div><div class="meta">${t.played} played${rank}</div></div>
+      <div class="tinfo"><div class="tn">${esc(t.name)}${egg}${badge}</div><div class="meta">${t.played} played${rank}</div></div>
       <div class="tg">${t.goals}</div>
     </div>`;
 }
@@ -564,10 +567,18 @@ function renderTable(s) {
       kb.setAttribute("aria-expanded", "false");
       kb.innerHTML =
         `<div class="rankb${rkcls}">${f.rank}</div>` +
-        `<div class="pcell"><div class="pname pname-out">${esc(f.name)}</div><div class="elim-tag">ELIMINATED 💀</div></div>` +
+        `<div class="pcell"><div class="pname pname-out"><span class="chev">▶</span>${esc(f.name)}</div><div class="elim-tag">ELIMINATED 💀</div></div>` +
         `<div class="goals">${f.totalGoals}<small>goals</small></div>` +
         `<div class="left share-low"><b>0</b> / ${f.teamsTotal}<br>teams left</div>`;
+      const kdetail = document.createElement("div");
+      kdetail.className = "detail";
+      kdetail.innerHTML = `<div class="teamgrid">${(f.teams || []).map(t => teamCard(t, f.name)).join("")}</div>`;
+      kb.addEventListener("click", () => {
+        const open = kdetail.classList.toggle("open");
+        kb.setAttribute("aria-expanded", open ? "true" : "false");
+      });
       el.appendChild(kb);
+      el.appendChild(kdetail);
       return;
     }
     const subLines = [];
@@ -576,6 +587,7 @@ function renderTable(s) {
       if (!over && phase === "group") l1 += ` · <b>${f.teamsThrough}</b>/${f.teamsTotal} AGS`;
       subLines.push(l1);
     }
+    if (over && f.gd != null) subLines.push(`GD <b>${f.gd > 0 ? "+" : ""}${f.gd}</b>`);
     if (!over && f.gamesRem) subLines.push(`${esc(f.gamesRem.label)} · <b>${f.gamesRem.remaining}</b>/${f.gamesRem.total}`);
     const sub = subLines.length ? `<div class="substat">${subLines.map(x => `<div>${x}</div>`).join("")}</div>` : "";
     const leftCls = colourShare ? (f.teamsLeft > fairShare ? " share-good" : f.teamsLeft < fairShare ? " share-low" : "") : "";
@@ -591,7 +603,7 @@ function renderTable(s) {
       `<div class="left${leftCls}" title="${colourShare ? "Even share of the teams still in is " + fairShare.toFixed(1) : ""}"><b>${f.teamsLeft}</b> / ${f.teamsTotal}<br>teams left</div>`;
     const detail = document.createElement("div");
     detail.className = "detail";
-    detail.innerHTML = `<div class="teamgrid">${(f.teams || []).map(teamCard).join("")}</div>`;
+    detail.innerHTML = `<div class="teamgrid">${(f.teams || []).map(t => teamCard(t, f.name)).join("")}</div>`;
     btn.addEventListener("click", () => {
       const open = detail.classList.toggle("open");
       btn.setAttribute("aria-expanded", open ? "true" : "false");
@@ -612,7 +624,7 @@ function renderUnassigned(s) {
   document.getElementById("unassigned").innerHTML =
     `<div class="fx"><div style="color:var(--muted);font-size:13px;margin:8px 0 12px">` +
     `These teams weren't drawn — their <b style="color:var(--ink)">${u.totalGoals}</b> goals don't count for anyone.</div>` +
-    `<div class="teamgrid">${(u.teams || []).map(teamCard).join("")}</div></div>`;
+    `<div class="teamgrid">${(u.teams || []).map(t => teamCard(t)).join("")}</div></div>`;
 }
 
 function fixtureRow(mt) {
@@ -1033,7 +1045,7 @@ function computeAll(config, src) {
   for (const [name, rk] of Object.entries(config.fifaRank || {})) rankOf[normName(name)] = rk;
   const getRank = n => (rankOf[n] != null ? rankOf[n] : null);
 
-  const teamGoals = Object.create(null), teamPlayed = Object.create(null), officialName = Object.create(null), lostKnockout = Object.create(null);
+  const teamGoals = Object.create(null), teamGA = Object.create(null), teamPlayed = Object.create(null), officialName = Object.create(null), lostKnockout = Object.create(null);
   const realTeams = new Set(), knockoutTeams = new Set();
   let knockoutResolved = false;
 
@@ -1045,18 +1057,45 @@ function computeAll(config, src) {
     if (isKO) { if (t1real) { knockoutTeams.add(n1); knockoutResolved = true; } if (t2real) { knockoutTeams.add(n2); knockoutResolved = true; } }
     if (isPlayed(m)) {
       const [g1, g2] = scoreFinal(m.score);
-      if (t1real) { teamGoals[n1] = (teamGoals[n1] || 0) + g1; teamPlayed[n1] = (teamPlayed[n1] || 0) + 1; }
-      if (t2real) { teamGoals[n2] = (teamGoals[n2] || 0) + g2; teamPlayed[n2] = (teamPlayed[n2] || 0) + 1; }
+      if (t1real) { teamGoals[n1] = (teamGoals[n1] || 0) + g1; teamGA[n1] = (teamGA[n1] || 0) + g2; teamPlayed[n1] = (teamPlayed[n1] || 0) + 1; }
+      if (t2real) { teamGoals[n2] = (teamGoals[n2] || 0) + g2; teamGA[n2] = (teamGA[n2] || 0) + g1; teamPlayed[n2] = (teamPlayed[n2] || 0) + 1; }
       if (isKO && t1real && t2real) {
-        let loser = null;
-        if (g1 !== g2) loser = g1 < g2 ? n1 : n2;
-        else if (m.score.p) { const p1 = +m.score.p[0], p2 = +m.score.p[1]; if (p1 !== p2) loser = p1 < p2 ? n1 : n2; }
-        if (loser) lostKnockout[loser] = true;
+        if (m.round === "Match for third place") {
+          lostKnockout[n1] = true; lostKnockout[n2] = true;   // both are done after the play-off
+        } else if (m.round !== "Semi-final") {   // semi-final losers still have the 3rd place play-off
+          let loser = null;
+          if (g1 !== g2) loser = g1 < g2 ? n1 : n2;
+          else if (m.score.p) { const p1 = +m.score.p[0], p2 = +m.score.p[1]; if (p1 !== p2) loser = p1 < p2 ? n1 : n2; }
+          if (loser) lostKnockout[loser] = true;
+        }
       }
     }
   }
   const grpAll = src.matches.filter(m => m.group);
   const groupStageComplete = grpAll.length > 0 && grpAll.every(isPlayed);
+
+  // how far each team got, as a placement ladder for the tie-break:
+  // champion (60) > runner-up (50) > third (45) > fourth (42) > lost SF (40)
+  // > lost QF (30) > lost R16 (20) > lost R32 (10) > group stage (0)
+  const REACH = { "Round of 32": 10, "Round of 16": 20, "Quarter-final": 30, "Semi-final": 40, "Match for third place": 41, "Final": 50 };
+  const reach = Object.create(null);
+  for (const m of src.matches) {
+    const sc = REACH[m.round]; if (!sc) continue;
+    const t1 = String(m.team1), t2 = String(m.team2), n1 = normName(t1), n2 = normName(t2);
+    const r1 = !isPlaceholder(t1), r2 = !isPlaceholder(t2);
+    if (r1) reach[n1] = Math.max(reach[n1] || 0, sc);
+    if (r2) reach[n2] = Math.max(reach[n2] || 0, sc);
+    if (r1 && r2 && isPlayed(m) && (m.round === "Final" || m.round === "Match for third place")) {
+      const [g1, g2] = scoreFinal(m.score);
+      let w = null;
+      if (g1 !== g2) w = g1 > g2 ? n1 : n2;
+      else if (m.score.p) { const p1 = +m.score.p[0], p2 = +m.score.p[1]; if (p1 !== p2) w = p1 > p2 ? n1 : n2; }
+      if (w) {
+        if (m.round === "Final") reach[w] = 60;
+        else { reach[w] = 45; reach[w === n1 ? n2 : n1] = 42; }
+      }
+    }
+  }
 
   // group tables
   const groupStats = Object.create(null);
@@ -1132,22 +1171,33 @@ function computeAll(config, src) {
 
   // friends
   let friends = Object.entries(config.friends).map(([friend, teams]) => {
-    let total = 0, aliveCount = 0, through = 0, rankAliveSum = 0, rankAliveN = 0, rankAllSum = 0, rankAllN = 0;
+    let total = 0, ga = 0, aliveCount = 0, through = 0, furthest = 0, rankAliveSum = 0, rankAliveN = 0, rankAllSum = 0, rankAllN = 0;
     const rows = teams.map(t => {
       const n = normName(t), g = teamGoals[n] || 0, p = teamPlayed[n] || 0, alive = isAlive(n), rk = getRank(n);
       if (alive) aliveCount++;
       if (rk != null) { rankAllSum += rk; rankAllN++; if (alive) { rankAliveSum += rk; rankAliveN++; } }
-      total += g; if (advancing.has(n)) through++;
+      total += g; ga += teamGA[n] || 0; furthest = Math.max(furthest, reach[n] || 0);
+      if (advancing.has(n)) through++;
       return { name: officialName[n] || t, goals: g, played: p, alive, code: getCode(n), rank: rk };
     }).sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
     // avg rank of remaining teams during the tournament; of all teams once it's over
     const avgRank = tournamentOver
       ? (rankAllN ? Math.round(rankAllSum / rankAllN) : null)
       : (rankAliveN ? Math.round(rankAliveSum / rankAliveN) : null);
-    return { name: friend, totalGoals: total, teamsLeft: tournamentOver ? 0 : aliveCount, teamsTotal: teams.length, teams: rows, teamsThrough: through, avgRank, gamesRem: phaseStat[friend] || null };
-  }).sort((a, b) => b.totalGoals - a.totalGoals || b.teamsLeft - a.teamsLeft || a.name.localeCompare(b.name));
+    return { name: friend, totalGoals: total, gd: total - ga, furthest, teamsLeft: tournamentOver ? 0 : aliveCount, teamsTotal: teams.length, teams: rows, teamsThrough: through, avgRank, gamesRem: phaseStat[friend] || null };
+  // tie-break (agreed by group vote, 16 Jul 2026): goals, then goal difference,
+  // then furthest-advanced team (champion > runner-up > 3rd > 4th > ...), then shared.
+  // Only applied once the tournament is over — during the event ties share a rank.
+  }).sort((a, b) => b.totalGoals - a.totalGoals
+    || (tournamentOver ? (b.gd - a.gd || b.furthest - a.furthest) : b.teamsLeft - a.teamsLeft)
+    || a.name.localeCompare(b.name));
   let rank = 0, seen = 0, prev = null;
-  for (const f of friends) { seen++; if (f.totalGoals !== prev) { rank = seen; prev = f.totalGoals; } f.rank = rank; }
+  for (const f of friends) {
+    seen++;
+    const key = tournamentOver ? f.totalGoals + "|" + f.gd + "|" + f.furthest : String(f.totalGoals);
+    if (key !== prev) { rank = seen; prev = key; }
+    f.rank = rank;
+  }
 
   // unassigned
   const unTeams = []; let unTotal = 0, unLeft = 0;
@@ -1236,7 +1286,7 @@ function computeAll(config, src) {
   const standings = {
     generatedAt, competition: config.competition, rules: config.rules,
     meta: { matchesPlayed: src.matches.filter(isPlayed).length, matchesTotal: src.matches.length, teamsInTournament: realTeams.size, groupStageComplete, phase: currentPhase ? currentPhase.key : "over", tournamentOver },
-    winner: tournamentOver && friends[0] ? friends[0].name : null,
+    winner: tournamentOver && friends[0] ? friends.filter(f => f.rank === 1).map(f => f.name).join(" & ") : null,
     friends, unassigned: { totalGoals: unTotal, teamsLeft: unLeft, teamsTotal: unTeams.length, teams: unTeams },
     groups: groupSorted.map(g => ({ name: g.name, teams: g.rows.map(r => ({ name: r.name, code: r.code, owner: r.owner, P: r.P, W: r.W, D: r.D, L: r.L, GF: r.GF, GA: r.GA, GD: r.GD, Pts: r.Pts, through: r.through })) })),
     knockout: koOut, thirdPlace, eliminated
