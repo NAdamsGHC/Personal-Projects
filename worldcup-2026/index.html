@@ -1295,14 +1295,21 @@ function computeAll(config, src) {
 }
 
 async function loadSource() {
+  // Prefer whichever source has more results: openfootball can lag behind a
+  // result added to the bundled snapshot, and vice versa once it catches up.
+  const played = s => (s.matches || []).filter(m => m.score && m.score.ft).length;
+  let remote = null, bundled = null;
   try {
     const r = await fetch(SOURCE_URL, opts);
-    if (!r.ok) throw new Error("source " + r.status);
-    return { src: await r.json(), live: true };
-  } catch (e) {
-    const r = await fetch("./data/source.json" + bust, opts);   // bundled fallback
-    return { src: await r.json(), live: false };
-  }
+    if (r.ok) remote = await r.json();
+  } catch (e) {}
+  try {
+    const r = await fetch("./data/source.json" + bust, opts);
+    if (r.ok) bundled = await r.json();
+  } catch (e) {}
+  if (remote && (!bundled || played(remote) >= played(bundled))) return { src: remote, live: true };
+  if (bundled) return { src: bundled, live: false };
+  throw new Error("no data source reachable");
 }
 
 async function init() {
