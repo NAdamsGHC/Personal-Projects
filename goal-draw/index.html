@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premier League Goal Draw 2026/27</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #1c0125; --bg2: #33043f; --panel: rgba(255,255,255,.055); --panel2: rgba(255,255,255,.09);
+    --line: rgba(255,255,255,.10); --ink: #f5f2f7; --muted: #b9a9c4;
+    --green: #00ff85; --magenta: #e90052; --cyan: #04f5ff; --gold: #ffd54a;
+    --shadow: 0 10px 28px rgba(0,0,0,.35);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Barlow", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(1100px 600px at 80% -10%, #4a0b5e 0%, transparent 60%),
+                radial-gradient(900px 500px at -10% 30%, #2b0f4a 0%, transparent 55%),
+                linear-gradient(165deg, var(--bg2) 0%, var(--bg1) 65%, #14001b 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  /* faint pitch markings */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1200'><g fill='none' stroke='white' stroke-opacity='0.045' stroke-width='2'><circle cx='400' cy='600' r='130'/><line x1='0' y1='600' x2='800' y2='600'/><circle cx='400' cy='600' r='4' fill='white' fill-opacity='0.045'/><rect x='180' y='0' width='440' height='150'/><rect x='290' y='0' width='220' height='60'/><path d='M320 150 A80 80 0 0 0 480 150'/><rect x='180' y='1050' width='440' height='150'/><rect x='290' y='1140' width='220' height='60'/><path d='M320 1050 A80 80 0 0 1 480 1050'/></g></svg>");
+    background-size: min(100vw, 820px) auto; background-position: top center; background-repeat: repeat-y;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 18px 14px 40px; }
+
+  header.hero { position: relative; border-radius: 20px; overflow: hidden; padding: 26px 22px 22px;
+    background: linear-gradient(115deg, #38003c 0%, #57007a 55%, #7a0060 100%);
+    border: 1px solid rgba(255,255,255,.14); box-shadow: var(--shadow); }
+  header.hero::after { content: ""; position: absolute; inset: 0;
+    background: radial-gradient(500px 210px at 50% -60%, rgba(4,245,255,.28), transparent 70%); pointer-events: none; }
+  .hero .comp { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--green); }
+  .hero h1 { margin: 6px 0 4px; font-family: "Barlow Condensed", "Barlow", sans-serif; font-weight: 800;
+    font-size: 40px; line-height: 1; letter-spacing: .5px; text-transform: uppercase; }
+  .hero h1 .thin { color: var(--cyan); }
+  .hero .sub { color: #e5d5ee; font-size: 13.5px; }
+  .pillrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; position: relative; z-index: 1; }
+  .pill { font-size: 11.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+    background: rgba(0,0,0,.30); border: 1px solid rgba(255,255,255,.16); color: #efe6f5;
+    padding: 5px 11px; border-radius: 999px; }
+  .pill.green { color: #052; background: var(--green); border-color: var(--green); }
+  .pill.draft { color: #3a2a00; background: var(--gold); border-color: var(--gold); }
+
+  .banner { margin-top: 14px; border-radius: 16px; border: 1px solid rgba(4,245,255,.35);
+    background: linear-gradient(100deg, rgba(4,245,255,.10), rgba(0,255,133,.07));
+    padding: 14px 16px; box-shadow: var(--shadow); }
+  .banner .bt { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 17px;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); }
+  .banner .bx { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .banner .bx b { color: var(--ink); }
+  .count { display: flex; gap: 10px; margin-top: 10px; }
+  .cunit { flex: 1; text-align: center; background: rgba(0,0,0,.30); border: 1px solid var(--line);
+    border-radius: 12px; padding: 8px 4px 6px; }
+  .cunit .n { font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 26px; color: var(--green); line-height: 1; }
+  .cunit .l { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 3px; }
+
+  nav.tabs { position: sticky; top: 0; z-index: 30; display: flex; gap: 8px; overflow-x: auto;
+    padding: 12px 2px; margin: 6px -2px 8px; backdrop-filter: blur(8px);
+    background: linear-gradient(rgba(28,1,37,.92), rgba(28,1,37,.78)); -webkit-overflow-scrolling: touch; }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+  .tab:hover { background: var(--panel2); }
+
+  section.card { position: relative; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; margin-top: 14px;
+    backdrop-filter: blur(4px); }
+  section.card h2 { margin: 0; padding: 15px 18px; font-family: "Barlow Condensed", sans-serif;
+    font-size: 18px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+  section.card h2::before { content: ""; width: 5px; height: 18px; border-radius: 3px;
+    background: linear-gradient(var(--green), var(--cyan)); }
+  #fx-card h2::before { background: linear-gradient(var(--magenta), var(--gold)); }
+  #results-card h2::before { background: linear-gradient(var(--cyan), var(--magenta)); }
+  #pltable-card h2::before { background: linear-gradient(var(--gold), var(--green)); }
+  .h2chev { margin-left: auto; font-size: 12px; color: var(--muted); transition: transform .18s; }
+  .collapsed .h2chev { transform: rotate(-90deg); }
+  .cardbody { border-top: 1px solid var(--line); }
+  .collapsed .cardbody { display: none; }
+  .empty { padding: 22px 18px; color: var(--muted); font-size: 13.5px; }
+  .err { padding: 22px 18px; color: #ffb3c8; font-size: 13.5px; }
+
+  .ribbon { position: absolute; top: 14px; right: -34px; transform: rotate(38deg); z-index: 5;
+    background: var(--gold); color: #3a2a00; font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 4px 40px; box-shadow: 0 2px 8px rgba(0,0,0,.4); pointer-events: none; }
+
+  table.t { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .t th { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+    text-align: right; padding: 10px 10px 8px; border-bottom: 1px solid var(--line); font-weight: 700; }
+  .t th.l, .t td.l { text-align: left; }
+  .t td { padding: 11px 10px; border-bottom: 1px solid var(--line); text-align: right;
+    font-variant-numeric: tabular-nums; }
+  .t tr:last-child td { border-bottom: 0; }
+  .t .pos { width: 30px; color: var(--muted); font-weight: 700; }
+  .t .pname { font-weight: 700; font-size: 15px; }
+  .t .big { font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 21px; color: var(--green); }
+  .t .plus { color: var(--cyan); font-weight: 700; }
+  .t .gd { color: var(--muted); }
+  .prow { cursor: pointer; transition: background .12s; }
+  .prow:hover { background: var(--panel2); }
+  .prow.lead td { background: linear-gradient(90deg, rgba(0,255,133,.10), transparent 70%); }
+  .crown { margin-left: 6px; }
+
+  .pdetail td { padding: 0 !important; background: rgba(0,0,0,.22); }
+  .teamgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 14px; }
+  .tmini { display: flex; align-items: center; gap: 9px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 8px 10px; font-size: 13px; }
+  .tmini.standin { background: rgba(255,213,74,.10); border-color: rgba(255,213,74,.55); }
+  .tmini .tn { font-weight: 600; line-height: 1.15; }
+  .tmini .ts { margin-left: auto; text-align: right; font-variant-numeric: tabular-nums; }
+  .tmini .ts .g { font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 19px; color: var(--green); }
+  .tmini .ts .s { display: block; font-size: 10.5px; color: var(--muted); }
+  .standin-note { font-size: 11px; color: var(--gold); display: block; margin-top: 1px; }
+  .tiebreak { padding: 0 14px 12px; font-size: 11.5px; color: var(--muted); }
+  .tiebreak b { color: var(--ink); }
+
+  .shirt { width: 26px; height: 26px; flex: 0 0 auto; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+  .fx .shirt { width: 22px; height: 22px; }
+
+  .dayhead { padding: 12px 18px 4px; font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--cyan); }
+  .fx { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+    padding: 10px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .fx:last-child { border-bottom: 0; }
+  .fx .home { display: flex; align-items: center; gap: 8px; justify-content: flex-end; font-weight: 700; }
+  .fx .away { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+  .fx .mid { color: var(--muted); font-size: 12px; min-width: 44px; text-align: center; }
+  .fx .mid.score { font-family: "Barlow Condensed", sans-serif; font-size: 19px; font-weight: 800; color: var(--ink); }
+  .fx .own { font-size: 10px; color: var(--muted); font-weight: 600; }
+
+  .mwbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 2px; }
+  .mwbtn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 10px;
+    width: 34px; height: 30px; font: inherit; font-weight: 800; cursor: pointer; }
+  .mwbtn:disabled { opacity: .3; cursor: default; }
+  .mwsel { flex: 1; text-align: center; font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+    font-size: 17px; letter-spacing: 1px; text-transform: uppercase; }
+  .mwnote { padding: 2px 18px 10px; font-size: 11.5px; color: var(--muted); }
+
+  .plt td.l { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .plt .champ td { background: linear-gradient(90deg, rgba(0,255,133,.12), transparent 70%); }
+  .plt .pts { font-weight: 800; }
+  .ownertag { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    color: var(--bg1); background: var(--green); border-radius: 6px; padding: 1.5px 6px; }
+
+  footer { margin-top: 26px; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.9; }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 460px) {
+    .hero h1 { font-size: 31px; }
+    .teamgrid { grid-template-columns: 1fr; }
+    .fx { font-size: 13.5px; padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="comp">Premier League · 2026/27</div>
+    <h1>Goal <span class="thin">Draw</span></h1>
+    <div class="sub">Five players. Twenty clubs. Most goals across the season wins.</div>
+    <div class="pillrow" id="pills"></div>
+  </header>
+
+  <div id="banner"></div>
+
+  <nav class="tabs" id="tabs">
+    <a class="tab" href="#draw-card">🏆 Draw table</a>
+    <a class="tab" href="#fx-card">📅 Fixtures</a>
+    <a class="tab" href="#results-card">✅ Results</a>
+    <a class="tab" href="#pltable-card">📊 PL table</a>
+  </nav>
+
+  <section class="card" id="draw-card">
+    <h2 id="draw-h">Goal draw table<span class="h2chev">▾</span></h2>
+    <div class="cardbody" id="draw"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section class="card" id="fx-card">
+    <h2 id="fx-h">Fixtures<span class="h2chev">▾</span></h2>
+    <div class="cardbody" id="fixtures"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section class="card" id="results-card">
+    <h2 id="results-h">Results<span class="h2chev">▾</span></h2>
+    <div class="cardbody" id="results"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section class="card collapsed" id="pltable-card">
+    <h2 id="pltable-h">Premier League table<span class="h2chev">▾</span></h2>
+    <div class="cardbody" id="pltable"><div class="empty">Loading…</div></div>
+  </section>
+
+  <footer>
+    <div>Goals counted from the scoreline — own goals count for the team they're credited to. All 380 matches.</div>
+    <div>Tie-breaks: goals → goal difference → highest-scoring team → owns the champions → best avg league position.</div>
+    <div>Data: <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> (updated roughly weekly) · <a href="../worldcup-2026/">World Cup 2026 archive 📦</a></div>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const SEASON_URL = "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json";
+const REPLAY_URL = "./data/replay-2025-26.json";
+const bust = "?v=" + Math.floor(Date.now() / 60000);
+const opts = { cache: "no-store" };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+let CFG = null;
+
+/* ---------- team name matching ---------- */
+function norm(name) {
+  return String(name).toLowerCase().replace(/&/g, "and")
+    .replace(/\b(fc|afc)\b/g, "").replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
+}
+function buildNameIndex() {
+  const idx = {};
+  for (const [abbr, t] of Object.entries(CFG.teams)) idx[norm(t.name)] = abbr;
+  // common short forms openfootball has used
+  idx[norm("Wolverhampton")] = idx[norm("Wolverhampton Wanderers")];
+  idx[norm("Brighton and Hove Albion")] = "BHA";
+  return idx;
+}
+
+/* ---------- kit chips ---------- */
+function shirtSVG(kit) {
+  const k = kit || { style: "plain", body: "#888" };
+  const body = k.body, sleeves = k.sleeves || k.body;
+  let torso = `<rect x="9" y="7" width="14" height="21" rx="2" fill="${body}"/>`;
+  if (k.style === "stripes") {
+    torso = `<rect x="9" y="7" width="14" height="21" rx="2" fill="${k.body2}"/>
+      <clipPath id="c${chipId}"><rect x="9" y="7" width="14" height="21" rx="2"/></clipPath>
+      <g clip-path="url(#c${chipId})">
+        <rect x="9" y="7" width="3" height="21" fill="${body}"/>
+        <rect x="14.5" y="7" width="3" height="21" fill="${body}"/>
+        <rect x="20" y="7" width="3" height="21" fill="${body}"/></g>`;
+  } else if (k.style === "pinstripe") {
+    torso += `<g stroke="${k.pin}" stroke-width="0.5" opacity="0.7">
+      <line x1="12" y1="7" x2="12" y2="28"/><line x1="16" y1="7" x2="16" y2="28"/><line x1="20" y1="7" x2="20" y2="28"/></g>`;
+  } else if (k.style === "shoulders") {
+    torso += `<path d="M9 7 h14 v4 h-14 z" fill="${k.shoulders}"/>`;
+  }
+  let arms = `<path d="M9 7 L3 11 L5.5 17 L9 15 Z" fill="${sleeves}"/>
+              <path d="M23 7 L29 11 L26.5 17 L23 15 Z" fill="${sleeves}"/>`;
+  if (k.style === "shoulders") {
+    arms += `<path d="M9 7 L3 11 L3.9 13.2 L9 9.8 Z" fill="${k.shoulders}"/>
+             <path d="M23 7 L29 11 L28.1 13.2 L23 9.8 Z" fill="${k.shoulders}"/>`;
+  }
+  if (k.style === "sleeve-trim") {
+    arms += `<path d="M3 11 L5.5 17 L7.2 16 L4.7 10 Z" fill="${k.trim}"/>
+             <path d="M29 11 L26.5 17 L24.8 16 L27.3 10 Z" fill="${k.trim}"/>`;
+  }
+  const collar = `<path d="M13 7 h6 l-3 3.5 z" fill="rgba(0,0,0,.35)"/>`;
+  chipId++;
+  return `<svg class="shirt" viewBox="0 0 32 32" aria-hidden="true">
+    <g stroke="rgba(0,0,0,.28)" stroke-width="0.6">${arms}${torso}</g>${collar}</svg>`;
+}
+let chipId = 0;
+const chip = abbr => shirtSVG((CFG.teams[abbr] || {}).kit);
+
+/* ---------- data loading ---------- */
+async function fetchJSON(url) {
+  try { const r = await fetch(url + bust, opts); if (r.ok) return await r.json(); } catch (e) {}
+  return null;
+}
+function playedCount(src) {
+  return (src && src.matches || []).filter(m => scoreOf(m)).length;
+}
+function scoreOf(m) {
+  if (!m.score) return null;
+  if (Array.isArray(m.score)) return m.score.length === 2 ? m.score : null;
+  if (Array.isArray(m.score.ft)) return m.score.ft;
+  return null;
+}
+
+/* ---------- core computation ---------- */
+function computeStats(src, assignment, nameIdx) {
+  // assignment: abbr -> owner (already stand-in-substituted for replay mode)
+  const teams = {};   // abbr -> stats
+  const owned = new Set(Object.keys(assignment));
+  const matches = [];
+  const unknown = new Set();
+  for (const m of src.matches || []) {
+    const a1 = nameIdx[norm(m.team1)], a2 = nameIdx[norm(m.team2)];
+    if (!a1) unknown.add(m.team1);
+    if (!a2) unknown.add(m.team2);
+    const sc = scoreOf(m);
+    const round = parseInt(String(m.round || "").replace(/\D+/g, ""), 10) || null;
+    matches.push({ ...m, a1, a2, sc, mw: round });
+    for (const [a, mine, opp] of [[a1, 0, 1], [a2, 1, 0]]) {
+      if (!a) continue;
+      teams[a] = teams[a] || { abbr: a, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0, recent: 0 };
+      if (!sc) continue;
+      const t = teams[a];
+      t.P++; t.GF += sc[mine]; t.GA += sc[opp];
+      if (sc[mine] > sc[opp]) { t.W++; t.Pts += 3; }
+      else if (sc[mine] === sc[opp]) { t.D++; t.Pts += 1; }
+      else t.L++;
+    }
+  }
+  const playedDates = matches.filter(m => m.sc).map(m => m.date).sort();
+  const lastDate = playedDates[playedDates.length - 1] || null;
+  // goals in the rolling 7 days up to the latest result
+  if (lastDate) {
+    const anchor = new Date(lastDate + "T23:59:59Z");
+    const cutoff = new Date(anchor.getTime() - 7 * 86400000);
+    for (const m of matches) {
+      if (!m.sc) continue;
+      const d = new Date(m.date + "T12:00:00Z");
+      if (d >= cutoff && d <= anchor) {
+        if (m.a1 && teams[m.a1]) teams[m.a1].recent += m.sc[0];
+        if (m.a2 && teams[m.a2]) teams[m.a2].recent += m.sc[1];
+      }
+    }
+  }
+  // PL table
+  const table = Object.values(teams).sort((x, y) =>
+    y.Pts - x.Pts || (y.GF - y.GA) - (x.GF - x.GA) || y.GF - x.GF ||
+    CFG.teams[x.abbr].name.localeCompare(CFG.teams[y.abbr].name));
+  table.forEach((t, i) => t.pos = i + 1);
+  const leader = table.length && table[0].P > 0 ? table[0].abbr : null;
+
+  // players
+  const players = Object.entries(CFG.players).map(([name, picks]) => {
+    const held = picks.map(p => assignment._map[p] || p); // effective abbrs
+    const rows = picks.map((pick, i) => {
+      const eff = held[i];
+      const st = teams[eff] || { P: 0, GF: 0, GA: 0, recent: 0, pos: null };
+      return { pick, eff, standin: eff !== pick, st };
+    });
+    const goals = rows.reduce((s, r) => s + r.st.GF, 0);
+    const ga = rows.reduce((s, r) => s + r.st.GA, 0);
+    const recent = rows.reduce((s, r) => s + r.st.recent, 0);
+    const best = Math.max(...rows.map(r => r.st.GF), 0);
+    const hasChamp = leader ? rows.some(r => r.eff === leader) : false;
+    const positions = rows.map(r => r.st.pos).filter(p => p);
+    const avgPos = positions.length ? positions.reduce((a, b) => a + b, 0) / positions.length : 99;
+    return { name, rows, goals, gd: goals - ga, recent, best, hasChamp, avgPos };
+  });
+  players.sort((x, y) => y.goals - x.goals || y.gd - x.gd || y.best - x.best ||
+    (y.hasChamp - x.hasChamp) || x.avgPos - y.avgPos || x.name.localeCompare(y.name));
+  // shared positions on full ladder tie
+  const keyOf = p => [p.goals, p.gd, p.best, p.hasChamp, p.avgPos.toFixed(2)].join("|");
+  players.forEach((p, i) => {
+    p.pos = (i > 0 && keyOf(p) === keyOf(players[i - 1])) ? players[i - 1].pos : i + 1;
+  });
+  return { teams, matches, table, leader, players, lastDate, unknown: [...unknown] };
+}
+
+/* ---------- rendering ---------- */
+const fmtDay = iso => new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB",
+  { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+
+function ownerOf(abbr, assignment) { return assignment[abbr] || null; }
+
+function renderPills(mode, S) {
+  const el = document.getElementById("pills");
+  const bits = [];
+  bits.push(`<span class="pill green">${mode === "replay" ? "Pre-season" : "Season live"}</span>`);
+  if (CFG.status !== "FINAL") bits.push(`<span class="pill draft">Draft draw</span>`);
+  if (S.lastDate) bits.push(`<span class="pill">Results up to ${fmtDay(S.lastDate)}${mode === "replay" ? " 2026 (25/26)" : ""}</span>`);
+  el.innerHTML = bits.join("");
+}
+
+function renderBanner(mode) {
+  const el = document.getElementById("banner");
+  if (mode !== "replay") { el.innerHTML = ""; return; }
+  el.innerHTML = `<div class="banner">
+    <div class="bt">⏳ Pre-season — last season replayed</div>
+    <div class="bx">This is <b>how the draw would have panned out in 2025/26</b>, for bragging rights only.
+      Promoted clubs hadn't come up yet, so their slot is filled by the relegated club they replaced —
+      <b style="color:var(--gold)">highlighted in yellow</b>. Everyone resets to zero at kick-off.</div>
+    <div class="count" id="count"></div>
+  </div>`;
+  const target = new Date(CFG.kickoff).getTime();
+  const tick = () => {
+    const d = Math.max(0, target - Date.now());
+    const dd = Math.floor(d / 86400000), hh = Math.floor(d / 3600000) % 24,
+          mm = Math.floor(d / 60000) % 60, ss = Math.floor(d / 1000) % 60;
+    const c = document.getElementById("count");
+    if (c) c.innerHTML = [[dd, "days"], [hh, "hrs"], [mm, "mins"], [ss, "secs"]]
+      .map(([n, l]) => `<div class="cunit"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+  };
+  tick(); setInterval(tick, 1000);
+}
+
+function renderDraw(S, assignment, mode) {
+  const el = document.getElementById("draw");
+  const card = document.getElementById("draw-card");
+  if (CFG.status !== "FINAL" && !card.querySelector(".ribbon")) {
+    card.insertAdjacentHTML("afterbegin", `<div class="ribbon">Draft draw</div>`);
+  }
+  const seasonOver = mode !== "replay" && S.matches.length > 0 && S.matches.every(m => m.sc);
+  const rows = S.players.map((p, i) => {
+    const lead = p.pos === 1 && p.goals > 0;
+    const teamCells = p.rows.map(r => {
+      const t = CFG.teams[r.eff] || { name: r.eff };
+      const real = CFG.teams[r.pick] || { name: r.pick };
+      const note = r.standin ? `<span class="standin-note">→ replaced by ${esc(real.name)} when the season starts</span>` : "";
+      const pos = r.st.pos ? `${r.st.pos}${["st","nd","rd"][((r.st.pos+90)%100-10)%10-1] || "th"}` : "—";
+      return `<div class="tmini${r.standin ? " standin" : ""}">${chip(r.eff)}
+        <span class="tn">${esc(t.name)}${note}</span>
+        <span class="ts"><span class="g">${r.st.GF}</span><span class="s">${pos} · GD ${r.st.GF - r.st.GA >= 0 ? "+" : ""}${r.st.GF - r.st.GA}</span></span></div>`;
+    }).join("");
+    return `<tr class="prow${lead ? " lead" : ""}" data-i="${i}">
+        <td class="pos">${p.pos}</td>
+        <td class="l pname">${esc(p.name)}${lead && seasonOver ? '<span class="crown">👑</span>' : ""}</td>
+        <td class="big">${p.goals}</td>
+        <td class="plus">+${p.recent}</td>
+        <td class="gd">${p.gd >= 0 ? "+" : ""}${p.gd}</td></tr>
+      <tr class="pdetail" data-d="${i}" hidden><td colspan="5">
+        <div class="teamgrid">${teamCells}</div>
+        <div class="tiebreak">Tie-breaks — best team: <b>${p.best}</b> goals · has ${seasonOver ? "champions" : "current leader"}:
+          <b>${p.hasChamp ? "yes" : "no"}</b> · avg league position: <b>${p.avgPos < 99 ? p.avgPos.toFixed(1) : "—"}</b></div>
+      </td></tr>`;
+  }).join("");
+  el.innerHTML = `<table class="t">
+    <thead><tr><th></th><th class="l">Player</th><th title="Total goals">Goals</th>
+      <th title="Goals in the 7 days up to the latest results">+7d</th><th title="Goal difference across their teams">GD</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
+  el.querySelectorAll(".prow").forEach(tr => tr.addEventListener("click", () => {
+    const d = el.querySelector(`[data-d="${tr.dataset.i}"]`);
+    if (d) d.hidden = !d.hidden;
+  }));
+}
+
+function fxRow(m, assignment, withScore) {
+  const t1 = CFG.teams[m.a1], t2 = CFG.teams[m.a2];
+  const o1 = ownerOf(m.a1, assignment), o2 = ownerOf(m.a2, assignment);
+  const mid = withScore && m.sc ? `<span class="mid score">${m.sc[0]} – ${m.sc[1]}</span>`
+    : `<span class="mid">${esc(m.time || "v")}</span>`;
+  return `<div class="fx">
+    <span class="home">${o1 ? `<span class="own">${esc(o1)}</span>` : ""}<span title="${t1 ? esc(t1.name) : esc(m.team1)}">${t1 ? m.a1 : esc(m.team1)}</span>${chip(m.a1)}</span>
+    ${mid}
+    <span class="away">${chip(m.a2)}<span title="${t2 ? esc(t2.name) : esc(m.team2)}">${t2 ? m.a2 : esc(m.team2)}</span>${o2 ? `<span class="own">${esc(o2)}</span>` : ""}</span>
+  </div>`;
+}
+
+function renderFixtures(S, assignment, mode, seasonSrc) {
+  const el = document.getElementById("fixtures");
+  if (mode === "replay") {
+    // if next season's fixture list is already published, show opening day
+    if (seasonSrc && seasonSrc.matches && seasonSrc.matches.length) {
+      const S2 = computeStats(seasonSrc, assignment._live, buildNameIndex());
+      return renderFixtures(S2, assignment._live, "live", null, el);
+    }
+    el.innerHTML = `<div class="empty">The 2026/27 fixture list isn't in the data feed yet.
+      First up: <b>kick-off Friday 21 August 2026, 8pm</b>.</div>`;
+    return;
+  }
+  const upcoming = S.matches.filter(m => !m.sc && m.date).sort((a, b) => a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
+  if (!upcoming.length) { el.innerHTML = `<div class="empty">No fixtures left — that's a wrap on the season. 🏁</div>`; return; }
+  const today = new Date().toISOString().slice(0, 10);
+  const nextDate = (upcoming.find(m => m.date >= today) || upcoming[0]).date;
+  const day = upcoming.filter(m => m.date === nextDate);
+  el.innerHTML = `<div class="dayhead">${fmtDay(nextDate)}</div>` + day.map(m => fxRow(m, assignment, false)).join("");
+}
+
+let MW = null;
+function renderResults(S, assignment, mode) {
+  const el = document.getElementById("results");
+  const played = S.matches.filter(m => m.sc && m.mw);
+  if (!played.length) { el.innerHTML = `<div class="empty">No results yet — check back after kick-off.</div>`; return; }
+  const byMW = {};
+  for (const m of played) (byMW[m.mw] = byMW[m.mw] || []).push(m);
+  const mws = Object.keys(byMW).map(Number).sort((a, b) => a - b);
+  // "where we actually are": the matchweek of the most recently played game
+  const latest = played.reduce((a, b) => (a.date > b.date ? a : b));
+  if (MW === null || !byMW[MW]) MW = latest.mw;
+  const idx = mws.indexOf(MW);
+  const list = byMW[MW].slice().sort((a, b) => a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
+  const days = {};
+  for (const m of list) (days[m.date] = days[m.date] || []).push(m);
+  el.innerHTML = `
+    <div class="mwbar">
+      <button class="mwbtn" id="mwprev" ${idx <= 0 ? "disabled" : ""}>‹</button>
+      <div class="mwsel">Matchweek ${MW}${MW === latest.mw ? " · current" : ""}</div>
+      <button class="mwbtn" id="mwnext" ${idx >= mws.length - 1 ? "disabled" : ""}>›</button>
+    </div>
+    <div class="mwnote">Rearranged games are shown under their proper matchweek, whenever they were played.</div>
+    ${Object.entries(days).map(([d, ms]) =>
+      `<div class="dayhead">${fmtDay(d)}</div>` + ms.map(m => fxRow(m, assignment, true)).join("")).join("")}`;
+  const go = d => { MW = mws[idx + d]; renderResults(S, assignment, mode); };
+  const p = document.getElementById("mwprev"), n = document.getElementById("mwnext");
+  if (p) p.addEventListener("click", () => go(-1));
+  if (n) n.addEventListener("click", () => go(1));
+}
+
+function renderPLTable(S, assignment) {
+  const el = document.getElementById("pltable");
+  if (!S.table.length || S.table[0].P === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
+  el.innerHTML = `<table class="t plt">
+    <thead><tr><th></th><th class="l">Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>GF</th><th>Pts</th></tr></thead>
+    <tbody>${S.table.map(t => {
+      const o = ownerOf(t.abbr, assignment);
+      return `<tr class="${t.pos === 1 ? "champ" : ""}"><td class="pos">${t.pos}</td>
+        <td class="l">${chip(t.abbr)}<span>${esc(CFG.teams[t.abbr].name)}</span>${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
+        <td>${t.P}</td><td>${t.W}</td><td>${t.D}</td><td>${t.L}</td>
+        <td>${t.GF - t.GA >= 0 ? "+" : ""}${t.GF - t.GA}</td><td>${t.GF}</td><td class="pts">${t.Pts}</td></tr>`;
+    }).join("")}</tbody></table>`;
+}
+
+function wireCollapse(hid) {
+  const h = document.getElementById(hid);
+  h.addEventListener("click", () => h.closest("section").classList.toggle("collapsed"));
+}
+
+/* ---------- boot ---------- */
+async function init() {
+  try {
+    CFG = await fetch("./teams.json" + bust, opts).then(r => r.json());
+    const nameIdx = buildNameIndex();
+
+    // owner lookup by drawn team
+    const liveAssign = {};
+    for (const [player, picks] of Object.entries(CFG.players)) picks.forEach(a => liveAssign[a] = player);
+    liveAssign._map = {}; // no substitution in live mode
+
+    // replay assignment: promoted clubs stand in as their relegated counterpart
+    const replayAssign = { _map: CFG.standins || {} };
+    for (const [abbr, owner] of Object.entries(liveAssign)) {
+      if (abbr === "_map") continue;
+      replayAssign[(CFG.standins || {})[abbr] || abbr] = owner;
+    }
+    replayAssign._live = liveAssign;
+
+    const seasonSrc = await fetchJSON(SEASON_URL);
+    const live = playedCount(seasonSrc) > 0 && Date.now() >= new Date(CFG.kickoff).getTime();
+    const mode = live ? "live" : "replay";
+    const src = live ? seasonSrc : await fetchJSON(REPLAY_URL);
+    if (!src) throw new Error("no data source reachable");
+    const assignment = live ? liveAssign : replayAssign;
+
+    const S = computeStats(src, assignment, nameIdx);
+    if (S.unknown.length) console.warn("Unmatched team names from data feed:", S.unknown);
+
+    renderPills(mode, S);
+    renderBanner(mode);
+    renderDraw(S, assignment, mode);
+    renderFixtures(S, assignment, mode, seasonSrc);
+    renderResults(S, assignment, mode);
+    renderPLTable(S, assignment);
+    ["draw-h", "fx-h", "results-h", "pltable-h"].forEach(wireCollapse);
+  } catch (err) {
+    document.getElementById("draw").innerHTML =
+      `<div class="err">Couldn't load the data — please refresh in a moment.<br><small>${esc(err.message || err)}</small></div>`;
+    ["fixtures", "results", "pltable"].forEach(id => document.getElementById(id).innerHTML = "");
+  }
+}
+init();
+</script>
+</body>
+</html>

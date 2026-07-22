@@ -1,0 +1,231 @@
+{
+  "season": "2026-27",
+  "kickoff": "2026-08-21T20:00:00+01:00",
+  "status": "DRAFT",
+  "players": {
+    "Baz": [
+      "MCI",
+      "BHA",
+      "LEE",
+      "HUL"
+    ],
+    "Jez": [
+      "BOU",
+      "CHE",
+      "TOT",
+      "COV"
+    ],
+    "Adam": [
+      "LIV",
+      "BRE",
+      "NFO",
+      "SUN"
+    ],
+    "Mikey": [
+      "MUN",
+      "AVL",
+      "EVE",
+      "IPS"
+    ],
+    "Toz": [
+      "ARS",
+      "NEW",
+      "FUL",
+      "CRY"
+    ]
+  },
+  "standins": {
+    "HUL": "WOL",
+    "COV": "WHU",
+    "IPS": "BUR"
+  },
+  "teams": {
+    "ARS": {
+      "name": "Arsenal",
+      "kit": {
+        "style": "sleeves",
+        "body": "#EF0107",
+        "sleeves": "#FFFFFF"
+      }
+    },
+    "MCI": {
+      "name": "Manchester City",
+      "kit": {
+        "style": "plain",
+        "body": "#6CABDD"
+      }
+    },
+    "BOU": {
+      "name": "AFC Bournemouth",
+      "kit": {
+        "style": "stripes",
+        "body": "#DA020E",
+        "body2": "#000000",
+        "sleeves": "#000000"
+      }
+    },
+    "MUN": {
+      "name": "Manchester United",
+      "kit": {
+        "style": "plain",
+        "body": "#DA291C"
+      }
+    },
+    "LIV": {
+      "name": "Liverpool",
+      "kit": {
+        "style": "plain",
+        "body": "#C8102E"
+      }
+    },
+    "AVL": {
+      "name": "Aston Villa",
+      "kit": {
+        "style": "sleeves",
+        "body": "#670E36",
+        "sleeves": "#95BFE5"
+      }
+    },
+    "CHE": {
+      "name": "Chelsea",
+      "kit": {
+        "style": "plain",
+        "body": "#034694"
+      }
+    },
+    "NEW": {
+      "name": "Newcastle United",
+      "kit": {
+        "style": "stripes",
+        "body": "#241F20",
+        "body2": "#FFFFFF",
+        "sleeves": "#241F20"
+      }
+    },
+    "BHA": {
+      "name": "Brighton & Hove Albion",
+      "kit": {
+        "style": "stripes",
+        "body": "#0057B8",
+        "body2": "#FFFFFF",
+        "sleeves": "#0057B8"
+      }
+    },
+    "BRE": {
+      "name": "Brentford",
+      "kit": {
+        "style": "stripes",
+        "body": "#E30613",
+        "body2": "#FFFFFF",
+        "sleeves": "#FFFFFF"
+      }
+    },
+    "FUL": {
+      "name": "Fulham",
+      "kit": {
+        "style": "sleeve-trim",
+        "body": "#FFFFFF",
+        "trim": "#000000",
+        "dark_text": true
+      }
+    },
+    "LEE": {
+      "name": "Leeds United",
+      "kit": {
+        "style": "sleeve-trim",
+        "body": "#FFFFFF",
+        "trim": "#1D428A",
+        "dark_text": true
+      }
+    },
+    "EVE": {
+      "name": "Everton",
+      "kit": {
+        "style": "plain",
+        "body": "#003399"
+      }
+    },
+    "NFO": {
+      "name": "Nottingham Forest",
+      "kit": {
+        "style": "pinstripe",
+        "body": "#DD0000",
+        "pin": "#FFFFFF"
+      }
+    },
+    "TOT": {
+      "name": "Tottenham Hotspur",
+      "kit": {
+        "style": "shoulders",
+        "body": "#FFFFFF",
+        "shoulders": "#132257",
+        "dark_text": true
+      }
+    },
+    "SUN": {
+      "name": "Sunderland",
+      "kit": {
+        "style": "stripes",
+        "body": "#EB172B",
+        "body2": "#FFFFFF",
+        "sleeves": "#EB172B"
+      }
+    },
+    "CRY": {
+      "name": "Crystal Palace",
+      "kit": {
+        "style": "stripes",
+        "body": "#C4122E",
+        "body2": "#1B458F",
+        "sleeves": "#1B458F"
+      }
+    },
+    "HUL": {
+      "name": "Hull City",
+      "kit": {
+        "style": "stripes",
+        "body": "#F5971D",
+        "body2": "#000000",
+        "sleeves": "#000000"
+      }
+    },
+    "IPS": {
+      "name": "Ipswich Town",
+      "kit": {
+        "style": "plain",
+        "body": "#3A64A3"
+      }
+    },
+    "COV": {
+      "name": "Coventry City",
+      "kit": {
+        "style": "stripes",
+        "body": "#63B1E5",
+        "body2": "#FFFFFF",
+        "sleeves": "#63B1E5"
+      }
+    },
+    "WHU": {
+      "name": "West Ham United",
+      "kit": {
+        "style": "plain",
+        "body": "#7A263A"
+      }
+    },
+    "BUR": {
+      "name": "Burnley",
+      "kit": {
+        "style": "plain",
+        "body": "#6C1D45"
+      }
+    },
+    "WOL": {
+      "name": "Wolverhampton Wanderers",
+      "kit": {
+        "style": "plain",
+        "body": "#FDB913",
+        "dark_text": true
+      }
+    }
+  }
+}

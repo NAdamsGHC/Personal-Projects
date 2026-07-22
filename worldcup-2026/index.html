@@ -360,9 +360,14 @@
     .pname { font-size: 16px; }
     .teamgrid { grid-template-columns: 1fr; }
   }
+  .archive-strip { background: #1a1f2b; color: #fff; text-align: center; font-size: 13px; font-weight: 600;
+                   padding: 10px 14px; letter-spacing: .2px; }
+  .archive-strip a { color: #8ab4ff; font-weight: 800; text-decoration: none; }
+  .archive-strip a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
+<div class="archive-strip">📦 Archived — World Cup 2026 final standings. The new season lives here: <a href="../goal-draw/">Premier League Goal Draw 2026/27 →</a></div>
 <div class="wrap">
   <header class="hero">
     <div class="kick">⚽🏆</div>
@@ -417,7 +422,7 @@
 
   <footer>
     <div>Goals counted: own goals ✓ &nbsp;·&nbsp; extra time ✓ &nbsp;·&nbsp; penalty shootouts ✗</div>
-    <div>Refreshes automatically through the day · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
+    <div>Archived — final results as of 19 July 2026 · Data: <a href="https://github.com/openfootball/worldcup.json" target="_blank" rel="noopener">openfootball</a> · Flags: <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a></div>
   </footer>
 </div>
 
@@ -1295,20 +1300,10 @@ function computeAll(config, src) {
 }
 
 async function loadSource() {
-  // Prefer whichever source has more results: openfootball can lag behind a
-  // result added to the bundled snapshot, and vice versa once it catches up.
-  const played = s => (s.matches || []).filter(m => m.score && m.score.ft).length;
-  let remote = null, bundled = null;
-  try {
-    const r = await fetch(SOURCE_URL, opts);
-    if (r.ok) remote = await r.json();
-  } catch (e) {}
-  try {
-    const r = await fetch("./data/source.json" + bust, opts);
-    if (r.ok) bundled = await r.json();
-  } catch (e) {}
-  if (remote && (!bundled || played(remote) >= played(bundled))) return { src: remote, live: true };
-  if (bundled) return { src: bundled, live: false };
+  // Archived: the tournament is over, so the page serves only the bundled
+  // final snapshot and never touches the network for results.
+  const r = await fetch("./data/source.json" + bust, opts);
+  if (r.ok) return { src: await r.json(), live: false };
   throw new Error("no data source reachable");
 }
 
