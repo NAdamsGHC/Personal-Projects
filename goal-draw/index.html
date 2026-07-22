@@ -387,28 +387,31 @@ function renderPills(mode, S) {
 
 function renderBanner(mode) {
   const el = document.getElementById("banner");
-  if (mode !== "replay") { el.innerHTML = ""; return; }
+  const replay = mode === "replay";
+  const title = replay ? "Pre-season — last season replayed" : "Countdown to the final day";
   el.innerHTML = `<div class="banner" id="presz">
     <div class="bhead" id="presz-h">
-      <span class="bt">Pre-season — last season replayed</span>
-      <button class="ibtn" id="presz-i" aria-label="What does this mean?" title="What does this mean?">i</button>
+      <span class="bt">${title}</span>
+      ${replay ? `<button class="ibtn" id="presz-i" aria-label="What does this mean?" title="What does this mean?">i</button>` : ""}
       <span class="h2chev">▾</span>
     </div>
     <div class="bbody">
-      <div class="bx" id="presz-x" hidden>This is <b>how the draw would have panned out in 2025/26</b>, for bragging
+      ${replay ? `<div class="bx" id="presz-x" hidden>This is <b>how the draw would have panned out in 2025/26</b>, for bragging
         rights only. Promoted clubs hadn't come up yet, so their slot is filled by the relegated club they replaced —
-        <b style="color:#a2790d">highlighted in yellow</b>. Everyone resets to zero at kick-off.</div>
+        <b style="color:#a2790d">highlighted in yellow</b>. Everyone resets to zero at kick-off.</div>` : ""}
       <div class="count" id="count"></div>
     </div>
   </div>`;
   document.getElementById("presz-h").addEventListener("click", () =>
     document.getElementById("presz").classList.toggle("collapsed"));
-  document.getElementById("presz-i").addEventListener("click", e => {
+  const ib = document.getElementById("presz-i");
+  if (ib) ib.addEventListener("click", e => {
     e.stopPropagation();
     document.getElementById("presz").classList.remove("collapsed");
     const x = document.getElementById("presz-x"); x.hidden = !x.hidden;
   });
-  const target = new Date(CFG.kickoff).getTime();
+  // pre-season: count to kick-off; in season: count to the final whistle of the last day
+  const target = new Date(replay ? CFG.kickoff : (CFG.seasonEnd || "2027-05-30T18:00:00+01:00")).getTime();
   const tick = () => {
     const d = Math.max(0, target - Date.now());
     const dd = Math.floor(d / 86400000), hh = Math.floor(d / 3600000) % 24,

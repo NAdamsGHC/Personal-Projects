@@ -97,6 +97,7 @@ def main():
     out = {
         "season": "2026-27",
         "kickoff": "2026-08-21T20:00:00+01:00",
+        "seasonEnd": "2027-05-30T18:00:00+01:00",
         "status": status or "DRAFT",
         "players": players,
         "standins": STANDINS,
