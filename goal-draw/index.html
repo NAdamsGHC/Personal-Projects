@@ -10,19 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg1: #121319; --bg2: #1c1d27; --panel: rgba(255,255,255,.055); --panel2: rgba(255,255,255,.09);
-    --line: rgba(255,255,255,.10); --ink: #f4f4f6; --muted: #a9aab8;
-    --green: #00ff85; --magenta: #e90052; --cyan: #04f5ff; --gold: #ffd54a;
-    --shadow: 0 10px 28px rgba(0,0,0,.35);
+    --bg1: #221430; --bg2: #38003c; --card: #ffffff; --panel: #f6f2fa; --panel2: #efe9f6;
+    --line: rgba(36,19,51,.10); --ink: #241333; --muted: #6f6781;
+    --green: #00ff85; --emerald: #00814d; --teal: #0e7490; --purple: #38003c;
+    --magenta: #e90052; --cyan: #04f5ff; --gold: #ffd54a; --goldrow: #ffe9a8; --redrow: #fde3e8;
+    --shadow: 0 8px 22px rgba(20,0,30,.28);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: "Poppins", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink);
-    background: radial-gradient(1100px 600px at 80% -10%, #2c2340 0%, transparent 60%),
-                radial-gradient(900px 500px at -10% 30%, #1b2b34 0%, transparent 55%),
-                linear-gradient(165deg, var(--bg2) 0%, var(--bg1) 65%, #0e0f14 100%);
+    background: radial-gradient(1100px 600px at 80% -10%, #4b1a55 0%, transparent 60%),
+                radial-gradient(900px 500px at -10% 30%, #2e1244 0%, transparent 55%),
+                linear-gradient(115deg, var(--bg1) 0%, var(--bg2) 100%);
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -35,8 +36,8 @@
   .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 18px 14px 40px; }
 
   header.hero { position: relative; border-radius: 20px; overflow: hidden; padding: 26px 22px 22px;
-    background: linear-gradient(115deg, #221430 0%, #38003c 100%);
-    border: 1px solid rgba(255,255,255,.14); box-shadow: var(--shadow); }
+    color: #fff; background: linear-gradient(115deg, #2c1240 0%, #47004c 100%);
+    border: 1px solid rgba(255,255,255,.18); box-shadow: var(--shadow); }
   header.hero::after { content: ""; position: absolute; inset: 0;
     background: radial-gradient(500px 210px at 50% -60%, rgba(4,245,255,.22), transparent 70%); pointer-events: none; }
   .hero .comp { font-size: 12.5px; font-weight: 600; letter-spacing: .8px; color: var(--green); }
@@ -51,29 +52,36 @@
   .pill.green { color: #052; background: var(--green); border-color: var(--green); }
   .pill.draft { color: #3a2a00; background: var(--gold); border-color: var(--gold); }
 
-  .banner { margin-top: 14px; border-radius: 16px; border: 1px solid rgba(4,245,255,.35);
-    background: linear-gradient(100deg, rgba(4,245,255,.10), rgba(0,255,133,.07));
-    padding: 14px 16px; box-shadow: var(--shadow); }
-  .banner .bt { font-weight: 600; font-size: 15px; letter-spacing: .2px; color: var(--cyan); }
-  .banner .bx { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .banner { margin-top: 14px; border-radius: 16px; border: 1px solid rgba(56,0,60,.25);
+    background: var(--card); box-shadow: var(--shadow); overflow: hidden; }
+  .bhead { display: flex; align-items: center; gap: 10px; padding: 13px 16px; cursor: pointer; user-select: none; }
+  .banner .bt { font-weight: 600; font-size: 15px; letter-spacing: .2px; color: var(--purple); }
+  .ibtn { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--purple); color: var(--purple);
+    background: none; font-family: Georgia, serif; font-style: italic; font-weight: 700; font-size: 13px;
+    line-height: 1; cursor: pointer; flex: 0 0 auto; }
+  .ibtn:hover { background: var(--panel); }
+  .banner .h2chev { margin-left: auto; }
+  .banner.collapsed .bbody { display: none; }
+  .banner.collapsed .h2chev { transform: rotate(-90deg); }
+  .bbody { padding: 0 16px 14px; }
+  .banner .bx { font-size: 13px; color: var(--muted); margin: 2px 0 10px; line-height: 1.45; }
   .banner .bx b { color: var(--ink); }
-  .count { display: flex; gap: 10px; margin-top: 10px; }
-  .cunit { flex: 1; text-align: center; background: rgba(0,0,0,.30); border: 1px solid var(--line);
+  .count { display: flex; gap: 10px; }
+  .cunit { flex: 1; text-align: center; background: var(--panel); border: 1px solid var(--line);
     border-radius: 12px; padding: 8px 4px 6px; }
-  .cunit .n { font-weight: 700; font-size: 21px; color: var(--green); line-height: 1.1; }
+  .cunit .n { font-weight: 700; font-size: 21px; color: var(--purple); line-height: 1.1; }
   .cunit .l { font-size: 10.5px; letter-spacing: .4px; color: var(--muted); margin-top: 3px; }
 
   nav.tabs { position: sticky; top: 0; z-index: 30; display: flex; gap: 8px; overflow-x: auto;
     padding: 12px 2px; margin: 6px -2px 8px; backdrop-filter: blur(8px);
-    background: linear-gradient(rgba(18,19,25,.92), rgba(18,19,25,.78)); -webkit-overflow-scrolling: touch; }
+    background: linear-gradient(rgba(34,20,48,.92), rgba(34,20,48,.78)); -webkit-overflow-scrolling: touch; }
   nav.tabs::-webkit-scrollbar { display: none; }
-  .tab { flex: 0 0 auto; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+  .tab { flex: 0 0 auto; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.92); color: var(--ink);
     border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
-  .tab:hover { background: var(--panel2); }
+  .tab:hover { background: #fff; }
 
-  section.card { position: relative; background: var(--panel); border: 1px solid var(--line);
-    border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; margin-top: 14px;
-    backdrop-filter: blur(4px); }
+  section.card { position: relative; background: var(--card); border: 1px solid var(--line);
+    border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; margin-top: 14px; }
   section.card h2 { margin: 0; padding: 15px 18px;
     font-size: 15.5px; font-weight: 600; letter-spacing: .2px;
     display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
@@ -87,7 +95,7 @@
   .cardbody { border-top: 1px solid var(--line); }
   .collapsed .cardbody { display: none; }
   .empty { padding: 22px 18px; color: var(--muted); font-size: 13.5px; }
-  .err { padding: 22px 18px; color: #ffb3c8; font-size: 13.5px; }
+  .err { padding: 22px 18px; color: #b00040; font-size: 13.5px; }
 
   .ribbon { position: absolute; top: 14px; right: -34px; transform: rotate(38deg); z-index: 5;
     background: var(--gold); color: #3a2a00; font-size: 10.5px; font-weight: 700; letter-spacing: .4px;
@@ -102,24 +110,24 @@
   .t tr:last-child td { border-bottom: 0; }
   .t .pos { width: 30px; color: var(--muted); font-weight: 700; }
   .t .pname { font-weight: 700; font-size: 15px; }
-  .t .big { font-weight: 700; font-size: 18px; color: var(--green); }
-  .t .plus { color: var(--cyan); font-weight: 700; }
+  .t .big { font-weight: 700; font-size: 18px; color: var(--emerald); }
+  .t .plus { color: var(--teal); font-weight: 700; }
   .t .gd { color: var(--muted); }
   .prow { cursor: pointer; transition: background .12s; }
   .prow:hover { background: var(--panel2); }
-  .prow.lead td { background: linear-gradient(90deg, rgba(0,255,133,.10), transparent 70%); }
-  .crown { margin-left: 6px; }
+  .prow.lead td, .plt .champ td { background: var(--goldrow); }
+  .plt .releg td { background: var(--redrow); }
 
-  .pdetail td { padding: 0 !important; background: rgba(0,0,0,.22); }
+  .pdetail td { padding: 0 !important; background: rgba(56,0,60,.04); }
   .teamgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 14px; }
   .tmini { display: flex; align-items: center; gap: 9px; background: var(--panel); border: 1px solid var(--line);
     border-radius: 12px; padding: 8px 10px; font-size: 13px; }
-  .tmini.standin { background: rgba(255,213,74,.10); border-color: rgba(255,213,74,.55); }
+  .tmini.standin { background: #fff6da; border-color: #e2bd4d; }
   .tmini .tn { font-weight: 600; line-height: 1.15; }
   .tmini .ts { margin-left: auto; text-align: right; font-variant-numeric: tabular-nums; }
-  .tmini .ts .g { font-weight: 700; font-size: 16px; color: var(--green); }
+  .tmini .ts .g { font-weight: 700; font-size: 16px; color: var(--emerald); }
   .tmini .ts .s { display: block; font-size: 10.5px; color: var(--muted); }
-  .standin-note { font-size: 11px; color: var(--gold); display: block; margin-top: 1px; }
+  .standin-note { font-size: 11px; color: #a2790d; display: block; margin-top: 1px; }
   .tiebreak { padding: 0 14px 12px; font-size: 11.5px; color: var(--muted); }
   .tiebreak b { color: var(--ink); }
 
@@ -127,7 +135,7 @@
   .fx .shirt { width: 22px; height: 22px; }
 
   .dayhead { padding: 12px 18px 4px; font-size: 11.5px; font-weight: 600;
-    letter-spacing: .3px; color: var(--cyan); }
+    letter-spacing: .3px; color: var(--magenta); }
   .fx { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
     padding: 10px 18px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
   .fx:last-child { border-bottom: 0; }
@@ -138,26 +146,33 @@
   .fx .own { font-size: 10px; color: var(--muted); font-weight: 600; }
 
   .mwbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 2px; }
-  .mwbtn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 10px;
-    width: 34px; height: 30px; font: inherit; font-weight: 800; cursor: pointer; }
+  .mwbtn { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 10px;
+    width: 34px; height: 30px; font: inherit; font-weight: 700; cursor: pointer; }
+  .mwbtn:hover:not(:disabled) { background: var(--panel); }
   .mwbtn:disabled { opacity: .3; cursor: default; }
   .mwsel { flex: 1; text-align: center; font-weight: 600; font-size: 14.5px; letter-spacing: .2px; }
   .mwnote { padding: 2px 18px 10px; font-size: 11.5px; color: var(--muted); }
 
-  .plt td.l { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .plt .champ td { background: linear-gradient(90deg, rgba(0,255,133,.12), transparent 70%); }
-  .plt .pts { font-weight: 800; }
+  #pltable { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .plt { min-width: 520px; }
+  .plt th, .plt td { text-align: center; }
+  .plt td.chipcell { width: 34px; padding-right: 2px; }
+  .plt td.chipcell .shirt { display: block; margin: 0 auto; }
+  .plt td.club { font-weight: 600; }
+  .plt td.ownercell { width: 62px; }
+  .plt .pts { font-weight: 700; }
   .ownertag { font-size: 10px; font-weight: 600; letter-spacing: .2px;
-    color: var(--bg1); background: var(--green); border-radius: 6px; padding: 1.5px 6px; }
+    color: var(--purple); background: var(--panel2); border-radius: 6px; padding: 2px 7px; }
 
-  footer { margin-top: 26px; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.9; }
-  footer a { color: var(--cyan); text-decoration: none; }
+  footer { margin-top: 26px; text-align: center; color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.9; }
+  footer a { color: var(--green); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
   @media (max-width: 460px) {
     .hero h1 { font-size: 27px; }
     .teamgrid { grid-template-columns: 1fr; }
     .fx { font-size: 13.5px; padding: 10px 12px; }
+    .plt th, .plt td { padding: 9px 6px; font-size: 13px; }
   }
 </style>
 </head>
@@ -173,10 +188,10 @@
   <div id="banner"></div>
 
   <nav class="tabs" id="tabs">
-    <a class="tab" href="#draw-card">🏆 Draw table</a>
-    <a class="tab" href="#fx-card">📅 Fixtures</a>
-    <a class="tab" href="#results-card">✅ Results</a>
-    <a class="tab" href="#pltable-card">📊 PL table</a>
+    <a class="tab" href="#draw-card">Draw table</a>
+    <a class="tab" href="#fx-card">Fixtures</a>
+    <a class="tab" href="#results-card">Results</a>
+    <a class="tab" href="#pltable-card">PL table</a>
   </nav>
 
   <section class="card" id="draw-card">
@@ -202,7 +217,7 @@
   <footer>
     <div>Goals counted from the scoreline — own goals count for the team they're credited to. All 380 matches.</div>
     <div>Tie-breaks: goals → goal difference → highest-scoring team → owns the champions → best avg league position.</div>
-    <div>Data: <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> (updated roughly weekly) · <a href="../worldcup-2026/">World Cup 2026 archive 📦</a></div>
+    <div>Data: <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> (updated roughly weekly) · <a href="../worldcup-2026/">World Cup 2026 archive</a></div>
   </footer>
 </div>
 
@@ -373,13 +388,26 @@ function renderPills(mode, S) {
 function renderBanner(mode) {
   const el = document.getElementById("banner");
   if (mode !== "replay") { el.innerHTML = ""; return; }
-  el.innerHTML = `<div class="banner">
-    <div class="bt">⏳ Pre-season — last season replayed</div>
-    <div class="bx">This is <b>how the draw would have panned out in 2025/26</b>, for bragging rights only.
-      Promoted clubs hadn't come up yet, so their slot is filled by the relegated club they replaced —
-      <b style="color:var(--gold)">highlighted in yellow</b>. Everyone resets to zero at kick-off.</div>
-    <div class="count" id="count"></div>
+  el.innerHTML = `<div class="banner" id="presz">
+    <div class="bhead" id="presz-h">
+      <span class="bt">Pre-season — last season replayed</span>
+      <button class="ibtn" id="presz-i" aria-label="What does this mean?" title="What does this mean?">i</button>
+      <span class="h2chev">▾</span>
+    </div>
+    <div class="bbody">
+      <div class="bx" id="presz-x" hidden>This is <b>how the draw would have panned out in 2025/26</b>, for bragging
+        rights only. Promoted clubs hadn't come up yet, so their slot is filled by the relegated club they replaced —
+        <b style="color:#a2790d">highlighted in yellow</b>. Everyone resets to zero at kick-off.</div>
+      <div class="count" id="count"></div>
+    </div>
   </div>`;
+  document.getElementById("presz-h").addEventListener("click", () =>
+    document.getElementById("presz").classList.toggle("collapsed"));
+  document.getElementById("presz-i").addEventListener("click", e => {
+    e.stopPropagation();
+    document.getElementById("presz").classList.remove("collapsed");
+    const x = document.getElementById("presz-x"); x.hidden = !x.hidden;
+  });
   const target = new Date(CFG.kickoff).getTime();
   const tick = () => {
     const d = Math.max(0, target - Date.now());
@@ -412,7 +440,7 @@ function renderDraw(S, assignment, mode) {
     }).join("");
     return `<tr class="prow${lead ? " lead" : ""}" data-i="${i}">
         <td class="pos">${p.pos}</td>
-        <td class="l pname">${esc(p.name)}${lead && seasonOver ? '<span class="crown">👑</span>' : ""}</td>
+        <td class="l pname">${esc(p.name)}</td>
         <td class="big">${p.goals}</td>
         <td class="plus">+${p.recent}</td>
         <td class="gd">${p.gd >= 0 ? "+" : ""}${p.gd}</td></tr>
@@ -457,7 +485,7 @@ function renderFixtures(S, assignment, mode, seasonSrc) {
     return;
   }
   const upcoming = S.matches.filter(m => !m.sc && m.date).sort((a, b) => a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
-  if (!upcoming.length) { el.innerHTML = `<div class="empty">No fixtures left — that's a wrap on the season. 🏁</div>`; return; }
+  if (!upcoming.length) { el.innerHTML = `<div class="empty">No fixtures left — that's a wrap on the season.</div>`; return; }
   const today = new Date().toISOString().slice(0, 10);
   const nextDate = (upcoming.find(m => m.date >= today) || upcoming[0]).date;
   const day = upcoming.filter(m => m.date === nextDate);
@@ -497,12 +525,16 @@ function renderResults(S, assignment, mode) {
 function renderPLTable(S, assignment) {
   const el = document.getElementById("pltable");
   if (!S.table.length || S.table[0].P === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
+  const nTeams = S.table.length;
   el.innerHTML = `<table class="t plt">
-    <thead><tr><th></th><th class="l">Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>GF</th><th>Pts</th></tr></thead>
+    <thead><tr><th></th><th></th><th>Club</th><th>Owner</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>GF</th><th>Pts</th></tr></thead>
     <tbody>${S.table.map(t => {
       const o = ownerOf(t.abbr, assignment);
-      return `<tr class="${t.pos === 1 ? "champ" : ""}"><td class="pos">${t.pos}</td>
-        <td class="l">${chip(t.abbr)}<span>${esc(CFG.teams[t.abbr].name)}</span>${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
+      const cls = t.pos === 1 ? "champ" : (t.pos > nTeams - 3 ? "releg" : "");
+      return `<tr class="${cls}"><td class="pos">${t.pos}</td>
+        <td class="chipcell">${chip(t.abbr)}</td>
+        <td class="club">${esc(CFG.teams[t.abbr].name)}</td>
+        <td class="ownercell">${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
         <td>${t.P}</td><td>${t.W}</td><td>${t.D}</td><td>${t.L}</td>
         <td>${t.GF - t.GA >= 0 ? "+" : ""}${t.GF - t.GA}</td><td>${t.GF}</td><td class="pts">${t.Pts}</td></tr>`;
     }).join("")}</tbody></table>`;
