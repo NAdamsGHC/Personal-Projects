@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f11">
+<title>BO1 Companion — Team Deathmatch</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="smoke" aria-hidden="true"></div>
+
+<header class="topbar">
+  <h1>Black Ops <span>Companion</span></h1>
+  <p class="mode">Team Deathmatch</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="prematch" class="on">Pre-Match</button>
+  <button data-tab="weapons">Weapons</button>
+  <button data-tab="perks">Perks</button>
+  <button data-tab="classes">Classes</button>
+</nav>
+
+<main>
+
+  <!-- ── PRE-MATCH ─────────────────────────────────────────── -->
+  <section id="prematch" class="tab on">
+    <div id="map-grid" class="grid"></div>
+    <div id="map-brief" class="brief hidden"></div>
+  </section>
+
+  <!-- ── WEAPONS ───────────────────────────────────────────── -->
+  <section id="weapons" class="tab">
+    <div class="filters">
+      <label>Level
+        <select id="level-filter"></select>
+      </label>
+      <label>Class
+        <select id="class-filter"></select>
+      </label>
+    </div>
+    <p class="hint" id="weapon-count"></p>
+    <div id="weapon-list" class="list"></div>
+    <div id="weapon-detail" class="detail hidden"></div>
+    <details class="ref">
+      <summary>Attachment reference</summary>
+      <div id="attachment-list"></div>
+    </details>
+  </section>
+
+  <!-- ── PERKS ─────────────────────────────────────────────── -->
+  <section id="perks" class="tab">
+    <p class="hint">All perks unlock for purchase at level 4. Pro needs all three challenges plus 3000 CoD Points.</p>
+    <div id="perk-list"></div>
+  </section>
+
+  <!-- ── CLASSES ───────────────────────────────────────────── -->
+  <section id="classes" class="tab">
+    <div class="filters">
+      <label>Score against
+        <select id="score-map"></select>
+      </label>
+    </div>
+    <div id="preset-bar" class="chips"></div>
+    <div id="builder"></div>
+    <div id="score"></div>
+    <details class="ref">
+      <summary>Killstreak reference</summary>
+      <div id="killstreak-list"></div>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <p>Unofficial fan project. Not affiliated with or endorsed by Activision or Treyarch.
+     Weapon stats are community datamined; map tactics are opinion — correct them in <code>data/maps.json</code>.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

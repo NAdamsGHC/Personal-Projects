@@ -1,0 +1,163 @@
+{
+ "source": {
+  "mechanics": "Effects for Suppressor, Rapid Fire and Dual Wield are computed from the Marvel4 BO1 statistics sheet — the app shows the real numbers per weapon rather than a generic description.",
+  "note": "Unlock requirements are deliberately not listed. Attachment unlocks are weapon-specific kill challenges and no source consulted gave figures worth trusting."
+ },
+ "attachments": [
+  {
+   "id": "suppressor",
+   "name": "Suppressor",
+   "type": "Barrel",
+   "effect": "Removes you from the minimap when firing, and silences the shot.",
+   "cost": "Cuts effective range hard — on most weapons the max-damage range drops by 60–70%, which adds a bullet to your shots-to-kill at surprisingly short distances.",
+   "verdict": "The most misunderstood attachment in the game. It is not a free stealth upgrade — it is a trade of range for concealment.",
+   "showsRangePenalty": true
+  },
+  {
+   "id": "rapid-fire",
+   "name": "Rapid Fire",
+   "type": "Fire rate",
+   "effect": "Increases rate of fire, typically from 750 to 1000 RPM or 937 to 1250 RPM.",
+   "cost": "More recoil and faster magazine drain.",
+   "verdict": "Only worth it where the shots-to-kill doesn't change — then it's pure TTK. On a gun you already struggle to control it just spreads your misses more efficiently.",
+   "showsRapidFire": true
+  },
+  {
+   "id": "extended-mag",
+   "name": "Extended Mag",
+   "type": "Magazine",
+   "effect": "Roughly 50% more rounds per magazine.",
+   "cost": "None mechanically, beyond the attachment slot.",
+   "verdict": "Boring and quietly good. If you are winning fights and then dying to the third enemy while reloading, this is the fix."
+  },
+  {
+   "id": "dual-mag",
+   "name": "Dual Mag",
+   "type": "Magazine",
+   "effect": "Two magazines taped together — every other reload is much faster.",
+   "cost": "The reload after that is normal speed, so the benefit alternates.",
+   "verdict": "Weaker than Extended Mag in most hands, because it only helps on alternate reloads. Fine on high-capacity guns where you rarely reload twice in a fight."
+  },
+  {
+   "id": "grip",
+   "name": "Grip",
+   "type": "Under barrel",
+   "effect": "Reduces recoil.",
+   "cost": "Occupies the under-barrel slot, so no Masterkey or launcher.",
+   "verdict": "Most valuable on high-recoil, high-damage guns — the AK-47 and the LMGs. Largely wasted on a FAMAS or an AUG that barely kicks."
+  },
+  {
+   "id": "reflex",
+   "name": "Reflex Sight",
+   "type": "Optic",
+   "effect": "A clean dot sight with a wide field of view.",
+   "cost": "None beyond the slot.",
+   "verdict": "Preference, not power. Pick the sight whose reticle you can see against the map you're on — Reflex reads best on dark maps."
+  },
+  {
+   "id": "red-dot",
+   "name": "Red Dot Sight",
+   "type": "Optic",
+   "effect": "A tighter dot with a slightly narrower view.",
+   "cost": "None beyond the slot.",
+   "verdict": "Same as Reflex — down to taste. The genuine argument for any sight is that iron sights on some BO1 guns obscure a lot of screen."
+  },
+  {
+   "id": "acog",
+   "name": "ACOG Scope",
+   "type": "Optic",
+   "effect": "Magnified optic for long sightlines.",
+   "cost": "Slower ADS and much harder to use up close.",
+   "verdict": "A trap on small maps. In TDM you will be caught at 5 metres by someone you're trying to zoom in on."
+  },
+  {
+   "id": "infrared",
+   "name": "Infrared Scope",
+   "type": "Optic",
+   "effect": "Highlights enemies as bright shapes against a dark background.",
+   "cost": "Slow to aim, restrictive view, and Ghost Pro users are resistant to it.",
+   "verdict": "Situationally strong on dark or cluttered maps where you keep losing enemies against the background."
+  },
+  {
+   "id": "variable-zoom",
+   "name": "Variable Zoom",
+   "type": "Optic",
+   "effect": "Switchable magnification on sniper rifles.",
+   "cost": "Slot only.",
+   "verdict": "Sniper-only, and TDM is rarely the mode for it."
+  },
+  {
+   "id": "masterkey",
+   "name": "Masterkey",
+   "type": "Under barrel",
+   "effect": "An under-barrel shotgun.",
+   "cost": "Uses the under-barrel slot, and the ammo is limited.",
+   "verdict": "A genuine answer to the close-range problem on a long-range primary. Worth carrying on an M16 or Galil if you keep getting rushed."
+  },
+  {
+   "id": "grenade-launcher",
+   "name": "Grenade Launcher",
+   "type": "Under barrel",
+   "effect": "An under-barrel 40mm launcher.",
+   "cost": "Under-barrel slot, and it arms only after a short flight distance.",
+   "verdict": "Cheap kills, no skill growth, and it teaches you nothing about positioning."
+  },
+  {
+   "id": "flamethrower",
+   "name": "Flamethrower",
+   "type": "Under barrel",
+   "effect": "A short-range under-barrel flamethrower that applies burn damage.",
+   "cost": "Very short range, and Flak Jacket Pro heavily resists it.",
+   "verdict": "Novelty. The burn does finish wounded runners, but you're giving up a real attachment for it."
+  },
+  {
+   "id": "dual-wield",
+   "name": "Dual Wield",
+   "type": "Akimbo",
+   "effect": "Carry two of the weapon, doubling total ammo and output.",
+   "cost": "No aiming down sights, and hip-fire spread roughly triples.",
+   "verdict": "Only viable at genuinely point-blank range. Outside a doorway fight you will lose to anything aimed.",
+   "showsDualWield": true
+  },
+  {
+   "id": "extended-clip",
+   "name": "Extended Clip",
+   "type": "Magazine",
+   "effect": "More rounds per magazine on handguns.",
+   "cost": "Slot only.",
+   "verdict": "Sensible on a pistol you actually intend to fight with rather than one carried as a backup."
+  },
+  {
+   "id": "snub-nose",
+   "name": "Snub Nose",
+   "type": "Barrel",
+   "effect": "Shortens the Python's barrel for a faster draw and quicker aim.",
+   "cost": "Reduced effective range.",
+   "verdict": "Turns the Python into a genuine panic-button sidearm."
+  },
+  {
+   "id": "speed-loader",
+   "name": "Speed Loader",
+   "type": "Magazine",
+   "effect": "Much faster Python reload.",
+   "cost": "Slot only.",
+   "verdict": "The Python's reload is its worst feature, and this mostly fixes it."
+  },
+  {
+   "id": "full-auto",
+   "name": "Full Auto",
+   "type": "Fire rate",
+   "effect": "Converts the CZ75 to fully automatic.",
+   "cost": "Damage drops from 40 to 30 and range falls sharply — the CZ75 goes from a 3-shot kill at 15.6m to a 3-shot kill at 5.6m.",
+   "verdict": "Looks like an upgrade and mostly isn't. The semi-auto CZ75 kills faster at any range you'd realistically use it."
+  },
+  {
+   "id": "upgraded-iron-sights",
+   "name": "Upgraded Iron Sights",
+   "type": "Optic",
+   "effect": "Cleaner iron sights with less screen obstruction.",
+   "cost": "None beyond the slot.",
+   "verdict": "Free clarity on guns whose stock irons are cluttered. Unglamorous and often the right pick."
+  }
+ ]
+}

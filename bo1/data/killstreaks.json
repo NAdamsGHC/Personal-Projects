@@ -1,0 +1,41 @@
+{
+ "source": "Call of Duty Wiki — Killstreak (Call of Duty: Black Ops section)",
+ "note": "All killstreaks are available for purchase at rank 10. Kills earned by a killstreak do not count towards the next one — every kill in the chain has to be yours.",
+ "profiles": [
+  {
+   "id": "default",
+   "name": "Default",
+   "streaks": ["Spy Plane", "Napalm Strike", "Attack Dogs"],
+   "note": "Your standing set-up. Spy Plane keeps information flowing early, Napalm punishes a held area, Dogs closes a game out."
+  },
+  {
+   "id": "support",
+   "name": "Support (3/4/5)",
+   "streaks": ["Spy Plane", "Counter-Spy Plane", "Care Package"],
+   "note": "Low, reliable, and information-led. You will earn all three most games, and Spy Plane into Counter-Spy Plane is the single best thing you can do for a team that keeps getting flanked."
+  },
+  {
+   "id": "assault",
+   "name": "Assault (8/9/11)",
+   "streaks": ["Blackbird", "Chopper Gunner", "Gunship"],
+   "note": "High ceiling, high variance. Needs eight kills in a life before anything pays out — take Hardline or expect to collect nothing on a bad night."
+  }
+ ],
+ "killstreaks": [
+  {"kills": 3, "name": "Spy Plane", "cost": "Default", "effect": "Enemy positions on the minimap, refreshing every 3–4 seconds for 45 seconds. Can be shot down. Does not detect Ghost users.", "tdm": "The best value in the game at any cost. Information wins TDM more reliably than damage."},
+  {"kills": 3, "name": "RC-XD", "cost": 1200, "effect": "Remote-controlled car with explosives. 30 seconds before it self-destructs.", "tdm": "Fun, and a free kill on a camped position — but you're stationary and helpless while driving it."},
+  {"kills": 4, "name": "Counter-Spy Plane", "cost": 1600, "effect": "Jams enemy radar. Can be shot down.", "tdm": "Badly underrated. Blinding the enemy is worth more than seeing them when your team is losing map control."},
+  {"kills": 4, "name": "SAM Turret", "cost": 1600, "effect": "Airdropped turret that targets all aerial killstreaks, infinite ammo.", "tdm": "Only if the lobby is running helicopters at you every game."},
+  {"kills": 5, "name": "Care Package", "cost": "Default", "effect": "Airdrops a random killstreak, ammo, a Death Machine or a Grim Reaper. Re-rollable with Hardline Pro, trappable with Hacker Pro.", "tdm": "A lottery ticket that also doubles as bait — enemies walk to the smoke, and you can be watching it."},
+  {"kills": 5, "name": "Napalm Strike", "cost": 2400, "effect": "Drops napalm on a designated area, leaving lingering fire.", "tdm": "Excellent on maps with a single obvious chokepoint or a spawn you can pin. The lingering burn denies ground long after the kills stop."},
+  {"kills": 6, "name": "Sentry Gun", "cost": 3200, "effect": "Airdropped placeable turret. Destroyed by any damage, and by a single stab.", "tdm": "Good for locking a flank you can't watch yourself. Place it facing the route you keep dying to."},
+  {"kills": 6, "name": "Mortar Team", "cost": 3200, "effect": "Bombards three chosen locations.", "tdm": "Blind damage. Best used on the enemy spawn immediately after a spawn flip."},
+  {"kills": 7, "name": "Attack Helicopter", "cost": "Default", "effect": "An AH-1 Cobra with flares. Cannot be controlled.", "tdm": "Fire and forget. Modest, but it costs you nothing to run and nothing to use."},
+  {"kills": 7, "name": "Valkyrie Rockets", "cost": 4000, "effect": "Two controllable missiles. Can shoot down other killstreaks.", "tdm": "Skill-rewarding but you're stationary and exposed for the duration."},
+  {"kills": 8, "name": "Blackbird", "cost": 4500, "effect": "Shows enemies AND the direction they are facing. Cannot be shot down. Ghost does not hide you from it.", "tdm": "The most decisive killstreak in the game. Direction-of-facing is what turns a flank from a guess into a certainty — and it's the one thing Ghost can't protect the enemy from."},
+  {"kills": 8, "name": "Rolling Thunder", "cost": 4500, "effect": "A B-52 carpet-bombs an ordered area.", "tdm": "Wide, dumb damage. Strong on maps where the enemy funnels into one half."},
+  {"kills": 9, "name": "Chopper Gunner", "cost": 5000, "effect": "Door gunner on a Huey circling the map. Enemies highlighted. One set of flares.", "tdm": "Big score swing, but you're a sitting duck on the ground the whole time it's up."},
+  {"kills": 11, "name": "Attack Dogs", "cost": 6000, "effect": "A pack of dogs that hunt enemies and kill in one hit. Replacements arrive for dogs killed.", "tdm": "The best 11 in the game, and unlike the Gunship you keep playing while it works. Wins close games outright."},
+  {"kills": 11, "name": "Gunship", "cost": 6000, "effect": "Pilot a Mi-24 Hind with rockets and a 12mm nose cannon.", "tdm": "Devastating when you get it. You will rarely get it."}
+ ]
+}

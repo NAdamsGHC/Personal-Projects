@@ -1,0 +1,668 @@
+{
+ "mode": "Team Deathmatch",
+ "source": {
+  "layout": "Call of Duty Wiki and callofdutymaps.com for structures, spawn ends and named locations.",
+  "tactics": "Synthesis from map geometry and community material — reasoned opinion, not citation. Written to be corrected: edit data/maps.json after you play.",
+  "confidence": "Layout and spawn ends: reliable. Specific angles and routes: good starting points, expect to refine."
+ },
+ "maps": [
+  {
+   "id": "nuketown",
+   "name": "Nuketown",
+   "size": "Tiny",
+   "identity": "Two houses staring at each other across a road. Everything is decided in about four seconds, and there is nowhere that isn't a sightline.",
+   "sides": [
+    {
+     "id": "yellow",
+     "name": "Yellow house",
+     "spawn": "Front lawn of the yellow house, at the mannequin end.",
+     "opening": "Do not cross the road. Go left along your own fence line and take the side lane — you arrive at their flank while the middle is still trading.",
+     "flank": "Down the outside of the yellow house, past the fence, into the gap beside their porch.",
+     "pinch": "The gap between the bus and the enemy porch. Everyone who takes this flank gets shot here, because the enemy upstairs window covers it. Look up before you commit."
+    },
+    {
+     "id": "green",
+     "name": "Green house",
+     "spawn": "Front lawn of the green house, at the truck end.",
+     "opening": "Right-hand side lane, behind the vehicles. Same principle — the middle is a coin flip and you don't need coin flips.",
+     "flank": "Along the truck side and into the yellow house's blind side.",
+     "pinch": "Coming around the truck into open lawn. Their spawn sees this the moment you clear the bonnet."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Your own upstairs window", "why": "Covers the entire middle and both vehicles. Unglamorous, and it wins games. You are looking at their approach instead of walking into it."},
+    {"name": "The side lane, one house back", "why": "You see anyone crossing the middle from the side, and nobody is behind you. Hold this and let them come."}
+   ],
+   "enemySpots": [
+    {"name": "Both upstairs windows", "note": "Assume one is occupied at all times."},
+    {"name": "Behind the bus", "note": "The single most common camping spot on the map."},
+    {"name": "The porch corner", "note": "Someone is always tucked against the wall of their own porch, watching the middle."}
+   ],
+   "trap": "Sprinting into the enemy house on your own. You'll get one or two kills, then the spawns flip behind you, your team is now at the far end, and you die facing the wrong way. On Nuketown, pushing into their house is how you lose your streak, not how you build it.",
+   "loadout": {
+    "weapon": "AKS-74U",
+    "weaponWhy": "3-shot kill to 19.5m covers the whole map, and 0.2s ADS wins the corner fights.",
+    "perk": "Flak Jacket",
+    "perkWhy": "The grenade traffic here is relentless. Half the deaths on Nuketown are explosive and this removes most of them."
+   },
+   "deeper": [
+    "Spawns flip faster here than on any other map. If you kill two people and everything goes quiet, the spawns have already moved — turn around.",
+    "Concussion grenades decide more fights than guns do. Tactical Mask Pro is a genuine counter, and it protects the thing you're best at.",
+    "Claymore behind you in the side lane means you can watch one direction properly instead of two badly."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Nuketown"
+  },
+  {
+   "id": "firing-range",
+   "name": "Firing Range",
+   "size": "Small",
+   "identity": "Three short lanes wrapped around an open middle, with one building that overlooks most of it. Fast, and it punishes running in a straight line.",
+   "sides": [
+    {
+     "id": "shed",
+     "name": "Shed end",
+     "spawn": "By the red shed and the low buildings at the southern end.",
+     "opening": "Straight to the two-storey building and get upstairs before it's contested. Whoever gets height first sets the terms of the whole game.",
+     "flank": "Around the outside past the shed and into the back of the open range.",
+     "pinch": "Stepping out of the shed lane into the open range. This is a long, clean sightline from the two-storey — if you lost the race to the building, do not cross here."
+    },
+    {
+     "id": "bunker",
+     "name": "Bunker end",
+     "spawn": "By the covered bunker and loading area at the northern end.",
+     "opening": "Take the covered walkway toward the middle, not the open ground. You reach the same place two seconds later and alive.",
+     "flank": "Wide around the garage side, coming out beside the two-storey rather than in front of it.",
+     "pinch": "The doorway into the garage. It's a single entrance covered from inside — never sprint through it."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Upstairs in the two-storey building", "why": "It overlooks the open middle and both main crossings. Control this and the enemy has to come to you across ground you can see."},
+    {"name": "The covered walkway beside the range", "why": "Concealed, central, and you can see people crossing the open ground without being part of it."}
+   ],
+   "enemySpots": [
+    {"name": "The two-storey windows", "note": "If you don't hold it, someone else does. Check it before every crossing."},
+    {"name": "Inside the garage", "note": "Sat in the dark watching the doorway. Grenade first."},
+    {"name": "The bunker mouth", "note": "Watching the middle from cover at the far end."}
+   ],
+   "trap": "Crossing the open middle at full sprint because it looks empty. It isn't empty — it's covered from the two-storey and from the far bunker, and you can't shoot back until you've stopped running. This one death will happen four times a game until you stop.",
+   "loadout": {
+    "weapon": "FAMAS",
+    "weaponWhy": "3-shot kill to 39.4m covers every sightline on this map, and 128ms TTK wins the trades.",
+    "perk": "Ghost",
+    "perkWhy": "Spy Planes go up constantly on a map this small, and the flanks here only work if they can't see you coming."
+   },
+   "deeper": [
+    "The two-storey is the map's pivot in every mode, not just TDM. If your team has it and you leave it to chase kills, you'll hand it back.",
+    "Motion Sensor at the bottom of the two-storey stairs turns your one weakness — not knowing who's behind you — into a solved problem.",
+    "If you're running a suppressor, remember the FAMAS drops to a 3-shot kill only inside 14m here. Across the open range that's a 4-shot kill and you will lose those fights."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range"
+  },
+  {
+   "id": "summit",
+   "name": "Summit",
+   "size": "Medium",
+   "identity": "A mountain research station built in a loop, with a central building, an outer catwalk, and real verticality. Fights come from above and behind more than anywhere else in the game.",
+   "sides": [
+    {
+     "id": "cablecar",
+     "name": "Cable car end",
+     "spawn": "Near the cable car and the tower.",
+     "opening": "Into the central building and hold the upper level. Don't take the cable car route first — it's the obvious move and it's watched.",
+     "flank": "Outside along the catwalk, coming into the enemy half from the exterior.",
+     "pinch": "The catwalk corner where it turns inward. Narrow, exposed, and covered from the central building's upper floor."
+    },
+    {
+     "id": "fan",
+     "name": "Fan end",
+     "spawn": "By the large industrial fan and the vents.",
+     "opening": "Push the interior corridor toward the centre. It's covered, short, and it gets you to the contested ground with your gun up.",
+     "flank": "Round the outside past the fan and up toward the tower side.",
+     "pinch": "The open snow between the fan and the central building. One clean sightline the length of it."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Upper level of the central building", "why": "It sees down into the middle and covers both main crossings. The map's high ground and its real objective in TDM."},
+    {"name": "The tower platform", "why": "Overhead view of a lot of the map. Hard to check and harder to clear, but you're static and eventually someone finds you."}
+   ],
+   "enemySpots": [
+    {"name": "The central building's upper windows", "note": "Always check up before crossing anything on this map."},
+    {"name": "The tower", "note": "Someone is up there most games and you will not see them from ground level."},
+    {"name": "The cable car", "note": "It swings visibly when occupied — that's a free tell if you look for it."}
+   ],
+   "trap": "Playing Summit like a flat map. Your deaths here come from above and from behind on the catwalk loop, not from in front. If you're being killed by people you never saw, you're not checking height and you're not checking the loop behind you.",
+   "loadout": {
+    "weapon": "Galil",
+    "weaponWhy": "3-shot kill out to 45.7m handles the longer interior sightlines that an SMG loses.",
+    "perk": "Ninja",
+    "perkWhy": "This is the map where hearing someone on the catwalk above or behind you is worth more than any stat. Get the Pro version."
+   },
+   "deeper": [
+    "The loop means there is no true back line. Anywhere you stand, someone can come round the other way — so pick spots with a wall behind you, not a corridor.",
+    "Verticality cuts both ways: holding height wins fights but makes you predictable. Take the upper level, get two kills, move.",
+    "This is the strongest map on the list for a Blackbird. Direction-of-facing on a loop map tells you exactly which way the enemy half is looking."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Summit"
+  },
+  {
+   "id": "radiation",
+   "name": "Radiation",
+   "size": "Medium",
+   "identity": "An industrial plant built around a big central structure, with tight outdoor lanes wrapping it. The middle is valuable and dangerous in equal measure.",
+   "sides": [
+    {
+     "id": "north",
+     "name": "North end",
+     "spawn": "The northern industrial end, near the pipework.",
+     "opening": "Take the side lane toward the centre and hold the entrance rather than the interior. Owning the doorway is safer than owning the room.",
+     "flank": "Around the outside along the pipes into the far side of the central structure.",
+     "pinch": "The gap in the pipework where the outer lane narrows. Single file, no cover, and easily watched."
+    },
+    {
+     "id": "south",
+     "name": "South end",
+     "spawn": "The southern yard end.",
+     "opening": "Up the covered side into the central structure's lower level, then hold the ramp.",
+     "flank": "Wide along the outer wall and into the enemy's approach lane.",
+     "pinch": "The ramp entrance. Everyone funnels here and it's the most contested metre of the map."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Upper level of the central structure", "why": "Sees both approach lanes and most of the middle. Whoever holds it doesn't have to guess."},
+    {"name": "The outer lane corner overlooking the yard", "why": "Quiet, off the main traffic, and it catches everyone rotating between the middle and the flanks."}
+   ],
+   "enemySpots": [
+    {"name": "Inside the central structure, watching a doorway", "note": "The interior favours whoever is already still."},
+    {"name": "The pipework on the outer lane", "note": "Good concealment, and a common ambush spot for flankers."},
+    {"name": "The elevated corner overlooking the yard", "note": "Long, clean angle on anyone crossing the open ground."}
+   ],
+   "trap": "Charging into the central structure through the front. Interiors reward the person already standing still with their gun up — that is never the person who just sprinted through the door. Take the middle from the side or don't take it.",
+   "loadout": {
+    "weapon": "Commando",
+    "weaponWhy": "3-shot to 45.7m with good handling — the flexible pick for a map that mixes interior fights with outdoor lanes.",
+    "perk": "Ghost",
+    "perkWhy": "The outer lanes are only survivable if you aren't broadcasting yourself on their minimap."
+   },
+   "deeper": [
+    "The industrial clutter is genuinely good concealment. Standing still against machinery here works far better than it should.",
+    "This is a map where a Sentry Gun facing your unwatched flank buys you the freedom to look one way.",
+    "Napalm on the central structure entrance is close to unfair — it's a chokepoint with limited exits."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Radiation"
+  },
+  {
+   "id": "jungle",
+   "name": "Jungle",
+   "size": "Medium",
+   "identity": "Dense foliage, poor sightlines, and a raised centre. The most flank-heavy map in the game — you will be shot from directions you didn't know existed.",
+   "sides": [
+    {
+     "id": "camp",
+     "name": "Camp end",
+     "spawn": "Near the huts and the camp structures.",
+     "opening": "Move to the raised centre through cover, but stop short and hold the approach. The centre is a magnet and magnets get grenaded.",
+     "flank": "Through the low undergrowth on the outside, slow, staying off the paths.",
+     "pinch": "The stream crossing. Open, low, and overlooked from the higher ground on both sides."
+    },
+    {
+     "id": "ruins",
+     "name": "Ruins end",
+     "spawn": "The ruins and broken structures at the far end.",
+     "opening": "Up the side toward the high ground, hugging cover the whole way.",
+     "flank": "Wide through the trees on the outer edge, into their half from behind.",
+     "pinch": "The gap between the treeline and the ruins. Short, but it's the only way through and everyone knows it."
+    }
+   ],
+   "powerPositions": [
+    {"name": "The raised centre", "why": "Height plus cover, seeing down into most of the traffic. Valuable and heavily contested — take it, don't live in it."},
+    {"name": "A concealed spot off the main paths", "why": "On a map with this much foliage, being still and unseen beside a route is worth more than any position on it."}
+   ],
+   "enemySpots": [
+    {"name": "The high ground in the middle", "note": "Assume it's held every time you approach."},
+    {"name": "Prone in the undergrowth", "note": "Jungle is the map where prone players are genuinely invisible until they fire."},
+    {"name": "The hut interiors", "note": "Dark, enclosed, and covering the obvious approach."}
+   ],
+   "trap": "Sprinting between cover on a map where enemies are invisible until 10 metres. Every flank route here is also their flank route, and you'll meet someone head-on while running. Move in short bursts and stop with your gun up — this map rewards patience more than any other on the list.",
+   "loadout": {
+    "weapon": "AK-47",
+    "weaponWhy": "3-shot to 45.7m and high damage for a map where you often get one burst through a gap. Run a Grip.",
+    "perk": "Ninja",
+    "perkWhy": "Visibility is so poor here that sound is your primary sensor. Ninja Pro doubles as detection."
+   },
+   "deeper": [
+    "Foliage blocks your view, not bullets. If you see a muzzle flash in a bush, shoot the bush.",
+    "This is the best map on the list for Motion Sensors — you cannot see flanks coming, so let equipment do it.",
+    "A suppressor is worth more here than almost anywhere, because engagements are short-range anyway and staying off the minimap on a flank-heavy map is the whole game."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle"
+  },
+  {
+   "id": "hanoi",
+   "name": "Hanoi",
+   "size": "Medium",
+   "identity": "A prison compound with a long exterior lane down one side and a warren of interior rooms on the other. Two completely different games depending which half you're in.",
+   "sides": [
+    {
+     "id": "courtyard",
+     "name": "Courtyard end",
+     "spawn": "The open courtyard end of the compound.",
+     "opening": "Go interior immediately. The long exterior lane is a shooting gallery in the first fifteen seconds and there is nothing there worth dying for.",
+     "flank": "Through the interior corridors and out into the far side of the courtyard.",
+     "pinch": "The doorway from the interior into the courtyard. It's the obvious exit and it's covered from the far end."
+    },
+    {
+     "id": "interior",
+     "name": "Interior end",
+     "spawn": "The building end, among the rooms and corridors.",
+     "opening": "Hold your side of the interior and let them come to you through the corridors — you know the room, they don't.",
+     "flank": "Along the outer wall toward the courtyard side.",
+     "pinch": "The corner where the outer lane meets the courtyard. Wide open for a fraction of a second, and that's enough."
+    }
+   ],
+   "powerPositions": [
+    {"name": "The interior overlooking the courtyard", "why": "You see the open ground without standing in it, and you have walls and exits behind you."},
+    {"name": "The far end of the long lane, in cover", "why": "It's the longest sightline on the map. If you're holding it, nobody crosses."}
+   ],
+   "enemySpots": [
+    {"name": "The far end of the long lane", "note": "Someone is watching it. Always."},
+    {"name": "Interior room corners", "note": "The rooms are small enough that whoever is already inside wins."},
+    {"name": "The courtyard edges", "note": "Tucked against cover, watching the interior doorways."}
+   ],
+   "trap": "The long lane. It looks like the fast route between the two ends and it's the most reliably fatal piece of ground on the map. If you find yourself sprinting down it, you have already made the mistake — the interior gets you to the same place.",
+   "loadout": {
+    "weapon": "MP5K",
+    "weaponWhy": "3-shot to 21m and fast ADS for the interior fights, which is where you should be spending your time.",
+    "perk": "Hardened",
+    "perkWhy": "The interior has thin walls and a lot of prefire. Penetration plus reduced flinch wins the close trades you'll be in."
+   },
+   "deeper": [
+    "Pick a half and commit. Players who oscillate between the interior and the lane die in the transition every time.",
+    "The interior is a genuine advantage for a good gunfighter — small rooms, short angles, no long-range disadvantage. Play to that.",
+    "A claymore in the corridor behind you converts your worst weakness into a warning system."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi"
+  },
+  {
+   "id": "havana",
+   "name": "Havana",
+   "size": "Medium",
+   "identity": "A Cuban street with one long central road, buildings and interiors on both sides, and alleys connecting them. The street is the trap and the buildings are the game.",
+   "sides": [
+    {
+     "id": "market",
+     "name": "Market end",
+     "spawn": "The market end of the street.",
+     "opening": "Straight into the buildings on your left. Do not touch the street until you know where their long-range player is.",
+     "flank": "Through the interiors and out into the alleys behind their side.",
+     "pinch": "Every alley mouth onto the main street. You cross one metre of open road and someone at the far end sees all of it."
+    },
+    {
+     "id": "bar",
+     "name": "Bar end",
+     "spawn": "The bar and club end.",
+     "opening": "Into the bar interior and hold the windows onto the street — you get the sightline without being in it.",
+     "flank": "Along the back alleys parallel to the street, into their half.",
+     "pinch": "The alley exit into the plaza. Short, but overlooked from windows on both sides."
+    }
+   ],
+   "powerPositions": [
+    {"name": "A window overlooking the street", "why": "You get the map's dominant sightline with a wall around you. This is the correct way to use the street."},
+    {"name": "The interior route parallel to the street", "why": "Gets you the length of the map in safety and comes out behind their line."}
+   ],
+   "enemySpots": [
+    {"name": "The far end of the main street", "note": "The classic Havana angle. Someone is holding it in every single game."},
+    {"name": "Interior windows above the street", "note": "Check high on both sides before you cross."},
+    {"name": "The plaza corners", "note": "Cover-hugging players watching alley exits."}
+   ],
+   "trap": "The main street. It is the most direct route and it is covered end to end from both directions and from above. You will die here repeatedly, and every one of those deaths is avoidable by taking an interior.",
+   "loadout": {
+    "weapon": "M16",
+    "weaponWhy": "3-shot burst kill out to 58.4m — the longest reach on the list, and Havana's street is where reach pays.",
+    "perk": "Ghost",
+    "perkWhy": "The interior flank is the whole strategy, and it only works if you're not on their minimap while you do it."
+   },
+   "deeper": [
+    "If you insist on a suppressor here, know the cost: it takes the M16 from a 3-shot kill at 58.4m down to 26.4m. On this street that is the difference between winning and trading.",
+    "Havana rewards patience at range more than any small map. If your gun can't reach, don't take fights in the open.",
+    "Spawns run along the length of the street, so pushing too deep flips them behind you and puts you in the open lane you were avoiding."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Havana"
+  },
+  {
+   "id": "grid",
+   "name": "Grid",
+   "size": "Medium",
+   "identity": "A symmetrical Soviet installation built around a central dish area, with mirrored buildings either side. Symmetry means whatever you're thinking, they're thinking too.",
+   "sides": [
+    {
+     "id": "east",
+     "name": "East end",
+     "spawn": "The eastern buildings.",
+     "opening": "Into your side building and up, taking the angle onto the centre rather than entering it.",
+     "flank": "Round the outside edge into their building's blind side.",
+     "pinch": "The open ground beside the central dish. Symmetrical maps mean this is covered from a mirrored position you can predict."
+    },
+    {
+     "id": "west",
+     "name": "West end",
+     "spawn": "The western buildings.",
+     "opening": "Same in mirror — your building first, height second, centre third.",
+     "flank": "Along the outer path toward their side.",
+     "pinch": "The gap between the outer path and the central area. One step of exposure, watched from the middle."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Elevated inside your side building", "why": "You cover the centre and your own approach at once, with a short retreat behind you."},
+    {"name": "The outer path midway", "why": "Catches rotations and flankers, and it's off the main traffic that the centre generates."}
+   ],
+   "enemySpots": [
+    {"name": "The mirrored position to yours", "note": "On a symmetrical map, the fastest way to find enemies is to ask where you would be."},
+    {"name": "The central dish area", "note": "Contested constantly, so someone is usually holding an angle on it."},
+    {"name": "Building windows overlooking the middle", "note": "Check both sides — they mirror."}
+   ],
+   "trap": "Contesting the centre first. On a symmetrical map both teams reach the middle at the same time from equivalent positions, so it's a coin flip — and you don't need coin flips, you need angles. Take height on your side, let them walk into the middle, then shoot them in it.",
+   "loadout": {
+    "weapon": "Galil",
+    "weaponWhy": "3-shot to 45.7m covers the mirrored sightlines without giving up close-range viability.",
+    "perk": "Sleight of Hand",
+    "perkWhy": "Symmetrical maps generate a lot of first-shot races at medium range. Faster ADS wins those."
+   },
+   "deeper": [
+    "Use the symmetry deliberately: when you die, note where the shot came from, then go stand in the equivalent spot on your side.",
+    "Spawns are stable here compared with Nuketown, so map control actually holds. That makes patience unusually profitable.",
+    "The centre is where the kills happen but the buildings are where the kills are earned."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Grid"
+  },
+  {
+   "id": "array",
+   "name": "Array",
+   "size": "Large",
+   "identity": "The biggest base map — open snow, radar dishes, and long sightlines with a bunker complex in the middle. Distances here are beyond most guns' effective range.",
+   "sides": [
+    {
+     "id": "dishes",
+     "name": "Dish end",
+     "spawn": "Near the radar dishes.",
+     "opening": "Hug the structures and work toward the middle in cover. Crossing open snow at the start of an Array game is how you donate a kill.",
+     "flank": "Along the outer edge using the dish structures as cover, into their half.",
+     "pinch": "The last stretch of open ground before the central bunker. Long, exposed, and covered by anyone with a scope."
+    },
+    {
+     "id": "bunker",
+     "name": "Bunker end",
+     "spawn": "The bunker and vehicle end.",
+     "opening": "Into the central complex through cover, then hold an angle out rather than pushing further.",
+     "flank": "Wide round the outside, slow, using terrain.",
+     "pinch": "The open approach to the dishes. There is no cover for a long stretch and it's the map's classic sniping lane."
+    }
+   ],
+   "powerPositions": [
+    {"name": "The central complex", "why": "It connects everything and it's the only part of the map where you're not exposed to a long shot."},
+    {"name": "An elevated position with a long lane", "why": "On a map this size, a gun that reaches plus an angle that's covered is worth more than mobility."}
+   ],
+   "enemySpots": [
+    {"name": "Anywhere with a long sightline", "note": "Array is the sniping map of the base 14. Assume every long lane is watched."},
+    {"name": "The central complex interiors", "note": "Contested and enclosed — the one place SMGs work."},
+    {"name": "Behind the dish structures", "note": "Cover with a view across the open ground."}
+   ],
+   "trap": "Bringing your usual close-range class and your usual pace. On Array, sprinting across open snow with an SMG is a death sentence you'll repeat all game. This is the one map on the list where you should slow down deliberately and take a gun that reaches.",
+   "loadout": {
+    "weapon": "M16",
+    "weaponWhy": "58.4m of 3-shot kill range, the longest on the list. On Array, range beats fire rate.",
+    "perk": "Ghost",
+    "perkWhy": "Large maps mean long rotations, and being invisible for a long flank is worth more the further you have to walk."
+   },
+   "deeper": [
+    "Do not run a suppressor here. Cutting your max-damage range by two-thirds on the biggest map in the game is self-sabotage.",
+    "Array is where Blackbird pays most — long rotations mean knowing which way people face saves you an entire flank's worth of guessing.",
+    "If your team has the central complex, the game is effectively won. It's the only route that isn't exposed."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Array"
+  },
+  {
+   "id": "wmd",
+   "name": "WMD",
+   "size": "Large",
+   "identity": "Three lanes through a snowed-in Russian lab, built around a central building with a second floor. Real verticality — silos to the east, a multi-storey to the west, and catwalks over the top.",
+   "sides": [
+    {
+     "id": "east",
+     "name": "East (silos)",
+     "spawn": "The eastern limit, near the large silos.",
+     "opening": "Get to the second floor of the central building. That is the game — everything else is negotiating for it.",
+     "flank": "North through the narrow alley beside the main building into their half.",
+     "pinch": "The alley exit into the western side. Narrow, single-file, and covered from the multi-storey."
+    },
+    {
+     "id": "west",
+     "name": "West (warehouse)",
+     "spawn": "The western limit, beside the warehouse.",
+     "opening": "Into the central building's lower level and up, or take the catwalks if the middle is already contested.",
+     "flank": "The wider northern passage into the silo side.",
+     "pinch": "Coming out of the northern passage into open ground under the silos. Overlooked from height on the east."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Second floor of the central building", "why": "You were right about this one. It overlooks all three lanes and it's the pivot of the entire map. Hold it and the enemy has no safe rotation."},
+    {"name": "The catwalks", "why": "Height over the middle with multiple exits. Strong, but exposed from the silos — take a look, take a kill, move."}
+   ],
+   "enemySpots": [
+    {"name": "The silos on the east", "note": "Elevated and covering the open middle. Check them before crossing."},
+    {"name": "The second floor windows", "note": "If you don't hold the centre, expect fire from it."},
+    {"name": "The western multi-storey", "note": "The mirror of the silos, covering the same ground from the other side."}
+   ],
+   "trap": "Crossing the middle at ground level while the centre is contested. WMD's verticality means at any moment you're visible from the silos, the second floor and the catwalks simultaneously — three angles you can't all watch. Take a lane and stay in it until the centre is settled.",
+   "loadout": {
+    "weapon": "Commando",
+    "weaponWhy": "3-shot to 45.7m with manageable recoil — WMD's lanes are long enough to punish an SMG but not so long you need an M16.",
+    "perk": "Ghost",
+    "perkWhy": "Three lanes means the flank is always available. It only works if they can't see you take it."
+   },
+   "deeper": [
+    "The extended northern lane gives you both a narrow alley and a wider passage. The alley is faster and far more dangerous.",
+    "Verticality is the whole map. Before you cross anything, look up — most WMD deaths come from above.",
+    "Napalm on the central building's entrance denies the map's most valuable ground for a long time."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)"
+  },
+  {
+   "id": "launch",
+   "name": "Launch",
+   "size": "Large",
+   "identity": "A rocket facility with a big open pad in the middle and structures around the edge. The rocket launches mid-game and changes the middle while it does.",
+   "sides": [
+    {
+     "id": "control",
+     "name": "Control end",
+     "spawn": "By the control buildings.",
+     "opening": "Work the building side toward the middle. The open pad is not a route, it's a hazard.",
+     "flank": "Through the side structures into their half, staying under cover.",
+     "pinch": "Stepping onto the pad from the building side. Long open ground, covered from height on both ends."
+    },
+    {
+     "id": "pad",
+     "name": "Pad end",
+     "spawn": "The far end near the launch structures.",
+     "opening": "Up into the structures and take an angle over the middle instead of crossing it.",
+     "flank": "Round the outside past the support buildings.",
+     "pinch": "The gap between the structures and the pad — brief exposure with clean sightlines on both sides."
+    }
+   ],
+   "powerPositions": [
+    {"name": "Elevated in the structures overlooking the pad", "why": "You own the map's main open space without standing in it."},
+    {"name": "The interior routes around the edge", "why": "They connect the ends without exposure, which is the whole problem Launch poses."}
+   ],
+   "enemySpots": [
+    {"name": "Elevated positions over the pad", "note": "Both ends have them and both are usually occupied."},
+    {"name": "The building interiors", "note": "Short angles, whoever is inside has the advantage."},
+    {"name": "Corners of the open middle", "note": "Players holding the edge of the pad rather than crossing it — which is the correct play, and you should copy it."}
+   ],
+   "trap": "The open pad. It's the shortest line between the two ends and it's covered from height at both. When the rocket launches, the noise and visual chaos tempt everyone into moving — that's the moment you're most likely to get caught in the open.",
+   "loadout": {
+    "weapon": "Galil",
+    "weaponWhy": "45.7m of 3-shot range handles the medium-long lanes without being useless in the buildings.",
+    "perk": "Hardened",
+    "perkWhy": "A lot of Launch fights are through thin structures and at range where flinch decides the trade."
+   },
+   "deeper": [
+    "Treat the launch itself as a timed event — decide in advance where you'll be standing when it happens, and don't be crossing open ground.",
+    "The edge routes are slower and dramatically safer. On a map this size the two seconds you save are never worth it.",
+    "Long rotations make this another strong Blackbird map."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Launch"
+  },
+  {
+   "id": "villa",
+   "name": "Villa",
+   "size": "Medium",
+   "identity": "A hillside villa complex on several levels, full of small rooms, staircases and courtyards. Enclosed, vertical and genuinely confusing.",
+   "sides": [
+    {
+     "id": "lower",
+     "name": "Lower end",
+     "spawn": "The lower terraces.",
+     "opening": "Work upward through cover. Fighting uphill on Villa is a disadvantage and the first thirty seconds decide who's doing it.",
+     "flank": "Round the side stairs into the upper courtyards.",
+     "pinch": "The staircases. Enclosed, single-file, and impossible to fight out of — never take one at a sprint."
+    },
+    {
+     "id": "upper",
+     "name": "Upper end",
+     "spawn": "The upper courtyards.",
+     "opening": "Hold the high ground and the stair heads. You have the advantage — don't give it away by pushing down.",
+     "flank": "Down the outer path and into their lower approach.",
+     "pinch": "The courtyard entrances. Multiple doorways onto the same space, and you can't watch them all."
+    }
+   ],
+   "powerPositions": [
+    {"name": "The upper courtyards", "why": "Height, cover, and the enemy has to climb to reach you. The clearest positional advantage on any map in the list."},
+    {"name": "A stair head", "why": "You see everyone coming up before they see you, and you can back off into a room."}
+   ],
+   "enemySpots": [
+    {"name": "The top of every staircase", "note": "The default camping spot, and a good one."},
+    {"name": "Small room corners", "note": "Villa's rooms are tight enough that entering one blind is a coin flip."},
+    {"name": "The courtyard overlooks", "note": "Windows and balconies onto the open courtyards."}
+   ],
+   "trap": "Sprinting up stairs and through doorways. Villa is wall-to-wall blind corners and the person standing still always wins them. This is the map where your rushing habit costs you most — every death will be to someone who heard you coming and was already aimed at the doorway.",
+   "loadout": {
+    "weapon": "AKS-74U",
+    "weaponWhy": "Fast ADS and a 3-shot kill to 19.5m — Villa's fights are almost all inside that range.",
+    "perk": "Ninja",
+    "perkWhy": "On a map this enclosed, footsteps are the primary source of information in both directions. Pro is close to mandatory here."
+   },
+   "deeper": [
+    "Clear corners with your gun already up, not by walking into the room. Villa punishes momentum harder than any other map.",
+    "The verticality means grenades roll downhill in your favour if you're above and against you if you're below.",
+    "If you're lost, go up. The upper ground is both safer and more useful."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Villa"
+  },
+  {
+   "id": "crisis",
+   "name": "Crisis",
+   "size": "Medium",
+   "identity": "A beachside missile base — open sand on one flank, a building complex through the middle, and structures on the other side. One half is exposed and one half is a knife fight.",
+   "sides": [
+    {
+     "id": "beach",
+     "name": "Beach end",
+     "spawn": "Toward the beach and the open sand.",
+     "opening": "Move inland into the complex. The beach flank looks inviting and it has no cover worth the name.",
+     "flank": "Along the sand only if you know their long-range player is occupied — otherwise through the buildings.",
+     "pinch": "The open sand between cover. It's the longest uninterrupted sightline on the map."
+    },
+    {
+     "id": "base",
+     "name": "Base end",
+     "spawn": "The base structures end.",
+     "opening": "Through the interior route toward the middle complex and hold an entrance.",
+     "flank": "Round the structure side into their approach.",
+     "pinch": "The doorway from the structures onto the open ground. Watched from the far side of the sand."
+    }
+   ],
+   "powerPositions": [
+    {"name": "The central building complex", "why": "It links both flanks, and it's the only ground you can hold without being exposed to the beach lane."},
+    {"name": "Cover overlooking the sand", "why": "The beach is a killing field for whoever holds an angle on it. Be that person rather than the one crossing."}
+   ],
+   "enemySpots": [
+    {"name": "Overlooking the beach", "note": "Someone always holds this angle. It's too good not to."},
+    {"name": "Inside the central complex", "note": "Short interior fights, advantage to whoever is already set."},
+    {"name": "The structure rooftops and elevations", "note": "Check height on the base side."}
+   ],
+   "trap": "The beach. It is wide, bright, and completely covered — and it looks like a flank route because it's empty. It's empty because everyone who tries it dies there.",
+   "loadout": {
+    "weapon": "FAMAS",
+    "weaponWhy": "39.4m of 3-shot range and a 128ms TTK — enough reach for the open half, fast enough for the interiors.",
+    "perk": "Ghost",
+    "perkWhy": "The interior flank through the complex is the good route, and it needs you off the minimap."
+   },
+   "deeper": [
+    "Crisis effectively has two games running at once. Decide which one you're playing before you spawn in, and take the loadout for it.",
+    "The complex in the middle is the connective tissue — losing it means every rotation goes across open ground.",
+    "Smoke genuinely works on the open half if your team needs to cross."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Crisis"
+  },
+  {
+   "id": "cracked",
+   "name": "Cracked",
+   "size": "Medium",
+   "identity": "Bombed-out urban blocks with a street through the middle and buildings you can fight through and above. Multi-level, cluttered, and full of angles.",
+   "sides": [
+    {
+     "id": "north",
+     "name": "North end",
+     "spawn": "The northern block.",
+     "opening": "Into the buildings, get up a level, and take an angle onto the street rather than walking down it.",
+     "flank": "Through the interiors parallel to the street into their block.",
+     "pinch": "Every street crossing. The rubble gives partial cover which is worse than none — it makes you feel safe while you're visible."
+    },
+    {
+     "id": "south",
+     "name": "South end",
+     "spawn": "The southern block.",
+     "opening": "Up into your buildings first, then work toward the middle from height.",
+     "flank": "Along the back of the buildings into their half.",
+     "pinch": "The gap between blocks. Short, overlooked from upper floors on both sides."
+    }
+   ],
+   "powerPositions": [
+    {"name": "An upper floor overlooking the street", "why": "You get the map's main sightline with cover and an exit. This is the correct way to play Cracked."},
+    {"name": "The interior route parallel to the street", "why": "Moves you the length of the map without ever crossing the open middle."}
+   ],
+   "enemySpots": [
+    {"name": "Upper floors and windows", "note": "Cracked is a look-up map. Most of the deaths come from above street level."},
+    {"name": "The rubble in the street", "note": "Prone and partially hidden, covering the crossing."},
+    {"name": "Interior stairwells", "note": "Watching the only way up."}
+   ],
+   "trap": "Fighting at street level. The street is overlooked from every upper floor on both sides, and the rubble that looks like cover only conceals you from the ground. If you keep dying to shots you didn't see, you are standing in the street and they are standing above it.",
+   "loadout": {
+    "weapon": "FAMAS",
+    "weaponWhy": "Fast, accurate, and 39.4m of 3-shot range covers street length and interior fights alike.",
+    "perk": "Ninja",
+    "perkWhy": "Multi-level buildings mean enemies are constantly above or below you. Footstep information is the difference between clearing a floor and dying on the stairs."
+   },
+   "deeper": [
+    "Vertical clearing discipline: when you enter a building, decide whether you're going up or holding the ground floor. Doing both gets you caught on the stairs.",
+    "The street is bait. It is the fastest route and the most watched ground.",
+    "A claymore on the stairwell behind you buys the freedom to watch one direction properly."
+   ],
+   "diagram": null,
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked"
+  }
+ ]
+}

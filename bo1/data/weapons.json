@@ -1,0 +1,3886 @@
+{
+ "game": "Call of Duty: Black Ops (2010) — PS5 port",
+ "source": {
+  "stats": "Black Ops Weapon Stats by Marvel4 (community datamine)",
+  "unlockLevels": "bosslobbies.com BO1 weapon list",
+  "note": "Stats are datamined from the original PC build, not published by Treyarch. The PS5 release is a straight port, so they should hold."
+ },
+ "units": {
+  "range": "metres",
+  "ttk": "seconds",
+  "health": 100
+ },
+ "weapons": [
+  {
+   "name": "M16",
+   "baseName": "M16",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 50.8,
+    "minM": 63.5
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 459.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": 3,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.03,
+    "empty": 2.36
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 58.4,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.392
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.392
+   },
+   "suppressed": {
+    "rangeMaxM": 20.3,
+    "rangeMinM": 30.5,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 26.4,
+      "beyond": false,
+      "ttk": 0.128
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.392
+     }
+    ]
+   }
+  },
+  {
+   "name": "Enfield",
+   "baseName": "Enfield",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 5,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 35.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.45,
+    "empty": 3.0
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 39.4,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.24
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.24
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 14.0,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.24
+     }
+    ]
+   }
+  },
+  {
+   "name": "M14",
+   "baseName": "M14",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 9,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 50.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 2,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.5,
+    "neck": 1.5,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.4,
+    "empty": 3.45
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 38.1,
+     "beyond": false,
+     "ttk": 0.096
+    },
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.192
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.096,
+    "far": 0.192
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": 12.7,
+      "beyond": false,
+      "ttk": 0.096
+     },
+     {
+      "shots": 3,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.192
+     }
+    ]
+   }
+  },
+  {
+   "name": "FAMAS",
+   "baseName": "FAMAS",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 14,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 35.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.35,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.5,
+    "empty": 3.3
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 39.4,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.192
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.192
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 14.0,
+      "beyond": false,
+      "ttk": 0.128
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.192
+     }
+    ]
+   }
+  },
+  {
+   "name": "Galil",
+   "baseName": "Galil",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 20,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 35.0,
+   "ammoMax": 280.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.8,
+    "empty": 3.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 45.7,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.24
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.24
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 20.3,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.24
+     }
+    ]
+   }
+  },
+  {
+   "name": "AUG",
+   "baseName": "AUG",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 26,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 35.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.6,
+    "empty": 3.05
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 39.4,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.192
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.192
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 14.0,
+      "beyond": false,
+      "ttk": 0.128
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.192
+     }
+    ]
+   }
+  },
+  {
+   "name": "FAL",
+   "baseName": "FAL",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 32,
+   "classified": false,
+   "aliases": [
+    "FN FAL"
+   ],
+   "damage": {
+    "max": 50.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 2,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.5,
+    "empty": 3.1
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 38.1,
+     "beyond": false,
+     "ttk": 0.096
+    },
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.192
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.096,
+    "far": 0.192
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": 12.7,
+      "beyond": false,
+      "ttk": 0.096
+     },
+     {
+      "shots": 3,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.192
+     }
+    ]
+   }
+  },
+  {
+   "name": "AK-47",
+   "baseName": "AK-47",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 38,
+   "classified": false,
+   "aliases": [
+    "AK47"
+   ],
+   "damage": {
+    "max": 40.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.5,
+    "empty": 3.25
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 45.7,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.24
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.24
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 20.3,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.24
+     }
+    ]
+   }
+  },
+  {
+   "name": "Commando",
+   "baseName": "Commando",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 44,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.05,
+    "empty": 2.55
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 45.7,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.24
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.24
+   },
+   "suppressed": {
+    "rangeMaxM": 12.7,
+    "rangeMinM": 25.4,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 20.3,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.24
+     }
+    ]
+   }
+  },
+  {
+   "name": "G11",
+   "baseName": "G11",
+   "variant": null,
+   "class": "AR",
+   "depth": "full",
+   "unlockLevel": 44,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 35.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 523.0,
+   "fireTime": 0.048,
+   "rapidFireRpm": null,
+   "burst": 3,
+   "mag": 48.0,
+   "ammoMax": 384.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.7,
+    "empty": 3.85
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 39.4,
+     "beyond": false,
+     "ttk": 0.096
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.344
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.096,
+    "far": 0.344
+   }
+  },
+  {
+   "name": "MP5K",
+   "baseName": "MP5K",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": 1000.0,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.9,
+    "empty": 3.2
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 21.0,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": 23.8,
+     "beyond": false,
+     "ttk": 0.24
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.32
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.32
+   },
+   "rapidFire": {
+    "rpm": 1000.0,
+    "ttkClose": 0.12
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 11.6,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": 15.5,
+      "beyond": false,
+      "ttk": 0.24
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.32
+     }
+    ]
+   }
+  },
+  {
+   "name": "Skorpion",
+   "baseName": "Skorpion",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 7,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 50.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 5.1,
+    "minM": 10.2
+   },
+   "stk": {
+    "close": 2,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": 1000.0,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.35,
+    "empty": 3.2
+   },
+   "sprintOut": 0.35,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 5.1,
+     "beyond": false,
+     "ttk": 0.08
+    },
+    {
+     "shots": 3,
+     "toM": 7.8,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": 9.3,
+     "beyond": false,
+     "ttk": 0.24
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.32
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.08,
+    "far": 0.32
+   },
+   "rapidFire": {
+    "rpm": 1000.0,
+    "ttkClose": 0.06
+   },
+   "suppressed": {
+    "rangeMaxM": 2.5,
+    "rangeMinM": 7.6,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": 2.5,
+      "beyond": false,
+      "ttk": 0.08
+     },
+     {
+      "shots": 3,
+      "toM": 5.2,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": 6.8,
+      "beyond": false,
+      "ttk": 0.24
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.32
+     }
+    ]
+   }
+  },
+  {
+   "name": "Skorpion DW",
+   "baseName": "Skorpion",
+   "variant": "dual-wield",
+   "class": "SMG",
+   "depth": "brief",
+   "unlockLevel": 7,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 12.7,
+    "minM": 19.1
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 320.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 2.6,
+    "empty": 2.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 14.6,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": 17.4,
+     "beyond": false,
+     "ttk": 0.24
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.32
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.32
+   }
+  },
+  {
+   "name": "MAC-11",
+   "baseName": "MAC-11",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 11,
+   "classified": false,
+   "aliases": [
+    "MAC11"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.0,
+    "empty": 2.67
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 13.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "MAC-11 DW",
+   "baseName": "MAC-11",
+   "variant": "dual-wield",
+   "class": "SMG",
+   "depth": "brief",
+   "unlockLevel": 11,
+   "classified": false,
+   "aliases": [
+    "MAC11"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 320.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 2.43,
+    "empty": 2.67
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "AKS-74U",
+   "baseName": "AKS-74U",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 17,
+   "classified": false,
+   "aliases": [
+    "AK74u",
+    "AK-74u",
+    "AKS74u"
+   ],
+   "damage": {
+    "max": 35.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": 1000.0,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.1,
+    "empty": 2.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 19.5,
+     "beyond": false,
+     "ttk": 0.16
+    },
+    {
+     "shots": 4,
+     "toM": 23.3,
+     "beyond": false,
+     "ttk": 0.24
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.32
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.32
+   },
+   "rapidFire": {
+    "rpm": 1000.0,
+    "ttkClose": 0.12
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 9.5,
+      "beyond": false,
+      "ttk": 0.16
+     },
+     {
+      "shots": 4,
+      "toM": 14.8,
+      "beyond": false,
+      "ttk": 0.24
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.32
+     }
+    ]
+   }
+  },
+  {
+   "name": "Uzi",
+   "baseName": "Uzi",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 23,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 32.0,
+   "ammoMax": 256.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.4,
+    "empty": 3.25
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 13.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "PM-63",
+   "baseName": "PM-63",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 29,
+   "classified": false,
+   "aliases": [
+    "PM63"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.05,
+    "empty": 2.85
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   }
+  },
+  {
+   "name": "PM-63 DW",
+   "baseName": "PM-63",
+   "variant": "dual-wield",
+   "class": "SMG",
+   "depth": "brief",
+   "unlockLevel": 29,
+   "classified": false,
+   "aliases": [
+    "PM63"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 320.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 2.0,
+    "empty": 2.5
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "MPL",
+   "baseName": "MPL",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 35,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 32.0,
+   "ammoMax": 256.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.25,
+    "empty": 3.0
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 13.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "Spectre",
+   "baseName": "Spectre",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 41,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.3,
+    "empty": 3.0
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 13.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "Kiparis",
+   "baseName": "Kiparis",
+   "variant": null,
+   "class": "SMG",
+   "depth": "full",
+   "unlockLevel": 41,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": 1250.0,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 160.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 2.1,
+    "empty": 2.65
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   },
+   "rapidFire": {
+    "rpm": 1250.0,
+    "ttkClose": 0.144
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 17.8,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 13.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "Kiparis DW",
+   "baseName": "Kiparis",
+   "variant": "dual-wield",
+   "class": "SMG",
+   "depth": "brief",
+   "unlockLevel": 41,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 19.1,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 20.0,
+   "ammoMax": 320.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 2.1,
+    "empty": 2.65
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 22.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "HK21",
+   "baseName": "HK21",
+   "variant": null,
+   "class": "LMG",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.35,
+   "movementSpeed": 0.875,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.75,
+    "empty": 4.75
+   },
+   "sprintOut": 0.45,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.16
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.16
+   }
+  },
+  {
+   "name": "RPK",
+   "baseName": "RPK",
+   "variant": null,
+   "class": "LMG",
+   "depth": "full",
+   "unlockLevel": 6,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 750.0,
+   "fireTime": 0.08,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 40.0,
+   "ammoMax": 320.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.35,
+   "movementSpeed": 0.875,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 4.0,
+    "empty": 5.5
+   },
+   "sprintOut": 0.45,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.16
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.16,
+    "far": 0.16
+   }
+  },
+  {
+   "name": "M60",
+   "baseName": "M60",
+   "variant": null,
+   "class": "LMG",
+   "depth": "full",
+   "unlockLevel": 21,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 50.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 25.4,
+    "minM": 38.1
+   },
+   "stk": {
+    "close": 2,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 535.0,
+   "fireTime": 0.112,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 100.0,
+   "ammoMax": 300.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.35,
+   "movementSpeed": 0.875,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 9.7,
+    "empty": 9.7
+   },
+   "sprintOut": 0.45,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 25.4,
+     "beyond": false,
+     "ttk": 0.112
+    },
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.224
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.112,
+    "far": 0.224
+   }
+  },
+  {
+   "name": "Stoner 63",
+   "baseName": "Stoner 63",
+   "variant": null,
+   "class": "LMG",
+   "depth": "full",
+   "unlockLevel": 21,
+   "classified": true,
+   "aliases": [
+    "Stoner63"
+   ],
+   "damage": {
+    "max": 40.0,
+    "min": 40.0
+   },
+   "range": {
+    "maxM": 38.1,
+    "minM": 50.8
+   },
+   "stk": {
+    "close": 3,
+    "far": 3
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 30.0,
+   "ammoMax": 240.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 0.875,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.2,
+    "empty": 3.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.128
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.128
+   }
+  },
+  {
+   "name": "Dragunov",
+   "baseName": "Dragunov",
+   "variant": null,
+   "class": "Sniper",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 70.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 101.6,
+    "minM": 127.0
+   },
+   "stk": {
+    "close": 2,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 234.0,
+   "fireTime": 0.256,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 10.0,
+   "ammoMax": 80.0,
+   "multipliers": {
+    "head": 2.0,
+    "neck": 2.0,
+    "upperTorso": 1.5,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.4,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.95,
+    "empty": 3.75
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.256,
+    "far": 0.256
+   },
+   "suppressed": {
+    "rangeMaxM": 101.6,
+    "rangeMinM": 127.0,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "WA2000",
+   "baseName": "WA2000",
+   "variant": null,
+   "class": "Sniper",
+   "depth": "full",
+   "unlockLevel": 10,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 70.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 101.6,
+    "minM": 127.0
+   },
+   "stk": {
+    "close": 2,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 234.0,
+   "fireTime": 0.256,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 6.0,
+   "ammoMax": 48.0,
+   "multipliers": {
+    "head": 2.0,
+    "neck": 2.0,
+    "upperTorso": 1.5,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.4,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.2,
+    "empty": 3.85
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.256,
+    "far": 0.256
+   },
+   "suppressed": {
+    "rangeMaxM": 101.6,
+    "rangeMinM": 127.0,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "L96A1",
+   "baseName": "L96A1",
+   "variant": null,
+   "class": "Sniper",
+   "depth": "full",
+   "unlockLevel": 27,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 70.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 101.6,
+    "minM": 127.0
+   },
+   "stk": {
+    "close": 2,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 50.0,
+   "fireTime": 1.2,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 5.0,
+   "ammoMax": 40.0,
+   "multipliers": {
+    "head": 2.0,
+    "neck": 2.0,
+    "upperTorso": 1.5,
+    "lowerTorso": 1.5
+   },
+   "adsTime": 0.4,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.3,
+    "empty": 3.5
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": null,
+     "beyond": true,
+     "ttk": 1.2
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 1.2,
+    "far": 1.2
+   },
+   "suppressed": {
+    "rangeMaxM": 101.6,
+    "rangeMinM": 127.0,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": null,
+      "beyond": true,
+      "ttk": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "name": "PSG1",
+   "baseName": "PSG1",
+   "variant": null,
+   "class": "Sniper",
+   "depth": "full",
+   "unlockLevel": 27,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 70.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 101.6,
+    "minM": 127.0
+   },
+   "stk": {
+    "close": 2,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 234.0,
+   "fireTime": 0.256,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 5.0,
+   "ammoMax": 40.0,
+   "multipliers": {
+    "head": 2.0,
+    "neck": 2.0,
+    "upperTorso": 1.5,
+    "lowerTorso": 1.5
+   },
+   "adsTime": 0.4,
+   "movementSpeed": 0.95,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.2,
+    "empty": 3.5
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.256,
+    "far": 0.256
+   },
+   "suppressed": {
+    "rangeMaxM": 101.6,
+    "rangeMinM": 127.0,
+    "profile": [
+     {
+      "shots": 2,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.256
+     }
+    ]
+   }
+  },
+  {
+   "name": "Olympia",
+   "baseName": "Olympia",
+   "variant": null,
+   "class": "Shotgun",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 10.0
+   },
+   "range": {
+    "maxM": 10.2,
+    "minM": 15.2
+   },
+   "stk": {
+    "close": 3,
+    "far": 10
+   },
+   "pellets": 8,
+   "rpm": 212.0,
+   "fireTime": 0.283,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 2.0,
+   "ammoMax": 40.0,
+   "multipliers": {
+    "head": 1.0,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.3,
+    "empty": 3.9
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 11.2,
+     "beyond": false,
+     "ttk": 0.566
+    },
+    {
+     "shots": 4,
+     "toM": 12.7,
+     "beyond": false,
+     "ttk": 0.849
+    },
+    {
+     "shots": 5,
+     "toM": 13.5,
+     "beyond": false,
+     "ttk": 1.132
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.566,
+    "far": 2.547
+   }
+  },
+  {
+   "name": "Stakeout",
+   "baseName": "Stakeout",
+   "variant": null,
+   "class": "Shotgun",
+   "depth": "full",
+   "unlockLevel": 8,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 10.0
+   },
+   "range": {
+    "maxM": 7.6,
+    "minM": 16.5
+   },
+   "stk": {
+    "close": 3,
+    "far": 10
+   },
+   "pellets": 8,
+   "rpm": 63.0,
+   "fireTime": 0.938,
+   "rapidFireRpm": 71.0,
+   "burst": null,
+   "mag": 4.0,
+   "ammoMax": 32.0,
+   "multipliers": {
+    "head": 1.0,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 0.567,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 9.4,
+     "beyond": false,
+     "ttk": 1.876
+    },
+    {
+     "shots": 4,
+     "toM": 12.1,
+     "beyond": false,
+     "ttk": 2.814
+    },
+    {
+     "shots": 5,
+     "toM": 13.5,
+     "beyond": false,
+     "ttk": 3.752
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 1.876,
+    "far": 8.442
+   },
+   "rapidFire": {
+    "rpm": 71.0,
+    "ttkClose": 1.676
+   }
+  },
+  {
+   "name": "SPAS-12",
+   "baseName": "SPAS-12",
+   "variant": null,
+   "class": "Shotgun",
+   "depth": "full",
+   "unlockLevel": 24,
+   "classified": false,
+   "aliases": [
+    "SPAS12"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 10.0
+   },
+   "range": {
+    "maxM": 7.6,
+    "minM": 15.2
+   },
+   "stk": {
+    "close": 4,
+    "far": 10
+   },
+   "pellets": 8,
+   "rpm": 312.0,
+   "fireTime": 0.192,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 8.0,
+   "ammoMax": 64.0,
+   "multipliers": {
+    "head": 1.0,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 0.567,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 9.5,
+     "beyond": false,
+     "ttk": 0.576
+    },
+    {
+     "shots": 5,
+     "toM": 11.4,
+     "beyond": false,
+     "ttk": 0.768
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.576,
+    "far": 1.728
+   },
+   "suppressed": {
+    "rangeMaxM": 7.6,
+    "rangeMinM": 15.2,
+    "profile": [
+     {
+      "shots": 4,
+      "toM": 9.5,
+      "beyond": false,
+      "ttk": 0.576
+     },
+     {
+      "shots": 5,
+      "toM": 11.4,
+      "beyond": false,
+      "ttk": 0.768
+     }
+    ]
+   }
+  },
+  {
+   "name": "HS-10",
+   "baseName": "HS-10",
+   "variant": null,
+   "class": "Shotgun",
+   "depth": "full",
+   "unlockLevel": 24,
+   "classified": true,
+   "aliases": [
+    "HS10"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 10.0
+   },
+   "range": {
+    "maxM": 7.6,
+    "minM": 15.2
+   },
+   "stk": {
+    "close": 4,
+    "far": 10
+   },
+   "pellets": 8,
+   "rpm": 340.0,
+   "fireTime": 0.176,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 4.0,
+   "ammoMax": 32.0,
+   "multipliers": {
+    "head": 1.0,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.2,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 0.65,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 9.5,
+     "beyond": false,
+     "ttk": 0.528
+    },
+    {
+     "shots": 5,
+     "toM": 11.4,
+     "beyond": false,
+     "ttk": 0.704
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.528,
+    "far": 1.584
+   }
+  },
+  {
+   "name": "HS-10 DW",
+   "baseName": "HS-10",
+   "variant": "dual-wield",
+   "class": "Shotgun",
+   "depth": "brief",
+   "unlockLevel": 24,
+   "classified": true,
+   "aliases": [
+    "HS10"
+   ],
+   "damage": {
+    "max": 30.0,
+    "min": 10.0
+   },
+   "range": {
+    "maxM": 5.1,
+    "minM": 12.7
+   },
+   "stk": {
+    "close": 4,
+    "far": 10
+   },
+   "pellets": 8,
+   "rpm": 340.0,
+   "fireTime": 0.176,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 4.0,
+   "ammoMax": 64.0,
+   "multipliers": {
+    "head": 1.0,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 3.0,
+    "empty": 3.4
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 4,
+     "toM": 7.0,
+     "beyond": false,
+     "ttk": 0.528
+    },
+    {
+     "shots": 5,
+     "toM": 8.9,
+     "beyond": false,
+     "ttk": 0.704
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.528,
+    "far": 1.584
+   }
+  },
+  {
+   "name": "ASP",
+   "baseName": "ASP",
+   "variant": null,
+   "class": "Pistol",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 7.0,
+   "ammoMax": 56.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.15,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 1.25,
+    "empty": 1.4
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "ASP DW",
+   "baseName": "ASP",
+   "variant": "dual-wield",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 7.0,
+   "ammoMax": 112.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 1.8,
+    "empty": 2.1
+   },
+   "sprintOut": 0.25,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "M1911",
+   "baseName": "M1911",
+   "variant": null,
+   "class": "Pistol",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 7.0,
+   "ammoMax": 56.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.1,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 1.63,
+    "empty": 1.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.288
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.384
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.384
+   },
+   "suppressed": {
+    "rangeMaxM": 6.3,
+    "rangeMinM": 12.7,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 8.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 4,
+      "toM": 11.1,
+      "beyond": false,
+      "ttk": 0.288
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.384
+     }
+    ]
+   }
+  },
+  {
+   "name": "M1911 DW",
+   "baseName": "M1911",
+   "variant": "dual-wield",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 937.0,
+   "fireTime": 0.064,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 7.0,
+   "ammoMax": 112.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 1.9,
+    "empty": 2.4
+   },
+   "sprintOut": 0.2,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.128
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.256
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.128,
+    "far": 0.256
+   }
+  },
+  {
+   "name": "Makarov",
+   "baseName": "Makarov",
+   "variant": null,
+   "class": "Pistol",
+   "depth": "full",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 8.0,
+   "ammoMax": 64.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.15,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 1.625,
+    "empty": 1.917
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.288
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.384
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.384
+   },
+   "suppressed": {
+    "rangeMaxM": 6.3,
+    "rangeMinM": 12.7,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 8.3,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 4,
+      "toM": 11.1,
+      "beyond": false,
+      "ttk": 0.288
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.384
+     }
+    ]
+   }
+  },
+  {
+   "name": "Makarov DW",
+   "baseName": "Makarov",
+   "variant": "dual-wield",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 22.9
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 8.0,
+   "ammoMax": 128.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 1.8,
+    "empty": 1.8
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 13.1,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": 19.4,
+     "beyond": false,
+     "ttk": 0.288
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.384
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.384
+   }
+  },
+  {
+   "name": "Python",
+   "baseName": "Python",
+   "variant": null,
+   "class": "Pistol",
+   "depth": "full",
+   "unlockLevel": 18,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 50.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 30.5
+   },
+   "stk": {
+    "close": 2,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 6.0,
+   "ammoMax": 48.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.15,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 0.65,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 8.9,
+     "beyond": false,
+     "ttk": 0.096
+    },
+    {
+     "shots": 3,
+     "toM": 26.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.288
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.096,
+    "far": 0.288
+   },
+   "suppressed": {
+    "rangeMaxM": 8.9,
+    "rangeMinM": 30.5,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 21.8,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 4,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.288
+     }
+    ]
+   }
+  },
+  {
+   "name": "Python DW",
+   "baseName": "Python",
+   "variant": "dual-wield",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 18,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 50.0,
+    "min": 30.0
+   },
+   "range": {
+    "maxM": 8.9,
+    "minM": 30.5
+   },
+   "stk": {
+    "close": 2,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 6.0,
+   "ammoMax": 96.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 2.1,
+    "empty": 2.7
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 8.9,
+     "beyond": false,
+     "ttk": 0.096
+    },
+    {
+     "shots": 3,
+     "toM": 26.2,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.288
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.096,
+    "far": 0.288
+   }
+  },
+  {
+   "name": "CZ75",
+   "baseName": "CZ75",
+   "variant": null,
+   "class": "Pistol",
+   "depth": "full",
+   "unlockLevel": 18,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 11.4,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 12.0,
+   "ammoMax": 96.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.15,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 1.63,
+    "empty": 2.013
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 15.6,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": 21.9,
+     "beyond": false,
+     "ttk": 0.288
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.384
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.384
+   },
+   "suppressed": {
+    "rangeMaxM": 7.6,
+    "rangeMinM": 12.7,
+    "profile": [
+     {
+      "shots": 3,
+      "toM": 9.1,
+      "beyond": false,
+      "ttk": 0.192
+     },
+     {
+      "shots": 4,
+      "toM": 11.4,
+      "beyond": false,
+      "ttk": 0.288
+     },
+     {
+      "shots": 5,
+      "toM": null,
+      "beyond": true,
+      "ttk": 0.384
+     }
+    ]
+   }
+  },
+  {
+   "name": "CZ75 DW",
+   "baseName": "CZ75",
+   "variant": "dual-wield",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 18,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 40.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 11.4,
+    "minM": 25.4
+   },
+   "stk": {
+    "close": 3,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 625.0,
+   "fireTime": 0.096,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 12.0,
+   "ammoMax": 192.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 1.9,
+    "empty": 2.2
+   },
+   "sprintOut": 0.45,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 15.6,
+     "beyond": false,
+     "ttk": 0.192
+    },
+    {
+     "shots": 4,
+     "toM": 21.9,
+     "beyond": false,
+     "ttk": 0.288
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.384
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.192,
+    "far": 0.384
+   }
+  },
+  {
+   "name": "CZ75 Full-Auto",
+   "baseName": "CZ75",
+   "variant": "full-auto",
+   "class": "Pistol",
+   "depth": "brief",
+   "unlockLevel": 18,
+   "classified": true,
+   "aliases": [],
+   "damage": {
+    "max": 30.0,
+    "min": 20.0
+   },
+   "range": {
+    "maxM": 7.6,
+    "minM": 12.7
+   },
+   "stk": {
+    "close": 4,
+    "far": 5
+   },
+   "pellets": null,
+   "rpm": 535.0,
+   "fireTime": 0.112,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 12.0,
+   "ammoMax": 96.0,
+   "multipliers": {
+    "head": 1.4,
+    "neck": 1.0,
+    "upperTorso": 1.0,
+    "lowerTorso": 1.0
+   },
+   "adsTime": 0.15,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.8,
+   "reload": {
+    "full": 1.63,
+    "empty": 2.013
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 3,
+     "toM": 5.6,
+     "beyond": false,
+     "ttk": 0.224
+    },
+    {
+     "shots": 4,
+     "toM": 10.2,
+     "beyond": false,
+     "ttk": 0.336
+    },
+    {
+     "shots": 5,
+     "toM": null,
+     "beyond": true,
+     "ttk": 0.448
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.336,
+    "far": 0.448
+   }
+  },
+  {
+   "name": "M72 LAW",
+   "baseName": "M72 LAW",
+   "variant": null,
+   "class": "Launcher",
+   "depth": "brief",
+   "unlockLevel": 4,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 160.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 5.7,
+    "minM": 3.8
+   },
+   "stk": {
+    "close": 1,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 14.0,
+   "fireTime": 4.06,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 1.0,
+   "ammoMax": 1.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": 0.5,
+   "movementSpeed": 0.8,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.0,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 5.7,
+     "beyond": false,
+     "ttk": 4.06
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 4.06
+   }
+  },
+  {
+   "name": "RPG-7",
+   "baseName": "RPG-7",
+   "variant": null,
+   "class": "Launcher",
+   "depth": "brief",
+   "unlockLevel": 12,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 160.0,
+    "min": 70.0
+   },
+   "range": {
+    "maxM": 5.7,
+    "minM": 3.8
+   },
+   "stk": {
+    "close": 1,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 16.0,
+   "fireTime": 3.612,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 1.0,
+   "ammoMax": 2.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": 0.5,
+   "movementSpeed": 0.8,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.292,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 5.7,
+     "beyond": false,
+     "ttk": 3.612
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 3.612
+   }
+  },
+  {
+   "name": "Strela-3",
+   "baseName": "Strela-3",
+   "variant": null,
+   "class": "Launcher",
+   "depth": "brief",
+   "unlockLevel": 30,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 175.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 10.2,
+    "minM": 5.1
+   },
+   "stk": {
+    "close": 1,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 14.0,
+   "fireTime": 4.056,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 1.0,
+   "ammoMax": 2.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": 0.5,
+   "movementSpeed": 0.8,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 3.0,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 10.2,
+     "beyond": false,
+     "ttk": 4.056
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 12.168
+   }
+  },
+  {
+   "name": "China Lake",
+   "baseName": "China Lake",
+   "variant": null,
+   "class": "Launcher",
+   "depth": "brief",
+   "unlockLevel": 48,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 155.0,
+    "min": 25.0
+   },
+   "range": {
+    "maxM": 7.6,
+    "minM": 3.2
+   },
+   "stk": {
+    "close": 1,
+    "far": 4
+   },
+   "pellets": null,
+   "rpm": 19.0,
+   "fireTime": 3.05,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 2.0,
+   "ammoMax": 2.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": 0.5,
+   "movementSpeed": 0.8,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 1.0,
+    "empty": null
+   },
+   "sprintOut": 0.6,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 6.1,
+     "beyond": false,
+     "ttk": 3.05
+    },
+    {
+     "shots": 3,
+     "toM": 7.1,
+     "beyond": false,
+     "ttk": 6.1
+    },
+    {
+     "shots": 4,
+     "toM": 7.6,
+     "beyond": false,
+     "ttk": 9.15
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 9.15
+   }
+  },
+  {
+   "name": "Ballistic Knife",
+   "baseName": "Ballistic Knife",
+   "variant": null,
+   "class": "Special",
+   "depth": "brief",
+   "unlockLevel": 15,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 300.0,
+    "min": 300.0
+   },
+   "range": {
+    "maxM": null,
+    "minM": null
+   },
+   "stk": {
+    "close": 1,
+    "far": 1
+   },
+   "pellets": null,
+   "rpm": 27.0,
+   "fireTime": 2.2,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 1.0,
+   "ammoMax": 1.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": null,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": null,
+   "reload": {
+    "full": 1.5,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 0.0
+   }
+  },
+  {
+   "name": "Crossbow",
+   "baseName": "Crossbow",
+   "variant": null,
+   "class": "Special",
+   "depth": "brief",
+   "unlockLevel": 33,
+   "classified": false,
+   "aliases": [],
+   "damage": {
+    "max": 200.0,
+    "min": 75.0
+   },
+   "range": {
+    "maxM": 4.1,
+    "minM": 3.3
+   },
+   "stk": {
+    "close": 1,
+    "far": 2
+   },
+   "pellets": null,
+   "rpm": 19.0,
+   "fireTime": 3.07,
+   "rapidFireRpm": null,
+   "burst": null,
+   "mag": 1.0,
+   "ammoMax": 4.0,
+   "multipliers": {
+    "head": null,
+    "neck": null,
+    "upperTorso": null,
+    "lowerTorso": null
+   },
+   "adsTime": 0.25,
+   "movementSpeed": 1.0,
+   "adsMoveSpeed": 0.4,
+   "reload": {
+    "full": 2.75,
+    "empty": null
+   },
+   "sprintOut": 0.3,
+   "profile": [
+    {
+     "shots": 2,
+     "toM": 4.1,
+     "beyond": false,
+     "ttk": 3.07
+    }
+   ],
+   "source": "Marvel4 BO1 weapon statistics sheet",
+   "ttk": {
+    "close": 0.0,
+    "far": 3.07
+   }
+  }
+ ]
+}

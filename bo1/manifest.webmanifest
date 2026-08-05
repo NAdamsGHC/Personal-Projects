@@ -1,0 +1,9 @@
+{
+  "name": "Black Ops Companion — TDM",
+  "short_name": "BO1 TDM",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f11",
+  "theme_color": "#0b0f11"
+}

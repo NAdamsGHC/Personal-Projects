@@ -1,0 +1,234 @@
+{
+ "source": {
+  "effects": "Call of Duty Wiki — Perks (Call of Duty: Black Ops section)",
+  "challenges": "GameTipCenter — Black Ops full perk list and Pro perk challenge list",
+  "note": "All perks are available for purchase at level 4. Pro requires all three challenges plus 3000 CoD Points on top of the 2000 base cost."
+ },
+ "perks": [
+  {
+   "name": "Lightweight",
+   "tier": 1,
+   "cost": "Default",
+   "proCost": 3000,
+   "effect": "Move 7% faster.",
+   "proEffect": "No falling damage.",
+   "challenges": [
+    "Escape death 5 times after being injured",
+    "Get 15 melee kills",
+    "Get 10 Offense Medals by killing enemies near their objective"
+   ],
+   "tdm": "Fine, but 7% is smaller than it sounds and Tier 1 is where Ghost and Flak Jacket live. The Pro half — no falling damage — is the real prize, because it opens drops you'd otherwise walk around.",
+   "forYou": "Tempting for a rusher, and that's the problem. Moving faster into the same bad angles gets you there sooner. Skip until the positioning is fixed."
+  },
+  {
+   "name": "Scavenger",
+   "tier": 1,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Pick up ammo and lethal grenades from dead bodies.",
+   "proEffect": "Extra mags when spawned, and tactical grenades replenish (except Willy Pete).",
+   "challenges": [
+    "Get 5 Lethal Grenade kills with a resupplied grenade",
+    "Get 5 kills without dying, 5 times",
+    "Resupply 150 times while using Scavenger"
+   ],
+   "tdm": "Strong if you hold an area and rack up kills without moving much. In TDM the bodies come to you.",
+   "forYou": "Rewards exactly the patient, position-holding game you're trying to build. Worth a look once you're living longer."
+  },
+  {
+   "name": "Ghost",
+   "tier": 1,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Invisible to Spy Planes.",
+   "proEffect": "Resistant to aircraft, infrared and sentries. No crosshair or red name when targeted.",
+   "challenges": [
+    "Kill 20 enemies while they have a Spy Plane or Blackbird active",
+    "Destroy 30 aircraft with any non-Killstreak launcher",
+    "Destroy 1 enemy Sentry Gun"
+   ],
+   "tdm": "The default competitive pick. Spy Planes are everywhere at 3 kills, and being off the minimap is what makes a flank a flank.",
+   "forYou": "The single most important perk for your problem. You already run it on four classes — good. Note the limit: Ghost does NOT hide you from a Blackbird. If the enemy hits 8, your flank is visible and you should play like it."
+  },
+  {
+   "name": "Flak Jacket",
+   "tier": 1,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Reduced explosive damage.",
+   "proEffect": "Take significantly less flame damage, and reset the fuse on enemy frags you throw back.",
+   "challenges": [
+    "Plant or defuse 10 bombs in Demolition, Sabotage or Search & Destroy",
+    "Survive 10 explosions while using Flak Jacket",
+    "Throw back 5 enemy Frag grenades"
+   ],
+   "tdm": "Map-dependent. On Nuketown and Firing Range the grenade spam is constant and Flak Jacket is close to mandatory. On open maps it's a wasted slot.",
+   "forYou": "Correct call on your Nuketown class. Don't carry it onto the big maps."
+  },
+  {
+   "name": "Hardline",
+   "tier": 1,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "One less kill required for killstreaks.",
+   "proEffect": "Re-roll a Care Package once.",
+   "challenges": [
+    "Get 7 kills without dying in one match",
+    "Earn 7 killstreaks in one match while using Hardline",
+    "Share 10 Killstreak reward crates with teammates"
+   ],
+   "tdm": "Turns 3/4/5 into 2/3/4 and 8/9/11 into 7/8/10. The higher your streaks, the more it's worth.",
+   "forYou": "This is the perk that makes your Assault set-up viable. Running 8/9/11 without Hardline means you need eight kills in a life — which, on your own account, isn't happening often. Either take Hardline or drop to lower streaks. Your xJawz class already has it; the others don't."
+  },
+  {
+   "name": "Hardened",
+   "tier": 2,
+   "cost": "Default",
+   "proCost": 3000,
+   "effect": "Increased bullet penetration.",
+   "proEffect": "More damage to enemy killstreaks, and reduced flinch when shot at.",
+   "challenges": [
+    "Shoot 200 bullets into enemy aircraft",
+    "Destroy 1 piece of enemy equipment through a wall",
+    "Get 10 kills using Hardened, shooting through walls"
+   ],
+   "tdm": "The Pro half is the point. Reduced flinch means that when someone shoots first, your screen doesn't jump and you can still win the trade.",
+   "forYou": "Underrated for you specifically. You back yourself in a 1v1 — reduced flinch is what lets you win the ones you didn't start. Arguably a better Tier 2 than Sleight of Hand on a gun you rarely empty."
+  },
+  {
+   "name": "Scout",
+   "tier": 2,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Hold breath longer when scoped.",
+   "proEffect": "Switch weapons faster.",
+   "challenges": [
+    "Get 30 Headshot kills",
+    "Get 50 One Shot, One Kill Medals",
+    "Get 50 kills with secondary weapons"
+   ],
+   "tdm": "A sniper perk with a weapon-swap bonus bolted on. Outside of sniping it's the weakest Tier 2.",
+   "forYou": "No. You're not sniping in TDM and the swap speed doesn't pay for the slot."
+  },
+  {
+   "name": "Steady Aim",
+   "tier": 2,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Increased hip-fire accuracy.",
+   "proEffect": "Faster recovery after sprinting and knifing.",
+   "challenges": [
+    "Get 150 hip fire kills using Steady Aim",
+    "Melee two enemies consecutively within 5 seconds",
+    "Get 100 kills after sprinting"
+   ],
+   "tdm": "The Pro effect is the hidden gem: faster sprint-out means less time helpless after you stop running.",
+   "forYou": "Read the Pro effect again. 'I get caught out mid-sprint a lot' is literally the problem Steady Aim Pro reduces — it shortens the window between releasing sprint and being able to shoot. Strongest non-obvious pick on this list for you."
+  },
+  {
+   "name": "Sleight of Hand",
+   "tier": 2,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Faster reload.",
+   "proEffect": "Faster ADS (except sniper rifles).",
+   "challenges": [
+    "Get 150 kills while aiming down sights",
+    "Kill an enemy within 5 seconds of reloading, 30 times",
+    "Reload and finish off the enemy you wounded, 10 times"
+   ],
+   "tdm": "The standard Tier 2 pick, and deservedly so — faster ADS wins first-shot races.",
+   "forYou": "You run it on four of five classes and it's a defensible default. Just be aware you're paying a slot for a benefit that mostly helps players who lose the first-shot race. You usually don't. Try one class with Hardened or Steady Aim instead and see if your deaths change shape."
+  },
+  {
+   "name": "Warlord",
+   "tier": 2,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Two primary weapon attachments (except underbarrel).",
+   "proEffect": "One extra lethal and tactical grenade, except Willy Pete.",
+   "challenges": [
+    "Get 10 Frag or Semtex kills",
+    "Get 1 multi-kill with Frag or Semtex",
+    "Get 150 kills using a gun with two attachments"
+   ],
+   "tdm": "Two attachments plus extra equipment. Greedy, but on the right gun it's the difference between a good class and a complete one.",
+   "forYou": "You run zero Warlord across five classes, so every gun you use is on one attachment. Suppressor plus a sight, or Dual Mag plus Grip, is a real upgrade. Worth testing on the Famas."
+  },
+  {
+   "name": "Marathon",
+   "tier": 3,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Increased sprint duration.",
+   "proEffect": "Unlimited sprint.",
+   "challenges": [
+    "Sprint 26 miles using Marathon",
+    "In Capture the Flag, get the Flag Capture Medal 15 times while using Marathon",
+    "Get the First Blood Medal 10 times"
+   ],
+   "tdm": "Great on big maps, actively dangerous on small ones — it makes sprinting into trouble easier.",
+   "forYou": "Avoid. This perk subsidises the exact habit that's costing you: more sprint means more time in the state where you can't shoot back."
+  },
+  {
+   "name": "Ninja",
+   "tier": 3,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Quiet movement (75%).",
+   "proEffect": "Enemies are heard louder, and you become completely silent.",
+   "challenges": [
+    "Get 5 Backstabber Medals",
+    "Plant the bomb 10 times in Demolition, Sabotage or Search & Destroy",
+    "Get 150 kills using the Suppressor attachment"
+   ],
+   "tdm": "The best Tier 3 in the game, and the Pro half is why: enemy footsteps get louder to you. That's free information about where people are.",
+   "forYou": "You run Ninja on four classes. If you haven't done the Pro challenges, you are getting the half that hides you and none of the half that finds them — and finding them is your actual weakness. The third challenge (150 suppressor kills) fits your loadouts already. Do this one first."
+  },
+  {
+   "name": "Second Chance",
+   "tier": 3,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Survive lethal damage and use a pistol while downed. Cannot be revived. Headshots, explosions, knives, shotgun blasts, sniper one-hit-kills and killstreaks cancel it out.",
+   "proEffect": "Longer bleed-out, and teammates can revive you.",
+   "challenges": [
+    "Get 1 headshot kill while in Second Chance",
+    "Get 10 kills while in Second Chance",
+    "While in Second Chance, kill the enemy who downed you 5 times"
+   ],
+   "tdm": "In TDM a downed player is usually just a delayed death, and the enemy still gets the point. Low value without a team that revives.",
+   "forYou": "No. It costs you Ninja, which is the slot doing real work."
+  },
+  {
+   "name": "Hacker",
+   "tier": 3,
+   "cost": 2000,
+   "proCost": 3000,
+   "effect": "Detect enemy equipment.",
+   "proEffect": "Booby-trap enemy Care Packages, hack enemy equipment, and become invisible to Motion Sensors.",
+   "challenges": [
+    "Destroy 10 equipment or explosives while using Hacker",
+    "Kill 25 enemies with a Claymore or C4",
+    "Kill 25 enemies within the radius of your Jammer or Motion Sensor"
+   ],
+   "tdm": "Situational. It shines against claymore-heavy lobbies and on maps with obvious equipment chokepoints.",
+   "forYou": "Worth one class. Claymores in doorways are a recurring cause of the deaths you've described — walking into things you couldn't see. Hacker turns that death into a free kill."
+  },
+  {
+   "name": "Tactical Mask",
+   "tier": 3,
+   "cost": "Default",
+   "proCost": 3000,
+   "effect": "Immune to Nova Gas.",
+   "proEffect": "Reduced effect from enemy flashbangs and concussions, and reveals the position of a flashed or stunned enemy.",
+   "challenges": [
+    "Kill 20 enemies blinded by your Flashbang",
+    "Kill 20 enemies stunned by your Concussion Grenade",
+    "Kill 20 enemies poisoned by your Nova Gas"
+   ],
+   "tdm": "Almost worthless at base, genuinely good at Pro. Concussion spam on small maps is the main thing that takes gunfights out of your hands.",
+   "forYou": "You already run it on Nuketown, which is the right map for it. Everyone concusses on Nuketown, and you're a player whose value comes from winning the gunfight — anything that stops you being stunned protects your main strength."
+  }
+ ]
+}

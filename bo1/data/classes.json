@@ -1,0 +1,95 @@
+{
+ "source": "Presets transcribed from CODB01Classes.xlsx. Killstreaks were not in that file — the default profile is applied to all five and should be corrected per class if they differ.",
+ "equipment": {
+  "lethal": ["Frag", "Semtex", "Tomahawk"],
+  "tactical": ["Flashbang", "Concussion", "Willy Pete", "Nova Gas", "Decoy"],
+  "gear": ["Claymore", "C4", "Motion Sensor", "Jammer", "Camera Spike", "Tactical Insertion"]
+ },
+ "presets": [
+  {
+   "name": "xJawz",
+   "primary": "FAMAS",
+   "primaryAttachments": ["Dual Mag"],
+   "secondary": "CZ75",
+   "secondaryAttachments": ["Suppressor"],
+   "perks": ["Hardline", "Sleight of Hand", "Ninja"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Claymore",
+   "killstreakProfile": "default",
+   "note": "The only one of your five with Hardline, which makes it the only one where high streaks are realistic."
+  },
+  {
+   "name": "Chabba",
+   "primary": "FAMAS",
+   "primaryAttachments": ["Suppressor"],
+   "secondary": "Strela-3",
+   "secondaryAttachments": [],
+   "perks": ["Ghost", "Sleight of Hand", "Ninja"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Motion Sensor",
+   "killstreakProfile": "default",
+   "note": "Ghost plus suppressor plus Ninja is a complete stealth package — but the suppressor drops the FAMAS to a 3-shot kill inside 14m, so it only works if you fight close."
+  },
+  {
+   "name": "Stealth",
+   "primary": "Galil",
+   "primaryAttachments": ["Suppressor"],
+   "secondary": "CZ75",
+   "secondaryAttachments": ["Suppressor"],
+   "perks": ["Ghost", "Hardened", "Ninja"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Motion Sensor",
+   "killstreakProfile": "default",
+   "note": "The most internally coherent of the five. Hardened's reduced flinch pairs well with a suppressed mid-range gun, and Motion Sensor covers the flank you can't watch."
+  },
+  {
+   "name": "Baz",
+   "primary": "FAMAS",
+   "primaryAttachments": ["Red Dot Sight"],
+   "secondary": "CZ75",
+   "secondaryAttachments": ["Suppressor"],
+   "perks": ["Ghost", "Sleight of Hand", "Ninja"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Claymore",
+   "killstreakProfile": "default",
+   "note": "The unsuppressed FAMAS keeps its full 39.4m of 3-shot range. On the larger maps this is the strongest of your Famas classes."
+  },
+  {
+   "name": "Nuketown",
+   "primary": "AKS-74U",
+   "primaryAttachments": ["Dual Mag"],
+   "secondary": "Python",
+   "secondaryAttachments": ["Dual Wield"],
+   "perks": ["Flak Jacket", "Sleight of Hand", "Tactical Mask"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Claymore",
+   "killstreakProfile": "default",
+   "note": "Map-specific and correctly so. Flak Jacket and Tactical Mask are the two perks that matter most on Nuketown, and dual-wield Pythons are viable at the ranges that map produces."
+  }
+ ],
+ "scoring": {
+  "weights": {"ttk": 20, "mobility": 15, "perkSynergy": 25, "mapFit": 25, "killstreaks": 15},
+  "note": "Weighted toward perk synergy and map fit — the positioning-adjacent legs — rather than raw gun stats.",
+  "perkSynergy": {
+   "pairs": [
+    {"perks": ["Ghost", "Ninja"], "points": 6, "why": "Off the minimap and silent. The complete concealment package and the basis of any flank."},
+    {"perks": ["Hardline"], "points": 5, "why": "Makes high killstreaks actually reachable."},
+    {"perks": ["Hardened", "Ninja"], "points": 4, "why": "Reduced flinch plus footstep information — you hear them first and you win the trade."},
+    {"perks": ["Steady Aim"], "points": 5, "why": "Pro shortens the window after sprinting where you can't shoot. Directly targets getting caught mid-sprint."},
+    {"perks": ["Flak Jacket", "Tactical Mask"], "points": 5, "why": "The explosive and stun resistance package. Strong on small maps, wasted on large ones."},
+    {"perks": ["Marathon"], "points": -6, "why": "Subsidises sprinting into trouble. Actively works against the positioning problem."},
+    {"perks": ["Second Chance"], "points": -4, "why": "Costs the Tier 3 slot that Ninja should own, and in TDM the enemy still banks the kill."},
+    {"perks": ["Scout"], "points": -3, "why": "A sniper perk on a class that isn't sniping."}
+   ]
+  },
+  "killstreakRealism": {
+   "note": "Scored on whether you will realistically collect the streaks you've picked. Total cost is compared against Hardline and against a TDM life expectancy of roughly 4–6 kills.",
+   "hardlineBonus": 5
+  }
+ }
+}
