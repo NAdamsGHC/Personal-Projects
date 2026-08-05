@@ -1,81 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="380" height="375" viewBox="0 0 380 375" role="img" aria-label="Hanoi tactical schematic traced from the in-game minimap: a long diagonal street, a prison building complex to the west, an open courtyard north-east, a well feature, and a narrow covered route to the south-east.">
-  <defs>
-    <pattern id="hn-danger" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.4"/>
-    </pattern>
-    <style>
-      .terr { fill:#1b2429; stroke:#55636e; stroke-width:1.4; }
-      .b  { fill:#2b353c; stroke:#6b7d80; stroke-width:1.1; }
-      .open { fill:#141b1f; stroke:#3f4c55; stroke-width:1; }
-      .t  { fill:#e6ecec; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:10px; letter-spacing:0.9px; }
-      .ts { fill:#93a4a6; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:8.4px; letter-spacing:0.6px; }
-      .td { fill:#d99a90; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:8.4px; letter-spacing:0.6px; }
-      .pin { fill:#d98b4a; }
-      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:9px; font-weight:700; }
-    </style>
-  </defs>
-
-  <text class="t"  x="8" y="14">HANOI</text>
-  <text class="ts" x="58" y="14">— TRACED FROM THE IN-GAME MINIMAP · ONLY TWO LEVELS</text>
-
-  <!-- footprint -->
-  <path class="terr" d="M60 24 L200 20 L318 34 L332 96 L322 150 L336 186 L308 236 L286 274 L330 300 L376 356 L336 372 L282 320 L214 296 L150 288 L104 250 L36 244 L14 190 L34 140 L18 108 L46 78 Z"/>
-
-  <!-- open courtyard, north-east -->
-  <path class="open" d="M196 26 L316 38 L322 140 L232 150 L192 100 Z"/>
-  <text class="ts" x="236" y="70">OPEN COURTYARD</text>
-  <rect class="b" x="230" y="82" width="16" height="12" rx="1"/>
-  <rect class="b" x="272" y="72" width="16" height="12" rx="1"/>
-  <rect class="b" x="292" y="104" width="16" height="12" rx="1"/>
-  <rect class="b" x="248" y="118" width="16" height="12" rx="1"/>
-
-  <!-- the long diagonal street -->
-  <path fill="url(#hn-danger)" stroke="#c25b4e" stroke-width="1"
-        d="M176 52 L204 44 L308 158 L288 178 Z"/>
-  <text class="td" x="196" y="120" transform="rotate(45 196 120)">LONG STREET — WIDE OPEN</text>
-
-  <!-- prison complex, west -->
-  <rect class="b" x="92" y="60" width="112" height="86" rx="2"/>
-  <text class="t"  x="98" y="80">PRISON</text>
-  <text class="ts" x="98" y="94">2ND-LEVEL BUILDINGS</text>
-  <text class="ts" x="98" y="106">OVERLOOK CENTRE</text>
-  <rect class="b" x="104" y="112" width="52" height="26" rx="2"/>
-
-  <rect class="b" x="88" y="152" width="86" height="42" rx="2"/>
-  <text class="ts" x="94" y="176">CENTRAL AREA</text>
-
-  <!-- west protrusions -->
-  <rect class="b" x="16" y="130" width="46" height="34" rx="2"/>
-  <text class="ts" x="20" y="152">BACK</text>
-  <text class="ts" x="20" y="164">HOUSE</text>
-  <rect class="b" x="4" y="104" width="26" height="26" rx="2"/>
-
-  <!-- the well -->
-  <circle class="b" cx="300" cy="184" r="10"/>
-  <text class="t"  x="286" y="208">WELL AREA</text>
-  <text class="td" x="264" y="220">HARD TO SHOOT INTO</text>
-
-  <!-- centre-bottom structures -->
-  <rect class="b" x="128" y="196" width="88" height="52" rx="2"/>
-  <text class="ts" x="134" y="216">CENTRAL AREA 2</text>
-  <text class="td" x="134" y="234">LITTLE COVER · OVERLOOKED</text>
-
-  <rect class="b" x="228" y="228" width="52" height="34" rx="2"/>
-  <text class="ts" x="232" y="248">TRUCKS</text>
-
-  <!-- south-east narrow route -->
-  <path class="b" d="M286 276 L326 300 L372 356 L340 366 L282 300 Z"/>
-  <text class="ts" x="296" y="330">NARROW</text>
-  <text class="ts" x="296" y="342">SIDE</text>
-
-  <!-- markers -->
-  <circle class="pin" cx="184" cy="72" r="8"/><text class="pint" x="181.5" y="75">1</text>
-  <circle class="pin" cx="300" cy="184" r="8" opacity="0"/>
-
-  <text class="ts" x="8" y="344">THE BACK BALCONY (BUGGED RAILING), BACK ROOF, BACK COURTYARD AND FLOWER POT</text>
-  <text class="ts" x="8" y="356">ARE ON THIS MAP — UNLABELLED ON THE MINIMAP, SO NOT PLACED HERE</text>
-  <text class="ts" x="8" y="370">GEOMETRY FROM THE MINIMAP · LABELS BEST-EFFORT — CORRECT THEM</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="390" viewBox="0 0 400 390" role="img" aria-label="Hanoi tactical schematic, traced from the in-game minimap.">
+<defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
+<style>
+.terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
+.b{fill:#39454c;stroke:#8fb0aa;stroke-width:1.1}
+.s{fill:#2b353c;stroke:#6b7d80;stroke-width:1}
+.sp{fill:#17313a;stroke:#8fb0aa;stroke-width:1.3}
+.rock{fill:#333f45;stroke:#7d8f92;stroke-width:0.9}
+.water{fill:#24343c;stroke:#8fb0aa;stroke-width:1}
+.hot{fill:url(#hz);stroke:#c25b4e;stroke-width:1}
+.lbl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:9.0px;letter-spacing:0.7px}
+.lbl2{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+      font-size:8.0px;letter-spacing:0.5px}
+.hotlbl{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+        font-size:8.0px;letter-spacing:0.5px}
+.ttl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:10.5px;letter-spacing:1.0px;font-weight:600}
+.key{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:8.6px;letter-spacing:0.5px}
+.keyhot{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+        font-size:8.6px;letter-spacing:0.5px}
+.pin{fill:#d98b4a}
+.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
+.link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
+</style></defs>
+<text class="ttl" x="8" y="15">HANOI</text>
+<text class="key" x="60.7" y="15">— only two levels</text>
+<path class="terr" d="M70 26 L210 22 L328 36 L342 98 L332 152 L346 188 L318 238 L296 276 L340 302 L386 356 L346 372 L292 322 L224 298 L160 290 L114 252 L46 246 L24 192 L44 142 L28 110 L56 80 Z"/>
+<rect class="s" x="196" y="30" width="130" height="40" rx="2"/>
+<text class="lbl2" x="201" y="53">OPEN COURTYARD</text>
+<path class="hot" d="M176 54 L204 46 L308 160 L288 180 Z"/>
+<rect class="b" x="92" y="82" width="112" height="56" rx="2"/>
+<text class="lbl" x="97" y="107.5">PRISON</text>
+<text class="lbl" x="97" y="118.5">2ND LEVELS</text>
+<rect class="s" x="92" y="150" width="100" height="34" rx="2"/>
+<text class="lbl2" x="97" y="170">CENTRAL AREA</text>
+<rect class="s" x="16" y="130" width="72" height="32" rx="2"/>
+<text class="lbl2" x="21" y="149">BACK HOUSE</text>
+<circle class="b" cx="300" cy="186" r="10"/>
+<rect class="s" x="230" y="210" width="100" height="26" rx="2"/>
+<text class="lbl2" x="235" y="226">TRUCKS</text>
+<rect class="hot" x="120" y="200" width="100" height="34" rx="2"/>
+<text class="hotlbl" x="125" y="220">CENTRAL 2</text>
+<rect class="s" x="268" y="288" width="92" height="28" rx="2"/>
+<text class="lbl2" x="273" y="305">NARROW SIDE</text>
+<circle class="pin" cx="180" cy="74" r="8"/><text class="pinn" x="177.5" y="77.2">1</text>
+<circle class="pin" cx="300" cy="186" r="8"/><text class="pinn" x="297.5" y="189.2">2</text>
+<text class="keyhot" x="8" y="334">1  Long street — wide open, cross fast</text>
+<text class="key" x="8" y="346.5">2  Well area — hard to shoot into</text>
+<text class="key" x="8" y="359">Back balcony railing is bugged: free cover</text>
+<text class="key" x="8" y="371.5">Back roof, courtyard, flower pot not placed</text>
 </svg>

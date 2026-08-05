@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{background:#0d1214;margin:0;padding:8px;font-family:system-ui;color:#93a4a6}
+.w{width:346px;margin:0 auto 14px;border:1px solid #2b383e}
+.w img{display:block;width:100%;height:auto}
+h2{font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:6px 0 4px;color:#8fb0aa}
+</style></head><body>
+<div id="o"></div>
+<script>
+const maps = location.hash.slice(1).split(',').filter(Boolean);
+document.getElementById('o').innerHTML = maps.map(m =>
+  `<h2>${m}</h2><div class="w"><img src="diagrams/${m}.svg?t=${Date.now()}"></div>`).join('');
+</script>
+</body></html>

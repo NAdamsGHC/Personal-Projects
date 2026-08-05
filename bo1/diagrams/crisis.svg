@@ -1,84 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="235" viewBox="0 0 400 235" role="img" aria-label="Crisis tactical schematic traced from the in-game minimap: built-up west with Castro's house, rock formations and the control room through the centre, and an open beach east dotted with rock perches.">
-  <defs>
-    <pattern id="cr-danger" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.36"/>
-    </pattern>
-    <style>
-      .terr { fill:#1b2429; stroke:#55636e; stroke-width:1.4; }
-      .b  { fill:#39454c; stroke:#8fb0aa; stroke-width:1.1; }
-      .s  { fill:#2b353c; stroke:#6b7d80; stroke-width:1; }
-      .rock { fill:#333f45; stroke:#7d8f92; stroke-width:0.9; }
-      .t  { fill:#e6ecec; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:9.6px; letter-spacing:0.8px; }
-      .ts { fill:#93a4a6; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:8px; letter-spacing:0.5px; }
-      .td { fill:#d99a90; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:8px; letter-spacing:0.5px; }
-      .path { stroke:#c9b98a; stroke-width:1.6; stroke-dasharray:4 3; fill:none; }
-      .pin { fill:#d98b4a; }
-      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:8.5px; font-weight:700; }
-    </style>
-  </defs>
-
-  <text class="t"  x="8" y="13">CRISIS</text>
-  <text class="ts" x="56" y="13">— TRACED FROM THE IN-GAME MINIMAP</text>
-
-  <!-- footprint -->
-  <path class="terr" d="M150 18 L246 16 L300 22 L400 26 L398 172 L330 178 L246 186 L200 200 L150 210 L108 216 L36 212 L4 170 L10 108 L30 78 L74 56 L112 34 Z"/>
-
-  <!-- Castro's house, west, multi-level -->
-  <rect class="b" x="92" y="58" width="54" height="76" rx="2"/>
-  <line x1="110" y1="58" x2="110" y2="134" stroke="#6b7d80" stroke-width="0.7"/>
-  <line x1="128" y1="58" x2="128" y2="134" stroke="#6b7d80" stroke-width="0.7"/>
-  <text class="t"  x="96" y="76">CASTRO'S</text>
-  <text class="t"  x="96" y="88">HOUSE</text>
-  <text class="td" x="96" y="104">CENTRE STAIRS</text>
-  <text class="td" x="96" y="115">= POPULAR CHOKE</text>
-
-  <!-- west block -->
-  <rect class="s" x="28" y="90" width="46" height="40" rx="2"/>
-  <text class="ts" x="32" y="112">TROPAS</text>
-  <text class="ts" x="32" y="124">SPAWN</text>
-
-  <!-- south-west block -->
-  <rect class="s" x="36" y="184" width="72" height="28" rx="2"/>
-  <text class="ts" x="40" y="202">SW BUILDING</text>
-
-  <!-- centre-north building -->
-  <rect class="b" x="158" y="40" width="50" height="44" rx="2"/>
-  <text class="ts" x="162" y="60">MID ARCHES</text>
-  <text class="ts" x="162" y="72">/ SIDE ROOF</text>
-
-  <!-- rock masses centre -->
-  <path class="rock" d="M156 78 L212 74 L240 92 L232 114 L182 118 L152 100 Z"/>
-  <path class="rock" d="M136 136 L184 132 L192 162 L162 180 L134 166 Z"/>
-
-  <!-- control room, cutting through the centre -->
-  <rect x="182" y="104" width="42" height="28" fill="url(#cr-danger)" stroke="#c25b4e" stroke-width="1" rx="2"/>
-  <text class="t"  x="184" y="122">CONTROL RM</text>
-  <text class="td" x="150" y="146">QUICKEST ROUTE BETWEEN SPAWNS</text>
-
-  <!-- winding paths -->
-  <path class="path" d="M150 92 L186 100 L206 118 L214 148"/>
-  <path class="path" d="M230 110 L248 132 L246 160"/>
-
-  <!-- east: beach and rock perches -->
-  <path class="rock" d="M252 60 L276 56 L282 78 L258 84 Z"/>
-  <path class="rock" d="M296 66 L318 62 L324 86 L300 92 Z"/>
-  <path class="rock" d="M262 108 L288 104 L294 128 L268 132 Z"/>
-  <path class="rock" d="M312 118 L338 116 L342 140 L316 144 Z"/>
-  <path class="rock" d="M276 150 L302 148 L306 168 L280 170 Z"/>
-
-  <text class="t"  x="300" y="42">BEACH — OPEN</text>
-  <text class="td" x="300" y="54">LONG-RANGE HALF</text>
-  <rect class="s" x="326" y="24" width="34" height="16" rx="2"/>
-  <rect class="s" x="350" y="98" width="30" height="22" rx="2"/>
-  <text class="ts" x="346" y="132">OP 40 SIDE</text>
-
-  <!-- markers -->
-  <circle class="pin" cx="140" cy="66" r="7.5"/><text class="pint" x="137.5" y="69">1</text>
-  <circle class="pin" cx="268" cy="112" r="7.5"/><text class="pint" x="265.5" y="115">2</text>
-
-  <text class="ts" x="8" y="222">RAPUNZEL TOWER, THE JEEPS, SHIPPING ROOM, MIDDLE SANDBAGS AND THE ROCK PERCHES</text>
-  <text class="ts" x="8" y="231">ARE ON THIS MAP — UNLABELLED ON THE MINIMAP · LABELS BEST-EFFORT, CORRECT THEM</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280" viewBox="0 0 400 280" role="img" aria-label="Crisis tactical schematic, traced from the in-game minimap.">
+<defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
+<style>
+.terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
+.b{fill:#39454c;stroke:#8fb0aa;stroke-width:1.1}
+.s{fill:#2b353c;stroke:#6b7d80;stroke-width:1}
+.sp{fill:#17313a;stroke:#8fb0aa;stroke-width:1.3}
+.rock{fill:#333f45;stroke:#7d8f92;stroke-width:0.9}
+.water{fill:#24343c;stroke:#8fb0aa;stroke-width:1}
+.hot{fill:url(#hz);stroke:#c25b4e;stroke-width:1}
+.lbl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:9.0px;letter-spacing:0.7px}
+.lbl2{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+      font-size:8.0px;letter-spacing:0.5px}
+.hotlbl{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+        font-size:8.0px;letter-spacing:0.5px}
+.ttl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:10.5px;letter-spacing:1.0px;font-weight:600}
+.key{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+     font-size:8.6px;letter-spacing:0.5px}
+.keyhot{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+        font-size:8.6px;letter-spacing:0.5px}
+.pin{fill:#d98b4a}
+.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
+.link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
+</style></defs>
+<text class="ttl" x="8" y="15">CRISIS</text>
+<text class="key" x="68.84" y="15">— versatile, tricky guns</text>
+<rect class="b" x="20" y="60" width="116" height="62" rx="2"/>
+<text class="lbl" x="25" y="88.5">CASTRO'S</text>
+<text class="lbl" x="25" y="99.5">HOUSE</text>
+<rect class="sp" x="20" y="130" width="116" height="30" rx="2"/>
+<text class="lbl" x="25" y="148">TROPAS</text>
+<rect class="s" x="20" y="172" width="116" height="28" rx="2"/>
+<text class="lbl2" x="25" y="189">SW BUILDING</text>
+<rect class="s" x="150" y="40" width="108" height="34" rx="2"/>
+<text class="lbl2" x="155" y="60">MID ARCHES</text>
+<rect class="s" x="150" y="84" width="108" height="34" rx="2"/>
+<text class="lbl2" x="155" y="104">SIDE ROOF</text>
+<rect class="hot" x="150" y="130" width="108" height="30" rx="2"/>
+<text class="hotlbl" x="155" y="148">CONTROL RM</text>
+<rect class="s" x="150" y="172" width="108" height="28" rx="2"/>
+<text class="lbl2" x="155" y="189">BOTTOM CASTRO</text>
+<rect class="rock" x="272" y="60" width="116" height="30" rx="2"/>
+<text class="lbl" x="277" y="78">ROCK PERCH 1</text>
+<rect class="rock" x="272" y="100" width="116" height="30" rx="2"/>
+<text class="lbl" x="277" y="118">ROCK PERCH 2</text>
+<rect class="s" x="272" y="140" width="116" height="30" rx="2"/>
+<text class="lbl2" x="277" y="158">MID SANDBAGS</text>
+<rect class="sp" x="272" y="180" width="116" height="26" rx="2"/>
+<text class="lbl" x="277" y="196">OP 40 · BEACH</text>
+<circle class="pin" cx="128" cy="72" r="8"/><text class="pinn" x="125.5" y="75.2">1</text>
+<circle class="pin" cx="250" cy="142" r="8"/><text class="pinn" x="247.5" y="145.2">2</text>
+<text class="key" x="8" y="224">1  Wall jump to upper Castro, skip the stairs</text>
+<text class="key" x="8" y="236.5">2  Control room — quickest route between spawns</text>
+<text class="keyhot" x="8" y="249">Centre stairs stay the popular choke</text>
+<text class="key" x="8" y="261.5">Rock hill leads up to the middle sandbags</text>
 </svg>

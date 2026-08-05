@@ -80,13 +80,23 @@ bo1/
     classes.json        presets and the scoring rubric
   scripts/
     build_weapons.py    Marvel4 sheet -> data/weapons.json
+    build_diagrams.py   generates all 14 schematics
     source/             vendored source data
+  _svgcheck.html        dev preview: /_svgcheck.html#nuketown,havana
 ```
 
 ## Not yet done
 
-- **Tactical schematics.** Every map has an empty `diagram` slot and a link out to the full
-  minimap. Simple top-down SVGs get drawn in over time, most-played maps first.
+- **Correcting the schematic labels.** The minimaps carry no text, so building names are
+  inferred from the walkthroughs. Each diagram lists the callouts it couldn't place. Fix the
+  spec in `scripts/build_diagrams.py` and re-run:
+
+  ```bash
+  python scripts/build_diagrams.py
+  ```
+
+  Labels are measured before they're placed, so anything that doesn't fit its box fails loudly
+  instead of shipping clipped.
 - **The 12 DLC maps** (First Strike, Escalation, Annihilation). Same data shape, so it's content
   entry rather than rework.
 - **Modes beyond TDM.**
