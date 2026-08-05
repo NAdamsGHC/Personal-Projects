@@ -2,7 +2,7 @@
  "mode": "Team Deathmatch",
  "source": {
   "layout": "Call of Duty Wiki map pages (all 14 checked), plus callofdutymaps.com for named structures.",
-  "tactics": "Layout from the Call of Duty Wiki. Tactical content is sourced from BO1-era community guides where it exists, and reasoned from the layout where it doesn't — each map's 'Checked against the wiki' list says which is which.",
+  "tactics": "Where a map has a ZigZack IGN map-recon walkthrough, the callouts and positions come from that. Otherwise from BO1-era community guides where they exist, and reasoned from the layout where they don't. Each map's 'Checked against the wiki' list says which.",
   "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference."
  },
  "maps": [
@@ -84,75 +84,78 @@
    "id": "firing-range",
    "name": "Firing Range",
    "size": "Small",
-   "identity": "A military practice facility built around a central tower, with two main buildings either team wants and a courtyard between them covered from every direction. A run-and-gun map: you move from position to position, or you die.",
+   "identity": "A compact training facility with three routes through it — left flank, middle road, right flank. Two elevated holds, the garage and top wooden, decide most games between them.",
    "sides": [
     {
-     "id": "a",
-     "name": "End A",
-     "spawn": "One end of the facility. The two spawns sit close enough that a well-placed opening grenade can steal a kill.",
-     "opening": "Go for the thin wooden house — it's the map's main prize and both teams want it. Hug the buildings on the way; don't cut across the courtyard.",
-     "flank": "Around the outside and into the back of the far building.",
-     "pinch": "The courtyard between the tower and the building opposite. It has vantage points on all sides and it is where the crossfire happens."
+     "id": "op40",
+     "name": "OP 40 (south)",
+     "spawn": "The southern end of the map. The garage is directly in front of you.",
+     "opening": "Take the garage. It's elevated, it watches enemies crossing below, and it's one of the most popular spots on the map — so it's a race. From there you have access to the nook, below the sniper perch.",
+     "flank": "Garage into the sandbags, then transition into double barrels to watch the left flank with cover. An assault rifle covers that crossing well.",
+     "pinch": "The shipping container on the way out of the shooting range. Throw a flash or stun over it before you commit."
     },
     {
-     "id": "b",
-     "name": "End B",
-     "spawn": "The opposite end. Same warning about the opening grenade.",
-     "opening": "Take the tower or the building beside it and get height before the map settles. From the tower there's a beam across to the next building if you need to leave in a hurry.",
-     "flank": "Wide round the edge rather than through the middle.",
-     "pinch": "The doorways into the main buildings. Single entrances, covered from inside."
+     "id": "tropas",
+     "name": "Tropas (north)",
+     "spawn": "The northern end, by the second shooting range.",
+     "opening": "Contest top wooden. Controlling it gives your team eyes on most of the map, including top garage — and it has an escape into back alley if it turns.",
+     "flank": "Out through back alley, or down the side into the sandbags to peek top garage and lower mid.",
+     "pinch": "Moving through the shooting range itself. It's full of campers and spawn points — be thorough, don't sprint it."
     }
    ],
    "powerPositions": [
     {
-     "name": "The thin wooden house",
-     "why": "One of the two buildings both teams fight over, and the most contested ground on the map. Holding it sets the terms of the game."
+     "name": "Top wooden (the wooden bunker)",
+     "why": "Eyes on most of the map, including top garage, and a clean escape into back alley. The single most valuable hold here."
     },
     {
-     "name": "The central tower",
-     "why": "Overlooks the middle and it's the map's designated camping spot. There's a perch opposite the ladder and a wooden beam across to the next building — so unlike most towers, it has a way out."
+     "name": "The garage",
+     "why": "Elevated over the crossings and one of the most popular spots on the map. Watches enemies moving below and connects to the nook."
     }
    ],
    "enemySpots": [
     {
-     "name": "The central tower",
-     "note": "If you don't hold it, someone does. It's small and enclosed, which is why grenades lobbed up at it work so reliably."
+     "name": "Top garage",
+     "note": "Named as a popular spot. Check it from wooden before you cross."
     },
     {
-     "name": "The elevated structures in the middle",
-     "note": "The map's sniping positions. Good players claymore the ladder behind them."
+     "name": "The sniper perch and the elevated middle structures",
+     "note": "The map's sniping positions. Vulnerable to a lobbed grenade and to a knife in the back — which is also how you deal with them."
     },
     {
-     "name": "The windows and rooftop overlooking the courtyard",
-     "note": "The courtyard is watched from above on more than one side. Look up before you cross."
+     "name": "The second shooting range, down back alley",
+     "note": "Home to many campers and to spawn points."
     }
    ],
-   "trap": "Crossing the courtyard between the tower and the building opposite. It has vantage points on every side, including a rooftop and windows above it, so you can be in three people's sights at once while sprinting and unable to shoot back. The map's small size means you can be back in that courtyard seconds after spawning.",
+   "trap": "Moving without checking around you. The map is small and laid out so that the middle road and the crossings are covered from the garage, top wooden and the perch at once — run it blind and you're caught in a crossfire within seconds of spawning. Lower mid in particular is ground that gets peeked from above.",
    "loadout": {
     "weapon": "FAMAS",
-    "weaponWhy": "3-shot kill to 39.4m covers every sightline here, and a 128ms kill wins the trades.",
+    "weaponWhy": "3-shot kill to 39.4m covers every sightline here, and an assault rifle is what you want for watching the left flank from the sandbags.",
     "perk": "Ghost",
     "perkWhy": "Spy Planes go up constantly on a map this small, and the flanks only work if they can't see you take them."
    },
    "deeper": [
-    "If someone is in the tower, don't duel them — lob a grenade up. It's small and enclosed, and that's the intended answer.",
-    "If you take an elevated spot, claymore the way up behind you. Staying scoped too long on this map is how you get knifed in the back.",
-    "Claymores and Motion Sensors are strongly favoured here — the map is small enough that you will be rushed, and equipment covers what you can't watch.",
-    "Attack helicopters do well because there's very little cover from above.",
+    "If someone is in the tower, don't duel them — lob a grenade or two up. It's small and enclosed, and that's the intended answer.",
+    "If you take an elevated spot, claymore the way up behind you, and don't stay scoped — the standard punishment here is a knife in the back.",
+    "Attack helicopters do well because the map offers very little aerial protection.",
     "Snipers struggle: the map is too small for the ranges they need.",
-    "If you're running a suppressor, the FAMAS drops to a 3-shot kill inside 14m — across the courtyard that's a 4-shot kill."
+    "Gas into a contested area creates enough confusion to take it.",
+    "If you're running a suppressor, the FAMAS drops to a 3-shot kill inside 14m — across the middle that's a 4-shot kill."
    ],
    "verified": [
-    "Two main buildings both teams contest, plus a small tower in the middle (wiki)",
-    "The thin wooden house is the hotly contested building; the tower is a strong camping spot (wiki)",
-    "Both teams spawn dangerously close together — grenades can reach (wiki)",
-    "Favours SMGs, ARs and LMGs; shotguns for defending a building; snipers are difficult (wiki)",
-    "The tower sits at C3, is small and enclosed, and has a perch opposite the ladder with a wooden beam across to the building at D3 (community guide)",
-    "The courtyard crossing between C3/C4 and D3/D4 has many vantage points; be wary of the windows at E4 and the rooftop at D4 (community guide)",
-    "The elevated middle structures are the sniping positions and are vulnerable to grenades and knives — claymore the rear (community guide)",
-    "A bathroom hut in the north-west has two exits and covers useful sightlines (community guide)",
-    "Helicopter killstreaks are effective — little aerial cover (community guide)",
-    "Exact spawn ends are not sourced; the schematic marks them as approximate"
+    "Tropas spawn is the northern end of the map; OP 40 spawn is the south (ZigZack, IGN map recon)",
+    "Three major routes: right flank, middle road, left flank (ZigZack)",
+    "The garage sits in front of the OP 40 spawn, is elevated, watches enemies crossing below, and is one of the most popular spots (ZigZack)",
+    "The nook sits below the sniper perch and is accessed from the garage (ZigZack)",
+    "Sandbags give cover and peek both sides; you can watch the left flank from them and transition into double barrels (ZigZack)",
+    "Controlling top wooden gives eyes on most of the map including top garage; sandbags peek top garage or lower mid; wooden escapes to back alley (ZigZack)",
+    "Back alley leads to a second shooting range, home to many campers and spawn points (ZigZack)",
+    "A choke point sits at the shipping container when exiting the shooting range — flash or stun the spawns beyond it (ZigZack)",
+    "Two elevated middle structures are the sniping spots; vulnerable to lobbed grenades and knifing, so claymore your back (Dominate Black Ops)",
+    "A bathroom hut in the north-west has two exits with sightlines to critical points (Dominate Black Ops)",
+    "Grenades lob into the high central tower reliably (Dominate Black Ops)",
+    "Little aerial protection, so helicopter streaks are strong (Dominate Black Ops)",
+    "Favours SMGs, ARs and LMGs; shotguns for defending; snipers difficult (CoD Wiki)"
    ],
    "diagram": "diagrams/firing-range.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range"
@@ -160,70 +163,82 @@
   {
    "id": "summit",
    "name": "Summit",
-   "size": "Medium",
-   "identity": "A narrow mountain research facility with severe drops on every side. Mostly tight gaps and pathways, with one large central building whose interior is the only genuinely open space.",
+   "size": "Small",
+   "identity": "A small mountain facility built around a central control room. Four major choke points, and every one of them involves that room — so the game is really about who owns the middle and whether you keep the enemy pushed back.",
    "sides": [
     {
-     "id": "cablecar",
-     "name": "Cable car end",
-     "spawn": "The cable car side of the facility.",
-     "opening": "Work toward the central building through the narrow pathways. The interior is the map's open ground and whoever arrives set wins it.",
-     "flank": "Along the outer pathways rather than through the middle.",
-     "pinch": "The narrow gaps either side of the central building. Single file, no cover, and easy to hold from inside."
+     "id": "spetsnaz",
+     "name": "Spetsnaz spawn",
+     "spawn": "The Spetsnaz side. Check every corner for campers before you move — it's a known problem here.",
+     "opening": "Push into the control room. On a map this small you have to keep pushing the enemy back, because that's what gives you favourable spawns.",
+     "flank": "Around or through the electrical room is a quick route to the porch, and a good peek onto people pushing.",
+     "pinch": "The electrical room route into the porch. It works, but it is a magnet for grenades."
     },
     {
-     "id": "far",
-     "name": "Far end",
-     "spawn": "The opposite end of the facility.",
-     "opening": "Take a pathway toward the centre and hold an entrance to the big building instead of walking into the middle of it.",
-     "flank": "The outer route toward the cable car side.",
-     "pinch": "Crossing the interior of the central building. It's the most open area on the map and it's watched from several directions."
+     "id": "blackops",
+     "name": "Black Ops spawn",
+     "spawn": "The Black Ops side.",
+     "opening": "Use the balcony first — it gives a clear view of some major spawn points, which tells you where they are before you commit to anything.",
+     "flank": "The rock area gives a long-range view down the west side; the skinny bridge from there leads to the back of the Spetsnaz spawn.",
+     "pinch": "The skinny bridge. Narrow, and good snipers pick players off through the trees around it."
     }
    ],
    "powerPositions": [
     {
-     "name": "An entrance to the central building",
-     "why": "The interior is the map's main open space. Holding a way in beats standing in the middle of it."
+     "name": "Top control room",
+     "why": "A hot spot and one of the bigger rooms on the map once all the glass is broken. Multiple levels, multiple windows, and about half a dozen entrances to watch."
     },
     {
-     "name": "One of the small enclosed spots off the pathways",
-     "why": "Summit is full of little hiding places. On a narrow map, being still beside a route is worth more than moving along it."
+     "name": "The back area and the back stairs",
+     "why": "Both named as underused. The back area gives great vision of nearby spawn points; the back stairs punish people who sprint up rather than holding."
     }
    ],
    "enemySpots": [
     {
-     "name": "Inside the central building",
-     "note": "The most fought-over space on the map."
+     "name": "Bottom control room",
+     "note": "Where SMG players cruise — a variety of peeks and a lot of traffic."
     },
     {
-     "name": "The small hiding spots along the pathways",
-     "note": "There are a lot of them and they're easy to walk past."
+     "name": "The rock area",
+     "note": "The sniper route. Any good sniper plays it for the long view down the west side."
     },
     {
-     "name": "The cable car",
-     "note": "Reachable with a sprinting jump. It swings when occupied, which is a free tell if you look."
+     "name": "Corners of the Spetsnaz spawn, and the porch",
+     "note": "Campers sit in the spawn corners; the porch has good peeks and attracts thrown equipment."
     }
    ],
-   "trap": "Treating the central building's interior as a route. It's the most open area on a map that is otherwise all narrow gaps, which means it's where everyone's guns are already pointed. Cross it and you're the only thing moving in the one place people can see.",
+   "trap": "Back rooms. It's one of the four choke points and it should be avoided — but it's also the quickest route to the porch, which is exactly why people keep taking it and keep dying in it. The porch itself then attracts thrown equipment, so the fast route punishes you twice.",
    "loadout": {
-    "weapon": "Galil",
-    "weaponWhy": "3-shot kill to 45.7m handles the interior sightlines that an SMG loses.",
+    "weapon": "AKS-74U",
+    "weaponWhy": "The control room is a bottom-and-top SMG fight with short peeks — 3-shot kill to 19.5m and a 0.2s aim-in suits it.",
     "perk": "Ninja",
-    "perkWhy": "Narrow pathways and small hiding spaces mean footsteps carry more information than sightlines do."
+    "perkWhy": "Half a dozen entrances to one room means people arrive from everywhere. Footsteps are the only warning you get."
    },
    "deeper": [
-    "Severe drops on all sides mean the playable space is narrower than it looks. There are fewer flank routes here than on a map this shape usually has.",
-    "Spawn trapping is easy on this map if one team takes control of one end — if your team is getting pinned, break out along an outer pathway rather than through the centre.",
-    "The cable car is reachable by sprinting jump, which surprises people who assume it's scenery."
+    "A Motion Sensor in the right corner of the control room covers four popular choke spots at once — the highest-value piece of equipment on this map.",
+    "Toss a flash into middle hall; it very reliably catches people.",
+    "Breaking the glass in top control room changes the room — it becomes one of the biggest spaces on the map, with far more angles than people expect.",
+    "Double barrels gives a view of the Spetsnaz spawn buildings.",
+    "Constant pressure matters more here than on bigger maps: pushing the enemy back is what keeps your spawns favourable.",
+    "Lethal grenades and gas into the upper room of the compound shake people out of it."
    ],
    "verified": [
-    "Narrow map with severe drops on all sides, set in the Ural Mountains",
-    "Mostly narrow gaps and pathways, with lots of small hiding spaces",
-    "The interior of the large central building is the most open area on the map",
-    "The cable car is reachable with a sprinting jump",
-    "Spawn trapping is easy when one team holds an end"
+    "One of the smaller maps, with four major choke points, each involving the control room (ZigZack, IGN map recon)",
+    "On a map this size you must keep pushing the enemy to hold favourable spawns (ZigZack)",
+    "The control room is the centre: multiple levels, multiple windows, about half a dozen entrances (ZigZack)",
+    "A motion sensor in a corner of the control room covers four popular choke spots (ZigZack)",
+    "Back rooms is a choke to avoid, but the quickest route to the porch; the porch attracts thrown equipment (ZigZack)",
+    "Top control room is a hot spot and one of the bigger rooms once the glass is broken (ZigZack)",
+    "A flash into middle hall reliably catches players (ZigZack)",
+    "The back area is underused and watches nearby spawn points; the back stairs are underrated (ZigZack)",
+    "The Black Ops spawn balcony gives a clear view of major spawn points (ZigZack)",
+    "The rock area is the sniper route, with a long view down the west side; double barrels views the Spetsnaz spawn buildings (ZigZack)",
+    "A skinny bridge leads to the back of the Spetsnaz spawn; snipers shoot through the trees there (ZigZack)",
+    "Around or through the electrical room is a quick route to the porch, and a grenade magnet (ZigZack)",
+    "The centre compound is where most kills occur; grenades and gas into the upper room work (Dominate Black Ops)",
+    "Set in the Ural Mountains with severe drops on all sides (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/summit.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Summit"
   },
   {
@@ -577,68 +592,81 @@
    "id": "array",
    "name": "Array",
    "size": "Large",
-   "identity": "A winterised relay station on mostly level ground, centred on a large dish and its surrounding buildings. Big open areas make sniping prevalent, and most of the fighting is on the flat.",
+   "identity": "One of the larger maps, and more varied than it looks — a handful of routes that mix long-range fragging with close gun battles around a big open centre. Just about any weapon is usable here.",
    "sides": [
     {
-     "id": "south",
-     "name": "South end",
-     "spawn": "The southern approach to the relay station.",
-     "opening": "Work toward the relay station in cover. Most of the fighting happens around, inside or just north of it, so that's where the game is.",
-     "flank": "Along the map's edge using the buildings, rather than across the open level ground.",
-     "pinch": "The last open stretch before the relay buildings. Level ground, long sightlines, no cover."
+     "id": "blackops",
+     "name": "Black Ops spawn",
+     "spawn": "The Black Ops end, off a huge open area.",
+     "opening": "A quick grenade at the doorway by the truck at the start of the round can get multiple kills — it's a major choke and people funnel there.",
+     "flank": "Toward centre array via the pallet and forklift, then the guard house.",
+     "pinch": "The stairs above the guardhouse. They're narrow, so it's a kill or be killed — and watch for claymores on them."
     },
     {
-     "id": "north",
-     "name": "North end",
-     "spawn": "The northern end, toward the tower.",
-     "opening": "Either take the tower for the sightline or push down to the relay station — but decide before you move, because the two are different games.",
-     "flank": "Round the outside toward the southern approach.",
-     "pinch": "The ground below the north tower. Anyone up there sees it, and so does anyone in the vegetation beside it."
+     "id": "spawn2",
+     "name": "Opposite spawn",
+     "spawn": "The far end, toward the crane.",
+     "opening": "The large crane gives a couple of levels and huge peeks down the side of the map. Take a look, take a kill, then move — good players work you out quickly.",
+     "flank": "The back tunnel in bottom array. It's underused and it gets you behind their lines fast.",
+     "pinch": "The open ground below the electrical tower. It's wide open and gets picked on constantly from centre array."
     }
    ],
    "powerPositions": [
     {
-     "name": "The relay station itself",
-     "why": "Around, inside and slightly north of it is where most of the fighting takes place. It's the map's centre of gravity and the only ground that isn't wide open."
+     "name": "The legs of the electrical tower",
+     "why": "You can jump onto them for excellent cover while keeping good peeks on the open ground — one of the best-value spots on the map, and it fixes the problem that the area below the tower is otherwise a shooting gallery."
     },
     {
-     "name": "The north tower",
-     "why": "Climbable and it commands the open ground. Strong — but the vegetation to its left is exactly where a counter-sniper sits."
+     "name": "Centre array, reached by climbing the boxes",
+     "why": "Climbing up to centre array lets you avoid all the popular routes and chokes where you're most likely to be killed. Best ground, safest arrival."
     }
    ],
    "enemySpots": [
     {
-     "name": "The north tower",
-     "note": "Someone is up there most games."
+     "name": "Array Tower",
+     "note": "The map's landmark and where people camp. The bunkers and trucks in the open area are the cover you use to get angles on them."
     },
     {
-     "name": "The vegetation left of the tower",
-     "note": "Camouflages a sniper whose specific job is killing whoever climbed the tower."
+     "name": "Under the wedge, by the hill",
+     "note": "A specific camping spot. If you're on the hill, move fast and keep your eyes on it."
     },
     {
-     "name": "The elevated spots at the map's extremes",
-     "note": "There are only a few, which makes them predictable."
+     "name": "The crane and the satellite dish",
+     "note": "Both climbable, both give long peeks — the dish looks down the electrical tower."
     }
    ],
-   "trap": "Bringing a close-range class and a close-range pace. The open areas make sniping prevalent and most of the map is level ground with long sightlines — sprinting across it with an SMG is a death you'll repeat all game.",
+   "trap": "The open ground below the electrical tower. It's wide, it's overlooked from centre array, and it gets picked on by a lot of people. The rock area is the other one — a strong choke that's surrounded by spawns, so you can win a fight there and immediately have company.",
    "loadout": {
     "weapon": "M16",
-    "weaponWhy": "58.4m of 3-shot kill range, the longest available. On Array, reach beats fire rate.",
+    "weaponWhy": "58.4m of 3-shot kill range for the long routes — though Array genuinely supports anything, so bring what you shoot well.",
     "perk": "Ghost",
-    "perkWhy": "Rotations are long here, and being invisible matters more the further you have to walk."
+    "perkWhy": "Rotations are long, and the back tunnel only works as a flank if you aren't on their minimap while you take it."
    },
    "deeper": [
-    "Do not run a suppressor on this map. Cutting your full-damage range by two-thirds on the most open map in the game is self-sabotage.",
-    "If you climb the north tower, check the vegetation to its left first — that's the counter-position, and it's a known one.",
-    "Long rotations make Blackbird worth more here than almost anywhere: knowing which way people face saves an entire flank's worth of guessing."
+    "The truck at the doorway won't blow up, so the back of it is genuine cover. Once it has been destroyed, the wreck becomes an elevated position with angles into both spawns.",
+    "The unfinished building has thin walls that will get you killed, but it offers a useful peek if you're just passing through.",
+    "You can jump onto a ledge in the ice cannon and be out of range of most grenades and bullets while prone.",
+    "Jumping out of the window onto the railing gives a spot that peeks the propane tank and the main entrance of Array Tower.",
+    "Claymores are common on the guardhouse stairs and in the rooms — check before you move through.",
+    "The pallet and forklift lead to the guard house; both are critical choke points for traffic.",
+    "Don't run a suppressor here. Cutting your full-damage range on a map this open is self-sabotage."
    ],
    "verified": [
-    "Medium-large winterised map on mostly level terrain",
-    "Centred on a large relay dish and its surrounding buildings",
-    "Most fighting takes place around, inside, or slightly north of the relay station",
-    "Large open areas make sniping prevalent",
-    "A climbable tower to the north, with vegetated areas to its left that camouflage a counter-sniper",
-    "Only a few elevated positions, at the furthest extremes of the map"
+    "One of the larger maps, offering a handful of routes for both long-range and close combat; just about any weapon is usable (ZigZack, IGN map recon)",
+    "A large open area with bunkers and trucks providing cover for angles on players camping in Array Tower (ZigZack)",
+    "A major choke at the truck by the doorway; a grenade at the start of the round can multi-kill; the truck won't blow up so its back is cover (ZigZack)",
+    "Once destroyed, the truck becomes an elevated position with angles into both spawns (ZigZack)",
+    "Players camp under the wedge near the hill (ZigZack)",
+    "A large crane offers a couple of levels and long peeks down the side of the map (ZigZack)",
+    "The satellite dish is climbable and peeks down the electrical tower; the unfinished building has thin walls but a useful peek (ZigZack)",
+    "The rock area is a strong choke point surrounded by spawns (ZigZack)",
+    "The stairs above the guardhouse are narrow and claymored; the pallet, forklift and guard house are critical traffic chokes (ZigZack)",
+    "A ledge in the ice cannon puts you out of range of most grenades and bullets when prone (ZigZack)",
+    "The area below the electrical tower is wide open and gets shot from centre array; jumping onto the tower's legs gives cover with good peeks (ZigZack)",
+    "Climbing the boxes to centre array avoids the popular routes and chokes (ZigZack)",
+    "A window-to-railing spot peeks the propane tank and the main entrance of Array Tower (ZigZack)",
+    "A back tunnel in bottom array is underused and gets you behind enemy lines quickly (ZigZack)",
+    "Centred on a large relay dish with surrounding buildings; large open areas make sniping prevalent (CoD Wiki)"
    ],
    "diagram": null,
    "minimapUrl": "https://callofduty.fandom.com/wiki/Array"
@@ -647,68 +675,74 @@
    "id": "wmd",
    "name": "WMD",
    "size": "Large",
-   "identity": "A snowed-in Nova 6 facility in three lanes, built around a central building with a second floor. Genuine verticality — silos to the east, a multi-storey to the west, and catwalks over the middle.",
+   "identity": "A fairly large snowed-in facility with real verticality — silos, a factory, catwalks, rafters and a middle house you can see most of the map from. Height is the whole game here.",
    "sides": [
     {
-     "id": "east",
-     "name": "East (silos)",
-     "spawn": "The eastern limit of the map, near the large silos.",
-     "opening": "Get to the second floor of the central building. That is the game — everything else is negotiating for it.",
-     "flank": "North through the narrow alley beside the main building into their half.",
-     "pinch": "The alley exit into the western side. Narrow, single file, and covered from the multi-storey."
+     "id": "spetsnaz",
+     "name": "Spetsnaz (silos)",
+     "spawn": "The Spetsnaz side, below the silos.",
+     "opening": "Climb the elevated positions below the silos and use the distance. The sniper perch by the AC unit gives good cover and watches the middle.",
+     "flank": "Into the factory, which has three major entrances — from there you either watch players crossing the middle or watch for flankers.",
+     "pinch": "Crossing the middle in view of the silos. The elevated positions on that side exist precisely to punish it."
     },
     {
-     "id": "west",
-     "name": "West (warehouse)",
-     "spawn": "The western limit, beside the warehouse.",
-     "opening": "Into the central building's lower level and up, or take the catwalks if the middle is already contested.",
-     "flank": "The wider northern passage into the silo side.",
-     "pinch": "Coming out of the northern passage into open ground under the silos. Overlooked from height on the east."
+     "id": "blackops",
+     "name": "Black Ops",
+     "spawn": "The Black Ops side.",
+     "opening": "Climb the ladder to the rafters — the most elevated position on the map. You can cover teammates from there and alternate between firing spots to keep the enemy guessing.",
+     "flank": "Cut through cat house to middle house, either jumping across or climbing from the ground up.",
+     "pinch": "The catwalk peek. It gives a wide view into the Black Ops spawn, which means it also looks straight back at you."
     }
    ],
    "powerPositions": [
     {
-     "name": "Second floor of the central building",
-     "why": "One of the map's key high-ground positions, overlooking the lanes. Hold it and the enemy has no safe rotation."
+     "name": "The rafters, above the Black Ops spawn",
+     "why": "The most elevated position on the map, with enough spots to alternate your fire from so nobody pins down where you are."
     },
     {
-     "name": "The catwalks",
-     "why": "Height over the middle with multiple exits. Strong, and exposed from the silos — take a look, take a kill, move."
+     "name": "The second level of middle house",
+     "why": "A 360-degree view of most of the map. The ground floor is a death trap with four entrances; the level above it is the reason to go there at all."
     }
    ],
    "enemySpots": [
     {
-     "name": "The silos to the east",
-     "note": "Elevated, covering the open middle. Check them before crossing."
+     "name": "The warehouse overlooking the silos",
+     "note": "Explicitly a camper's haven. From its top there's a clear view of the whole silo area."
     },
     {
-     "name": "The second floor windows",
-     "note": "If you don't hold the centre, expect fire from it."
+     "name": "The sniper perch by the AC unit",
+     "note": "Good cover watching the middle. Assume it's occupied before you cross."
     },
     {
-     "name": "The western multi-storey",
-     "note": "The mirror of the silos, covering the same ground from the other side."
+     "name": "The factory's three entrances and the catwalk",
+     "note": "Both watch the middle crossings and the flank routes."
     }
    ],
-   "trap": "Crossing the middle at ground level while the centre is contested. The verticality means you can be visible from the silos, the second floor and the catwalks at once — three angles you cannot all watch. Take a lane and stay in it until the centre is settled.",
+   "trap": "Playing middle house on the ground floor. It has four main entrances, which makes it a very risky area — you cannot watch them all, and people arrive from every side. The second level is what you actually came for; the ground floor is where you die.",
    "loadout": {
     "weapon": "Commando",
-    "weaponWhy": "3-shot kill to 45.7m with manageable recoil — the lanes are long enough to punish an SMG but not so long you need an M16.",
+    "weaponWhy": "3-shot kill to 45.7m with manageable recoil — the lanes are long enough to punish an SMG without demanding a full long-range build.",
     "perk": "Ghost",
-    "perkWhy": "Three lanes means a flank is always available, and it only works if they can't see you take it."
+    "perkWhy": "The flank routes through cat house and the factory only work if they can't see you take them."
    },
    "deeper": [
-    "The extended northern lane offers both a narrow alley beside the main building and a wider passage further out. The alley is faster and far more dangerous.",
-    "Verticality is the whole map. Before you cross anything, look up.",
-    "A freight train passes along the railway on the west side at random times — noise cover, and a distraction that works both ways."
+    "The stairs give good cover against players rushing out of the Black Ops spawn, especially against the cat house windows.",
+    "Verticality is the point of this map: silos, sniper perch, factory, catwalk, rafters and middle house's upper level are all elevated. Before you cross anything, look up.",
+    "A freight train passes on the west-side railway at random times — noise cover that works both ways.",
+    "The catwalk is reached by ladder and sees a good portion of the map, but it is a known route rather than a hidden one."
    ],
    "verified": [
-    "A Nova 6 facility in the Soviet Union, snowy landscape",
-    "Three lanes with verticality as the defining feature",
-    "Key high ground: the silos to the east, the second floor of the central building, a multi-storey to the west, and the catwalks",
-    "Team spawns are on the eastern and western limits — east by the silos, west beside a warehouse",
-    "The northern lane has both a narrow alley beside the main building and a wider passage further north",
-    "A freight train passes on the west-side railway at random times"
+    "A fairly large map (ZigZack, IGN map recon)",
+    "Below the silos there are elevated positions to climb and use the distance from (ZigZack)",
+    "A sniper perch with an AC unit gives cover and watches the middle of the map (ZigZack)",
+    "The factory has three major entrances and watches both the middle crossings and flankers (ZigZack)",
+    "A ladder leads to the catwalk, which sees a good portion of the map and peeks into the Black Ops spawn (ZigZack)",
+    "A ladder in the Black Ops spawn leads to the rafters — the most elevated position on the map, with multiple firing spots (ZigZack)",
+    "Cat house connects to middle house; you can jump across or climb from the ground (ZigZack)",
+    "Middle house has four main entrances making it very risky, but its second level gives a 360-degree view of most of the map (ZigZack)",
+    "Stairs give cover against players rushing from the Black Ops spawn, especially into cat house windows (ZigZack)",
+    "The warehouse overlooking the silos is a camper's haven with a clear view of the silo area from the top (ZigZack)",
+    "A Nova 6 facility in the Soviet Union; a freight train passes on the west-side railway (CoD Wiki)"
    ],
    "diagram": null,
    "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)"
@@ -717,67 +751,75 @@
    "id": "launch",
    "name": "Launch",
    "size": "Large",
-   "identity": "A Soviet cosmodrome with a Soyuz rocket at its heart. As vertical as it is horizontal — and about halfway through the match the rocket launches and kills anyone standing under it.",
+   "identity": "Not actually a small map, though it plays like one because everybody forces the same few routes. The middle is split in two by railroad tracks and is deeply unstable — this is a team map, and solo heroics do not get through enemy lines.",
    "sides": [
     {
-     "id": "control",
-     "name": "Control end",
-     "spawn": "By the control structures.",
-     "opening": "Work the building side toward the middle and get a level up. The ground under the rocket is contested and, later, lethal.",
-     "flank": "Through the side structures into their half, staying under cover.",
-     "pinch": "Stepping into the open beneath the rocket. Long sightlines and height on both sides cover it."
+     "id": "spetsnaz",
+     "name": "Spetsnaz",
+     "spawn": "The Spetsnaz side. The back area behind it is wide open with a handful of spawn points — which is exactly why air strikes land there.",
+     "opening": "Push up the left side toward the middle, but expect it: that's the most popular choke breaching this spawn, and it will be full of grenades and flashes.",
+     "flank": "Bottom rocket into the three-storey area, which takes you up to top rocket with one press of sprint.",
+     "pinch": "The left-side choke. If you get through the nades and flashes you reach the centre — plenty don't."
     },
     {
-     "id": "pad",
-     "name": "Pad end",
-     "spawn": "The far end, toward the launch structures.",
-     "opening": "Up into the structures and take an angle over the middle instead of crossing it.",
-     "flank": "Round the outside past the support buildings.",
-     "pinch": "The gap between the structures and the pad — brief exposure, clean sightlines both ways."
+     "id": "blackops",
+     "name": "Black Ops",
+     "spawn": "The Black Ops side. More confined, which funnels foot traffic into a single area.",
+     "opening": "Push out. Getting spawn trapped here is very hard to recover from, so the priority is not letting it start.",
+     "flank": "The mirrored bridge, or the identical three-storey route on this side of the rocket for long peeks on enemies spawning opposite.",
+     "pinch": "The back rooms of your own spawn — a popular spot for enemy equipment. Check for claymores and tactical insertions."
     }
    ],
    "powerPositions": [
     {
-     "name": "Elevated in the structures overlooking the pad",
-     "why": "You own the map's main open space without standing in it, and the vertical routes are what the map is built around."
+     "name": "Top rocket, via the three-storey area",
+     "why": "Both sides have an identical three-storey route from bottom rocket to top rocket that you clear with one press of sprint. The same jumps on the far side of the rocket give long-range peeks onto enemies spawning opposite."
     },
     {
-     "name": "The interior routes around the edge",
-     "why": "They connect the ends without exposure, which is exactly the problem Launch poses."
+     "name": "The middle crossing that overlooks the centre",
+     "why": "A major route into the Spetsnaz side, and it gets exceptional vision on anyone running straight through the middle."
     }
    ],
    "enemySpots": [
     {
-     "name": "Elevated positions over the pad",
-     "note": "The map is heavily vertical and both ends have height. Check up."
+     "name": "Overlooking the middle",
+     "note": "Most firefights start and end in the centre, and the routes across it are watched."
     },
     {
-     "name": "Under and around the rocket",
-     "note": "The centre is contested in every mode — it's the objective location in most of them."
+     "name": "The back Black Ops spawn rooms",
+     "note": "A popular area for equipment — claymores and tactical insertions rather than players."
     },
     {
-     "name": "Building interiors",
-     "note": "Short angles, advantage to whoever is set."
+     "name": "The three-storey areas either side of the rocket",
+     "note": "Both sides are identical, so whatever you're doing, they can do back."
     }
    ],
-   "trap": "Being under the rocket when it launches. It goes at roughly the halfway point of the match and sets alight and kills anyone beneath the engines. The centre is also where everyone fights, so the moment of maximum temptation and maximum danger are the same moment.",
+   "trap": "The middle. It's split in two by the railroad tracks and it is almost impossible to watch every angle — most firefights and most deaths start and end there. Solo pushes through it are the specific thing this map punishes.",
    "loadout": {
     "weapon": "Galil",
     "weaponWhy": "45.7m of 3-shot range handles the medium-long lanes without being useless inside the structures.",
     "perk": "Hardened",
-    "perkWhy": "A lot of fights here are through thin structures and at ranges where flinch decides the trade."
+    "perkWhy": "A lot of fights here are through structures and at ranges where flinch decides the trade."
    },
    "deeper": [
-    "Treat the launch as a timed event. Decide in advance where you'll be when it happens, and make sure it isn't underneath.",
-    "The map was one of the first in the series built for vertical play — if you're fighting only on the ground floor you're using half of it.",
-    "Long rotations make this a strong Blackbird map."
+    "The barriers in the middle are bulletproof — real cover, not decoration. Use them rather than sprinting between them.",
+    "Air strikes on the open back area of the Spetsnaz spawn are unusually effective because of the number of spawn points clustered there.",
+    "Getting spawn trapped in the Black Ops spawn is very difficult to recover from. If your team is being pinned, the answer is a coordinated push out, not individuals trying to break it.",
+    "The rocket launches around the halfway point and kills anyone beneath the engines — decide in advance where you'll be.",
+    "This map rewards playing with your team more than any other in the rotation."
    ],
    "verified": [
-    "Set at the Baikonur Cosmodrome, with a Soyuz 2 rocket",
-    "The rocket launches around the halfway point of the match",
-    "It sets alight and kills anyone located beneath the engines",
-    "The map is as vertical as it is horizontal, using the rocket as a major part of its structure",
-    "The area under the rocket is the objective location in Domination, Demolition and S&D"
+    "Not considered a small map, though most people feel like it is; plenty of routes exist but most players force the popular ones (ZigZack, IGN map recon)",
+    "A very unstable middle section makes it a team-oriented map where solo pushes fail (ZigZack)",
+    "The back area of the Spetsnaz spawn is wide open with a handful of spawn points — good for air strikes (ZigZack)",
+    "Pushing the left side reaches the most popular choke breaching the Spetsnaz spawn, defended with grenades and flashes (ZigZack)",
+    "The centre is split in two by railroad tracks, and the barriers there are bulletproof (ZigZack)",
+    "The Black Ops spawn is more confined with concentrated foot traffic; its back rooms are a popular equipment spot — check for claymores and tactical insertions (ZigZack)",
+    "Being spawn trapped in the Black Ops spawn is very hard to recover from (ZigZack)",
+    "Both sides have an identical three-storey area linking bottom rocket to top rocket, clearable with one sprint; the same route on the far side gives long peeks onto opposite spawns (ZigZack)",
+    "A mirrored bridge leads back to the Spetsnaz side; a middle route gets exceptional vision on people running through the middle (ZigZack)",
+    "Most firefights and deaths start and end in the middle (ZigZack)",
+    "Set at the Baikonur Cosmodrome; the rocket launches mid-match and kills anyone beneath the engines (CoD Wiki)"
    ],
    "diagram": null,
    "minimapUrl": "https://callofduty.fandom.com/wiki/Launch"

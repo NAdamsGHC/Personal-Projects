@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="320" viewBox="0 0 420 320" role="img" aria-label="Summit tactical schematic: the control room at the centre with four choke points, the porch reached via back rooms or the electrical room, the rock area and skinny bridge on the west, and the Black Ops spawn balcony.">
+  <defs>
+    <pattern id="sm-danger" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.42"/>
+    </pattern>
+    <marker id="sm-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8fb0aa"/>
+    </marker>
+    <style>
+      .b  { fill:#2b353c; stroke:#55636e; stroke-width:1.2; }
+      .g  { fill:#212a30; stroke:#3f4c55; stroke-width:1; }
+      .sp { fill:#17313a; stroke:#8fb0aa; stroke-width:1.2; }
+      .t  { fill:#e6ecec; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:10.5px; letter-spacing:1px; }
+      .ts { fill:#93a4a6; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:9px; letter-spacing:0.8px; }
+      .td { fill:#d99a90; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:9px; letter-spacing:0.8px; }
+      .link { stroke:#55636e; stroke-width:1.4; fill:none; stroke-dasharray:3 3; }
+      .route { fill:none; stroke:#8fb0aa; stroke-width:2; stroke-dasharray:6 4; marker-end:url(#sm-arrow); }
+      .pin { fill:#d98b4a; }
+      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:9.5px; font-weight:700; }
+      .choke { fill:none; stroke:#c25b4e; stroke-width:1.8; }
+    </style>
+  </defs>
+
+  <text class="t"  x="8" y="16">SUMMIT</text>
+  <text class="ts" x="66" y="16">— FOUR CHOKES, ALL INVOLVING THE CONTROL ROOM</text>
+
+  <!-- control room, centre -->
+  <rect class="b" x="140" y="112" width="140" height="96" rx="2"/>
+  <text class="t"  x="148" y="132">CONTROL ROOM</text>
+  <text class="ts" x="148" y="147">TOP · MULTIPLE LEVELS</text>
+  <text class="ts" x="148" y="160">AND WINDOWS</text>
+  <line class="link" x1="148" y1="168" x2="272" y2="168"/>
+  <text class="ts" x="148" y="182">BOTTOM · SMG PEEKS</text>
+  <text class="td" x="148" y="199">~6 ENTRANCES</text>
+
+  <!-- middle hall -->
+  <rect class="g choke" x="140" y="216" width="140" height="20" rx="2"/>
+  <text class="td" x="146" y="230">MIDDLE HALL — FLASH IT</text>
+
+  <!-- back rooms: choke, quickest route to porch -->
+  <rect class="g choke" x="292" y="112" width="82" height="34" rx="2"/>
+  <text class="td" x="297" y="126">BACK ROOMS</text>
+  <text class="ts" x="297" y="139">AVOID · FAST</text>
+
+  <!-- porch -->
+  <rect class="b" x="292" y="156" width="82" height="34" rx="2"/>
+  <text class="t"  x="297" y="171">PORCH</text>
+  <text class="td" x="297" y="184">NADE MAGNET</text>
+
+  <!-- electrical room: alternate route to porch -->
+  <rect class="g" x="292" y="200" width="82" height="32" rx="2"/>
+  <text class="ts" x="297" y="215">ELECTRICAL</text>
+  <text class="ts" x="297" y="227">ROOM</text>
+
+  <!-- back area + back stairs, underused -->
+  <rect class="b" x="140" y="60" width="66" height="40" rx="2"/>
+  <text class="ts" x="145" y="76">BACK AREA</text>
+  <text class="ts" x="145" y="89">SEES SPAWNS</text>
+  <rect class="b" x="214" y="60" width="66" height="40" rx="2"/>
+  <text class="ts" x="219" y="76">BACK</text>
+  <text class="ts" x="219" y="89">STAIRS</text>
+
+  <!-- west: rock area, double barrels, skinny bridge -->
+  <rect class="b" x="20" y="112" width="100" height="38" rx="2"/>
+  <text class="t"  x="26" y="128">ROCK AREA</text>
+  <text class="ts" x="26" y="142">SNIPER · WEST VIEW</text>
+
+  <rect class="g" x="20" y="158" width="100" height="28" rx="2"/>
+  <text class="ts" x="26" y="176">DOUBLE BARRELS</text>
+
+  <rect class="g choke" x="20" y="194" width="100" height="26" rx="2"/>
+  <text class="td" x="26" y="211">SKINNY BRIDGE</text>
+  <text class="ts" x="26" y="234">TREES — SNIPERS SHOOT THROUGH</text>
+
+  <!-- spawns -->
+  <rect class="sp" x="20" y="252" width="132" height="26" rx="2"/>
+  <text class="t" x="26" y="269">SPETSNAZ SPAWN</text>
+
+  <rect class="sp" x="268" y="252" width="132" height="26" rx="2"/>
+  <text class="t" x="274" y="269">BLACK OPS SPAWN</text>
+  <text class="ts" x="274" y="288">BALCONY — VIEWS MAJOR SPAWNS</text>
+
+  <!-- connections -->
+  <line class="link" x1="120" y1="131" x2="140" y2="140"/>
+  <line class="link" x1="280" y1="130" x2="292" y2="129"/>
+  <line class="link" x1="332" y1="146" x2="332" y2="156"/>
+  <line class="link" x1="332" y1="200" x2="332" y2="190"/>
+  <line class="link" x1="86" y1="220" x2="86" y2="252"/>
+  <line class="link" x1="206" y1="100" x2="206" y2="112"/>
+
+  <!-- route: spawn -> control room -->
+  <path class="route" d="M334 252 L316 236 L300 214"/>
+
+  <!-- markers -->
+  <circle class="pin" cx="266" cy="126" r="9"/><text class="pint" x="263" y="129.5">1</text>
+  <circle class="pin" cx="192" cy="70" r="9"/><text class="pint" x="189" y="73.5">2</text>
+
+  <text class="ts" x="8" y="304">ORIENTATION APPROXIMATE — ONLY THE WEST-SIDE ROCK AREA IS STATED IN THE SOURCE</text>
+  <circle class="pin" cx="14" cy="316" r="6"/><text class="pint" x="11.5" y="319">1</text>
+  <text class="ts" x="25" y="319">TOP CONTROL ROOM</text>
+  <circle class="pin" cx="158" cy="316" r="6"/><text class="pint" x="155.5" y="319">2</text>
+  <text class="ts" x="169" y="319">BACK AREA / BACK STAIRS — UNDERUSED</text>
+</svg>

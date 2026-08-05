@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="280" viewBox="0 0 420 280" role="img" aria-label="Firing Range tactical schematic: central sniper tower linked by a wooden beam to a building, with a contested courtyard overlooked by a rooftop and windows.">
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="330" viewBox="0 0 420 330" role="img" aria-label="Firing Range tactical schematic: Tropas spawn north, OP 40 spawn south, three routes, with the garage, wooden bunker, sandbags, double barrels, the nook, sniper perch, back alley and the shipping container choke.">
   <defs>
     <pattern id="fr-danger" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.42"/>
@@ -11,84 +11,89 @@
       .g  { fill:#212a30; stroke:#3f4c55; stroke-width:1; }
       .sp { fill:#17313a; stroke:#8fb0aa; stroke-width:1.2; }
       .t  { fill:#e6ecec; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:11px; letter-spacing:1.2px; }
+            font-size:10.5px; letter-spacing:1px; }
       .ts { fill:#93a4a6; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:9.5px; letter-spacing:1px; }
+            font-size:9px; letter-spacing:0.8px; }
       .td { fill:#d99a90; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-            font-size:9.5px; letter-spacing:1px; }
+            font-size:9px; letter-spacing:0.8px; }
       .route { fill:none; stroke:#8fb0aa; stroke-width:2; stroke-dasharray:6 4; marker-end:url(#fr-arrow); }
-      .beam { stroke:#8a7d5f; stroke-width:4; stroke-linecap:round; }
       .pin { fill:#d98b4a; }
-      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:10px; font-weight:700; }
-      .sight { stroke:#c25b4e; stroke-width:1.3; stroke-dasharray:4 3; fill:none; opacity:0.85; }
+      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:9.5px; font-weight:700; }
+      .choke { fill:none; stroke:#c25b4e; stroke-width:1.8; }
     </style>
   </defs>
 
-  <text class="t"  x="8" y="20">FIRING RANGE</text>
-  <text class="ts" x="104" y="20">— SCHEMATIC, NOT TO SCALE</text>
+  <text class="t"  x="8" y="16">FIRING RANGE</text>
+  <text class="ts" x="104" y="16">— THREE ROUTES: LEFT FLANK · MIDDLE ROAD · RIGHT FLANK</text>
+
+  <!-- north: Tropas spawn -->
+  <rect class="sp" x="150" y="28" width="120" height="24" rx="2"/>
+  <text class="t" x="157" y="44">TROPAS SPAWN · N</text>
+
+  <!-- the second shooting range -->
+  <rect class="b" x="108" y="60" width="204" height="40" rx="2"/>
+  <text class="t"  x="115" y="76">SHOOTING RANGE</text>
+  <text class="td" x="115" y="91">CAMPERS + SPAWN POINTS</text>
 
   <!-- bathroom hut, north-west -->
-  <rect class="b" x="24" y="36" width="62" height="40" rx="2"/>
-  <text class="ts" x="28" y="54">BATHROOM</text>
-  <text class="ts" x="28" y="66">HUT · 2 EXITS</text>
+  <rect class="b" x="22" y="60" width="76" height="40" rx="2"/>
+  <text class="ts" x="27" y="77">BATHROOM HUT</text>
+  <text class="ts" x="27" y="90">TWO EXITS</text>
 
-  <!-- the wooden house — hotly contested -->
-  <rect class="b" x="42" y="104" width="94" height="66" rx="2"/>
-  <text class="t"  x="48" y="126">WOODEN</text>
-  <text class="t"  x="48" y="140">HOUSE</text>
-  <text class="ts" x="48" y="156">HOTLY CONTESTED</text>
+  <!-- shipping container choke -->
+  <rect class="g choke" x="188" y="108" width="84" height="20" rx="2"/>
+  <text class="td" x="192" y="122">SHIPPING CONTAINER</text>
 
-  <!-- central tower C3 -->
-  <rect class="b" x="182" y="100" width="46" height="50" rx="2"/>
-  <text class="t"  x="188" y="122">TOWER</text>
-  <text class="ts" x="188" y="136">C3 · LADDER</text>
+  <!-- back alley -->
+  <rect class="g" x="96" y="108" width="34" height="70" rx="2"/>
+  <text class="ts" x="99" y="140">BACK</text>
+  <text class="ts" x="99" y="152">ALLEY</text>
 
-  <!-- wooden beam across to D3 -->
-  <line class="beam" x1="228" y1="124" x2="266" y2="124"/>
-  <text class="ts" x="230" y="116">BEAM</text>
+  <!-- wooden bunker -->
+  <rect class="b" x="148" y="138" width="120" height="42" rx="2"/>
+  <text class="t"  x="155" y="156">WOODEN BUNKER</text>
+  <text class="ts" x="155" y="171">TOP WOODEN</text>
 
-  <!-- building D3 -->
-  <rect class="b" x="266" y="96" width="70" height="56" rx="2"/>
-  <text class="t"  x="272" y="118">BUILDING</text>
-  <text class="ts" x="272" y="132">D3</text>
+  <!-- sniper perch + the nook (right) -->
+  <rect class="b" x="298" y="138" width="76" height="34" rx="2"/>
+  <text class="ts" x="303" y="158">SNIPER PERCH</text>
+  <rect class="g" x="298" y="178" width="76" height="28" rx="2"/>
+  <text class="ts" x="303" y="196">THE NOOK</text>
 
-  <!-- courtyard: the crossfire -->
-  <rect x="150" y="160" width="200" height="60" fill="url(#fr-danger)" stroke="#c25b4e" stroke-width="1" rx="2"/>
-  <text class="td" x="158" y="184">COURTYARD — MANY VANTAGE POINTS</text>
-  <text class="td" x="158" y="198">CROSSFIRE. DO NOT SPRINT THROUGH.</text>
+  <!-- sandbags -->
+  <rect class="g" x="152" y="186" width="112" height="18" rx="2"/>
+  <text class="ts" x="157" y="199">SANDBAGS</text>
 
-  <!-- rooftop D4 and windows E4 overlooking the courtyard -->
-  <rect class="g" x="266" y="224" width="60" height="30" rx="2"/>
-  <text class="ts" x="270" y="243">ROOFTOP D4</text>
-  <rect class="g" x="344" y="160" width="60" height="30" rx="2"/>
-  <text class="ts" x="348" y="179">WINDOWS E4</text>
+  <!-- lower mid: the peeked ground -->
+  <rect x="152" y="210" width="112" height="24" fill="url(#fr-danger)" stroke="#c25b4e" stroke-width="1" rx="2"/>
+  <text class="td" x="157" y="226">LOWER MID</text>
 
-  <!-- sightlines onto the courtyard -->
-  <path class="sight" d="M296 224 L262 220"/>
-  <path class="sight" d="M344 176 L350 178"/>
-  <path class="sight" d="M205 150 L215 160"/>
+  <!-- double barrels, left flank -->
+  <rect class="b" x="34" y="186" width="76" height="34" rx="2"/>
+  <text class="ts" x="39" y="200">DOUBLE</text>
+  <text class="ts" x="39" y="212">BARRELS</text>
 
-  <!-- spawns (ends approximate) -->
-  <rect class="sp" x="20" y="212" width="62" height="34" rx="2"/>
-  <text class="t"  x="25" y="228">SPAWN</text>
-  <text class="ts" x="25" y="240">END A</text>
+  <!-- garage -->
+  <rect class="b" x="168" y="242" width="118" height="34" rx="2"/>
+  <text class="t"  x="175" y="258">GARAGE</text>
+  <text class="ts" x="175" y="271">ELEVATED · TOP GARAGE</text>
 
-  <rect class="sp" x="338" y="36" width="62" height="34" rx="2"/>
-  <text class="t"  x="343" y="52">SPAWN</text>
-  <text class="ts" x="343" y="64">END B</text>
+  <!-- south: OP 40 spawn -->
+  <rect class="sp" x="168" y="282" width="118" height="24" rx="2"/>
+  <text class="t" x="175" y="298">OP 40 SPAWN · S</text>
 
-  <!-- route: hug the buildings, avoid the courtyard -->
-  <path class="route" d="M52 212 L46 178 L92 172 L140 150"/>
+  <!-- route: spawn -> garage -> sandbags -> double barrels -->
+  <path class="route" d="M226 282 L226 278"/>
+  <path class="route" d="M200 242 L188 210 L172 196"/>
+  <path class="route" d="M152 195 L112 200"/>
 
   <!-- markers -->
-  <circle class="pin" cx="126" cy="112" r="9"/><text class="pint" x="123" y="116">1</text>
-  <circle class="pin" cx="218" cy="108" r="9"/><text class="pint" x="215" y="112">2</text>
+  <circle class="pin" cx="258" cy="150" r="9"/><text class="pint" x="255" y="153.5">1</text>
+  <circle class="pin" cx="276" cy="252" r="9"/><text class="pint" x="273" y="255.5">2</text>
 
   <!-- legend -->
-  <circle class="pin" cx="14" cy="266" r="6"/><text class="pint" x="11.5" y="269.5">1</text>
-  <text class="ts" x="25" y="269">WOODEN HOUSE — THE MAP'S MAIN PRIZE</text>
-  <circle class="pin" cx="224" cy="266" r="6"/><text class="pint" x="221.5" y="269.5">2</text>
-  <text class="ts" x="235" y="269">TOWER — STRONG, AND GRENADED CONSTANTLY</text>
-
-  <text class="ts" x="8" y="256">SPAWN ENDS APPROXIMATE — NOT SOURCED</text>
+  <circle class="pin" cx="14" cy="316" r="6"/><text class="pint" x="11.5" y="319">1</text>
+  <text class="ts" x="25" y="319">TOP WOODEN — EYES ON MOST OF THE MAP</text>
+  <circle class="pin" cx="238" cy="316" r="6"/><text class="pint" x="235.5" y="319">2</text>
+  <text class="ts" x="249" y="319">GARAGE — WATCHES THE CROSSINGS</text>
 </svg>
