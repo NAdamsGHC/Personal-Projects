@@ -110,7 +110,25 @@ function renderBrief() {
   const spawnField = el("div", "field", "<h3>Spawns</h3>");
   spawnField.appendChild(toggle);
   spawnField.appendChild(el("p", "", `<strong>You start:</strong> ${esc(side.spawn)}`));
-  spawnField.appendChild(el("p", "", `<span style="color:var(--dimmer)">They start at the other end. Spawns flip when your team pushes past the middle — if it goes quiet, check behind you.</span>`));
+  const ss = DATA.maps.spawnSystem;
+  if (ss) {
+    const how = el("details", "ref");
+    how.style.marginTop = "10px";
+    how.appendChild(el("summary", "", "How spawns actually work"));
+    const hb = el("div", "body");
+    hb.appendChild(el("p", "", esc(ss.how)));
+    hb.appendChild(el("div", "kv", `<div class="k">What flips them</div>`));
+    const tl = el("ul", "challenges");
+    ss.triggers.forEach((t) => tl.appendChild(el("li", "", esc(t))));
+    hb.appendChild(tl);
+    hb.appendChild(el("div", "kv", `<div class="k">How you spot it</div>`));
+    const el2 = el("ul", "challenges");
+    ss.tells.forEach((t) => el2.appendChild(el("li", "", esc(t))));
+    hb.appendChild(el2);
+    hb.appendChild(el("p", "src", esc(ss.source)));
+    how.appendChild(hb);
+    spawnField.appendChild(how);
+  }
   box.appendChild(spawnField);
 
   // 3 — power positions
@@ -154,11 +172,20 @@ function renderBrief() {
   }
   box.appendChild(load);
 
-  // diagram slot — empty until the schematics are drawn
-  const dia = el("div", "diagram-slot", m.diagram
-    ? m.diagram
-    : `Tactical schematic not drawn yet &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`);
-  box.appendChild(dia);
+  // diagram — a drawn schematic where one exists, otherwise a link out
+  if (m.diagram) {
+    const fig = el("figure", "diagram");
+    const img = document.createElement("img");
+    img.src = m.diagram;
+    img.alt = `${m.name} tactical schematic`;
+    fig.appendChild(img);
+    fig.appendChild(el("figcaption", "",
+      `Schematic, not to scale &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`));
+    box.appendChild(fig);
+  } else {
+    box.appendChild(el("div", "diagram-slot",
+      `Tactical schematic not drawn yet &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`));
+  }
 
   // below the fold — leisure reading
   const deep = el("details", "ref");

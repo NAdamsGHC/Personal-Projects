@@ -315,6 +315,29 @@ footer code { color: var(--dim); }
 }
 .loadout-call .why { font-size: 0.86rem; color: var(--dim); }
 
+figure.diagram {
+  margin: 16px 0 4px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--panel);
+  overflow: hidden;
+}
+figure.diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+figure.diagram figcaption {
+  padding: 8px 10px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--dimmer);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+figure.diagram figcaption a { color: var(--accent); }
+
 .diagram-slot {
   margin: 14px 0 4px;
   border: 1px dashed var(--line);
