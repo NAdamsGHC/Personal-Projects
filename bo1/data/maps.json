@@ -787,7 +787,7 @@
     "The warehouse overlooking the silos is a camper's haven with a clear view of the silo area from the top (ZigZack)",
     "A Nova 6 facility in the Soviet Union; a freight train passes on the west-side railway (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/wmd.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)"
   },
   {
@@ -864,7 +864,7 @@
     "Most firefights and deaths start and end in the middle (ZigZack)",
     "Set at the Baikonur Cosmodrome; the rocket launches mid-match and kills anyone beneath the engines (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/launch.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Launch"
   },
   {
