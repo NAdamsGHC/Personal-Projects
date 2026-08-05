@@ -168,6 +168,20 @@ function renderBrief() {
   deep.appendChild(body);
   box.appendChild(deep);
 
+  // what's sourced vs what's reasoning — stated per map rather than buried
+  if (m.verified && m.verified.length) {
+    const ver = el("details", "ref");
+    ver.appendChild(el("summary", "", "Checked against the wiki"));
+    const vb = el("div", "body");
+    const ul = el("ul", "challenges");
+    m.verified.forEach((v) => ul.appendChild(el("li", "", esc(v))));
+    vb.appendChild(ul);
+    vb.appendChild(el("p", "src",
+      "Everything above that isn't in this list — routes, pinch points, opening moves — is reasoning from the layout, not a sourced fact."));
+    ver.appendChild(vb);
+    box.appendChild(ver);
+  }
+
   box.appendChild(el("p", "src",
     `Layout: ${esc(DATA.maps.source.layout)} Tactics: ${esc(DATA.maps.source.tactics)}`));
 }
