@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="340" viewBox="0 0 420 340" role="img" aria-label="Radiation tactical schematic: Spetsnaz side with shipping room, tower walkways and lookout; a centre of controllable gates, reactor room and upper control room; the Black Ops spawn and forklift; and a basement tunnel with five access points beneath.">
+  <defs>
+    <pattern id="rd-danger" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.42"/>
+    </pattern>
+    <style>
+      .b  { fill:#2b353c; stroke:#55636e; stroke-width:1.2; }
+      .g  { fill:#212a30; stroke:#3f4c55; stroke-width:1; }
+      .sp { fill:#17313a; stroke:#8fb0aa; stroke-width:1.2; }
+      .t  { fill:#e6ecec; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:10px; letter-spacing:0.9px; }
+      .ts { fill:#93a4a6; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:8.4px; letter-spacing:0.6px; }
+      .td { fill:#d99a90; font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+            font-size:8.4px; letter-spacing:0.6px; }
+      .pin { fill:#d98b4a; }
+      .pint { fill:#0b0f11; font-family:ui-sans-serif,system-ui,sans-serif; font-size:9.5px; font-weight:700; }
+      .choke { fill:none; stroke:#c25b4e; stroke-width:1.8; }
+      .gate { fill:#243036; stroke:#d98b4a; stroke-width:1.6; stroke-dasharray:5 3; }
+    </style>
+  </defs>
+
+  <text class="t"  x="8" y="16">RADIATION</text>
+  <text class="ts" x="82" y="16">— FASTEST MAP: CONSTANT PRESSURE WRECKS THEIR SPAWNS</text>
+
+  <!-- Spetsnaz column -->
+  <rect class="sp" x="12" y="28" width="98" height="26" rx="2"/>
+  <text class="t" x="17" y="45">SPETSNAZ</text>
+
+  <rect class="b" x="12" y="60" width="98" height="36" rx="2"/>
+  <text class="ts" x="17" y="75">SHIPPING ROOM</text>
+  <text class="ts" x="17" y="88">CAMPERS + SPAWNS</text>
+
+  <rect class="g" x="12" y="102" width="98" height="32" rx="2"/>
+  <text class="ts" x="17" y="117">TOWER WALKWAYS</text>
+  <text class="td" x="17" y="129">LONG + NARROW</text>
+
+  <rect class="b" x="12" y="140" width="98" height="38" rx="2"/>
+  <text class="t"  x="17" y="155">LOOKOUT</text>
+  <text class="ts" x="17" y="168">ELEVATED · SEES CENTRE</text>
+
+  <rect class="g" x="12" y="184" width="98" height="30" rx="2"/>
+  <text class="ts" x="17" y="199">LOWER SPETSNAZ</text>
+  <text class="ts" x="17" y="211">MOSTLY EMPTY</text>
+
+  <!-- centre column -->
+  <rect class="g" x="122" y="28" width="82" height="26" rx="2"/>
+  <text class="ts" x="127" y="44">FAN AREA</text>
+
+  <rect class="g" x="212" y="28" width="82" height="26" rx="2"/>
+  <text class="ts" x="217" y="44">THE ROOF</text>
+
+  <rect class="gate" x="122" y="60" width="172" height="24" rx="2"/>
+  <text class="t" x="127" y="76">MIDDLE GATES — OPENABLE</text>
+
+  <rect class="g" x="122" y="90" width="82" height="30" rx="2"/>
+  <text class="ts" x="127" y="105">DOUBLE</text>
+  <text class="ts" x="127" y="117">WINDOWS</text>
+
+  <rect class="b" x="212" y="90" width="82" height="42" rx="2"/>
+  <text class="ts" x="217" y="105">UPPER CONTROL</text>
+  <text class="ts" x="217" y="117">ROOM · SEES MID</text>
+  <text class="ts" x="217" y="129">GATE SWITCH</text>
+
+  <rect class="b" x="122" y="138" width="172" height="66" rx="2"/>
+  <text class="t"  x="128" y="154">REACTOR ROOM</text>
+  <text class="td" x="128" y="169">CENTRE = SPAWN HAVEN</text>
+  <text class="ts" x="128" y="183">CONVEYOR BELT →</text>
+  <text class="ts" x="128" y="195">BACK CATWALK</text>
+
+  <rect class="g choke" x="122" y="210" width="172" height="24" rx="2"/>
+  <text class="td" x="127" y="226">BACKSIDE — MAJOR CHOKE, NADES</text>
+
+  <!-- Black Ops column -->
+  <rect class="sp" x="306" y="28" width="102" height="40" rx="2"/>
+  <text class="t"  x="311" y="44">BLACK OPS</text>
+  <text class="ts" x="311" y="60">WIDE OPEN · NOOKS</text>
+
+  <rect class="b" x="306" y="74" width="102" height="34" rx="2"/>
+  <text class="ts" x="311" y="89">SHIPPING ROOM 2</text>
+  <text class="ts" x="311" y="101">→ TUNNEL BELOW</text>
+
+  <rect class="b" x="306" y="114" width="102" height="40" rx="2"/>
+  <text class="t"  x="311" y="129">FORKLIFT</text>
+  <text class="ts" x="311" y="144">SEES MID + BTM REACTOR</text>
+
+  <rect class="g" x="306" y="160" width="102" height="32" rx="2"/>
+  <text class="ts" x="311" y="175">RED BARRELS</text>
+  <text class="td" x="311" y="187">ROUND-START KILLS</text>
+
+  <!-- basement tunnel -->
+  <rect x="12" y="248" width="396" height="42" fill="url(#rd-danger)" stroke="#c25b4e" stroke-width="1.2" rx="2"/>
+  <text class="t"  x="18" y="266">BASEMENT TUNNEL — 5 ACCESS POINTS</text>
+  <text class="td" x="18" y="281">CUTS THE MAP IN HALF · ALMOST AS UNSAFE AS THE CENTRE</text>
+
+  <!-- markers -->
+  <circle class="pin" cx="284" cy="102" r="9"/><text class="pint" x="281" y="105.5">1</text>
+  <circle class="pin" cx="398" cy="126" r="9"/><text class="pint" x="395" y="129.5">2</text>
+
+  <text class="ts" x="8" y="308">MOST FIREFIGHTS ARE OUTDOORS · ORIENTATION APPROXIMATE</text>
+  <circle class="pin" cx="14" cy="326" r="6"/><text class="pint" x="11.5" y="329">1</text>
+  <text class="ts" x="25" y="329">UPPER CONTROL ROOM</text>
+  <circle class="pin" cx="176" cy="326" r="6"/><text class="pint" x="173.5" y="329">2</text>
+  <text class="ts" x="187" y="329">FORKLIFT — VIEWS CENTRE AND BOTTOM REACTOR</text>
+</svg>
