@@ -67,6 +67,10 @@ bo1/
   styles.css            the whole look
   app.js                renders everything from /data
   manifest.webmanifest  Add-to-Home-Screen
+  diagrams/             14 original SVG schematics
+  images/
+    tiles/              map loading art, used on the Pre-Match tiles
+    minimaps/           in-game minimaps, shown under each brief
   data/
     maps.json           14 briefs — the file you'll edit most
     weapons.json        generated, do not hand-edit
@@ -89,7 +93,13 @@ bo1/
 
 ## Legal
 
-Unofficial fan project. Not affiliated with, endorsed by, or sponsored by Activision or
-Treyarch. *Call of Duty* and *Black Ops* are trade marks of their respective owners. No game
-assets are hosted here — map images are linked out to their source, and the visual design is
-original.
+Unofficial, non-commercial fan project. Not affiliated with, endorsed by, or sponsored by
+Activision or Treyarch. *Call of Duty* and *Black Ops* are trade marks of their respective
+owners.
+
+This repo includes **map loading art and in-game minimaps**, sourced via callofdutymaps.com.
+Those are Activision's game assets, reproduced here for reference in a fan project with no
+commercial use. The tactical schematics in `diagrams/` are original drawings — traced from the
+minimaps for geometry, but drawn from scratch. The rest of the visual design is original.
+
+If a rights holder objects, the images come out and the schematics stay.

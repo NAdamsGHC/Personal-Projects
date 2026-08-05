@@ -3,7 +3,8 @@
  "source": {
   "layout": "Call of Duty Wiki map pages (all 14 checked), plus callofdutymaps.com for named structures.",
   "tactics": "Where a map has a ZigZack IGN map-recon walkthrough, the callouts and positions come from that. Otherwise from BO1-era community guides where they exist, and reasoned from the layout where they don't. Each map's 'Checked against the wiki' list says which.",
-  "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference."
+  "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference.",
+  "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project."
  },
  "maps": [
   {
@@ -78,7 +79,9 @@
     "Backyard spawn zones become killing fields immediately after the match starts (community guide)"
    ],
    "diagram": "diagrams/nuketown.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Nuketown_(map)"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Nuketown_(map)",
+   "tile": "images/tiles/nuketown.jpg",
+   "minimap": "images/minimaps/nuketown.png"
   },
   {
    "id": "firing-range",
@@ -158,7 +161,9 @@
     "Favours SMGs, ARs and LMGs; shotguns for defending; snipers difficult (CoD Wiki)"
    ],
    "diagram": "diagrams/firing-range.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range",
+   "tile": "images/tiles/firing-range.jpg",
+   "minimap": "images/minimaps/firing-range.png"
   },
   {
    "id": "summit",
@@ -239,7 +244,9 @@
     "Set in the Ural Mountains with severe drops on all sides (CoD Wiki)"
    ],
    "diagram": "diagrams/summit.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Summit"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Summit",
+   "tile": "images/tiles/summit.jpg",
+   "minimap": "images/minimaps/summit.png"
   },
   {
    "id": "radiation",
@@ -319,7 +326,9 @@
     "The basement tunnel has wide open spaces and five access points, and is almost as unsafe as the centre (ZigZack)"
    ],
    "diagram": "diagrams/radiation.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Radiation"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Radiation",
+   "tile": "images/tiles/radiation.jpg",
+   "minimap": "images/minimaps/radiation.png"
   },
   {
    "id": "jungle",
@@ -397,7 +406,9 @@
     "Classified as a large map by Treyarch; a ruined village and a military base split by a river (CoD Wiki)"
    ],
    "diagram": "diagrams/jungle.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle_(Black_Ops)"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle_(Black_Ops)",
+   "tile": "images/tiles/jungle.jpg",
+   "minimap": "images/minimaps/jungle.png"
   },
   {
    "id": "hanoi",
@@ -475,7 +486,9 @@
     "A North Vietnamese prison based on the Hanoi Hilton, set at night; the dark sky makes Spy Planes hard to spot (CoD Wiki)"
    ],
    "diagram": "diagrams/hanoi.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi",
+   "tile": "images/tiles/hanoi.jpg",
+   "minimap": "images/minimaps/hanoi.png"
   },
   {
    "id": "havana",
@@ -552,7 +565,9 @@
     "The map is the same shape as Crossfire from Call of Duty 4 (CoD Wiki)"
    ],
    "diagram": "diagrams/havana.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Havana"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Havana",
+   "tile": "images/tiles/havana.jpg",
+   "minimap": "images/minimaps/havana.png"
   },
   {
    "id": "grid",
@@ -629,7 +644,9 @@
     "Often quiet in Team Deathmatch and open to stealth play (Dominate Black Ops)"
    ],
    "diagram": "diagrams/grid.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Grid"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Grid",
+   "tile": "images/tiles/grid.jpg",
+   "minimap": "images/minimaps/grid.png"
   },
   {
    "id": "array",
@@ -712,7 +729,9 @@
     "Centred on a large relay dish with surrounding buildings; large open areas make sniping prevalent (CoD Wiki)"
    ],
    "diagram": "diagrams/array.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Array"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Array",
+   "tile": "images/tiles/array.jpg",
+   "minimap": "images/minimaps/array.png"
   },
   {
    "id": "wmd",
@@ -788,7 +807,9 @@
     "A Nova 6 facility in the Soviet Union; a freight train passes on the west-side railway (CoD Wiki)"
    ],
    "diagram": "diagrams/wmd.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)",
+   "tile": "images/tiles/wmd.jpg",
+   "minimap": "images/minimaps/wmd.png"
   },
   {
    "id": "launch",
@@ -865,7 +886,9 @@
     "Set at the Baikonur Cosmodrome; the rocket launches mid-match and kills anyone beneath the engines (CoD Wiki)"
    ],
    "diagram": "diagrams/launch.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Launch"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Launch",
+   "tile": "images/tiles/launch.jpg",
+   "minimap": "images/minimaps/launch.png"
   },
   {
    "id": "villa",
@@ -941,7 +964,9 @@
     "A large house atop a cliff with a central courtyard of rock cover (CoD Wiki)"
    ],
    "diagram": "diagrams/villa.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Villa"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Villa",
+   "tile": "images/tiles/villa.jpg",
+   "minimap": "images/minimaps/villa.png"
   },
   {
    "id": "crisis",
@@ -1017,7 +1042,9 @@
     "A hidden missile facility in Cuba with indoor and outdoor battles and a beach (CoD Wiki)"
    ],
    "diagram": "diagrams/crisis.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Crisis"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Crisis",
+   "tile": "images/tiles/crisis.jpg",
+   "minimap": "images/minimaps/crisis.png"
   },
   {
    "id": "cracked",
@@ -1095,7 +1122,9 @@
     "Basis for the campaign mission The Defector; resembles Hue City (CoD Wiki)"
    ],
    "diagram": "diagrams/cracked.svg",
-   "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked"
+   "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked",
+   "tile": "images/tiles/cracked.jpg",
+   "minimap": "images/minimaps/cracked.png"
   }
  ],
  "spawnSystem": {

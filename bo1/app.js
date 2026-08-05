@@ -63,6 +63,10 @@ function renderMapGrid() {
   grid.innerHTML = "";
   DATA.maps.maps.forEach((m) => {
     const t = el("button", "map-tile", `<b>${esc(m.name)}</b><i>${esc(m.size)}</i>`);
+    if (m.tile) {
+      t.classList.add("has-art");
+      t.style.backgroundImage = `url("${m.tile}")`;
+    }
     t.addEventListener("click", () => openBrief(m.id));
     grid.appendChild(t);
   });
@@ -181,9 +185,23 @@ function renderBrief() {
     img.src = m.diagram;
     img.alt = `${m.name} tactical schematic`;
     fig.appendChild(img);
-    fig.appendChild(el("figcaption", "",
-      `Schematic, not to scale &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`));
+    fig.appendChild(el("figcaption", "", "Schematic &middot; geometry traced from the in-game minimap"));
     box.appendChild(fig);
+  }
+
+  // the real in-game minimap, behind a toggle so the brief stays scannable
+  if (m.minimap) {
+    const mm = el("details", "ref");
+    mm.appendChild(el("summary", "", "In-game minimap"));
+    const mb = el("div", "body");
+    const mfig = el("figure", "diagram minimap");
+    const mimg = document.createElement("img");
+    mimg.src = m.minimap;
+    mimg.alt = `${m.name} in-game minimap`;
+    mfig.appendChild(mimg);
+    mb.appendChild(mfig);
+    mm.appendChild(mb);
+    box.appendChild(mm);
   } else {
     box.appendChild(el("div", "diagram-slot",
       `Tactical schematic not drawn yet &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`));

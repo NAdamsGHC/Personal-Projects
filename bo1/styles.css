@@ -158,6 +158,25 @@ footer code { color: var(--dim); }
   inset: 0;
   background: radial-gradient(90% 70% at 15% 0%, rgba(255,255,255,0.13), transparent 65%);
 }
+
+/* Tiles carrying the map's loading art: desaturate and darken so the
+   name stays readable and the grid still reads as one set. */
+.map-tile.has-art {
+  background-size: cover;
+  background-position: center;
+  min-height: 96px;
+}
+.map-tile.has-art::before {
+  background:
+    linear-gradient(180deg, rgba(9,13,15,0.15) 0%, rgba(9,13,15,0.55) 45%, rgba(9,13,15,0.92) 100%),
+    radial-gradient(120% 90% at 50% 0%, rgba(80,120,120,0.18), transparent 70%);
+  backdrop-filter: saturate(0.55) contrast(1.05);
+}
+.map-tile.has-art b { text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+.map-tile.has-art i { color: rgba(255,255,255,0.78); text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
+
+figure.diagram.minimap { margin: 0; border: 0; background: none; }
+figure.diagram.minimap img { background: #0d1214; }
 .map-tile b {
   position: relative;
   font-size: 0.92rem;
