@@ -47,7 +47,7 @@
    },
    "deeper": [
     "Spawns flip faster here than on any other map. If you kill two people and everything goes quiet, the spawns have already moved — turn around.",
-    "Concussion grenades decide more fights than guns do. Tactical Mask Pro is a genuine counter, and it protects the thing you're best at.",
+    "Concussion grenades decide more fights here than guns do. Tactical Mask Pro is a genuine counter and keeps gunfights winnable on aim.",
     "Claymore behind you in the side lane means you can watch one direction properly instead of two badly."
    ],
    "diagram": null,
@@ -283,7 +283,7 @@
    "deeper": [
     "Pick a half and commit. Players who oscillate between the interior and the lane die in the transition every time.",
     "The interior is a genuine advantage for a good gunfighter — small rooms, short angles, no long-range disadvantage. Play to that.",
-    "A claymore in the corridor behind you converts your worst weakness into a warning system."
+    "A claymore in the corridor behind you turns an unwatchable flank into a warning system."
    ],
    "diagram": null,
    "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi"
@@ -453,7 +453,7 @@
     }
    ],
    "powerPositions": [
-    {"name": "Second floor of the central building", "why": "You were right about this one. It overlooks all three lanes and it's the pivot of the entire map. Hold it and the enemy has no safe rotation."},
+    {"name": "Second floor of the central building", "why": "It overlooks all three lanes and it's the pivot of the entire map. Hold it and the enemy has no safe rotation."},
     {"name": "The catwalks", "why": "Height over the middle with multiple exits. Strong, but exposed from the silos — take a look, take a kill, move."}
    ],
    "enemySpots": [
@@ -555,7 +555,7 @@
     {"name": "Small room corners", "note": "Villa's rooms are tight enough that entering one blind is a coin flip."},
     {"name": "The courtyard overlooks", "note": "Windows and balconies onto the open courtyards."}
    ],
-   "trap": "Sprinting up stairs and through doorways. Villa is wall-to-wall blind corners and the person standing still always wins them. This is the map where your rushing habit costs you most — every death will be to someone who heard you coming and was already aimed at the doorway.",
+   "trap": "Sprinting up stairs and through doorways. Villa is wall-to-wall blind corners and the person standing still always wins them. This is the map that punishes momentum hardest — most deaths here are to someone who heard you coming and was already aimed at the doorway.",
    "loadout": {
     "weapon": "AKS-74U",
     "weaponWhy": "Fast ADS and a 3-shot kill to 19.5m — Villa's fights are almost all inside that range.",

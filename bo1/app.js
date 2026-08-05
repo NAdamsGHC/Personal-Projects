@@ -351,7 +351,7 @@ function renderPerks() {
       ch.appendChild(ol);
       b.appendChild(ch);
       b.appendChild(el("div", "kv", `<div class="k">In TDM</div><div class="v">${esc(p.tdm)}</div>`));
-      b.appendChild(el("div", "kv", `<div class="k">For you</div><div class="v"><strong>${esc(p.forYou)}</strong></div>`));
+      b.appendChild(el("div", "kv", `<div class="k">In practice</div><div class="v"><strong>${esc(p.note)}</strong></div>`));
       dt.appendChild(b);
       box.appendChild(dt);
     });
@@ -544,7 +544,7 @@ function scoreBuild(b, map) {
         ? `Hardline brings them to ${eff.join(" / ")} kills.`
         : `No Hardline, so that's ${eff.join(" / ")} kills in a single life.`) +
       (highest >= 10 && !hardline
-        ? " On a rushing playstyle you will rarely collect the top one — either add Hardline or drop the ceiling."
+        ? " That's a lot of kills in one life — either add Hardline or drop the ceiling."
         : "")
     : "No killstreak profile set.";
   legs.push({ name: "Killstreak realism", pts: clamp(ks, 0, W.killstreaks), max: W.killstreaks, why: ksWhy });

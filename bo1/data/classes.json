@@ -17,7 +17,7 @@
    "tactical": "Concussion",
    "gear": "Claymore",
    "killstreakProfile": "default",
-   "note": "The only one of your five with Hardline, which makes it the only one where high streaks are realistic."
+   "note": "The only preset with Hardline, which makes it the only one where high streaks are realistic."
   },
   {
    "name": "Chabba",
@@ -80,7 +80,7 @@
     {"perks": ["Ghost", "Ninja"], "points": 6, "why": "Off the minimap and silent. The complete concealment package and the basis of any flank."},
     {"perks": ["Hardline"], "points": 5, "why": "Makes high killstreaks actually reachable."},
     {"perks": ["Hardened", "Ninja"], "points": 4, "why": "Reduced flinch plus footstep information — you hear them first and you win the trade."},
-    {"perks": ["Steady Aim"], "points": 5, "why": "Pro shortens the window after sprinting where you can't shoot. Directly targets getting caught mid-sprint."},
+    {"perks": ["Steady Aim"], "points": 5, "why": "Pro shortens the window after sprinting where you can't shoot — the window a lot of deaths happen in."},
     {"perks": ["Flak Jacket", "Tactical Mask"], "points": 5, "why": "The explosive and stun resistance package. Strong on small maps, wasted on large ones."},
     {"perks": ["Marathon"], "points": -6, "why": "Subsidises sprinting into trouble. Actively works against the positioning problem."},
     {"perks": ["Second Chance"], "points": -4, "why": "Costs the Tier 3 slot that Ninja should own, and in TDM the enemy still banks the kill."},

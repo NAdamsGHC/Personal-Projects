@@ -17,8 +17,8 @@
     "Get 15 melee kills",
     "Get 10 Offense Medals by killing enemies near their objective"
    ],
-   "tdm": "Fine, but 7% is smaller than it sounds and Tier 1 is where Ghost and Flak Jacket live. The Pro half — no falling damage — is the real prize, because it opens drops you'd otherwise walk around.",
-   "forYou": "Tempting for a rusher, and that's the problem. Moving faster into the same bad angles gets you there sooner. Skip until the positioning is fixed."
+   "tdm": "Fine, but 7% is smaller than it sounds and Tier 1 is where Ghost and Flak Jacket live. The Pro half — no falling damage — is the real prize, because it opens up drops you'd otherwise walk around.",
+   "note": "Speed only helps if you're going somewhere useful. If you're dying on the way to fights rather than in them, moving faster gets you there sooner and changes nothing. Best on players who already know the routes and want to reach them first."
   },
   {
    "name": "Scavenger",
@@ -33,7 +33,7 @@
     "Resupply 150 times while using Scavenger"
    ],
    "tdm": "Strong if you hold an area and rack up kills without moving much. In TDM the bodies come to you.",
-   "forYou": "Rewards exactly the patient, position-holding game you're trying to build. Worth a look once you're living longer."
+   "note": "Rewards a patient, position-holding game. Worthless if you die every 30 seconds, because you never live long enough to run dry."
   },
   {
    "name": "Ghost",
@@ -48,7 +48,7 @@
     "Destroy 1 enemy Sentry Gun"
    ],
    "tdm": "The default competitive pick. Spy Planes are everywhere at 3 kills, and being off the minimap is what makes a flank a flank.",
-   "forYou": "The single most important perk for your problem. You already run it on four classes — good. Note the limit: Ghost does NOT hide you from a Blackbird. If the enemy hits 8, your flank is visible and you should play like it."
+   "note": "Know the limit: Ghost does NOT hide you from a Blackbird. If the enemy team hits 8, your flank is visible for the duration and you should play like it — that's the moment to hold an angle rather than take a route."
   },
   {
    "name": "Flak Jacket",
@@ -62,8 +62,8 @@
     "Survive 10 explosions while using Flak Jacket",
     "Throw back 5 enemy Frag grenades"
    ],
-   "tdm": "Map-dependent. On Nuketown and Firing Range the grenade spam is constant and Flak Jacket is close to mandatory. On open maps it's a wasted slot.",
-   "forYou": "Correct call on your Nuketown class. Don't carry it onto the big maps."
+   "tdm": "Map-dependent. On Nuketown and Firing Range the grenade traffic is constant and Flak Jacket is close to mandatory. On open maps it's a wasted slot.",
+   "note": "A map-specific perk, not a default. Carry it on the small maps and swap it out on the large ones — running it on Array or Launch is a slot you've given away."
   },
   {
    "name": "Hardline",
@@ -78,7 +78,7 @@
     "Share 10 Killstreak reward crates with teammates"
    ],
    "tdm": "Turns 3/4/5 into 2/3/4 and 8/9/11 into 7/8/10. The higher your streaks, the more it's worth.",
-   "forYou": "This is the perk that makes your Assault set-up viable. Running 8/9/11 without Hardline means you need eight kills in a life — which, on your own account, isn't happening often. Either take Hardline or drop to lower streaks. Your xJawz class already has it; the others don't."
+   "note": "The perk that makes high killstreaks viable. If you're running anything at 8 or above, Hardline is close to mandatory — without it you need eight kills in a single life before your set-up pays out at all. Pair high streaks with Hardline, or drop the ceiling."
   },
   {
    "name": "Hardened",
@@ -93,14 +93,14 @@
     "Get 10 kills using Hardened, shooting through walls"
    ],
    "tdm": "The Pro half is the point. Reduced flinch means that when someone shoots first, your screen doesn't jump and you can still win the trade.",
-   "forYou": "Underrated for you specifically. You back yourself in a 1v1 — reduced flinch is what lets you win the ones you didn't start. Arguably a better Tier 2 than Sleight of Hand on a gun you rarely empty."
+   "note": "Underrated. It's the perk for players who win gunfights but keep losing the ones they didn't start — reduced flinch turns a lost reaction into a winnable trade. Strongest on maps with thin walls and a lot of prefire."
   },
   {
    "name": "Scout",
    "tier": 2,
    "cost": 2000,
    "proCost": 3000,
-   "effect": "Hold breath longer when scoped.",
+   "effect": "Hold breath longer when scoping.",
    "proEffect": "Switch weapons faster.",
    "challenges": [
     "Get 30 Headshot kills",
@@ -108,7 +108,7 @@
     "Get 50 kills with secondary weapons"
    ],
    "tdm": "A sniper perk with a weapon-swap bonus bolted on. Outside of sniping it's the weakest Tier 2.",
-   "forYou": "No. You're not sniping in TDM and the swap speed doesn't pay for the slot."
+   "note": "Only worth the slot on a dedicated sniper class. On anything else the swap speed doesn't pay for what you give up."
   },
   {
    "name": "Steady Aim",
@@ -123,7 +123,7 @@
     "Get 100 kills after sprinting"
    ],
    "tdm": "The Pro effect is the hidden gem: faster sprint-out means less time helpless after you stop running.",
-   "forYou": "Read the Pro effect again. 'I get caught out mid-sprint a lot' is literally the problem Steady Aim Pro reduces — it shortens the window between releasing sprint and being able to shoot. Strongest non-obvious pick on this list for you."
+   "note": "The most under-picked perk in the game. There's a window between releasing sprint and being able to shoot, and a lot of deaths happen inside it — Steady Aim Pro shortens that window. If you play fast, this does more for you than the hip-fire bonus ever will."
   },
   {
    "name": "Sleight of Hand",
@@ -138,7 +138,7 @@
     "Reload and finish off the enemy you wounded, 10 times"
    ],
    "tdm": "The standard Tier 2 pick, and deservedly so — faster ADS wins first-shot races.",
-   "forYou": "You run it on four of five classes and it's a defensible default. Just be aware you're paying a slot for a benefit that mostly helps players who lose the first-shot race. You usually don't. Try one class with Hardened or Steady Aim instead and see if your deaths change shape."
+   "note": "A safe default rather than an optimal one. The benefit mostly helps players who lose the first-shot race; if you usually win it, Hardened or Steady Aim may be doing more with the slot. Worth building one class each way and comparing how you die."
   },
   {
    "name": "Warlord",
@@ -153,7 +153,7 @@
     "Get 150 kills using a gun with two attachments"
    ],
    "tdm": "Two attachments plus extra equipment. Greedy, but on the right gun it's the difference between a good class and a complete one.",
-   "forYou": "You run zero Warlord across five classes, so every gun you use is on one attachment. Suppressor plus a sight, or Dual Mag plus Grip, is a real upgrade. Worth testing on the Famas."
+   "note": "Suppressor plus a sight, or Dual Mag plus Grip, is a genuine upgrade over any single attachment. If every class you own runs one attachment, you're leaving a whole slot's worth of gun on the table."
   },
   {
    "name": "Marathon",
@@ -167,8 +167,8 @@
     "In Capture the Flag, get the Flag Capture Medal 15 times while using Marathon",
     "Get the First Blood Medal 10 times"
    ],
-   "tdm": "Great on big maps, actively dangerous on small ones — it makes sprinting into trouble easier.",
-   "forYou": "Avoid. This perk subsidises the exact habit that's costing you: more sprint means more time in the state where you can't shoot back."
+   "tdm": "Great on the big maps, actively dangerous on the small ones — it makes sprinting into trouble easier.",
+   "note": "Costs you the Tier 3 slot that Ninja usually deserves. More sprint also means more time in the state where you can't shoot back, so it suits players who use it to rotate, not players who use it to charge."
   },
   {
    "name": "Ninja",
@@ -183,7 +183,7 @@
     "Get 150 kills using the Suppressor attachment"
    ],
    "tdm": "The best Tier 3 in the game, and the Pro half is why: enemy footsteps get louder to you. That's free information about where people are.",
-   "forYou": "You run Ninja on four classes. If you haven't done the Pro challenges, you are getting the half that hides you and none of the half that finds them — and finding them is your actual weakness. The third challenge (150 suppressor kills) fits your loadouts already. Do this one first."
+   "note": "Base Ninja hides you; Pro Ninja finds them. Those are two different perks and most people only ever get the first one. If you run Ninja and haven't done the challenges, you're using half of it — and the half you're missing is the one that tells you where the flank is coming from. The 150 suppressor kills come naturally on a stealth class."
   },
   {
    "name": "Second Chance",
@@ -197,8 +197,8 @@
     "Get 10 kills while in Second Chance",
     "While in Second Chance, kill the enemy who downed you 5 times"
    ],
-   "tdm": "In TDM a downed player is usually just a delayed death, and the enemy still gets the point. Low value without a team that revives.",
-   "forYou": "No. It costs you Ninja, which is the slot doing real work."
+   "tdm": "In TDM a downed player is usually just a delayed death, and the enemy banks the point either way. Low value without a team that actually revives.",
+   "note": "Only makes sense if you play with a squad who will come and pick you up. In a random lobby it's a Tier 3 slot spent on a slower death."
   },
   {
    "name": "Hacker",
@@ -213,7 +213,7 @@
     "Kill 25 enemies within the radius of your Jammer or Motion Sensor"
    ],
    "tdm": "Situational. It shines against claymore-heavy lobbies and on maps with obvious equipment chokepoints.",
-   "forYou": "Worth one class. Claymores in doorways are a recurring cause of the deaths you've described — walking into things you couldn't see. Hacker turns that death into a free kill."
+   "note": "Worth one class in the rotation. If a lobby is filling doorways with claymores, Hacker turns each of those deaths into a free kill instead."
   },
   {
    "name": "Tactical Mask",
@@ -227,8 +227,8 @@
     "Kill 20 enemies stunned by your Concussion Grenade",
     "Kill 20 enemies poisoned by your Nova Gas"
    ],
-   "tdm": "Almost worthless at base, genuinely good at Pro. Concussion spam on small maps is the main thing that takes gunfights out of your hands.",
-   "forYou": "You already run it on Nuketown, which is the right map for it. Everyone concusses on Nuketown, and you're a player whose value comes from winning the gunfight — anything that stops you being stunned protects your main strength."
+   "tdm": "Almost worthless at base, genuinely good at Pro. Concussion spam on the small maps is the main thing that takes gunfights out of your hands.",
+   "note": "A small-map perk. On Nuketown and Firing Range everyone throws concussions, and anything that stops you being stunned protects the fights you'd otherwise win on aim alone."
   }
  ]
 }
