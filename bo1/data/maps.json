@@ -396,7 +396,7 @@
     "The straight-through-the-middle route has rocks and barrels for cover but is shot into from elevated positions (ZigZack)",
     "Classified as a large map by Treyarch; a ruined village and a military base split by a river (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/jungle.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle_(Black_Ops)"
   },
   {
@@ -474,7 +474,7 @@
     "The central areas have little cover and are overlooked from the high buildings; most fighting is at ground level (ZigZack)",
     "A North Vietnamese prison based on the Hanoi Hilton, set at night; the dark sky makes Spy Planes hard to spot (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/hanoi.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi"
   },
   {
@@ -628,7 +628,7 @@
     "A rooftop at the Spetsnaz spawn lets you patrol opposite sides and watch for flankers (ZigZack)",
     "Often quiet in Team Deathmatch and open to stealth play (Dominate Black Ops)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/grid.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Grid"
   },
   {
@@ -711,7 +711,7 @@
     "A back tunnel in bottom array is underused and gets you behind enemy lines quickly (ZigZack)",
     "Centred on a large relay dish with surrounding buildings; large open areas make sniping prevalent (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/array.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Array"
   },
   {
@@ -940,7 +940,7 @@
     "The garage and the bar both lead back to the pool (ZigZack)",
     "A large house atop a cliff with a central courtyard of rock cover (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/villa.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Villa"
   },
   {
@@ -1016,7 +1016,7 @@
     "The control room is a hot spot filled with objectives and cuts through the map, the quickest route between spawns (ZigZack)",
     "A hidden missile facility in Cuba with indoor and outdoor battles and a beach (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/crisis.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Crisis"
   },
   {
@@ -1094,24 +1094,26 @@
     "A nook in the centre gives a good angle on enemies pushing; the NVA lookout usually holds a sniper and is reached by climbing the car or jumping from the sandbags (ZigZack)",
     "Basis for the campaign mission The Defector; resembles Hue City (CoD Wiki)"
    ],
-   "diagram": null,
+   "diagram": "diagrams/cracked.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked"
   }
  ],
  "spawnSystem": {
-  "how": "The game respawns you in the safest spot that isn't blocked by an enemy. It constantly re-reads where both teams are standing, so the spawn map moves as you do.",
+  "how": "The game puts you in the safest spot that isn't blocked by an enemy, and it re-reads where both teams are standing constantly. The practical version is the 70% rule: measure the distance from your spawn to theirs, and treat 70% of the way as the line you hold rather than cross.",
+  "rule": "Hold at 70% and the enemy is squeezed into the remaining 30% of the map, spawning in a small area you can watch. Cross it and you're deep in their half, you appear on the radar of everyone who has just spawned, and they will come looking for you.",
   "triggers": [
-   "Pushing deep into the enemy's back half",
-   "Your team spreading too thin across the map",
-   "Wiping the whole enemy side at once, leaving nowhere safe on their end",
-   "Physically standing on or near their spawn points",
-   "Holding a power position that reaches into their territory"
+   "Roughly three teammates pushing past the 70% line will flip the spawns",
+   "Even two of you at 80–90% is usually enough to trigger it",
+   "Wiping their whole side at once, leaving nowhere safe on their end",
+   "Standing on or near their spawn points",
+   "Leaning too heavily to one side — spawns can flip sideways, not just front to back"
   ],
   "tells": [
-   "A teammate appears from the direction the enemy came from",
+   "A teammate dies and respawns right next to you while you're near the enemy spawn — the map has flipped, go back",
    "Kills start arriving from a new direction",
-   "A part of the map that was busy goes silent — they've been moved"
+   "A part of the map that was busy goes quiet"
   ],
-  "source": "General Call of Duty spawn-flip mechanics (MitchCactus), corroborated for BO1 on Nuketown by a 2011 map guide describing enemies respawning behind your lines once your team pushes past the bus."
+  "note": "Spawn behaviour is more predictable on long, rectangular maps and less so on large, square ones. A Spy Plane makes it easy to see, but the skill is reading it without one.",
+  "source": "Pub-stomping fundamentals video covering Black Ops 1 and 2 (transcript supplied); corroborated for BO1 on Nuketown by a 2011 map guide describing enemies respawning behind your lines once your team pushes past the bus."
  }
 }

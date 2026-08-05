@@ -117,6 +117,7 @@ function renderBrief() {
     how.appendChild(el("summary", "", "How spawns actually work"));
     const hb = el("div", "body");
     hb.appendChild(el("p", "", esc(ss.how)));
+    if (ss.rule) hb.appendChild(el("div", "note", esc(ss.rule)));
     hb.appendChild(el("div", "kv", `<div class="k">What flips them</div>`));
     const tl = el("ul", "challenges");
     ss.triggers.forEach((t) => tl.appendChild(el("li", "", esc(t))));
@@ -125,6 +126,7 @@ function renderBrief() {
     const el2 = el("ul", "challenges");
     ss.tells.forEach((t) => el2.appendChild(el("li", "", esc(t))));
     hb.appendChild(el2);
+    if (ss.note) hb.appendChild(el("p", "", esc(ss.note)));
     hb.appendChild(el("p", "src", esc(ss.source)));
     how.appendChild(hb);
     spawnField.appendChild(how);
