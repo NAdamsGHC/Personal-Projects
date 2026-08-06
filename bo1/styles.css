@@ -175,6 +175,64 @@ footer code { color: var(--dim); }
 .map-tile.has-art b { text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
 .map-tile.has-art i { color: rgba(255,255,255,0.78); text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
 
+/* ── the lobby view: chips, class line, and the push line ── */
+
+.quick { margin: 14px 0 0; }
+
+.chips-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.chip {
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+}
+.chip.battle { color: #a9dcc0; border-color: #3d6b57; background: rgba(95,176,138,0.10); }
+.chip.style  { color: var(--hot); border-color: #6b4c30; background: rgba(217,139,74,0.10); }
+
+.qline {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.qline .qk {
+  flex: 0 0 78px;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+.qline .qv {
+  flex: 1;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.qwhy { margin: 10px 0 0; font-size: 0.9rem; color: var(--dim); }
+
+.pinbox {
+  margin: 16px 0 4px;
+  padding: 12px 14px;
+  border: 1px solid #3d6b57;
+  border-left-width: 3px;
+  border-radius: 2px;
+  background: rgba(95, 176, 138, 0.08);
+}
+.pinbox .pinhead {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #a9dcc0;
+  margin-bottom: 6px;
+}
+.pinbox p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
+details.brief-fold { margin-top: 18px; }
+
 figure.diagram.minimap { margin: 0; border: 0; background: none; }
 figure.diagram.minimap img { background: #0d1214; }
 .map-tile b {

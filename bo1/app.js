@@ -101,8 +101,47 @@ function renderBrief() {
   box.appendChild(el("div", "brief-head",
     `<h2>${esc(m.name)}</h2><span class="size">${esc(m.size)} &middot; TDM</span>`));
 
+  // ── the lobby view: schematic, then the four things that decide the game ──
+  if (m.diagram) {
+    const fig = el("figure", "diagram");
+    const img = document.createElement("img");
+    img.src = m.diagram;
+    img.alt = `${m.name} tactical schematic`;
+    fig.appendChild(img);
+    box.appendChild(fig);
+  }
+
+  const q = m.quick;
+  if (q) {
+    const qb = el("div", "quick");
+    qb.appendChild(el("div", "chips-row",
+      `<span class="chip battle">${esc(q.battle)}</span>
+       <span class="chip style">${esc(q.style)}</span>`));
+    qb.appendChild(el("div", "qline",
+      `<span class="qk">Class</span>
+       <span class="qv">${esc(q.weapon)} &middot; ${esc(q.attachment)}</span>`));
+    qb.appendChild(el("div", "qline",
+      `<span class="qk">Must have</span>
+       <span class="qv">${q.perks.map(esc).join(" &middot; ")}</span>`));
+    qb.appendChild(el("div", "qline",
+      `<span class="qk">Streaks</span>
+       <span class="qv">${q.streaks.map(esc).join(" &middot; ")}</span>`));
+    qb.appendChild(el("p", "qwhy", esc(q.classLine)));
+    box.appendChild(qb);
+
+    const pin = el("div", "pinbox");
+    pin.appendChild(el("div", "pinhead", "How far to push"));
+    pin.appendChild(el("p", "", esc(q.pinLine)));
+    box.appendChild(pin);
+  }
+
+  // ── everything else, folded away ──
+  const brief = el("details", "ref brief-fold");
+  brief.appendChild(el("summary", "", "Brief"));
+  const box2 = el("div", "body");
+
   // 1 — identity
-  box.appendChild(el("p", "identity", esc(m.identity)));
+  box2.appendChild(el("p", "identity", esc(m.identity)));
 
   // 2 — spawns, with the side toggle
   const toggle = el("div", "side-toggle");
@@ -135,25 +174,25 @@ function renderBrief() {
     how.appendChild(hb);
     spawnField.appendChild(how);
   }
-  box.appendChild(spawnField);
+  box2.appendChild(spawnField);
 
   // 3 — power positions
-  box.appendChild(listField("Power positions", m.powerPositions, "name", "why"));
+  box2.appendChild(listField("Power positions", m.powerPositions, "name", "why"));
 
   // 4 — where they'll be
-  box.appendChild(listField("Where they'll be", m.enemySpots, "name", "note"));
+  box2.appendChild(listField("Where they'll be", m.enemySpots, "name", "note"));
 
   // 5 — the trap
   const trap = el("div", "field warn", "<h3>The trap</h3>");
   trap.appendChild(el("p", "", esc(m.trap)));
-  box.appendChild(trap);
+  box2.appendChild(trap);
 
   // 6 — your route
   const route = el("div", "field", "<h3>Your route</h3>");
   route.appendChild(el("p", "", `<strong>First ten seconds:</strong> ${esc(side.opening)}`));
   route.appendChild(el("p", "", `<strong>The flank:</strong> ${esc(side.flank)}`));
   route.appendChild(el("div", "pinch", `<b>Pinch point</b>${esc(side.pinch)}`));
-  box.appendChild(route);
+  box2.appendChild(route);
 
   // 7 — loadout call
   const w = findWeapon(m.loadout.weapon);
@@ -176,20 +215,9 @@ function renderBrief() {
     if (w) jump.appendChild(a);
     load.appendChild(jump);
   }
-  box.appendChild(load);
+  box2.appendChild(load);
 
-  // diagram — a drawn schematic where one exists, otherwise a link out
-  if (m.diagram) {
-    const fig = el("figure", "diagram");
-    const img = document.createElement("img");
-    img.src = m.diagram;
-    img.alt = `${m.name} tactical schematic`;
-    fig.appendChild(img);
-    fig.appendChild(el("figcaption", "", "Schematic &middot; geometry traced from the in-game minimap"));
-    box.appendChild(fig);
-  }
-
-  // the real in-game minimap, behind a toggle so the brief stays scannable
+  // the real in-game minimap
   if (m.minimap) {
     const mm = el("details", "ref");
     mm.appendChild(el("summary", "", "In-game minimap"));
@@ -201,19 +229,16 @@ function renderBrief() {
     mfig.appendChild(mimg);
     mb.appendChild(mfig);
     mm.appendChild(mb);
-    box.appendChild(mm);
-  } else {
-    box.appendChild(el("div", "diagram-slot",
-      `Tactical schematic not drawn yet &middot; <a href="${esc(m.minimapUrl)}" target="_blank" rel="noopener">Full minimap &nearr;</a>`));
+    box2.appendChild(mm);
   }
 
-  // below the fold — leisure reading
+  // leisure reading
   const deep = el("details", "ref");
   deep.appendChild(el("summary", "", "Deeper notes"));
   const body = el("div", "body");
   m.deeper.forEach((d) => body.appendChild(el("p", "", esc(d))));
   deep.appendChild(body);
-  box.appendChild(deep);
+  box2.appendChild(deep);
 
   // what's sourced vs what's reasoning — stated per map rather than buried
   if (m.verified && m.verified.length) {
@@ -226,11 +251,14 @@ function renderBrief() {
     vb.appendChild(el("p", "src",
       "Everything above that isn't in this list — routes, pinch points, opening moves — is reasoning from the layout, not a sourced fact."));
     ver.appendChild(vb);
-    box.appendChild(ver);
+    box2.appendChild(ver);
   }
 
-  box.appendChild(el("p", "src",
+  box2.appendChild(el("p", "src",
     `Layout: ${esc(DATA.maps.source.layout)} Tactics: ${esc(DATA.maps.source.tactics)}`));
+
+  brief.appendChild(box2);
+  box.appendChild(brief);
 }
 
 function listField(title, items, keyName, keyBody) {

@@ -4,7 +4,8 @@
   "layout": "Call of Duty Wiki map pages (all 14 checked), plus callofdutymaps.com for named structures.",
   "tactics": "Where a map has a ZigZack IGN map-recon walkthrough, the callouts and positions come from that. Otherwise from BO1-era community guides where they exist, and reasoned from the layout where they don't. Each map's 'Checked against the wiki' list says which.",
   "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference.",
-  "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project."
+  "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project.",
+  "quick": "Battle type, style, class and must-haves follow from the sourced map content and the weapon data. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first."
  },
  "maps": [
   {
@@ -56,7 +57,7 @@
    ],
    "trap": "Pushing past the bus and the truck. The moment your team is through the middle, the game has nowhere safe left on their end and starts spawning them behind your lines — so the kills you just got become shots in your back. On Nuketown the discipline is to hold your side of the vehicles, not to win the centre.",
    "loadout": {
-    "weapon": "AKS-74U",
+    "weapon": "FAMAS",
     "weaponWhy": "3-shot kill to 19.5m covers the whole map, and a 0.2s aim-in wins the corner fights.",
     "perk": "Flak Jacket",
     "perkWhy": "The map is small enough that explosives are used liberally by everyone, and the two spawns are close enough for an opening grenade to reach."
@@ -82,7 +83,23 @@
    "diagram": "diagrams/nuketown.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Nuketown_(map)",
    "tile": "images/tiles/nuketown.jpg",
-   "minimap": "images/minimaps/nuketown.png"
+   "minimap": "images/minimaps/nuketown.png",
+   "quick": {
+    "battle": "CQB",
+    "style": "Aggressive",
+    "weapon": "FAMAS",
+    "attachment": "Suppressor",
+    "perks": [
+     "Flak Jacket",
+     "Tactical Mask"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Attack Helicopter"
+    ],
+    "classLine": "Suppressed Famas — every fight here is inside its 14m suppressed band, and staying off the minimap is what lets a pin hold.",
+    "pinLine": "Push to the side of their house, level with the garage — the fence line, not into the back garden. They spawn in the garden in front of you and you farm the gap. Step past the house corner and it flips."
+   }
   },
   {
    "id": "firing-range",
@@ -165,7 +182,23 @@
    "diagram": "diagrams/firing-range.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range",
    "tile": "images/tiles/firing-range.jpg",
-   "minimap": "images/minimaps/firing-range.png"
+   "minimap": "images/minimaps/firing-range.png",
+   "quick": {
+    "battle": "CQB–Mid",
+    "style": "Aggressive",
+    "weapon": "FAMAS",
+    "attachment": "Suppressor",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Attack Helicopter",
+     "Napalm Strike"
+    ],
+    "classLine": "Suppressed Famas, Ghost and Ninja — the map is small enough that being invisible on the minimap matters more than the range you give up.",
+    "pinLine": "Hold top wooden and the near edge of the shooting range. That range is full of their spawn points, so sit on its lip and they appear in front of you — walk into it and you own their spawn, which flips it."
+   }
   },
   {
    "id": "summit",
@@ -216,7 +249,7 @@
    ],
    "trap": "Back rooms. It's one of the four choke points and it should be avoided — but it's also the quickest route to the porch, which is exactly why people keep taking it and keep dying in it. The porch itself then attracts thrown equipment, so the fast route punishes you twice.",
    "loadout": {
-    "weapon": "AKS-74U",
+    "weapon": "FAMAS",
     "weaponWhy": "The control room is a bottom-and-top SMG fight with short peeks — 3-shot kill to 19.5m and a 0.2s aim-in suits it.",
     "perk": "Ninja",
     "perkWhy": "Half a dozen entrances to one room means people arrive from everywhere. Footsteps are the only warning you get."
@@ -249,7 +282,23 @@
    "diagram": "diagrams/summit.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Summit",
    "tile": "images/tiles/summit.jpg",
-   "minimap": "images/minimaps/summit.png"
+   "minimap": "images/minimaps/summit.png",
+   "quick": {
+    "battle": "CQB–Mid",
+    "style": "Stealth",
+    "weapon": "FAMAS",
+    "attachment": "Suppressor",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Napalm Strike"
+    ],
+    "classLine": "Suppressed Famas — the control room is a short-range fight and silence beats reach in a building with six ways in.",
+    "pinLine": "Own the control room and hold the porch side of it. That keeps them spawning at their end and walking into the same two doorways. Don't cross past the porch into their corner."
+   }
   },
   {
    "id": "radiation",
@@ -332,7 +381,23 @@
    "diagram": "diagrams/radiation.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Radiation",
    "tile": "images/tiles/radiation.jpg",
-   "minimap": "images/minimaps/radiation.png"
+   "minimap": "images/minimaps/radiation.png",
+   "quick": {
+    "battle": "Mid",
+    "style": "Aggressive",
+    "weapon": "Commando",
+    "attachment": "Extended Mag",
+    "perks": [
+     "Ghost",
+     "Hardline"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Napalm Strike"
+    ],
+    "classLine": "Commando with extra rounds — fights are outdoors at medium range and pressure here is constant, so you empty magazines.",
+    "pinLine": "The middle gates are the line. Hold them and they're squeezed into their third of the map; Napalm on the far side of the gates farms it. Push through and the basement tunnel behind you fills with respawns."
+   }
   },
   {
    "id": "jungle",
@@ -413,7 +478,23 @@
    "diagram": "diagrams/jungle.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle_(Black_Ops)",
    "tile": "images/tiles/jungle.jpg",
-   "minimap": "images/minimaps/jungle.png"
+   "minimap": "images/minimaps/jungle.png",
+   "quick": {
+    "battle": "Mid–Long",
+    "style": "Patient",
+    "weapon": "AK-47",
+    "attachment": "Red Dot Sight",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "AK-47 and a clean sight — the map has long views despite the foliage, and you often get one burst through a gap.",
+    "pinLine": "Hold your side of the small bridge and the rise above it. They have to cross to reach you, and they cross in the open. Push over the bridge into their camp and the spawns scatter behind you."
+   }
   },
   {
    "id": "hanoi",
@@ -464,7 +545,7 @@
    ],
    "trap": "The central areas. There isn't much cover in them and you're being looked down on from the high buildings, so cutting through the middle is the fast route from one end to the other and the unsafe one. On a map with only two levels, the danger is almost always from above rather than from a surprise angle.",
    "loadout": {
-    "weapon": "MP5K",
+    "weapon": "FAMAS",
     "weaponWhy": "3-shot kill to 21m and a fast aim-in for the narrow passages and close encounters.",
     "perk": "Hardened",
     "perkWhy": "Close trades through doorways and thin walls, where reduced flinch decides who wins."
@@ -494,7 +575,23 @@
    "diagram": "diagrams/hanoi.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Hanoi",
    "tile": "images/tiles/hanoi.jpg",
-   "minimap": "images/minimaps/hanoi.png"
+   "minimap": "images/minimaps/hanoi.png",
+   "quick": {
+    "battle": "CQB–Mid",
+    "style": "Stealth",
+    "weapon": "FAMAS",
+    "attachment": "Suppressor",
+    "perks": [
+     "Ghost",
+     "Hardened"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Napalm Strike"
+    ],
+    "classLine": "Suppressed Famas — narrow passages and doorways, and only two levels to the map, so the fights are short and close.",
+    "pinLine": "Take a second-level building over their central area and stay in it. They spawn below and come through the same doorways. Drop down into the far end of the street and you'll hand the spawns back."
+   }
   },
   {
    "id": "havana",
@@ -574,7 +671,23 @@
    "diagram": "diagrams/havana.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Havana",
    "tile": "images/tiles/havana.jpg",
-   "minimap": "images/minimaps/havana.png"
+   "minimap": "images/minimaps/havana.png",
+   "quick": {
+    "battle": "Mid–Long",
+    "style": "Patient",
+    "weapon": "M16",
+    "attachment": "Red Dot Sight",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "M16, no suppressor — you need all 58m of that burst to own Main Street from a window, and a silencer cuts it to 26m.",
+    "pinLine": "Hold the upstairs of whichever twin building sits on their half — cigar shop or hotel — and watch the street below. They spawn beyond it and funnel past you. Cross into the shelter and the spawns swap ends."
+   }
   },
   {
    "id": "grid",
@@ -654,7 +767,23 @@
    "diagram": "diagrams/grid.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Grid",
    "tile": "images/tiles/grid.jpg",
-   "minimap": "images/minimaps/grid.png"
+   "minimap": "images/minimaps/grid.png",
+   "quick": {
+    "battle": "Mid",
+    "style": "Patient",
+    "weapon": "Galil",
+    "attachment": "Extended Mag",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "Galil with extra rounds — enough reach for the open corridor without dying indoors, and you'll be firing a lot from one spot.",
+    "pinLine": "Hold the facility's second floor and the corridor's far mouth. Their spawns sit beyond it and the chokes bring them to you. Cross the corridor into their end and the open ground behind you becomes theirs."
+   }
   },
   {
    "id": "array",
@@ -740,7 +869,23 @@
    "diagram": "diagrams/array.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Array",
    "tile": "images/tiles/array.jpg",
-   "minimap": "images/minimaps/array.png"
+   "minimap": "images/minimaps/array.png",
+   "quick": {
+    "battle": "Long",
+    "style": "Patient",
+    "weapon": "M16",
+    "attachment": "Red Dot Sight",
+    "perks": [
+     "Ghost",
+     "Hardline"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "M16 with a sight and no silencer — the longest reach available, on the most open map in the rotation.",
+    "pinLine": "Hold the relay station and just north of it, using the east side to rotate. That keeps them at their end crossing open snow to reach you. Push to their buildings and you're alone in the open."
+   }
   },
   {
    "id": "wmd",
@@ -819,7 +964,23 @@
    "diagram": "diagrams/wmd.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/WMD_(map)",
    "tile": "images/tiles/wmd.jpg",
-   "minimap": "images/minimaps/wmd.png"
+   "minimap": "images/minimaps/wmd.png",
+   "quick": {
+    "battle": "Mid–Long",
+    "style": "Anchor",
+    "weapon": "Commando",
+    "attachment": "Extended Mag",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "Commando — the lanes are long enough to punish a short gun but not so long you need the M16's reach.",
+    "pinLine": "Hold the middle house upper level and the silo side with it. From height you see them spawn and cross. Push down into the warehouse end and you lose the height and the spawns at the same time."
+   }
   },
   {
    "id": "launch",
@@ -899,7 +1060,23 @@
    "diagram": "diagrams/launch.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Launch",
    "tile": "images/tiles/launch.jpg",
-   "minimap": "images/minimaps/launch.png"
+   "minimap": "images/minimaps/launch.png",
+   "quick": {
+    "battle": "Mid",
+    "style": "Anchor",
+    "weapon": "Galil",
+    "attachment": "Extended Mag",
+    "perks": [
+     "Ghost",
+     "Hardened"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "Galil — medium lanes through structures, where flinch decides trades more than raw range does.",
+    "pinLine": "Hold the three-storey on their side of the rocket, up top. It looks down onto their spawning players from across the middle. Push into their back rooms and you're in the one place that's hard to escape."
+   }
   },
   {
    "id": "villa",
@@ -950,7 +1127,7 @@
    ],
    "trap": "The connector. The statue gives a great peek on it precisely because standing in it is bad — it's the ground the elevated positions are watching. The fountain route is the other one: it cuts the map quickly and runs you straight into a couple of chokes.",
    "loadout": {
-    "weapon": "Galil",
+    "weapon": "M16",
     "weaponWhy": "3-shot kill to 45.7m — the map rewards distance from the houses, and this covers it without dying indoors.",
     "perk": "Ghost",
     "perkWhy": "Back road flanks are a live threat in both directions; taking one unannounced is the difference."
@@ -978,7 +1155,23 @@
    "diagram": "diagrams/villa.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Villa",
    "tile": "images/tiles/villa.jpg",
-   "minimap": "images/minimaps/villa.png"
+   "minimap": "images/minimaps/villa.png",
+   "quick": {
+    "battle": "Mid–Long",
+    "style": "Anchor",
+    "weapon": "M16",
+    "attachment": "Red Dot Sight",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Blackbird"
+    ],
+    "classLine": "M16 from the mansion — it looks clean across to the sniper house and the connector, and reach is what makes that overlook pay.",
+    "pinLine": "Hold the mansion overlook and the statue side of the connector. Anyone leaving the hill has to cross open ground you already cover. Push onto the hill itself and the back road flanks open behind you."
+   }
   },
   {
    "id": "crisis",
@@ -1057,7 +1250,23 @@
    "diagram": "diagrams/crisis.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Crisis",
    "tile": "images/tiles/crisis.jpg",
-   "minimap": "images/minimaps/crisis.png"
+   "minimap": "images/minimaps/crisis.png",
+   "quick": {
+    "battle": "CQB–Long",
+    "style": "Aggressive",
+    "weapon": "FAMAS",
+    "attachment": "Red Dot Sight",
+    "perks": [
+     "Ghost",
+     "Sleight of Hand"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Napalm Strike"
+    ],
+    "classLine": "Famas with a sight — the map swings from the control room to the beach, so take the compromise gun rather than a specialist.",
+    "pinLine": "Hold the middle sandbags at the top of the rock hill. That's the spot for pushing back a team spawning beach side, and it oversees the whole section. Drop onto the beach and you're the one in the open."
+   }
   },
   {
    "id": "cracked",
@@ -1138,7 +1347,23 @@
    "diagram": "diagrams/cracked.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked",
    "tile": "images/tiles/cracked.jpg",
-   "minimap": "images/minimaps/cracked.png"
+   "minimap": "images/minimaps/cracked.png",
+   "quick": {
+    "battle": "CQB–Mid",
+    "style": "Aggressive",
+    "weapon": "FAMAS",
+    "attachment": "Suppressor",
+    "perks": [
+     "Ghost",
+     "Ninja"
+    ],
+    "streaks": [
+     "Spy Plane",
+     "Napalm Strike"
+    ],
+    "classLine": "Suppressed Famas — urban blocks with multiple entrances everywhere, so short fights and staying off the minimap while you reposition.",
+    "pinLine": "Hold the blown-out building in the middle and the block facing their spawn side. They come up the main roads into your angle. Climb into their actual spawn buildings and the whole map turns around you."
+   }
   }
  ],
  "spawnSystem": {
