@@ -8,9 +8,9 @@
    "id": "suppressor",
    "name": "Suppressor",
    "type": "Barrel",
-   "effect": "Removes you from the minimap when firing, and silences the shot.",
-   "cost": "Cuts effective range hard — on most weapons the max-damage range drops by 60–70%, which adds a bullet to your shots-to-kill at surprisingly short distances.",
-   "verdict": "The most misunderstood attachment in the game. It is not a free stealth upgrade — it is a trade of range for concealment.",
+   "effect": "Removes you from the minimap when firing, and silences the shot. Ghost does not do this — Ghost hides you from Spy Planes, but an unsilenced shot still puts a dot on their map.",
+   "cost": "Cuts effective range hard — on most weapons the max-damage range drops by 60–70%, which adds a bullet to your shots-to-kill at surprisingly short distances. The Famas goes from a 3-shot kill at 39.4m to 14.0m; the M16 from 58.4m to 26.4m.",
+   "verdict": "Not recommended on any map in this app. The cost is largest exactly where you'd want the stealth — big maps mean long engagements — and on small maps you're on their minimap constantly anyway. Take Ghost for plane cover, and handle the firing dot by moving after kills instead. If you ever do run one, put it on a Galil, AK-47 or Commando (20.3m suppressed) rather than a Famas or AUG (14.0m).",
    "showsRangePenalty": true
   },
   {

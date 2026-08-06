@@ -5,7 +5,8 @@
   "tactics": "Where a map has a ZigZack IGN map-recon walkthrough, the callouts and positions come from that. Otherwise from BO1-era community guides where they exist, and reasoned from the layout where they don't. Each map's 'Checked against the wiki' list says which.",
   "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference.",
   "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project.",
-  "quick": "Battle type, style, class and must-haves follow from the sourced map content and the weapon data. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first."
+  "quick": "Battle type, style, class and must-haves follow from the sourced map content and the weapon data. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first.",
+  "attachments": "No map recommends a suppressor. On all six allowed assault rifles it costs 60-70% of full-damage range, which shows up as extra bullets to kill; its only unique benefit is hiding the firing dot on the enemy minimap, and that does not pay for the range on any map here. Ghost covers plane detection at no cost."
  },
  "maps": [
   {
@@ -88,7 +89,7 @@
     "battle": "CQB",
     "style": "Aggressive",
     "weapon": "FAMAS",
-    "attachment": "Suppressor",
+    "attachment": "Extended Mag",
     "perks": [
      "Flak Jacket",
      "Tactical Mask"
@@ -97,7 +98,7 @@
      "Spy Plane",
      "Attack Helicopter"
     ],
-    "classLine": "Suppressed Famas — every fight here is inside its 14m suppressed band, and staying off the minimap is what lets a pin hold.",
+    "classLine": "Famas with extra rounds — fastest kill of the six at 128ms, and a deeper magazine so a pin doesn't end on a reload.",
     "pinLine": "Push to the side of their house, level with the garage — the fence line, not into the back garden. They spawn in the garden in front of you and you farm the gap. Step past the house corner and it flips."
    }
   },
@@ -187,7 +188,7 @@
     "battle": "CQB–Mid",
     "style": "Aggressive",
     "weapon": "FAMAS",
-    "attachment": "Suppressor",
+    "attachment": "Extended Mag",
     "perks": [
      "Ghost",
      "Ninja"
@@ -196,7 +197,7 @@
      "Attack Helicopter",
      "Napalm Strike"
     ],
-    "classLine": "Suppressed Famas, Ghost and Ninja — the map is small enough that being invisible on the minimap matters more than the range you give up.",
+    "classLine": "Famas, no silencer — you need the full 39.4m here, and the extra rounds keep you firing through a contested hold.",
     "pinLine": "Hold top wooden and the near edge of the shooting range. That range is full of their spawn points, so sit on its lip and they appear in front of you — walk into it and you own their spawn, which flips it."
    }
   },
@@ -287,7 +288,7 @@
     "battle": "CQB–Mid",
     "style": "Stealth",
     "weapon": "FAMAS",
-    "attachment": "Suppressor",
+    "attachment": "Extended Mag",
     "perks": [
      "Ghost",
      "Ninja"
@@ -296,7 +297,7 @@
      "Spy Plane",
      "Napalm Strike"
     ],
-    "classLine": "Suppressed Famas — the control room is a short-range fight and silence beats reach in a building with six ways in.",
+    "classLine": "Famas — the control room is a short fight with six ways in, so magazine depth beats optics.",
     "pinLine": "Own the control room and hold the porch side of it. That keeps them spawning at their end and walking into the same two doorways. Don't cross past the porch into their corner."
    }
   },
@@ -395,7 +396,7 @@
      "Spy Plane",
      "Napalm Strike"
     ],
-    "classLine": "Commando with extra rounds — fights are outdoors at medium range and pressure here is constant, so you empty magazines.",
+    "classLine": "Commando with extra rounds — outdoor medium-range fights and constant pressure, so you empty magazines.",
     "pinLine": "The middle gates are the line. Hold them and they're squeezed into their third of the map; Napalm on the far side of the gates farms it. Push through and the basement tunnel behind you fills with respawns."
    }
   },
@@ -492,7 +493,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "AK-47 and a clean sight — the map has long views despite the foliage, and you often get one burst through a gap.",
+    "classLine": "AK-47 and a clean sight — long views despite the foliage, and you often get one burst through a gap.",
     "pinLine": "Hold your side of the small bridge and the rise above it. They have to cross to reach you, and they cross in the open. Push over the bridge into their camp and the spawns scatter behind you."
    }
   },
@@ -580,7 +581,7 @@
     "battle": "CQB–Mid",
     "style": "Stealth",
     "weapon": "FAMAS",
-    "attachment": "Suppressor",
+    "attachment": "Extended Mag",
     "perks": [
      "Ghost",
      "Hardened"
@@ -589,7 +590,7 @@
      "Spy Plane",
      "Napalm Strike"
     ],
-    "classLine": "Suppressed Famas — narrow passages and doorways, and only two levels to the map, so the fights are short and close.",
+    "classLine": "Famas — narrow passages and only two levels, so the fights are short, close and frequent.",
     "pinLine": "Take a second-level building over their central area and stay in it. They spawn below and come through the same doorways. Drop down into the far end of the street and you'll hand the spawns back."
    }
   },
@@ -685,7 +686,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "M16, no suppressor — you need all 58m of that burst to own Main Street from a window, and a silencer cuts it to 26m.",
+    "classLine": "M16 with a sight — all 58.4m of that burst is what owns Main Street from a window. A silencer would cut it to 26m.",
     "pinLine": "Hold the upstairs of whichever twin building sits on their half — cigar shop or hotel — and watch the street below. They spawn beyond it and funnel past you. Cross into the shelter and the spawns swap ends."
    }
   },
@@ -781,7 +782,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "Galil with extra rounds — enough reach for the open corridor without dying indoors, and you'll be firing a lot from one spot.",
+    "classLine": "Galil with extra rounds — reach for the open corridor without dying indoors, and you'll fire a lot from one spot.",
     "pinLine": "Hold the facility's second floor and the corridor's far mouth. Their spawns sit beyond it and the chokes bring them to you. Cross the corridor into their end and the open ground behind you becomes theirs."
    }
   },
@@ -883,7 +884,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "M16 with a sight and no silencer — the longest reach available, on the most open map in the rotation.",
+    "classLine": "M16 with a sight — the longest reach available, on the most open map in the rotation.",
     "pinLine": "Hold the relay station and just north of it, using the east side to rotate. That keeps them at their end crossing open snow to reach you. Push to their buildings and you're alone in the open."
    }
   },
@@ -969,7 +970,7 @@
     "battle": "Mid–Long",
     "style": "Anchor",
     "weapon": "Commando",
-    "attachment": "Extended Mag",
+    "attachment": "Red Dot Sight",
     "perks": [
      "Ghost",
      "Ninja"
@@ -978,7 +979,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "Commando — the lanes are long enough to punish a short gun but not so long you need the M16's reach.",
+    "classLine": "Commando with a sight — lanes long enough to punish a short gun, and you're often shooting down from height.",
     "pinLine": "Hold the middle house upper level and the silo side with it. From height you see them spawn and cross. Push down into the warehouse end and you lose the height and the spawns at the same time."
    }
   },
@@ -1074,7 +1075,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "Galil — medium lanes through structures, where flinch decides trades more than raw range does.",
+    "classLine": "Galil — medium lanes through structures, where flinch decides trades more than raw range.",
     "pinLine": "Hold the three-storey on their side of the rocket, up top. It looks down onto their spawning players from across the middle. Push into their back rooms and you're in the one place that's hard to escape."
    }
   },
@@ -1169,7 +1170,7 @@
      "Spy Plane",
      "Blackbird"
     ],
-    "classLine": "M16 from the mansion — it looks clean across to the sniper house and the connector, and reach is what makes that overlook pay.",
+    "classLine": "M16 from the mansion — it looks clean across to the sniper house, and reach is what makes that overlook pay.",
     "pinLine": "Hold the mansion overlook and the statue side of the connector. Anyone leaving the hill has to cross open ground you already cover. Push onto the hill itself and the back road flanks open behind you."
    }
   },
@@ -1264,7 +1265,7 @@
      "Spy Plane",
      "Napalm Strike"
     ],
-    "classLine": "Famas with a sight — the map swings from the control room to the beach, so take the compromise gun rather than a specialist.",
+    "classLine": "Famas with a sight — the map swings from the control room to the beach, so take the compromise gun.",
     "pinLine": "Hold the middle sandbags at the top of the rock hill. That's the spot for pushing back a team spawning beach side, and it oversees the whole section. Drop onto the beach and you're the one in the open."
    }
   },
@@ -1352,7 +1353,7 @@
     "battle": "CQB–Mid",
     "style": "Aggressive",
     "weapon": "FAMAS",
-    "attachment": "Suppressor",
+    "attachment": "Extended Mag",
     "perks": [
      "Ghost",
      "Ninja"
@@ -1361,7 +1362,7 @@
      "Spy Plane",
      "Napalm Strike"
     ],
-    "classLine": "Suppressed Famas — urban blocks with multiple entrances everywhere, so short fights and staying off the minimap while you reposition.",
+    "classLine": "Famas with extra rounds — urban blocks, multiple entrances, short fights one after another.",
     "pinLine": "Hold the blown-out building in the middle and the block facing their spawn side. They come up the main roads into your angle. Climb into their actual spawn buildings and the whole map turns around you."
    }
   }
