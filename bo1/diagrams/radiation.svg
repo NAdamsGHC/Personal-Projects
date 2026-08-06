@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="332" viewBox="0 0 400 332" role="img" aria-label="Radiation tactical schematic, traced from the in-game minimap.">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="346.5" viewBox="0 0 400 346.5" role="img" aria-label="Radiation tactical schematic, traced from the in-game minimap.">
 <defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
 <style>
 .terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
@@ -23,6 +23,10 @@
 .pin{fill:#d98b4a}
 .pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
 .link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
+
+.go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
+.golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+       font-size:9px;letter-spacing:0.7px}
 </style></defs>
 <text class="ttl" x="8" y="15">RADIATION</text>
 <text class="key" x="93.26" y="15">— fastest map</text>
@@ -32,8 +36,8 @@
 <text class="lbl2" x="13" y="82">SHIPPING RM</text>
 <rect class="s" x="8" y="102" width="96" height="30" rx="2"/>
 <text class="lbl2" x="13" y="120">TOWER WALKS</text>
-<rect class="b" x="8" y="138" width="96" height="34" rx="2"/>
-<text class="lbl" x="13" y="158">LOOKOUT</text>
+<rect class="go" x="8" y="138" width="96" height="34" rx="2"/>
+<text class="golbl" x="13" y="158">LOOKOUT</text>
 <rect class="s" x="8" y="178" width="96" height="28" rx="2"/>
 <text class="lbl2" x="13" y="195">LOWER SPZ</text>
 <rect class="s" x="116" y="30" width="80" height="26" rx="2"/>
@@ -44,8 +48,8 @@
 <text class="lbl" x="121" y="77">MIDDLE GATES</text>
 <rect class="s" x="116" y="92" width="80" height="30" rx="2"/>
 <text class="lbl2" x="121" y="110">DBL WINDOWS</text>
-<rect class="b" x="204" y="92" width="80" height="30" rx="2"/>
-<text class="lbl" x="209" y="110">UPPER CTRL</text>
+<rect class="go" x="204" y="92" width="80" height="30" rx="2"/>
+<text class="golbl" x="209" y="110">UPPER CTRL</text>
 <rect class="b" x="116" y="128" width="168" height="52" rx="2"/>
 <text class="lbl" x="121" y="157">REACTOR ROOM</text>
 <rect class="hot" x="116" y="186" width="168" height="22" rx="2"/>
@@ -54,16 +58,20 @@
 <text class="lbl" x="301" y="52">BLACK OPS</text>
 <rect class="s" x="296" y="74" width="96" height="32" rx="2"/>
 <text class="lbl2" x="301" y="93">SHIPPING 2</text>
-<rect class="b" x="296" y="112" width="96" height="34" rx="2"/>
-<text class="lbl" x="301" y="132">FORKLIFT</text>
+<rect class="go" x="296" y="112" width="96" height="34" rx="2"/>
+<text class="golbl" x="301" y="132">FORKLIFT</text>
 <rect class="s" x="296" y="152" width="96" height="28" rx="2"/>
 <text class="lbl2" x="301" y="169">RED BARRELS</text>
 <rect class="hot" x="8" y="224" width="384" height="34" rx="2"/>
 <text class="hotlbl" x="13" y="244">BASEMENT TUNNEL</text>
 <circle class="pin" cx="280" cy="98" r="8"/><text class="pinn" x="277.5" y="101.2">1</text>
 <circle class="pin" cx="384" cy="120" r="8"/><text class="pinn" x="381.5" y="123.2">2</text>
-<text class="key" x="8" y="276">1  Upper control room — holds the gate switch</text>
-<text class="key" x="8" y="288.5">2  Forklift — sees centre and bottom reactor</text>
-<text class="keyhot" x="8" y="301">Centre reactor room is a spawn haven</text>
-<text class="keyhot" x="8" y="313.5">Tunnel: 5 entries, as unsafe as the centre</text>
+<rect class="go" x="8" y="268" width="16" height="11" rx="2"/>
+<text class="key" x="30" y="277">head for</text>
+<rect class="hot" x="92" y="268" width="16" height="11" rx="2"/>
+<text class="keyhot" x="114" y="277">avoid / cross fast</text>
+<text class="key" x="8" y="290.5">1  Upper control room — holds the gate switch</text>
+<text class="key" x="8" y="303">2  Forklift — sees centre and bottom reactor</text>
+<text class="keyhot" x="8" y="315.5">Centre reactor room is a spawn haven</text>
+<text class="keyhot" x="8" y="328">Tunnel: 5 entries, as unsafe as the centre</text>
 </svg>

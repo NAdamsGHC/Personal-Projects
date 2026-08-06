@@ -59,6 +59,14 @@ CSS = """
        LABEL_SIZE - 1, LABEL_TRACK - 0.2, TITLE_SIZE, TITLE_TRACK,
        KEY_SIZE, KEY_TRACK, KEY_SIZE, KEY_TRACK)
 
+# Green = head here, red = stay out. The two colours carry the whole map at a
+# glance, which is the point of a diagram you read in a lobby.
+CSS += """
+.go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
+.golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+       font-size:9px;letter-spacing:0.7px}
+"""
+
 
 class Canvas:
     def __init__(self, name, w, title_note=""):
@@ -130,7 +138,8 @@ class Canvas:
             if 16 + text_w(s, KEY_SIZE, KEY_TRACK) > self.w - 4:
                 raise ValueError("%s: key line too long (%d chars): %r" % (self.name, len(s), s))
         key_top = self.body_h + 18
-        h = key_top + len(self.keys) * KEY_LINE_H + 6
+        zone_h = KEY_LINE_H + 2          # the green/red swatch row
+        h = key_top + zone_h + len(self.keys) * KEY_LINE_H + 6
         out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%g" height="%g" '
                'viewBox="0 0 %g %g" role="img" aria-label="%s tactical schematic, traced from '
                'the in-game minimap.">' % (self.w, h, self.w, h, esc(self.name)),
@@ -150,8 +159,14 @@ class Canvas:
         for x, y, n in self.pins:
             out.append('<circle class="pin" cx="%g" cy="%g" r="8"/>'
                        '<text class="pinn" x="%g" y="%g">%s</text>' % (x, y, x - 2.5, y + 3.2, n))
+        # zone key: what the two colours mean, stated on every diagram
+        zy = key_top - 8
+        out.append('<rect class="go" x="8" y="%g" width="16" height="11" rx="2"/>' % zy)
+        out.append('<text class="key" x="30" y="%g">head for</text>' % (zy + 9))
+        out.append('<rect class="hot" x="92" y="%g" width="16" height="11" rx="2"/>' % zy)
+        out.append('<text class="keyhot" x="114" y="%g">avoid / cross fast</text>' % (zy + 9))
         for i, (s, hot) in enumerate(self.keys):
-            yy = key_top + i * KEY_LINE_H
+            yy = key_top + zone_h + i * KEY_LINE_H
             out.append('<text class="%s" x="8" y="%g">%s</text>'
                        % ("keyhot" if hot else "key", yy, esc(s)))
         out.append('</svg>')
@@ -172,9 +187,9 @@ def nuketown():
     c.rect(6, 210, 388, 24, "s", ["SIDE LANE"])
     c.rect(6, 100, 44, 74, "sp", ["SPAWN"])
     c.rect(344, 100, 44, 74, "sp", ["SPAWN"])
-    c.rect(58, 76, 96, 122, "b", ["HOUSE"])
+    c.rect(58, 76, 96, 122, "go", ["HOUSE"], "golbl")
     c.rect(58, 152, 44, 46, "s", ["GARAGE"])
-    c.rect(240, 76, 96, 122, "b", ["HOUSE"])
+    c.rect(240, 76, 96, 122, "go", ["HOUSE"], "golbl")
     c.rect(292, 152, 44, 46, "s", ["GARAGE"])
     c.rect(162, 70, 70, 134, "hot", ["CENTRE"], "hotlbl")
     c.rect(170, 66, 54, 16, "s", ["BUS"])
@@ -194,13 +209,13 @@ def firing_range():
     c.rect(20, 64, 76, 40, "s", ["BATHROOM", "HUT"])
     c.rect(180, 112, 100, 20, "hot", ["CONTAINER"], "hotlbl")
     c.rect(92, 112, 48, 70, "s", ["BACK", "ALLEY"])
-    c.rect(148, 140, 116, 42, "b", ["TOP WOODEN"])
+    c.rect(148, 140, 116, 42, "go", ["TOP WOODEN"], "golbl")
     c.rect(296, 140, 92, 34, "s", ["SNIPER PERCH"])
     c.rect(296, 180, 92, 28, "s", ["THE NOOK"])
     c.rect(148, 188, 116, 20, "s", ["SANDBAGS"])
     c.rect(148, 214, 116, 24, "hot", ["LOWER MID"], "hotlbl")
     c.rect(30, 186, 88, 34, "s", ["DOUBLE", "BARRELS"])
-    c.rect(160, 246, 128, 34, "b", ["GARAGE"])
+    c.rect(160, 246, 128, 34, "go", ["GARAGE"], "golbl")
     c.rect(160, 286, 128, 24, "sp", ["OP 40 · S"])
     c.pin(252, 152, "1"); c.pin(276, 258, "2")
     c.key("1  Top wooden — eyes on most of the map")
@@ -212,13 +227,13 @@ def firing_range():
 
 def summit():
     c = Canvas("Summit", 400, "— four chokes")
-    c.rect(130, 108, 140, 96, "b", ["CONTROL ROOM", "TOP + BOTTOM"])
+    c.rect(130, 108, 140, 96, "go", ["CONTROL ROOM", "TOP + BOTTOM"], "golbl")
     c.rect(130, 212, 140, 20, "hot", ["MIDDLE HALL"], "hotlbl")
     c.rect(288, 108, 100, 32, "hot", ["BACK ROOMS"], "hotlbl")
     c.rect(288, 148, 100, 32, "b", ["PORCH"])
     c.rect(288, 188, 100, 30, "s", ["ELECTRICAL"])
-    c.rect(130, 58, 66, 40, "b", ["BACK", "AREA"])
-    c.rect(204, 58, 66, 40, "b", ["BACK", "STAIRS"])
+    c.rect(130, 58, 66, 40, "go", ["BACK", "AREA"], "golbl")
+    c.rect(204, 58, 66, 40, "go", ["BACK", "STAIRS"], "golbl")
     c.rect(16, 108, 100, 36, "b", ["ROCK AREA"])
     c.rect(16, 152, 100, 26, "s", ["DBL BARRELS"])
     c.rect(16, 186, 100, 26, "hot", ["SKINNY BRDG"], "hotlbl")
@@ -240,18 +255,18 @@ def radiation():
     c.rect(8, 30, 96, 26, "sp", ["SPETSNAZ"])
     c.rect(8, 62, 96, 34, "s", ["SHIPPING RM"])
     c.rect(8, 102, 96, 30, "s", ["TOWER WALKS"])
-    c.rect(8, 138, 96, 34, "b", ["LOOKOUT"])
+    c.rect(8, 138, 96, 34, "go", ["LOOKOUT"], "golbl")
     c.rect(8, 178, 96, 28, "s", ["LOWER SPZ"])
     c.rect(116, 30, 80, 26, "s", ["FAN AREA"])
     c.rect(204, 30, 80, 26, "s", ["THE ROOF"])
     c.rect(116, 62, 168, 24, "b", ["MIDDLE GATES"])
     c.rect(116, 92, 80, 30, "s", ["DBL WINDOWS"])
-    c.rect(204, 92, 80, 30, "b", ["UPPER CTRL"])
+    c.rect(204, 92, 80, 30, "go", ["UPPER CTRL"], "golbl")
     c.rect(116, 128, 168, 52, "b", ["REACTOR ROOM"])
     c.rect(116, 186, 168, 22, "hot", ["BACK SIDE"], "hotlbl")
     c.rect(296, 30, 96, 38, "sp", ["BLACK OPS"])
     c.rect(296, 74, 96, 32, "s", ["SHIPPING 2"])
-    c.rect(296, 112, 96, 34, "b", ["FORKLIFT"])
+    c.rect(296, 112, 96, 34, "go", ["FORKLIFT"], "golbl")
     c.rect(296, 152, 96, 28, "s", ["RED BARRELS"])
     c.rect(8, 224, 384, 34, "hot", ["BASEMENT TUNNEL"], "hotlbl")
     c.pin(280, 98, "1"); c.pin(384, 120, "2")
@@ -267,9 +282,9 @@ def jungle():
     c.path("M150 26 L250 22 L306 36 L356 32 L372 60 L362 110 L376 142 L366 196 "
            "L328 226 L278 244 L244 272 L188 286 L128 280 L86 256 L44 238 L22 198 "
            "L34 158 L20 126 L48 98 L96 94 L118 56 Z")
-    c.path("M108 82 L164 76 L180 104 L170 134 L120 138 L100 112 Z", "rock")
-    c.path("M240 94 L312 90 L334 122 L322 158 L264 166 L236 134 Z", "rock")
-    c.path("M150 148 L226 142 L264 168 L248 214 L190 234 L150 206 Z", "rock")
+    c.path("M108 82 L164 76 L180 104 L170 134 L120 138 L100 112 Z", "go")
+    c.path("M240 94 L312 90 L334 122 L322 158 L264 166 L236 134 Z", "go")
+    c.path("M150 148 L226 142 L264 168 L248 214 L190 234 L150 206 Z", "hot")
     c.rect(60, 166, 62, 26, "s", ["SOG CAMP"])
     c.rect(276, 34, 62, 26, "s", ["NE HUT"])
     c.rect(300, 182, 62, 24, "s", ["E BLOCKS"])
@@ -290,11 +305,11 @@ def hanoi():
            "L46 246 L24 192 L44 142 L28 110 L56 80 Z")
     c.rect(196, 30, 130, 40, "s", ["OPEN COURTYARD"])
     c.path("M176 54 L204 46 L308 160 L288 180 Z", "hot")
-    c.rect(92, 82, 112, 56, "b", ["PRISON", "2ND LEVELS"])
+    c.rect(92, 82, 112, 56, "go", ["PRISON", "2ND LEVELS"], "golbl")
     c.rect(92, 150, 100, 34, "s", ["CENTRAL AREA"])
     c.rect(16, 130, 72, 32, "s", ["BACK HOUSE"])
-    c.circle(300, 186, 10)
-    c.rect(230, 210, 100, 26, "s", ["TRUCKS"])
+    c.circle(300, 186, 10, "go")
+    c.rect(230, 210, 100, 26, "go", ["TRUCKS"], "golbl")
     c.rect(120, 200, 100, 34, "hot", ["CENTRAL 2"], "hotlbl")
     c.rect(268, 288, 92, 28, "s", ["NARROW SIDE"])
     c.pin(180, 74, "1"); c.pin(300, 186, "2")
@@ -310,8 +325,8 @@ def havana():
     c.rect(168, 66, 60, 200, "hot", ["MAIN", "STREET"], "hotlbl")
     c.rect(20, 30, 138, 24, "sp", ["TROPAS"])
     c.rect(238, 30, 150, 36, "b", ["SNIPER HOUSE"])
-    c.rect(20, 72, 138, 52, "b", ["CIGAR SHOP", "2ND LEVEL"])
-    c.rect(238, 72, 150, 52, "b", ["HOTEL", "2ND LEVEL"])
+    c.rect(20, 72, 138, 52, "go", ["CIGAR SHOP", "2ND LEVEL"], "golbl")
+    c.rect(238, 72, 150, 52, "go", ["HOTEL", "2ND LEVEL"], "golbl")
     c.rect(30, 134, 118, 32, "s", ["FOUNTAIN"])
     c.rect(20, 176, 100, 30, "s", ["BACK CAFE"])
     c.rect(128, 176, 40, 30, "s", ["TRASH"])
@@ -333,15 +348,15 @@ def havana():
 def grid():
     c = Canvas("Grid", 400, "— large, plays small")
     c.rect(110, 116, 284, 26, "hot", ["OPEN CORRIDOR"], "hotlbl")
-    c.rect(130, 24, 110, 88, "b", ["MID CONTROL"])
-    c.rect(130, 148, 140, 76, "b", ["THE FACILITY", "2ND FLOOR"])
+    c.rect(130, 24, 110, 88, "go", ["MID CONTROL"], "golbl")
+    c.rect(130, 148, 140, 76, "go", ["THE FACILITY", "2ND FLOOR"], "golbl")
     c.rect(44, 28, 68, 34, "s", ["HANGAR"])
     c.rect(44, 68, 68, 34, "s", ["PARKING"])
     c.rect(6, 148, 50, 32, "s", ["W BLOCK"])
     c.rect(54, 232, 74, 30, "s", ["LONG ALLEY"])
     c.rect(282, 24, 108, 30, "s", ["NE BLOCK"])
+    c.rect(282, 62, 108, 42, "hot", ["EAST: OPEN", "GROUND"], "hotlbl")
     c.pin(228, 36, "1"); c.pin(256, 160, "2")
-    c.free(282, 78, ["EAST: OPEN", "GROUND"], "lbl")
     c.key("1  Mid control — railing peeks the alley")
     c.key("2  Facility — doorways are a claymore choke", hot=True)
     c.key("East is a sniper haven; they hide in bushes", hot=True)
@@ -351,15 +366,15 @@ def grid():
 
 def array_():
     c = Canvas("Array", 400, "— open, sniper-heavy")
-    c.circle(170, 150, 46, "b", 30)
-    c.free(140, 146, ["RELAY DISH"], "lbl")
+    c.circle(170, 150, 46, "go", 30)
+    c.free(140, 146, ["RELAY DISH"], "golbl")
     c.rect(196, 30, 78, 30, "s", ["N TOWER"])
     c.rect(28, 60, 96, 34, "s", ["NW RISE"])
     c.rect(28, 104, 96, 30, "s", ["NW BUILDING"])
     c.rect(20, 186, 96, 30, "s", ["WEST CPLX"])
     c.rect(240, 96, 96, 30, "s", ["E BUILDING"])
     c.rect(240, 136, 96, 30, "s", ["NE BLOCK"])
-    c.rect(240, 186, 96, 30, "s", ["E HANGAR"])
+    c.rect(240, 186, 96, 30, "go", ["E HANGAR"], "golbl")
     c.rect(130, 236, 130, 24, "hot", ["OPEN SNOW"], "hotlbl")
     c.pin(216, 132, "1"); c.pin(266, 38, "2")
     c.key("1  Relay dish — bulk of the fighting, blind SE")
@@ -374,12 +389,13 @@ def wmd():
     c.circle(300, 62, 20, "b", 11)
     c.free(258, 34, ["SILOS · EAST"], "lbl")
     c.rect(72, 78, 116, 44, "s", ["NORTH LANE"])
-    c.rect(140, 138, 130, 66, "b", ["MIDDLE HOUSE", "4 ENTRANCES"])
+    c.rect(140, 138, 130, 66, "go", ["MIDDLE HOUSE", "4 ENTRANCES"], "golbl")
     c.rect(288, 112, 96, 82, "s", ["EAST", "STRUCTURE"])
     c.rect(8, 150, 96, 44, "s", ["WEST WING"])
     c.rect(88, 218, 128, 46, "s", ["WAREHOUSE"])
-    c.rect(228, 218, 130, 46, "s", ["FACTORY"])
+    c.rect(228, 218, 130, 46, "go", ["FACTORY"], "golbl")
     c.rect(88, 276, 200, 40, "s", ["SOUTH SHEDS"])
+    c.rect(140, 96, 130, 30, "hot", ["OPEN MIDDLE"], "hotlbl")
     c.rect(296, 276, 96, 24, "sp", ["EAST SPAWN"])
     c.rect(8, 202, 96, 24, "sp", ["WEST SPAWN"])
     c.pin(258, 150, "1"); c.pin(198, 230, "2")
@@ -395,8 +411,8 @@ def launch():
     c.circle(200, 60, 26, "b", 14)
     c.free(168, 30, ["ROCKET"], "lbl")
     c.rect(176, 96, 48, 116, "hot", ["MIDDLE"], "hotlbl")
-    c.rect(108, 96, 62, 46, "b", ["3-STOREY"])
-    c.rect(230, 96, 62, 46, "b", ["3-STOREY"])
+    c.rect(108, 96, 62, 46, "go", ["3-STOREY"], "golbl")
+    c.rect(230, 96, 62, 46, "go", ["3-STOREY"], "golbl")
     c.rect(150, 150, 100, 22, "s", ["MIRRORED BRIDGE"])
     c.rect(30, 96, 74, 34, "s", ["W STRUCTS"])
     c.rect(296, 96, 74, 34, "s", ["E STRUCTS"])
@@ -415,11 +431,11 @@ def villa():
     c = Canvas("Villa", 400, "— three elevated holds")
     c.circle(210, 96, 40, "b", 22)
     c.free(178, 44, ["FOUNTAIN"], "lbl")
-    c.rect(20, 108, 108, 44, "b", ["MANSION"])
+    c.rect(20, 108, 108, 44, "go", ["MANSION"], "golbl")
     c.rect(20, 60, 108, 34, "water", ["POOL · TROPAS"])
     c.rect(140, 150, 108, 34, "s", ["INNER ROOMS"])
     c.rect(272, 30, 116, 34, "s", ["NE BUILDINGS"])
-    c.rect(272, 74, 116, 44, "b", ["SNIPER HOUSE"])
+    c.rect(272, 74, 116, 44, "go", ["SNIPER HOUSE"], "golbl")
     c.rect(20, 168, 108, 34, "s", ["GUARD HOUSE"])
     c.rect(140, 196, 108, 30, "hot", ["CONNECTOR"], "hotlbl")
     c.rect(272, 150, 116, 40, "b", ["MARKET · OP 40"])
@@ -435,7 +451,7 @@ def villa():
 
 def crisis():
     c = Canvas("Crisis", 400, "— versatile, tricky guns")
-    c.rect(20, 60, 116, 62, "b", ["CASTRO'S", "HOUSE"])
+    c.rect(20, 60, 116, 62, "go", ["CASTRO'S", "HOUSE"], "golbl")
     c.rect(20, 130, 116, 30, "sp", ["TROPAS"])
     c.rect(20, 172, 116, 28, "s", ["SW BUILDING"])
     c.rect(150, 40, 108, 34, "s", ["MID ARCHES"])
@@ -444,7 +460,7 @@ def crisis():
     c.rect(150, 172, 108, 28, "s", ["BOTTOM CASTRO"])
     c.rect(272, 60, 116, 30, "rock", ["ROCK PERCH 1"])
     c.rect(272, 100, 116, 30, "rock", ["ROCK PERCH 2"])
-    c.rect(272, 140, 116, 30, "s", ["MID SANDBAGS"])
+    c.rect(272, 140, 116, 30, "go", ["MID SANDBAGS"], "golbl")
     c.rect(272, 180, 116, 26, "sp", ["OP 40 · BEACH"])
     c.pin(128, 72, "1"); c.pin(250, 142, "2")
     c.key("1  Wall jump to upper Castro, skip the stairs")
@@ -458,13 +474,13 @@ def cracked():
     c = Canvas("Cracked", 400, "— keep moving")
     c.rect(176, 26, 44, 232, "hot", ["MAIN", "ROAD"], "hotlbl")
     c.rect(8, 104, 384, 24, "hot", ["MAIN ROAD — DANGEROUS TO CROSS"], "hotlbl")
-    c.rect(140, 140, 116, 48, "b", ["BLOWN-OUT BLDG"])
+    c.rect(140, 140, 116, 48, "go", ["BLOWN-OUT BLDG"], "golbl")
     c.rect(8, 30, 108, 34, "s", ["NW BLOCK"])
-    c.rect(8, 140, 108, 44, "b", ["W BUILDING", "3 STOREYS"])
+    c.rect(8, 140, 108, 44, "go", ["W BUILDING", "3 STOREYS"], "golbl")
     c.rect(8, 196, 108, 30, "s", ["SW BLOCK"])
     c.rect(240, 30, 152, 30, "s", ["NE BLOCKS"])
     c.rect(240, 66, 152, 30, "s", ["NVA SPAWN SIDE"])
-    c.rect(276, 140, 116, 44, "b", ["E BUILDING"])
+    c.rect(276, 140, 116, 44, "go", ["E BUILDING"], "golbl")
     c.rect(276, 196, 116, 30, "s", ["S BLOCK"])
     c.pin(246, 152, "1"); c.pin(106, 152, "2")
     c.key("1  Blown-out building — controlling it wins")

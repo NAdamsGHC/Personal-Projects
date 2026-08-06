@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="336" viewBox="0 0 400 336" role="img" aria-label="Grid tactical schematic, traced from the in-game minimap.">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="350.5" viewBox="0 0 400 350.5" role="img" aria-label="Grid tactical schematic, traced from the in-game minimap.">
 <defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
 <style>
 .terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
@@ -23,16 +23,20 @@
 .pin{fill:#d98b4a}
 .pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
 .link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
+
+.go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
+.golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+       font-size:9px;letter-spacing:0.7px}
 </style></defs>
 <text class="ttl" x="8" y="15">GRID</text>
 <text class="key" x="52.56" y="15">— large, plays small</text>
 <rect class="hot" x="110" y="116" width="284" height="26" rx="2"/>
 <text class="hotlbl" x="115" y="132">OPEN CORRIDOR</text>
-<rect class="b" x="130" y="24" width="110" height="88" rx="2"/>
-<text class="lbl" x="135" y="71">MID CONTROL</text>
-<rect class="b" x="130" y="148" width="140" height="76" rx="2"/>
-<text class="lbl" x="135" y="183.5">THE FACILITY</text>
-<text class="lbl" x="135" y="194.5">2ND FLOOR</text>
+<rect class="go" x="130" y="24" width="110" height="88" rx="2"/>
+<text class="golbl" x="135" y="71">MID CONTROL</text>
+<rect class="go" x="130" y="148" width="140" height="76" rx="2"/>
+<text class="golbl" x="135" y="183.5">THE FACILITY</text>
+<text class="golbl" x="135" y="194.5">2ND FLOOR</text>
 <rect class="s" x="44" y="28" width="68" height="34" rx="2"/>
 <text class="lbl2" x="49" y="48">HANGAR</text>
 <rect class="s" x="44" y="68" width="68" height="34" rx="2"/>
@@ -43,12 +47,17 @@
 <text class="lbl2" x="59" y="250">LONG ALLEY</text>
 <rect class="s" x="282" y="24" width="108" height="30" rx="2"/>
 <text class="lbl2" x="287" y="42">NE BLOCK</text>
-<text class="lbl" x="282" y="78">EAST: OPEN</text>
-<text class="lbl" x="282" y="89">GROUND</text>
+<rect class="hot" x="282" y="62" width="108" height="42" rx="2"/>
+<text class="hotlbl" x="287" y="80.5">EAST: OPEN</text>
+<text class="hotlbl" x="287" y="91.5">GROUND</text>
 <circle class="pin" cx="228" cy="36" r="8"/><text class="pinn" x="225.5" y="39.2">1</text>
 <circle class="pin" cx="256" cy="160" r="8"/><text class="pinn" x="253.5" y="163.2">2</text>
-<text class="key" x="8" y="280">1  Mid control — railing peeks the alley</text>
-<text class="keyhot" x="8" y="292.5">2  Facility — doorways are a claymore choke</text>
-<text class="keyhot" x="8" y="305">East is a sniper haven; they hide in bushes</text>
-<text class="key" x="8" y="317.5">Mid statue climb reaches upper control room</text>
+<rect class="go" x="8" y="272" width="16" height="11" rx="2"/>
+<text class="key" x="30" y="281">head for</text>
+<rect class="hot" x="92" y="272" width="16" height="11" rx="2"/>
+<text class="keyhot" x="114" y="281">avoid / cross fast</text>
+<text class="key" x="8" y="294.5">1  Mid control — railing peeks the alley</text>
+<text class="keyhot" x="8" y="307">2  Facility — doorways are a claymore choke</text>
+<text class="keyhot" x="8" y="319.5">East is a sniper haven; they hide in bushes</text>
+<text class="key" x="8" y="332">Mid statue climb reaches upper control room</text>
 </svg>

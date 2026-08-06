@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="365" viewBox="0 0 400 365" role="img" aria-label="Summit tactical schematic, traced from the in-game minimap.">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="379.5" viewBox="0 0 400 379.5" role="img" aria-label="Summit tactical schematic, traced from the in-game minimap.">
 <defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
 <style>
 .terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
@@ -23,12 +23,16 @@
 .pin{fill:#d98b4a}
 .pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
 .link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
+
+.go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
+.golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+       font-size:9px;letter-spacing:0.7px}
 </style></defs>
 <text class="ttl" x="8" y="15">SUMMIT</text>
 <text class="key" x="68.84" y="15">— four chokes</text>
-<rect class="b" x="130" y="108" width="140" height="96" rx="2"/>
-<text class="lbl" x="135" y="153.5">CONTROL ROOM</text>
-<text class="lbl" x="135" y="164.5">TOP + BOTTOM</text>
+<rect class="go" x="130" y="108" width="140" height="96" rx="2"/>
+<text class="golbl" x="135" y="153.5">CONTROL ROOM</text>
+<text class="golbl" x="135" y="164.5">TOP + BOTTOM</text>
 <rect class="hot" x="130" y="212" width="140" height="20" rx="2"/>
 <text class="hotlbl" x="135" y="225">MIDDLE HALL</text>
 <rect class="hot" x="288" y="108" width="100" height="32" rx="2"/>
@@ -37,12 +41,12 @@
 <text class="lbl" x="293" y="167">PORCH</text>
 <rect class="s" x="288" y="188" width="100" height="30" rx="2"/>
 <text class="lbl2" x="293" y="206">ELECTRICAL</text>
-<rect class="b" x="130" y="58" width="66" height="40" rx="2"/>
-<text class="lbl" x="135" y="75.5">BACK</text>
-<text class="lbl" x="135" y="86.5">AREA</text>
-<rect class="b" x="204" y="58" width="66" height="40" rx="2"/>
-<text class="lbl" x="209" y="75.5">BACK</text>
-<text class="lbl" x="209" y="86.5">STAIRS</text>
+<rect class="go" x="130" y="58" width="66" height="40" rx="2"/>
+<text class="golbl" x="135" y="75.5">BACK</text>
+<text class="golbl" x="135" y="86.5">AREA</text>
+<rect class="go" x="204" y="58" width="66" height="40" rx="2"/>
+<text class="golbl" x="209" y="75.5">BACK</text>
+<text class="golbl" x="209" y="86.5">STAIRS</text>
 <rect class="b" x="16" y="108" width="100" height="36" rx="2"/>
 <text class="lbl" x="21" y="129">ROCK AREA</text>
 <rect class="s" x="16" y="152" width="100" height="26" rx="2"/>
@@ -58,10 +62,14 @@
 <line class="link" x1="338" y1="140" x2="338" y2="148"/>
 <circle class="pin" cx="256" cy="120" r="8"/><text class="pinn" x="253.5" y="123.2">1</text>
 <circle class="pin" cx="184" cy="68" r="8"/><text class="pinn" x="181.5" y="71.2">2</text>
-<text class="key" x="8" y="284">1  Top control room — bigger once glass breaks</text>
-<text class="key" x="8" y="296.5">2  Back area / back stairs — underused</text>
-<text class="key" x="8" y="309">Rock area is the sniper route, west side</text>
-<text class="key" x="8" y="321.5">Black Ops balcony views major spawn points</text>
-<text class="keyhot" x="8" y="334">Back rooms is fast to the porch, and fatal</text>
-<text class="key" x="8" y="346.5">Orientation approximate — only west is stated</text>
+<rect class="go" x="8" y="276" width="16" height="11" rx="2"/>
+<text class="key" x="30" y="285">head for</text>
+<rect class="hot" x="92" y="276" width="16" height="11" rx="2"/>
+<text class="keyhot" x="114" y="285">avoid / cross fast</text>
+<text class="key" x="8" y="298.5">1  Top control room — bigger once glass breaks</text>
+<text class="key" x="8" y="311">2  Back area / back stairs — underused</text>
+<text class="key" x="8" y="323.5">Rock area is the sniper route, west side</text>
+<text class="key" x="8" y="336">Black Ops balcony views major spawn points</text>
+<text class="keyhot" x="8" y="348.5">Back rooms is fast to the porch, and fatal</text>
+<text class="key" x="8" y="361">Orientation approximate — only west is stated</text>
 </svg>
