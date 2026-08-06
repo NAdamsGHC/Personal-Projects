@@ -6,7 +6,8 @@
   "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference.",
   "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project.",
   "quick": "Battle type, style, class and must-haves follow from the sourced map content and the weapon data. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first.",
-  "attachments": "No map recommends a suppressor. On all six allowed assault rifles it costs 60-70% of full-damage range, which shows up as extra bullets to kill; its only unique benefit is hiding the firing dot on the enemy minimap, and that does not pay for the range on any map here. Ghost covers plane detection at no cost."
+  "attachments": "No map recommends a suppressor. On all six allowed assault rifles it costs 60-70% of full-damage range, which shows up as extra bullets to kill; its only unique benefit is hiding the firing dot on the enemy minimap, and that does not pay for the range on any map here. Ghost covers plane detection at no cost.",
+  "perks": "Tier 1 is the real choice and Ghost and Hardline compete for it: Ghost where long rotations make a flank worth hiding, Hardline where the map is a scrap and kills come fast. Hardened sits in Tier 2 so it costs neither — Pro reduces flinch, which keeps trades you didn't start winnable. Nuketown keeps Flak Jacket because explosives are the main killer there."
  },
  "maps": [
   {
@@ -92,7 +93,7 @@
     "attachment": "Extended Mag",
     "perks": [
      "Flak Jacket",
-     "Tactical Mask"
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -190,8 +191,8 @@
     "weapon": "FAMAS",
     "attachment": "Extended Mag",
     "perks": [
-     "Ghost",
-     "Ninja"
+     "Hardline",
+     "Hardened"
     ],
     "streaks": [
      "Attack Helicopter",
@@ -290,8 +291,8 @@
     "weapon": "FAMAS",
     "attachment": "Extended Mag",
     "perks": [
-     "Ghost",
-     "Ninja"
+     "Hardline",
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -389,8 +390,8 @@
     "weapon": "Commando",
     "attachment": "Extended Mag",
     "perks": [
-     "Ghost",
-     "Hardline"
+     "Hardline",
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -583,7 +584,7 @@
     "weapon": "FAMAS",
     "attachment": "Extended Mag",
     "perks": [
-     "Ghost",
+     "Hardline",
      "Hardened"
     ],
     "streaks": [
@@ -776,7 +777,7 @@
     "attachment": "Extended Mag",
     "perks": [
      "Ghost",
-     "Ninja"
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -878,7 +879,7 @@
     "attachment": "Red Dot Sight",
     "perks": [
      "Ghost",
-     "Hardline"
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -973,7 +974,7 @@
     "attachment": "Red Dot Sight",
     "perks": [
      "Ghost",
-     "Ninja"
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -1258,8 +1259,8 @@
     "weapon": "FAMAS",
     "attachment": "Red Dot Sight",
     "perks": [
-     "Ghost",
-     "Sleight of Hand"
+     "Hardline",
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
@@ -1355,8 +1356,8 @@
     "weapon": "FAMAS",
     "attachment": "Extended Mag",
     "perks": [
-     "Ghost",
-     "Ninja"
+     "Hardline",
+     "Hardened"
     ],
     "streaks": [
      "Spy Plane",
