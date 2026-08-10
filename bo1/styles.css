@@ -214,6 +214,120 @@ footer code { color: var(--dim); }
 }
 .qwhy { margin: 10px 0 0; font-size: 0.9rem; color: var(--dim); }
 
+/* ── the class / killstreak calls in the lobby view ──────── */
+
+.callout {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+  background: var(--panel);
+}
+.callout.streaks { border-left-color: var(--hot); }
+.callhead {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.callout.streaks .callhead { color: var(--hot); }
+.callname {
+  font-size: 1.18rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.calldesc { margin: 0 0 10px; font-size: 0.9rem; color: var(--dim); font-style: italic; }
+.callwhy { margin: 10px 0 0; font-size: 0.9rem; color: var(--dim); line-height: 1.5; }
+
+.kit { border-top: 1px solid var(--line-soft); }
+.kitline {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.kitline:last-child { border-bottom: 0; }
+.kitline .kk {
+  flex: 0 0 52px;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+.kitline .kv2 {
+  flex: 1;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+ul.streaklist { margin: 0; padding: 0; list-style: none; }
+ul.streaklist li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+ul.streaklist li:last-child { border-bottom: 0; }
+ul.streaklist li b {
+  min-width: 24px;
+  color: var(--hot);
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+}
+
+/* ── the schematic key, as HTML rather than 7px SVG text ─── */
+
+.dkey {
+  padding: 11px 12px 12px;
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-2);
+}
+.dzones {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+  margin-bottom: 9px;
+}
+.dzones .z {
+  width: 15px;
+  height: 11px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.dzones .z:not(:first-child) { margin-left: 10px; }
+.dzones .z.go  { background: #1d3b2f; border: 1px solid #5fb08a; }
+.dzones .z.hot { background: rgba(194,91,78,0.28); border: 1px solid #c25b4e; }
+
+.dkey ul { margin: 0; padding: 0; list-style: none; }
+.dkey ul li {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--dim);
+  padding: 3px 0 3px 11px;
+  border-left: 2px solid var(--line);
+}
+.dkey ul li.hot { color: #e0b4ac; border-left-color: var(--danger); }
+.dkey .dnote {
+  margin: 9px 0 0;
+  font-size: 0.66rem;
+  color: var(--dimmer);
+  line-height: 1.45;
+}
+
 .pinbox {
   margin: 16px 0 4px;
   padding: 12px 14px;
@@ -686,48 +800,57 @@ details.ref { margin-top: 18px; }
   border-radius: 2px;
 }
 
-.score-head {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.classdesc { font-size: 0.95rem; margin: 0 0 14px; }
+
+/* The class read-out. No score — what it's good at, what it isn't. */
+
+.readout-head {
   border: 1px solid var(--line);
   border-radius: 2px;
   background: var(--panel);
-  padding: 14px;
-  margin-bottom: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
 }
-.score-num {
-  font-size: 2.6rem;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  min-width: 92px;
-}
-.score-num small { font-size: 0.9rem; color: var(--dimmer); }
-.score-verdict .v {
-  font-size: 0.72rem;
+.readout-head .rk {
+  font-size: 0.55rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  color: var(--dimmer);
+  margin-bottom: 3px;
 }
-.score-verdict .w { font-size: 0.88rem; color: var(--dim); }
+.readout-head .rv { font-size: 0.98rem; }
 
-.legs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-.leg { border: 1px solid var(--line-soft); border-radius: 2px; background: var(--panel); padding: 10px 12px; }
-.leg-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 6px;
+.tpanel {
+  border: 1px solid var(--line-soft);
+  border-left-width: 3px;
+  border-radius: 2px;
+  background: var(--panel);
+  padding: 12px 14px;
+  margin-bottom: 10px;
 }
-.leg-top b { color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
-.bar { height: 4px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
-.bar > i { display: block; height: 100%; background: var(--accent); }
-.leg.weak .bar > i { background: var(--danger); }
-.leg .why { font-size: 0.84rem; color: var(--dim); margin-top: 7px; }
+.tpanel.good { border-left-color: #5fb08a; }
+.tpanel.bad  { border-left-color: var(--danger); }
+.tpanel .thead {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.tpanel.good .thead { color: #a9dcc0; }
+.tpanel.bad .thead  { color: #e0938a; }
+.tpanel ul { margin: 0; padding: 0; list-style: none; }
+.tpanel ul li {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--dim);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.tpanel ul li:last-child { border-bottom: 0; }
+.tpanel .tnone { margin: 0; font-size: 0.9rem; color: var(--dimmer); }
+
+.note.good { border-left-color: #5fb08a; }
+.row .tag.mode { color: var(--dim); border-color: var(--line); }
 
 .ks-row {
   display: flex;

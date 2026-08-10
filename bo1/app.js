@@ -2,10 +2,8 @@
    No build step, no dependencies, no stored state beyond the current session. */
 
 const DATA = {};
-const MAX_LEVEL = 50;
 
 const state = {
-  level: MAX_LEVEL,      // session only — resets every visit, assumed max
   weaponClass: "All",
   mapId: null,
   sideIndex: 0,
@@ -24,12 +22,18 @@ const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const ms = (secs) => (secs === null || secs === undefined) ? "—" : `${Math.round(secs * 1000)}ms`;
 
+/* A one-pull kill has no time-to-kill to speak of, so say so rather than
+   printing 0ms and letting it sort like a number. */
+const ttkLabel = (w) =>
+  (w && w.stk && w.stk.torso === 1) ? "1 shot" : ms(w ? w.ttk.close : null);
+
 /* ── boot ─────────────────────────────────────────────────── */
 
-Promise.all(
-  ["weapons", "maps", "perks", "classes", "killstreaks", "attachments"]
-    .map((n) => fetch(`data/${n}.json`).then((r) => r.json()).then((j) => [n, j]))
-).then((pairs) => {
+Promise.all([
+  ...["weapons", "maps", "perks", "classes", "killstreaks", "attachments"]
+    .map((n) => fetch(`data/${n}.json`).then((r) => r.json()).then((j) => [n, j])),
+  fetch("diagrams/keys.json").then((r) => r.json()).then((j) => ["diagramKeys", j]),
+]).then((pairs) => {
   pairs.forEach(([n, j]) => (DATA[n] = j));
   initTabs();
   renderMapGrid();
@@ -37,7 +41,6 @@ Promise.all(
   renderPerks();
   initClasses();
   renderKillstreaks();
-  renderAttachments();
 }).catch((err) => {
   document.querySelector("main").innerHTML =
     `<p class="hint">Could not load data: ${esc(err.message)}</p>`;
@@ -49,11 +52,38 @@ function initTabs() {
   $("#tabs").addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-tab]");
     if (!btn) return;
-    document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b === btn));
-    document.querySelectorAll("main .tab").forEach((s) =>
-      s.classList.toggle("on", s.id === btn.dataset.tab));
-    window.scrollTo(0, 0);
+    showTab(btn.dataset.tab);
   });
+}
+
+function showTab(name) {
+  document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
+  document.querySelectorAll("main .tab").forEach((s) => s.classList.toggle("on", s.id === name));
+  window.scrollTo(0, 0);
+}
+
+/* ── shared lookups ───────────────────────────────────────── */
+
+function classById(id) {
+  return DATA.classes.presets.find((p) => p.id === id);
+}
+
+function streakProfile(id) {
+  return DATA.killstreaks.profiles.find((p) => p.id === id);
+}
+
+function streakCost(name) {
+  const k = DATA.killstreaks.killstreaks.find((x) => x.name === name);
+  return k ? k.kills : null;
+}
+
+/* Full-damage reach, after any suppressor on the build. */
+function effectiveReach(w, attachments) {
+  if (!w) return null;
+  const base = w.profile[0] && w.profile[0].toM ? w.profile[0].toM : null;
+  if (!(attachments || []).includes("Suppressor")) return base;
+  const s = w.suppressed && w.suppressed.profile[0];
+  return s && s.toM ? s.toM : base;
 }
 
 /* ── PRE-MATCH ────────────────────────────────────────────── */
@@ -101,15 +131,8 @@ function renderBrief() {
   box.appendChild(el("div", "brief-head",
     `<h2>${esc(m.name)}</h2><span class="size">${esc(m.size)} &middot; TDM</span>`));
 
-  // ── the lobby view: schematic, then the four things that decide the game ──
-  if (m.diagram) {
-    const fig = el("figure", "diagram");
-    const img = document.createElement("img");
-    img.src = m.diagram;
-    img.alt = `${m.name} tactical schematic`;
-    fig.appendChild(img);
-    box.appendChild(fig);
-  }
+  // ── the lobby view: schematic, its key, the class, the streaks ──
+  if (m.diagram) box.appendChild(diagramFigure(m));
 
   const q = m.quick;
   if (q) {
@@ -117,17 +140,9 @@ function renderBrief() {
     qb.appendChild(el("div", "chips-row",
       `<span class="chip battle">${esc(q.battle)}</span>
        <span class="chip style">${esc(q.style)}</span>`));
-    qb.appendChild(el("div", "qline",
-      `<span class="qk">Class</span>
-       <span class="qv">${esc(q.weapon)} &middot; ${esc(q.attachment)}</span>`));
-    qb.appendChild(el("div", "qline",
-      `<span class="qk">Must have</span>
-       <span class="qv">${q.perks.map(esc).join(" &middot; ")}</span>`));
-    qb.appendChild(el("div", "qline",
-      `<span class="qk">Streaks</span>
-       <span class="qv">${q.streaks.map(esc).join(" &middot; ")}</span>`));
-    qb.appendChild(el("p", "qwhy", esc(q.classLine)));
     box.appendChild(qb);
+    box.appendChild(classCallBlock(q));
+    box.appendChild(streakCallBlock(q));
 
     const pin = el("div", "pinbox");
     pin.appendChild(el("div", "pinhead", "How far to push"));
@@ -194,36 +209,14 @@ function renderBrief() {
   route.appendChild(el("div", "pinch", `<b>Pinch point</b>${esc(side.pinch)}`));
   box2.appendChild(route);
 
-  // 7 — loadout call
-  const w = findWeapon(m.loadout.weapon);
-  const perk = DATA.perks.perks.find((p) => p.name === m.loadout.perk);
-  const load = el("div", "field", "<h3>Loadout call</h3>");
-  const cards = el("div", "loadout-call");
-  cards.appendChild(el("div", "",
-    `<div class="lbl">Weapon</div><div class="val">${esc(m.loadout.weapon)}</div>
-     <div class="why">${esc(m.loadout.weaponWhy)}</div>`));
-  cards.appendChild(el("div", "",
-    `<div class="lbl">Perk</div><div class="val">${esc(m.loadout.perk)}</div>
-     <div class="why">${esc(m.loadout.perkWhy)}</div>`));
-  load.appendChild(cards);
-  if (w || perk) {
-    const jump = el("p", "", "");
-    jump.style.marginTop = "10px";
-    const a = el("button", "back", "Open weapon &rarr;");
-    a.style.marginBottom = "0";
-    a.addEventListener("click", () => { showTab("weapons"); openWeapon(w.name); });
-    if (w) jump.appendChild(a);
-    load.appendChild(jump);
-  }
-  box2.appendChild(load);
-
-  // the real in-game minimap
+  // the real in-game minimap — lazy, because it sits behind two closed folds
   if (m.minimap) {
     const mm = el("details", "ref");
     mm.appendChild(el("summary", "", "In-game minimap"));
     const mb = el("div", "body");
     const mfig = el("figure", "diagram minimap");
     const mimg = document.createElement("img");
+    mimg.loading = "lazy";
     mimg.src = m.minimap;
     mimg.alt = `${m.name} in-game minimap`;
     mfig.appendChild(mimg);
@@ -261,6 +254,85 @@ function renderBrief() {
   box.appendChild(brief);
 }
 
+/* The schematic, plus its key as real HTML underneath. The key used to be drawn
+   into the SVG, where a 400-unit canvas shown at phone width rendered it around
+   7px. Out here it is body text that wraps. */
+function diagramFigure(m) {
+  const fig = el("figure", "diagram");
+  const img = document.createElement("img");
+  img.src = m.diagram;
+  img.alt = `${m.name} tactical schematic`;
+  fig.appendChild(img);
+
+  const keys = DATA.diagramKeys && DATA.diagramKeys.maps[m.id];
+  if (keys) {
+    const k = el("div", "dkey");
+    const zones = DATA.diagramKeys.zones;
+    k.appendChild(el("div", "dzones",
+      `<span class="z go"></span>${esc(zones.go)}
+       <span class="z hot"></span>${esc(zones.hot)}`));
+    const ul = el("ul");
+    keys.lines.forEach((line) => ul.appendChild(el("li", line.hot ? "hot" : "", esc(line.text))));
+    k.appendChild(ul);
+    k.appendChild(el("p", "dnote",
+      "Geometry traced from the in-game minimap; the minimaps carry no text, so building names are best-effort."));
+    fig.appendChild(k);
+  }
+  return fig;
+}
+
+/* The class called for on this map, resolved live from classes.json so the
+   brief and the Classes tab can't drift apart. */
+function classCallBlock(q) {
+  const c = classById(q.classId);
+  const wrap = el("div", "callout");
+  if (!c) {
+    wrap.appendChild(el("p", "", "No class set for this map."));
+    return wrap;
+  }
+  wrap.appendChild(el("div", "callhead", "Class to run"));
+  wrap.appendChild(el("div", "callname", esc(c.name)));
+  wrap.appendChild(el("p", "calldesc", esc(c.description)));
+
+  const kit = el("div", "kit");
+  const atts = c.primaryAttachments.length ? c.primaryAttachments.join(" + ") : "no attachment";
+  kit.appendChild(el("div", "kitline",
+    `<span class="kk">Gun</span><span class="kv2">${esc(c.primary)} &middot; ${esc(atts)}</span>`));
+  kit.appendChild(el("div", "kitline",
+    `<span class="kk">Perks</span><span class="kv2">${c.perks.map(esc).join(" &middot; ")}</span>`));
+  kit.appendChild(el("div", "kitline",
+    `<span class="kk">Gear</span><span class="kv2">${esc(c.lethal)} &middot; ${esc(c.tactical)} &middot; ${esc(c.gear)}</span>`));
+  wrap.appendChild(kit);
+
+  wrap.appendChild(el("p", "callwhy", esc(q.classWhy)));
+
+  const jump = el("button", "back");
+  jump.style.margin = "10px 0 0";
+  jump.innerHTML = "Open in Classes &rarr;";
+  jump.addEventListener("click", () => {
+    showTab("classes");
+    selectPreset(c.id, state.mapId);
+  });
+  wrap.appendChild(jump);
+  return wrap;
+}
+
+function streakCallBlock(q) {
+  const p = streakProfile(q.streakSet);
+  const wrap = el("div", "callout streaks");
+  if (!p) return wrap;
+  wrap.appendChild(el("div", "callhead", "Killstreaks"));
+  wrap.appendChild(el("div", "callname", esc(p.name)));
+  const ul = el("ul", "streaklist");
+  p.streaks.forEach((s) => {
+    const n = streakCost(s);
+    ul.appendChild(el("li", "", `<b>${n === null ? "?" : n}</b>${esc(s)}`));
+  });
+  wrap.appendChild(ul);
+  wrap.appendChild(el("p", "callwhy", esc(q.streakWhy)));
+  return wrap;
+}
+
 function listField(title, items, keyName, keyBody) {
   const f = el("div", "field", `<h3>${esc(title)}</h3>`);
   const ul = el("ul");
@@ -268,12 +340,6 @@ function listField(title, items, keyName, keyBody) {
     `<b>${esc(it[keyName])}</b><span>${esc(it[keyBody])}</span>`)));
   f.appendChild(ul);
   return f;
-}
-
-function showTab(name) {
-  document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("on", b.dataset.tab === name));
-  document.querySelectorAll("main .tab").forEach((s) => s.classList.toggle("on", s.id === name));
-  window.scrollTo(0, 0);
 }
 
 /* ── WEAPONS ──────────────────────────────────────────────── */
@@ -291,15 +357,6 @@ function findWeapon(name) {
 }
 
 function initWeapons() {
-  const lvl = $("#level-filter");
-  for (let i = MAX_LEVEL; i >= 4; i--) {
-    const o = el("option", "", i === MAX_LEVEL ? `${i} (max)` : String(i));
-    o.value = i;
-    lvl.appendChild(o);
-  }
-  lvl.value = state.level;
-  lvl.addEventListener("change", () => { state.level = +lvl.value; renderWeaponList(); });
-
   const cls = $("#class-filter");
   ["All", "AR", "SMG", "LMG", "Sniper", "Shotgun", "Pistol"].forEach((c) => {
     const o = el("option", "", c === "All" ? "All classes" : c);
@@ -307,7 +364,6 @@ function initWeapons() {
     cls.appendChild(o);
   });
   cls.addEventListener("change", () => { state.weaponClass = cls.value; renderWeaponList(); });
-
   renderWeaponList();
 }
 
@@ -317,21 +373,28 @@ function renderWeaponList() {
   list.classList.remove("hidden");
   list.innerHTML = "";
 
-  let ws = fullDepth().filter((w) => (w.unlockLevel ?? 99) <= state.level);
+  let ws = fullDepth();
   if (state.weaponClass !== "All") ws = ws.filter((w) => w.class === state.weaponClass);
-  ws.sort((a, b) => (a.ttk.close ?? 9) - (b.ttk.close ?? 9));
+  // One-shot weapons all tie at 0ms, so aim-in time breaks the tie — between
+  // two guns that kill on contact, the one that gets there first wins.
+  ws.sort((a, b) => ((a.ttk.close ?? 9) - (b.ttk.close ?? 9)) || (a.adsTime - b.adsTime));
 
   $("#weapon-count").textContent =
-    `${ws.length} available at level ${state.level}, fastest kill first. ` +
-    `TTK is best case at close range — check the reach beside it before you believe it.`;
+    `${ws.length} weapons, fastest kill first. Time-to-kill assumes hits to the upper torso ` +
+    `at full damage — check the reach beside it before you believe it. Anything you fire one ` +
+    `pull at a time is capped at ${DATA.weapons.units.tapHz} pulls a second, which is an ` +
+    `estimate of a normal trigger finger rather than a datamined figure.`;
 
   ws.forEach((w) => {
     const reach = w.profile[0] && w.profile[0].toM ? `${w.profile[0].toM} m` : "any range";
+    const mode = w.fireMode === "auto" ? "" :
+      `<span class="tag mode">${esc(w.fireModeLabel)}</span>`;
     const r = el("button", "row",
       `<span class="nm">${esc(w.name)}</span>
+       ${mode}
        <span class="tag">${esc(w.class)}${w.classified ? " ·CLS" : ""}</span>
        <span class="reach">${reach}</span>
-       <span class="ttk">${ms(w.ttk.close)}</span>`);
+       <span class="ttk">${ttkLabel(w)}</span>`);
     r.addEventListener("click", () => openWeapon(w.name));
     list.appendChild(r);
   });
@@ -340,6 +403,7 @@ function renderWeaponList() {
 function openWeapon(name) {
   const w = findWeapon(name);
   if (!w) return;
+  showTab("weapons");
   $("#weapon-list").classList.add("hidden");
   const d = $("#weapon-detail");
   d.classList.remove("hidden");
@@ -351,23 +415,76 @@ function openWeapon(name) {
 
   d.appendChild(el("h2", "", esc(w.name)));
   d.appendChild(el("p", "sub",
-    `${esc(w.class)} &middot; Unlock level ${w.unlockLevel}${w.classified ? " (classified)" : ""}${w.burst ? ` &middot; ${w.burst}-round burst` : ""}`));
+    `${esc(w.class)} &middot; ${esc(w.fireModeLabel)} &middot; Unlock level ${w.unlockLevel}${w.classified ? " (classified)" : ""}`));
 
   const stats = el("div", "stats");
   const stat = (k, v) => stats.appendChild(el("div", "stat", `<div class="k">${k}</div><div class="v">${v}</div>`));
-  stat("Damage", `${w.damage.max}<small> / ${w.damage.min}</small>`);
+  stat("Damage", `${w.damage.max}<small> / ${w.damage.min}</small>${w.pellets ? `<small> ×${w.pellets}</small>` : ""}`);
   stat("Rate of fire", `${Math.round(w.rpm)}<small> rpm</small>`);
-  stat("TTK close", `<span style="color:var(--hot)">${ms(w.ttk.close)}</span>`);
+  stat("Kill", `<span style="color:var(--hot)">${ttkLabel(w)}</span>`);
   stat("ADS", `${w.adsTime}<small>s</small>`);
   d.appendChild(stats);
 
-  d.appendChild(el("h3", "tier-head", "Shots to kill by range"));
+  // The headline claim, spelled out — this is where snipers used to be wrong.
+  if (w.oneShot && w.oneShot.length) {
+    d.appendChild(el("div", "note good",
+      `<b>One-shot kill.</b> ${esc(oneShotSentence(w))}`));
+  }
+
+  if (w.rateCapped) {
+    d.appendChild(el("div", "note",
+      `<b>You are the fire rate.</b> The gun will accept ${Math.round(w.rpm)} rpm, but you have to
+       pull the trigger for every round. Timings here assume
+       ${DATA.weapons.units.tapHz} pulls a second — an estimate of a normal trigger finger, not a
+       datamined number. Tap faster and you beat it; panic and you won't.`));
+  }
+
+  if (w.missPenalty) {
+    d.appendChild(el("div", "note bad",
+      `<b>A miss costs you ${ms(w.missPenalty)}.</b> That is the re-chamber before you can fire
+       again, and it is longer than most guns need to kill you outright.`));
+  }
+
+  // The range profile is the un-multiplied case: what it takes if you catch a
+  // limb rather than the chest. On most guns that's the same number and the
+  // heading is unremarkable; on a sniper it's the difference between one shot
+  // and two, so say which one you're looking at.
+  const limbOnly = w.stk.torso && w.stk.close && w.stk.torso < w.stk.close;
+  d.appendChild(el("h3", "tier-head",
+    w.pellets ? "Pellets on target, by range"
+      : limbOnly ? "If you catch a limb rather than the body"
+      : "Shots to kill by range"));
   const prof = el("div", "profile");
-  w.profile.forEach((b) => prof.appendChild(el("div", "profile-row",
-    `<span class="shots">${b.shots} shots</span>
-     <span class="rng">${b.beyond ? "beyond that" : `out to ${b.toM} m`}</span>
-     <span class="t">${ms(b.ttk)}</span>`)));
+  w.profile.forEach((b) => {
+    const need = w.pellets
+      ? `${b.hits} of ${w.pellets} pellets`
+      : `${b.shots} shot${b.shots === 1 ? "" : "s"}`;
+    const pulls = w.pellets && b.shots === 1 ? " · one pull" : "";
+    prof.appendChild(el("div", "profile-row",
+      `<span class="shots">${esc(need)}</span>
+       <span class="rng">${b.beyond ? "beyond that" : `out to ${b.toM} m`}${pulls}</span>
+       <span class="t">${b.shots === 1 ? "—" : ms(b.ttk)}</span>`));
+  });
   d.appendChild(prof);
+
+  // Where you hit changes the answer — this is the multiplier table, applied.
+  const z = w.killZones || {};
+  if (Object.keys(z).length) {
+    const rows = [["Head", z.head], ["Neck", z.neck],
+                  ["Upper torso", z.upperTorso], ["Lower torso", z.lowerTorso],
+                  ["Arms and legs", w.stk.close]]
+      .filter(([, n]) => n);
+    const uniform = rows.every(([, n]) => n === rows[0][1]);
+    if (rows.length && !(uniform && !limbOnly)) {
+      d.appendChild(el("h3", "tier-head", "Where you hit"));
+      const zb = el("div", "profile");
+      rows.forEach(([k, n]) => zb.appendChild(el("div", "profile-row",
+        `<span class="shots">${esc(k)}</span>
+         <span class="rng">${n} ${w.pellets ? (n === 1 ? "pull" : "pulls") : (n === 1 ? "shot" : "shots")}</span>
+         <span class="t">${n === 1 ? "instant" : ""}</span>`)));
+      d.appendChild(zb);
+    }
+  }
 
   if (w.suppressed) {
     const base = w.profile[0], sup = w.suppressed.profile[0];
@@ -375,49 +492,55 @@ function openWeapon(name) {
       const drop = Math.round((1 - sup.toM / base.toM) * 100);
       d.appendChild(el("div", "note bad",
         `<b>Suppressor costs you range.</b> The ${base.shots}-shot kill drops from
-         <b>${base.toM} m</b> to <b>${sup.toM} m</b> — a ${drop}% cut. Past that you need an extra bullet.`));
+         <b>${base.toM} m</b> to <b>${sup.toM} m</b> — a ${drop}% cut. Past that you need an extra
+         bullet. What you get back is no dot on their minimap when you fire, which is worth having
+         where you're flanking and worth very little where you're trading.`));
     }
   }
 
-  if (w.rapidFire) {
+  // Rapid Fire only means anything where a second shot is involved — on a
+  // one-pull kill there is no time-to-kill for it to shorten.
+  if (w.rapidFire && w.stk.torso > 1) {
     d.appendChild(el("div", "note",
       `<b>Rapid Fire</b> takes it to ${Math.round(w.rapidFire.rpm)} rpm, pulling the close-range kill
        from ${ms(w.ttk.close)} down to <b>${ms(w.rapidFire.ttkClose)}</b>.`));
+  } else if (w.rapidFire) {
+    d.appendChild(el("div", "note",
+      `<b>Rapid Fire</b> takes it to ${Math.round(w.rapidFire.rpm)} rpm. It can't shorten a kill that
+       already takes one pull — what it buys you is a faster second shot when the first one misses.`));
   }
 
   const dw = DATA.weapons.weapons.find((x) => x.baseName === w.baseName && x.variant === "dual-wield");
   if (dw) d.appendChild(el("div", "note",
     `<b>Dual Wield available.</b> Doubles your ammo and removes aiming down sights entirely.`));
 
-  const mult = w.multipliers;
-  if (mult.head) {
+  // Which classes carry it, and therefore which maps call for it.
+  const carriedBy = DATA.classes.presets.filter((p) => findWeapon(p.primary)?.name === w.name);
+  if (carriedBy.length) {
+    const maps = DATA.maps.maps.filter((m) => carriedBy.some((p) => p.id === m.quick.classId));
     d.appendChild(el("div", "note",
-      `<b>Multipliers.</b> Head &times;${mult.head}, upper torso &times;${mult.upperTorso}, lower torso &times;${mult.lowerTorso}.`));
+      `<b>Carried by:</b> ${carriedBy.map((p) => esc(p.name)).join(", ")}.` +
+      (maps.length ? ` Called for on ${maps.map((m) => esc(m.name)).join(", ")}.` : "")));
   }
 
-  const maps = DATA.maps.maps.filter((m) => findWeapon(m.loadout.weapon)?.name === w.name);
-  if (maps.length) {
-    d.appendChild(el("div", "note",
-      `<b>Called for on:</b> ${maps.map((m) => esc(m.name)).join(", ")}.`));
-  }
-
-  d.appendChild(el("p", "src", `Stats: ${esc(w.source)}. ${esc(DATA.weapons.source.note)}`));
+  d.appendChild(el("p", "src", `Stats: ${esc(w.source)}. ${esc(DATA.weapons.source.note)} ${esc(DATA.weapons.source.tapRate)}`));
   window.scrollTo(0, 0);
 }
 
-function renderAttachments() {
-  const box = $("#attachment-list");
-  box.className = "body";
-  DATA.attachments.attachments.forEach((a) => {
-    const dt = el("details", "perk");
-    dt.appendChild(el("summary", "", `${esc(a.name)}`));
-    const b = el("div", "body");
-    b.appendChild(el("div", "kv", `<div class="k">${esc(a.type)}</div><div class="v">${esc(a.effect)}</div>`));
-    b.appendChild(el("div", "kv", `<div class="k">Cost</div><div class="v">${esc(a.cost)}</div>`));
-    b.appendChild(el("div", "kv", `<div class="k">Verdict</div><div class="v"><strong>${esc(a.verdict)}</strong></div>`));
-    dt.appendChild(b);
-    box.appendChild(dt);
-  });
+function oneShotSentence(w) {
+  const z = w.oneShot;
+  const has = (k) => z.includes(k);
+  const where = has("lowerTorso") ? "anywhere on the body"
+    : has("upperTorso") ? "to the chest or above"
+    : has("neck") ? "to the neck or head"
+    : "to the head";
+  if (w.pellets) {
+    const b = w.profile[0];
+    return `One pull kills ${where} out to ${b.toM} m, if enough of the pattern lands — ` +
+           `${b.hits} of ${w.pellets} pellets. Past that it takes a second shot.`;
+  }
+  return `Kills ${where} at any range. The damage figure alone says two shots; ` +
+         `the multiplier on that hit is what makes it one.`;
 }
 
 /* ── PERKS ────────────────────────────────────────────────── */
@@ -445,6 +568,32 @@ function renderPerks() {
       box.appendChild(dt);
     });
   });
+  renderSynergy();
+}
+
+/* Perks are picked one per tier, so what matters is which combinations pull in
+   the same direction. Read straight off the same rules the Classes tab uses. */
+function renderSynergy() {
+  const box = $("#perk-synergy");
+  if (!box) return;
+  box.className = "body";
+  box.innerHTML = "";
+  box.appendChild(el("p", "hint",
+    "One perk from each tier, so the question is never which perk is best — it's which three " +
+    "agree with each other. These are the combinations that do something together that neither " +
+    "does alone."));
+  // Only rules that turn purely on the perks belong here. Anything that also
+  // depends on the map or the gun is a read for a specific build, not a general
+  // statement about a perk, and it says so over on the Classes tab.
+  const perkOnly = DATA.classes.traits.rules.filter((r) =>
+    r.when.perks && Object.keys(r.when).every((k) => k === "perks"));
+
+  perkOnly.filter((r) => r.when.perks.length > 1)
+    .forEach((r) => box.appendChild(el("div", "note",
+      `<b>${esc(r.when.perks.join(" + "))}</b> — ${esc(r.excels || r.struggles)}`)));
+  perkOnly.filter((r) => r.when.perks.length === 1 && r.struggles)
+    .forEach((r) => box.appendChild(el("div", "note bad",
+      `<b>${esc(r.when.perks[0])}</b> — ${esc(r.struggles)}`)));
 }
 
 /* ── KILLSTREAKS ──────────────────────────────────────────── */
@@ -452,6 +601,10 @@ function renderPerks() {
 function renderKillstreaks() {
   const box = $("#killstreak-list");
   box.className = "body";
+  box.innerHTML = "";
+  if (DATA.killstreaks.profilesNote) {
+    box.appendChild(el("p", "hint", esc(DATA.killstreaks.profilesNote)));
+  }
   DATA.killstreaks.profiles.forEach((p) => {
     box.appendChild(el("div", "note",
       `<b>${esc(p.name)}</b> — ${esc(p.streaks.join(" / "))}. ${esc(p.note)}`));
@@ -463,7 +616,7 @@ function renderKillstreaks() {
   });
 }
 
-/* ── CLASSES + META SCORE ─────────────────────────────────── */
+/* ── CLASSES ──────────────────────────────────────────────── */
 
 function initClasses() {
   const sel = $("#score-map");
@@ -475,36 +628,44 @@ function initClasses() {
     o.value = m.id;
     sel.appendChild(o);
   });
-  sel.addEventListener("change", () => { state.scoreMapId = sel.value; renderScore(); });
+  sel.addEventListener("change", () => { state.scoreMapId = sel.value; renderReadout(); });
 
   const bar = $("#preset-bar");
   DATA.classes.presets.forEach((p) => {
     const b = el("button", "", esc(p.name));
-    b.addEventListener("click", () => {
-      state.build = JSON.parse(JSON.stringify(p));
-      document.querySelectorAll("#preset-bar button").forEach((x) => x.classList.toggle("on", x === b));
-      renderBuilder();
-      renderScore();
-    });
+    b.dataset.preset = p.id;
+    b.addEventListener("click", () => selectPreset(p.id));
     bar.appendChild(b);
   });
 
-  state.build = JSON.parse(JSON.stringify(DATA.classes.presets[0]));
-  bar.firstChild.classList.add("on");
+  selectPreset(DATA.classes.presets[0].id);
+}
+
+function selectPreset(id, mapId) {
+  const p = classById(id) || DATA.classes.presets[0];
+  state.build = JSON.parse(JSON.stringify(p));
+  document.querySelectorAll("#preset-bar button").forEach((x) =>
+    x.classList.toggle("on", x.dataset.preset === p.id));
+  if (mapId) {
+    state.scoreMapId = mapId;
+    $("#score-map").value = mapId;
+  }
   renderBuilder();
-  renderScore();
+  renderReadout();
 }
 
 function renderBuilder() {
   const box = $("#builder");
   box.innerHTML = "";
-  const grid = el("div", "build-grid");
+  const b = state.build;
 
+  if (b.description) box.appendChild(el("p", "calldesc classdesc", esc(b.description)));
+
+  const grid = el("div", "build-grid");
   const primaries = fullDepth().filter((w) => w.class !== "Pistol").map((w) => w.name);
   const secondaries = DATA.weapons.weapons
-    .filter((w) => (w.class === "Pistol" || w.class === "Launcher") && !w.variant)
+    .filter((w) => (w.class === "Pistol" || w.class === "Launcher" || w.class === "Special") && !w.variant)
     .map((w) => w.name);
-  const atts = DATA.attachments.attachments.map((a) => a.name);
   const perksByTier = (t) => DATA.perks.perks.filter((p) => p.tier === t).map((p) => p.name);
 
   const add = (label, options, value, onChange) => {
@@ -516,15 +677,37 @@ function renderBuilder() {
       if (o === value) opt.selected = true;
       s.appendChild(opt);
     });
-    s.addEventListener("change", () => { onChange(s.value); renderScore(); });
+    s.addEventListener("change", () => { onChange(s.value); renderBuilder(); renderReadout(); });
     l.appendChild(s);
     grid.appendChild(l);
+    return s;
   };
 
-  const b = state.build;
-  add("Primary", primaries, b.primary, (v) => (b.primary = v));
-  add("Attachment", ["— none —", ...atts], b.primaryAttachments[0] || "— none —",
-    (v) => (b.primaryAttachments = v === "— none —" ? [] : [v]));
+  // Attachments are filtered to what the weapon can actually take, and the
+  // second slot only exists if Warlord is in the build — as in the game.
+  const w = findWeapon(b.primary);
+  const allowed = attachmentsFor(w);
+  const warlord = b.perks.includes("Warlord");
+  const NONE = "— none —";
+
+  add("Primary", primaries, b.primary, (v) => {
+    b.primary = v;
+    b.primaryAttachments = b.primaryAttachments.filter((a) =>
+      attachmentsFor(findWeapon(v)).includes(a));
+  });
+  add("Attachment", [NONE, ...allowed], b.primaryAttachments[0] || NONE, (v) => {
+    b.primaryAttachments[0] = v === NONE ? null : v;
+    b.primaryAttachments = b.primaryAttachments.filter(Boolean);
+  });
+  if (warlord) {
+    add("Attachment 2", [NONE, ...allowed.filter((a) => a !== b.primaryAttachments[0])],
+      b.primaryAttachments[1] || NONE, (v) => {
+        b.primaryAttachments[1] = v === NONE ? null : v;
+        b.primaryAttachments = b.primaryAttachments.filter(Boolean);
+      });
+  } else if (b.primaryAttachments.length > 1) {
+    b.primaryAttachments = b.primaryAttachments.slice(0, 1);
+  }
   add("Secondary", secondaries, b.secondary, (v) => (b.secondary = v));
   add("Perk 1", perksByTier(1), b.perks[0], (v) => (b.perks[0] = v));
   add("Perk 2", perksByTier(2), b.perks[1], (v) => (b.perks[1] = v));
@@ -532,144 +715,135 @@ function renderBuilder() {
   add("Lethal", DATA.classes.equipment.lethal, b.lethal, (v) => (b.lethal = v));
   add("Tactical", DATA.classes.equipment.tactical, b.tactical, (v) => (b.tactical = v));
   add("Equipment", DATA.classes.equipment.gear, b.gear, (v) => (b.gear = v));
-  add("Killstreaks", DATA.killstreaks.profiles.map((p) => p.name),
-    (DATA.killstreaks.profiles.find((p) => p.id === b.killstreakProfile) || {}).name,
-    (v) => (b.killstreakProfile = DATA.killstreaks.profiles.find((p) => p.name === v).id));
 
   box.appendChild(grid);
-  if (b.note) box.appendChild(el("div", "note", esc(b.note)));
+  if (!warlord) {
+    box.appendChild(el("p", "hint",
+      "One attachment per weapon. Warlord in Tier 2 gives you a second slot."));
+  }
 }
 
-/* The rubric. Every leg is shown with its reasoning — a bare number would be
-   fake authority. Weighted toward map fit and perk synergy. */
-function scoreBuild(b, map) {
-  const W = DATA.classes.scoring.weights;
+function attachmentsFor(w) {
+  if (!w) return [];
+  return DATA.attachments.attachments
+    .filter((a) => !a.classes || a.classes.includes(w.class))
+    .map((a) => a.name);
+}
+
+/* ── What the class is good and bad at ────────────────────── */
+
+/* No score. The rules below each fire off something real in the build, and any
+   number they quote is pulled from weapons.json at render time. */
+function readBuild(b, map) {
   const w = findWeapon(b.primary);
-  const legs = [];
+  const reach = effectiveReach(w, b.primaryAttachments);
+  const ctx = { b, w, map, reach };
+  const excels = [], struggles = [];
 
-  // 1 — TTK. Fastest primary in the game is 80ms, slowest useful around 320ms.
-  const ttk = w && w.ttk.close ? w.ttk.close : 0.32;
-  const ttkPts = clamp(W.ttk * (0.34 - ttk) / (0.34 - 0.09), 0, W.ttk);
-  legs.push({
-    name: "TTK class", pts: ttkPts, max: W.ttk,
-    why: w ? `${w.name} kills in ${ms(w.ttk.close)} at close range (${w.stk.close} shots at ${Math.round(w.rpm)} rpm).`
-           : "Unknown weapon.",
+  DATA.classes.traits.rules.forEach((r) => {
+    if (!matches(r.when, ctx)) return;
+    if (r.excels) excels.push(resolve(r.excels, ctx));
+    if (r.struggles) struggles.push(resolve(r.struggles, ctx));
   });
-
-  // 2 — Mobility: movement speed, ADS time, and perks that move you.
-  let mob = 0;
-  if (w) {
-    mob += clamp((w.movementSpeed - 0.85) / 0.15, 0, 1) * 7;
-    mob += clamp((0.40 - w.adsTime) / 0.25, 0, 1) * 8;
-  }
-  if (b.perks.includes("Lightweight")) mob = Math.min(W.mobility, mob + 2);
-  legs.push({
-    name: "Mobility", pts: clamp(mob, 0, W.mobility), max: W.mobility,
-    why: w ? `Moves at ${w.movementSpeed}× base with a ${w.adsTime}s aim-in.` : "—",
-  });
-
-  // 3 — Perk synergy, from the rules in classes.json.
-  let syn = 12;
-  const reasons = [];
-  DATA.classes.scoring.perkSynergy.pairs.forEach((rule) => {
-    if (rule.perks.every((p) => b.perks.includes(p))) {
-      syn += rule.points;
-      reasons.push(`${rule.perks.join(" + ")}: ${rule.why}`);
-    }
-  });
-  legs.push({
-    name: "Perk synergy", pts: clamp(syn, 0, W.perkSynergy), max: W.perkSynergy,
-    why: reasons.length ? reasons.join(" ") : "No strong interactions either way — a functional but unremarkable set.",
-  });
-
-  // 4 — Map fit: does the gun's reach match the ground, and do the perks suit it?
-  let fit = 12;
-  const fitWhy = [];
-  const reach = w && w.profile[0] && w.profile[0].toM ? w.profile[0].toM : 20;
-  const suppressed = b.primaryAttachments.includes("Suppressor");
-  const effReach = suppressed && w && w.suppressed && w.suppressed.profile[0]
-    ? (w.suppressed.profile[0].toM || reach) : reach;
-
-  const size = map ? map.size : "Medium";
-  const want = { Tiny: [8, 25], Small: [12, 32], Medium: [18, 46], Large: [35, 99] }[size];
-  if (effReach >= want[0] && effReach <= want[1]) {
-    fit += 8;
-    fitWhy.push(`${effReach} m of full-damage reach suits a ${size.toLowerCase()} map.`);
-  } else if (effReach < want[0]) {
-    fit -= 6;
-    fitWhy.push(`Only ${effReach} m of full-damage reach on a ${size.toLowerCase()} map — you will lose fights you should win.`);
-  } else {
-    fit -= 1;
-    fitWhy.push(`${effReach} m of reach is more than a ${size.toLowerCase()} map needs.`);
-  }
-  if (suppressed && w && w.suppressed && w.profile[0] && w.profile[0].toM) {
-    fitWhy.push(`The suppressor is what cut it, from ${w.profile[0].toM} m.`);
-  }
-  if (map) {
-    if (b.perks.includes(map.loadout.perk)) { fit += 4; fitWhy.push(`${map.loadout.perk} is the called-for perk here.`); }
-    if (["Tiny", "Small"].includes(size) && b.perks.includes("Flak Jacket")) { fit += 3; fitWhy.push("Flak Jacket earns its slot on a map this small."); }
-    if (size === "Large" && b.perks.includes("Flak Jacket")) { fit -= 3; fitWhy.push("Flak Jacket is close to wasted on a map this size."); }
-    if (["Tiny", "Small"].includes(size) && b.perks.includes("Marathon")) { fit -= 3; fitWhy.push("Marathon on a small map just gets you into trouble faster."); }
-  } else {
-    fitWhy.push("Scored against general TDM — pick a map above for a sharper read.");
-  }
-  legs.push({ name: "Map fit", pts: clamp(fit, 0, W.mapFit), max: W.mapFit, why: fitWhy.join(" ") });
-
-  // 5 — Killstreak realism: will you actually collect these?
-  const prof = DATA.killstreaks.profiles.find((p) => p.id === b.killstreakProfile);
-  const costs = (prof ? prof.streaks : []).map((n) =>
-    (DATA.killstreaks.killstreaks.find((k) => k.name === n) || { kills: 6 }).kills);
-  const hardline = b.perks.includes("Hardline");
-  const eff = costs.map((c) => (hardline ? c - 1 : c));
-  const lowest = Math.min(...eff, 99);
-  const highest = Math.max(...eff, 0);
-  let ks = 0;
-  ks += clamp((7 - lowest) * 2.5, 0, 8);            // is anything reachable early?
-  ks += clamp((13 - highest) * 0.6, 0, 4);          // is the top end plausible?
-  if (hardline) ks += DATA.classes.scoring.killstreakRealism.hardlineBonus;
-  const ksWhy = prof
-    ? `${prof.name}: ${prof.streaks.join(" / ")}. ` +
-      (hardline
-        ? `Hardline brings them to ${eff.join(" / ")} kills.`
-        : `No Hardline, so that's ${eff.join(" / ")} kills in a single life.`) +
-      (highest >= 10 && !hardline
-        ? " That's a lot of kills in one life — either add Hardline or drop the ceiling."
-        : "")
-    : "No killstreak profile set.";
-  legs.push({ name: "Killstreak realism", pts: clamp(ks, 0, W.killstreaks), max: W.killstreaks, why: ksWhy });
-
-  const total = Math.round(legs.reduce((s, l) => s + l.pts, 0));
-  return { total, legs };
+  return { excels: excels.filter(Boolean), struggles: struggles.filter(Boolean), w, reach };
 }
 
-const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-
-function verdictFor(n) {
-  if (n >= 80) return ["Strong", "This holds together. Take it out as it is."];
-  if (n >= 65) return ["Solid", "Works. One leg below is dragging it — fix that and it's a proper class."];
-  if (n >= 48) return ["Situational", "Fine in the right place, punished in the wrong one. Check map fit."];
-  return ["Trap", "Something here is actively costing you. Read the weak leg first."];
+function matches(when, ctx) {
+  const { b, w, map, reach } = ctx;
+  if (when.perks && !when.perks.every((p) => b.perks.includes(p))) return false;
+  if (when.noneOfPerks && when.noneOfPerks.some((p) => b.perks.includes(p))) return false;
+  if (when.attachment && !b.primaryAttachments.includes(when.attachment)) return false;
+  if (when.weaponClass && (!w || w.class !== when.weaponClass)) return false;
+  if (when.fireMode && (!w || w.fireMode !== when.fireMode)) return false;
+  if (when.reachUnder !== undefined && !(reach !== null && reach < when.reachUnder)) return false;
+  if (when.reachOver !== undefined && !(reach !== null && reach > when.reachOver)) return false;
+  if (when.mapSizeIn && (!map || !when.mapSizeIn.includes(map.size))) return false;
+  return true;
 }
 
-function renderScore() {
+function resolve(text, ctx) {
+  const { b, w, map, reach } = ctx;
+  const base = w && w.profile[0] ? w.profile[0].toM : null;
+  const sup = b.primaryAttachments.includes("Suppressor");
+
+  const tokens = {
+    WEAPON_REACH: reach === null
+      ? "It holds full damage at any range."
+      : `Full damage stops at ${reach} m; past that every kill costs an extra bullet.`,
+    SUPPRESSOR_RANGE: (base && reach && base !== reach)
+      ? `Range. The ${w.stk.torso}-shot kill falls from ${base} m to ${reach} m — a ` +
+        `${Math.round((1 - reach / base) * 100)}% cut. Fine if you're flanking, expensive if you're trading.`
+      : "Range, on most guns — though this one keeps its reach.",
+    RAPID_FIRE: w && w.rapidFire
+      ? `${Math.round(w.rapidFire.rpm)} rpm brings the kill down to ${ms(w.rapidFire.ttkClose)}, at the cost of control.`
+      : "a higher rate of fire, at the cost of control.",
+    ONE_SHOT: w ? oneShotSentence(w) : "",
+    MISS_PENALTY: w && w.missPenalty ? ms(w.missPenalty) : "a long re-chamber",
+    TRIGGER_RATE: w && w.rateCapped
+      ? `Sustained fire. The gun accepts ${Math.round(w.rpm)} rpm but you supply every round — ` +
+        `these timings assume ${DATA.weapons.units.tapHz} pulls a second, which is an estimate, ` +
+        `not a datamined figure.`
+      : "",
+    MAP_OVERKILL: (map && reach)
+      ? `More reach than ${map.name} asks for — ${reach} m on a ${map.size.toLowerCase()} map. ` +
+        `No harm in it, but the range isn't what wins you fights here.`
+      : "",
+    MAP_UNDERGUNNED: (map && reach)
+      ? `Reach, on ground this size. ${reach} m of full damage on ${map.name} means losing fights ` +
+        `you never got to start.`
+      : "",
+  };
+  let out = text;
+  Object.keys(tokens).forEach((k) => {
+    if (out.includes(k)) out = out.split(k).join(tokens[k]);
+  });
+  return out.trim() ? out : "";
+}
+
+function renderReadout() {
   const box = $("#score");
   box.innerHTML = "";
   const map = state.scoreMapId === "general"
     ? null : DATA.maps.maps.find((m) => m.id === state.scoreMapId);
-  const { total, legs } = scoreBuild(state.build, map);
-  const [v, w] = verdictFor(total);
+  const { excels, struggles, w, reach } = readBuild(state.build, map);
 
-  box.appendChild(el("div", "score-head",
-    `<div class="score-num">${total}<small>/100</small></div>
-     <div class="score-verdict"><div class="v">${esc(v)}</div><div class="w">${esc(w)}</div></div>`));
+  const head = el("div", "readout-head");
+  head.appendChild(el("div", "rk", "The gun"));
+  head.appendChild(el("div", "rv", w
+    ? `${esc(w.name)} — ${esc(w.fireModeLabel.toLowerCase())}, ${ttkLabel(w)} to kill, ` +
+      `full damage ${reach === null ? "at any range" : `to ${reach} m`}`
+    : "Unknown weapon."));
+  if (w) {
+    const jump = el("button", "back");
+    jump.style.margin = "10px 0 0";
+    jump.innerHTML = "Open weapon &rarr;";
+    jump.addEventListener("click", () => openWeapon(w.name));
+    head.appendChild(jump);
+  }
+  box.appendChild(head);
 
-  const legsBox = el("div", "legs");
-  legs.forEach((l) => {
-    const weak = l.pts / l.max < 0.5;
-    legsBox.appendChild(el("div", `leg${weak ? " weak" : ""}`,
-      `<div class="leg-top"><span>${esc(l.name)}</span><b>${Math.round(l.pts)} / ${l.max}</b></div>
-       <div class="bar"><i style="width:${Math.round((l.pts / l.max) * 100)}%"></i></div>
-       <div class="why">${esc(l.why)}</div>`));
-  });
-  box.appendChild(legsBox);
+  if (!map) {
+    box.appendChild(el("p", "hint",
+      "Scored against general Team Deathmatch — pick a map above and the read sharpens."));
+  }
+
+  box.appendChild(panel("Excels at", excels, "good"));
+  box.appendChild(panel("Struggles with", struggles, "bad"));
+
+  box.appendChild(el("p", "src", esc(DATA.classes.note)));
+}
+
+function panel(title, lines, kind) {
+  const p = el("div", `tpanel ${kind}`);
+  p.appendChild(el("div", "thead", esc(title)));
+  if (!lines.length) {
+    p.appendChild(el("p", "tnone", kind === "good"
+      ? "Nothing here is doing anything special. It'll work; it won't win you anything on its own."
+      : "Nothing obviously working against you."));
+    return p;
+  }
+  const ul = el("ul");
+  lines.forEach((l) => ul.appendChild(el("li", "", esc(l))));
+  p.appendChild(ul);
+  return p;
 }

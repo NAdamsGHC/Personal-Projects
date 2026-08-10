@@ -1,24 +1,21 @@
 {
  "source": "Call of Duty Wiki — Killstreak (Call of Duty: Black Ops section)",
  "note": "All killstreaks are available for purchase at rank 10. Kills earned by a killstreak do not count towards the next one — every kill in the chain has to be yours.",
+ "profilesNote": "Two sets, and the map decides which. Killstreaks in Black Ops are kill-based and reset when you die, so the question is only whether the ground lets you string kills together. Somewhere you fight constantly and die often, take the low set and actually collect it. Somewhere you can hold an angle and live, the high set is worth the wait.",
  "profiles": [
   {
-   "id": "default",
-   "name": "Default",
-   "streaks": ["Spy Plane", "Napalm Strike", "Attack Dogs"],
-   "note": "Spy Plane keeps information flowing early, Napalm punishes a held area, and Dogs closes a game out. A balanced spread that pays something out most games."
+   "id": "low",
+   "name": "Low set — 3 / 4 / 5",
+   "streaks": ["Spy Plane", "Counter-Spy Plane", "Napalm Strike"],
+   "short": "Spy Plane · Counter-Spy Plane · Napalm",
+   "note": "You will earn all three most games. Spy Plane tells your team where the fight is, Counter-Spy Plane blinds theirs, and Napalm denies the chokepoint everyone keeps walking into. Nothing here needs you to survive a big life."
   },
   {
-   "id": "support",
-   "name": "Support (3/4/5)",
-   "streaks": ["Spy Plane", "Counter-Spy Plane", "Care Package"],
-   "note": "Low, reliable, and information-led. You will earn all three most games, and Spy Plane into Counter-Spy Plane is the single best thing you can do for a team that keeps getting flanked."
-  },
-  {
-   "id": "assault",
-   "name": "Assault (8/9/11)",
-   "streaks": ["Blackbird", "Chopper Gunner", "Gunship"],
-   "note": "High ceiling, high variance. Needs eight kills in a life before anything pays out — take Hardline or expect to collect nothing on a bad night."
+   "id": "high",
+   "name": "High set — 8 / 9 / 11",
+   "streaks": ["Blackbird", "Chopper Gunner", "Attack Dogs"],
+   "short": "Blackbird · Chopper Gunner · Dogs",
+   "note": "Nothing pays out until eight kills in one life, so this only makes sense where you can hold ground. Blackbird is the best killstreak in the game and Ghost doesn't hide anyone from it. Hardline brings the whole set within reach."
   }
  ],
  "killstreaks": [

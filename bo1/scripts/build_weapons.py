@@ -24,6 +24,53 @@ OUT = os.path.join(ROOT, "data", "weapons.json")
 INCH_TO_M = 0.0254
 HEALTH = 100
 
+# How fast a person actually pulls a trigger. The sheet's RPM for a semi-auto or
+# a pump is the rate the *game* will accept, not a rate the gun delivers for you
+# -- quoting it as a flat TTK made the M14 and FAL look faster than the FAMAS.
+# Anything you fire by hand is therefore capped at this rate.
+#
+# This figure is an ESTIMATE, not datamined. Sustained controller tapping sits
+# somewhere around 5-8 taps a second; 6 is the middle of that and is what the
+# app assumes. It is labelled as an assumption everywhere it changes a number.
+TAP_HZ = 6.0
+TAP_INTERVAL = 1.0 / TAP_HZ
+
+# Fire modes. The sheet does not carry these, so they are stated here.
+# "auto" fires while held; "burst" fires a fixed burst per pull; everything else
+# needs one pull per round and is subject to TAP_HZ.
+BURST_MODE, AUTO, SEMI, PUMP, BOLT, BREAK = "burst", "auto", "semi", "pump", "bolt", "break"
+MANUAL_MODES = {SEMI, PUMP, BOLT, BREAK}
+
+FIRE_MODE = {
+    # Assault rifles
+    "M16": BURST_MODE, "G11": BURST_MODE, "M14": SEMI, "FAL": SEMI,
+    "Enfield": AUTO, "FAMAS": AUTO, "Galil": AUTO, "AUG": AUTO,
+    "AK-47": AUTO, "Commando": AUTO,
+    # Submachine guns -- all automatic
+    "MP5K": AUTO, "Skorpion": AUTO, "MAC-11": AUTO, "AKS-74U": AUTO,
+    "Uzi": AUTO, "PM-63": AUTO, "MPL": AUTO, "Spectre": AUTO, "Kiparis": AUTO,
+    # Light machine guns -- all automatic
+    "HK21": AUTO, "RPK": AUTO, "M60": AUTO, "Stoner 63": AUTO,
+    # Snipers
+    "L96A1": BOLT, "Dragunov": SEMI, "WA2000": SEMI, "PSG1": SEMI,
+    # Shotguns
+    "Olympia": BREAK, "Stakeout": PUMP, "SPAS-12": SEMI, "HS-10": SEMI,
+    # Handguns -- all fired one pull at a time
+    "ASP": SEMI, "M1911": SEMI, "Makarov": SEMI, "Python": SEMI, "CZ75": SEMI,
+    # Specials and launchers -- one shot per pull, then a reload
+    "Ballistic Knife": SEMI, "Crossbow": SEMI,
+    "M72 LAW": SEMI, "RPG-7": SEMI, "Strela-3": SEMI, "China Lake": PUMP,
+}
+
+FIRE_MODE_LABEL = {
+    AUTO: "Full auto",
+    BURST_MODE: "3-round burst",
+    SEMI: "Semi-auto",
+    PUMP: "Pump action",
+    BOLT: "Bolt action",
+    BREAK: "Break action",
+}
+
 # Column indices in the Marvel4 sheet (3-row header, leaf labels on row 3).
 C_NAME = 0
 C_SPEED, C_ADS_MOVE = 1, 2
@@ -112,14 +159,38 @@ def metres(units):
     return round(units * INCH_TO_M, 1)
 
 
-def shots_to_kill(dmg):
+def hits_to_kill(dmg):
+    """Hits needed at a given per-projectile damage. For a shotgun this is
+    PELLETS, not trigger pulls -- the sheet's damage column is per pellet."""
     if not dmg:
         return None
     return int(math.ceil(HEALTH / dmg))
 
 
-def shot_time(name, n, fire_time, rpm):
-    """Seconds from first round leaving the barrel to the nth round landing."""
+def pulls_for_hits(hits, pellets):
+    """Trigger pulls needed to land `hits` projectiles, assuming a shotgun puts
+    its whole pattern on target. One pull throws `pellets` of them."""
+    if hits is None:
+        return None
+    if not pellets or pellets <= 1:
+        return hits
+    return int(math.ceil(hits / float(pellets)))
+
+
+def interval(fire_time, mode):
+    """Seconds between consecutive shots you actually get. Anything fired by
+    hand is capped at TAP_HZ; automatics run at the gun's own cyclic rate."""
+    if not fire_time:
+        return fire_time
+    if mode in MANUAL_MODES:
+        return max(fire_time, TAP_INTERVAL)
+    return fire_time
+
+
+def shot_time(name, n, fire_time, rpm, mode):
+    """Seconds from the first round leaving the barrel to the nth round landing.
+    n is trigger pulls for everything except a burst weapon, where the burst
+    cycle carries the cost of the gap between bursts."""
     if n is None or n < 2 or not fire_time:
         return 0.0
     burst = BURST.get(name)
@@ -127,23 +198,41 @@ def shot_time(name, n, fire_time, rpm):
         cycle = burst * (60.0 / rpm)   # full burst-to-burst period
         full, rem = divmod(n - 1, burst)
         return full * cycle + rem * fire_time
-    return (n - 1) * fire_time
+    return (n - 1) * interval(fire_time, mode)
 
 
-def build_profile(row, htk_cols, name, fire_time, rpm):
-    """Shots-to-kill brackets by range, with the TTK for each bracket."""
+def build_profile(row, htk_cols, name, fire_time, rpm, mode, pellets):
+    """Range brackets. `hits` is projectiles that must land, `shots` is trigger
+    pulls -- the same number for a rifle, different for a shotgun."""
     out = []
-    for shots, col in zip((2, 3, 4, 5), htk_cols):
+    for hits, col in zip((2, 3, 4, 5), htk_cols):
         v = num(row[col]) if col < len(row) else None
         if v is None:
             continue
         beyond = v == math.inf
+        pulls = pulls_for_hits(hits, pellets)
         out.append({
-            "shots": shots,
+            "hits": hits,
+            "shots": pulls,
             "toM": None if beyond else metres(v),
             "beyond": beyond,
-            "ttk": round(shot_time(name, shots, fire_time, rpm), 3),
+            "ttk": round(shot_time(name, pulls, fire_time, rpm, mode), 3),
         })
+    return out
+
+
+def kill_zones(dmg, mults, pellets):
+    """Trigger pulls to kill by where you hit. This is what makes a 70-damage
+    sniper a one-shot weapon: 70 x 1.5 to the chest is 105, and the flat
+    100/damage sum never saw it."""
+    if not dmg:
+        return {}
+    out = {}
+    for zone in ("head", "neck", "upperTorso", "lowerTorso"):
+        m = mults.get(zone)
+        if not m:
+            continue
+        out[zone] = pulls_for_hits(hits_to_kill(dmg * m), pellets)
     return out
 
 
@@ -177,10 +266,27 @@ def main():
         rpm = num(row[C_RPM])
         dmg_max = num(row[C_DMG_MAX])
         dmg_min = num(row[C_DMG_MIN])
-        pellets = num(row[C_PELLETS])
+        pellets = int(num(row[C_PELLETS])) if num(row[C_PELLETS]) else None
+        mode = FIRE_MODE.get(base_name, AUTO)
 
-        stk_max = shots_to_kill(dmg_max)
-        stk_min = shots_to_kill(dmg_min)
+        hits_max, hits_min = hits_to_kill(dmg_max), hits_to_kill(dmg_min)
+        stk_max = pulls_for_hits(hits_max, pellets)
+        stk_min = pulls_for_hits(hits_min, pellets)
+
+        mults = {
+            "head": num(row[C_MULT[0]]),
+            "neck": num(row[C_MULT[1]]),
+            "upperTorso": num(row[C_MULT[2]]),
+            "lowerTorso": num(row[C_MULT[3]]),
+        }
+        zones = kill_zones(dmg_max, mults, pellets)
+        one_shot = [z for z, n in zones.items() if n == 1]
+
+        # The headline number assumes you hit where people aim: the upper torso.
+        # For every automatic in the game that multiplier is 1.0 and this changes
+        # nothing -- but it is the whole story on a 70-damage sniper, where
+        # 70 x 1.5 = 105 makes a chest hit a one-shot kill.
+        stk_torso = zones.get("upperTorso", stk_max)
 
         unlock = UNLOCKS.get(base_name)
         classified = False
@@ -200,42 +306,53 @@ def main():
             "damage": {"max": dmg_max, "min": dmg_min},
             "range": {"maxM": metres(num(row[C_RANGE_MAX])),
                       "minM": metres(num(row[C_RANGE_MIN]))},
-            "stk": {"close": stk_max, "far": stk_min},
-            "pellets": int(pellets) if pellets else None,
+            "stk": {"close": stk_max, "far": stk_min, "torso": stk_torso},
+            "hitsToKill": {"close": hits_max, "far": hits_min},
+            "pellets": pellets,
+            "fireMode": mode,
+            "fireModeLabel": FIRE_MODE_LABEL[mode],
+            "handFired": mode in MANUAL_MODES,
+            "killZones": zones,
+            "oneShot": one_shot,
             "rpm": rpm,
             "fireTime": fire_time,
+            "effectiveFireTime": round(interval(fire_time, mode), 4) if fire_time else None,
+            "rateCapped": bool(fire_time and mode in MANUAL_MODES and fire_time < TAP_INTERVAL),
             "rapidFireRpm": num(row[C_RF_RPM]),
             "burst": BURST.get(base_name),
             "mag": num(row[C_MAG]),
             "ammoMax": num(row[C_AMMO_MAX]),
-            "multipliers": {
-                "head": num(row[C_MULT[0]]),
-                "neck": num(row[C_MULT[1]]),
-                "upperTorso": num(row[C_MULT[2]]),
-                "lowerTorso": num(row[C_MULT[3]]),
-            },
+            "multipliers": mults,
             "adsTime": num(row[C_ADS_TIME]),
             "movementSpeed": num(row[C_SPEED]),
             "adsMoveSpeed": num(row[C_ADS_MOVE]),
             "reload": {"full": num(row[C_RELOAD_FULL]),
                        "empty": num(row[C_RELOAD_EMPTY])},
             "sprintOut": num(row[C_SPRINT_OUT]),
-            "profile": build_profile(row, C_HTK, base_name, fire_time, rpm),
+            "profile": build_profile(row, C_HTK, base_name, fire_time, rpm, mode, pellets),
             "source": "Marvel4 BO1 weapon statistics sheet",
         }
 
         # Best-case and worst-case TTK, the two numbers that decide gunfights.
+        # `close` is an upper-torso hit at full damage; a one-pull kill is 0ms by
+        # definition, since there is no second shot to wait for.
         entry["ttk"] = {
-            "close": round(shot_time(base_name, stk_max, fire_time, rpm), 3) if stk_max else None,
-            "far": round(shot_time(base_name, stk_min, fire_time, rpm), 3) if stk_min else None,
+            "close": round(shot_time(base_name, stk_torso, fire_time, rpm, mode), 3) if stk_torso else None,
+            "far": round(shot_time(base_name, stk_min, fire_time, rpm, mode), 3) if stk_min else None,
+            "flat": round(shot_time(base_name, stk_max, fire_time, rpm, mode), 3) if stk_max else None,
         }
 
-        # Rapid Fire recomputes TTK off a higher cyclic rate.
+        # What a miss costs: on a bolt or a pump, the re-chamber is the fight.
+        if fire_time and mode in (BOLT, PUMP):
+            entry["missPenalty"] = round(fire_time, 3)
+
+        # Rapid Fire recomputes TTK off a higher cyclic rate. It cannot help a
+        # weapon whose limit is your trigger finger rather than the gun.
         if entry["rapidFireRpm"]:
             rf_time = num(row[C_RF_TIME])
             entry["rapidFire"] = {
                 "rpm": entry["rapidFireRpm"],
-                "ttkClose": round(shot_time(base_name, stk_max, rf_time, entry["rapidFireRpm"]), 3)
+                "ttkClose": round(shot_time(base_name, stk_max, rf_time, entry["rapidFireRpm"], mode), 3)
                 if stk_max else None,
             }
 
@@ -246,7 +363,7 @@ def main():
             entry["suppressed"] = {
                 "rangeMaxM": metres(s_max),
                 "rangeMinM": metres(num(row[C_S_RANGE_MIN])),
-                "profile": build_profile(row, C_S_HTK, base_name, fire_time, rpm),
+                "profile": build_profile(row, C_S_HTK, base_name, fire_time, rpm, mode, pellets),
             }
 
         weapons.append(entry)
@@ -258,8 +375,22 @@ def main():
             "unlockLevels": "bosslobbies.com BO1 weapon list",
             "note": "Stats are datamined from the original PC build, not published "
                     "by Treyarch. The PS5 release is a straight port, so they should hold.",
+            "fireModes": "Fire modes are not in the sheet — they are stated in "
+                         "build_weapons.py from how each weapon behaves in game.",
+            "tapRate": "Semi-auto, pump, bolt and break weapons are capped at an "
+                       "assumed %g trigger pulls a second. That figure is an "
+                       "estimate of a normal trigger finger, not a datamined "
+                       "value, and it is the only number in this file that isn't "
+                       "computed from the sheet." % TAP_HZ,
+            "shotguns": "Shotgun damage in the sheet is per pellet, so the sheet's "
+                        "hits-to-kill is pellets. Trigger pulls are derived from it "
+                        "assuming the pattern lands.",
+            "killZones": "Shots-to-kill by hit location applies the sheet's own "
+                         "damage multipliers. This is what makes the 70-damage "
+                         "snipers one-shot weapons to the chest.",
         },
-        "units": {"range": "metres", "ttk": "seconds", "health": HEALTH},
+        "units": {"range": "metres", "ttk": "seconds", "health": HEALTH,
+                  "tapHz": TAP_HZ},
         "weapons": weapons,
     }
 
@@ -273,6 +404,14 @@ def main():
     missing = [w["name"] for w in weapons if w["unlockLevel"] is None and w["variant"] is None]
     if missing:
         print(f"  no unlock level for: {', '.join(missing)}")
+    no_mode = [w["baseName"] for w in weapons
+               if w["variant"] is None and w["baseName"] not in FIRE_MODE]
+    if no_mode:
+        print(f"  no fire mode stated (defaulted to auto): {', '.join(sorted(set(no_mode)))}")
+    one_shot = [w["name"] for w in full if w["oneShot"]]
+    print(f"  one-shot kills somewhere on the body: {', '.join(one_shot) or 'none'}")
+    capped = [w["name"] for w in full if w["rateCapped"]]
+    print(f"  capped at {TAP_HZ:g} pulls/sec: {', '.join(capped) or 'none'}")
 
 
 if __name__ == "__main__":

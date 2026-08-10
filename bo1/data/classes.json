@@ -1,5 +1,6 @@
 {
- "source": "Presets transcribed from CODB01Classes.xlsx. Killstreaks were not in that file — the default profile is applied to all five and should be corrected per class if they differ.",
+ "source": "The eight classes are transcribed from CODB01Classes.xlsx, descriptions included, exactly as written there. Weapon and attachment names are normalised to the spellings used elsewhere in the app. Killstreaks are not part of a class here — they are called per map, because what is worth running depends on the ground, not the gun.",
+ "note": "There is no score. A number out of 100 implied a precision that wasn't there. What each class is good and bad at is worked out from its own parts — the weapon's reach and time-to-kill from weapons.json, the perks, the attachments — against the map you pick.",
  "equipment": {
   "lethal": ["Frag", "Semtex", "Tomahawk"],
   "tactical": ["Flashbang", "Concussion", "Willy Pete", "Nova Gas", "Decoy"],
@@ -7,7 +8,9 @@
  },
  "presets": [
   {
+   "id": "xjawz",
    "name": "xJawz",
+   "description": "OG Pub-stomper who's class is set up for big streaks.",
    "primary": "FAMAS",
    "primaryAttachments": ["Dual Mag"],
    "secondary": "CZ75",
@@ -15,12 +18,12 @@
    "perks": ["Hardline", "Sleight of Hand", "Ninja"],
    "lethal": "Semtex",
    "tactical": "Concussion",
-   "gear": "Claymore",
-   "killstreakProfile": "default",
-   "note": "The only preset with Hardline, which makes it the only one where high streaks are realistic."
+   "gear": "Claymore"
   },
   {
+   "id": "chabba",
    "name": "Chabba",
+   "description": "He's a wanker, but a bigger flanker. Also loves shooting shit down.",
    "primary": "FAMAS",
    "primaryAttachments": ["Suppressor"],
    "secondary": "Strela-3",
@@ -28,12 +31,12 @@
    "perks": ["Ghost", "Sleight of Hand", "Ninja"],
    "lethal": "Semtex",
    "tactical": "Concussion",
-   "gear": "Motion Sensor",
-   "killstreakProfile": "default",
-   "note": "Ghost plus suppressor plus Ninja is a complete stealth package — but the suppressor drops the FAMAS to a 3-shot kill inside 14m, so it only works if you fight close."
+   "gear": "Motion Sensor"
   },
   {
+   "id": "stealth",
    "name": "Stealth",
+   "description": "Classic Stealth Class.",
    "primary": "Galil",
    "primaryAttachments": ["Suppressor"],
    "secondary": "CZ75",
@@ -41,12 +44,12 @@
    "perks": ["Ghost", "Hardened", "Ninja"],
    "lethal": "Semtex",
    "tactical": "Concussion",
-   "gear": "Motion Sensor",
-   "killstreakProfile": "default",
-   "note": "The most internally coherent of the five. Hardened's reduced flinch pairs well with a suppressed mid-range gun, and Motion Sensor covers the flank you can't watch."
+   "gear": "Motion Sensor"
   },
   {
+   "id": "baz",
    "name": "Baz",
+   "description": "A class for getting into the mixer, winning scraps and getting diddled from behind due to your horrible lack of awareness.",
    "primary": "FAMAS",
    "primaryAttachments": ["Red Dot Sight"],
    "secondary": "CZ75",
@@ -54,12 +57,12 @@
    "perks": ["Ghost", "Sleight of Hand", "Ninja"],
    "lethal": "Semtex",
    "tactical": "Concussion",
-   "gear": "Claymore",
-   "killstreakProfile": "default",
-   "note": "The unsuppressed FAMAS keeps its full 39.4m of 3-shot range. On the larger maps this is the strongest of your Famas classes."
+   "gear": "Claymore"
   },
   {
+   "id": "nuketown",
    "name": "Nuketown",
+   "description": "SMG and bomb proof for fully getitng involved in Nuketown.",
    "primary": "AKS-74U",
    "primaryAttachments": ["Dual Mag"],
    "secondary": "Python",
@@ -67,29 +70,165 @@
    "perks": ["Flak Jacket", "Sleight of Hand", "Tactical Mask"],
    "lethal": "Semtex",
    "tactical": "Concussion",
-   "gear": "Claymore",
-   "killstreakProfile": "default",
-   "note": "Map-specific and correctly so. Flak Jacket and Tactical Mask are the two perks that matter most on Nuketown, and dual-wield Pythons are viable at the ranges that map produces."
+   "gear": "Claymore"
+  },
+  {
+   "id": "cqb",
+   "name": "CQB",
+   "description": "A class for small maps, to help fight, streak and protect from throwables.",
+   "primary": "FAMAS",
+   "primaryAttachments": ["Dual Mag"],
+   "secondary": "Python",
+   "secondaryAttachments": ["Dual Wield"],
+   "perks": ["Flak Jacket", "Sleight of Hand", "Tactical Mask"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Claymore"
+  },
+  {
+   "id": "long-range",
+   "name": "Long Range",
+   "description": "A class for picking long range fights and staying hidden.",
+   "primary": "M16",
+   "primaryAttachments": ["Red Dot Sight", "Suppressor"],
+   "secondary": "CZ75",
+   "secondaryAttachments": ["Suppressor"],
+   "perks": ["Ghost", "Warlord", "Ninja"],
+   "lethal": "Semtex",
+   "tactical": "Concussion",
+   "gear": "Motion Sensor"
+  },
+  {
+   "id": "rush",
+   "name": "Rush",
+   "description": "A class to fly around the map and probably lose all your gunfights with.",
+   "primary": "MPL",
+   "primaryAttachments": ["Grip"],
+   "secondary": "Ballistic Knife",
+   "secondaryAttachments": [],
+   "perks": ["Lightweight", "Sleight of Hand", "Ninja"],
+   "lethal": "Tomahawk",
+   "tactical": "Concussion",
+   "gear": "Motion Sensor"
   }
  ],
- "scoring": {
-  "weights": {"ttk": 20, "mobility": 15, "perkSynergy": 25, "mapFit": 25, "killstreaks": 15},
-  "note": "Weighted toward perk synergy and map fit — the positioning-adjacent legs — rather than raw gun stats.",
-  "perkSynergy": {
-   "pairs": [
-    {"perks": ["Ghost", "Ninja"], "points": 6, "why": "Off the minimap and silent. The complete concealment package and the basis of any flank."},
-    {"perks": ["Hardline"], "points": 5, "why": "Makes high killstreaks actually reachable."},
-    {"perks": ["Hardened", "Ninja"], "points": 4, "why": "Reduced flinch plus footstep information — you hear them first and you win the trade."},
-    {"perks": ["Steady Aim"], "points": 5, "why": "Pro shortens the window after sprinting where you can't shoot — the window a lot of deaths happen in."},
-    {"perks": ["Flak Jacket", "Tactical Mask"], "points": 5, "why": "The explosive and stun resistance package. Strong on small maps, wasted on large ones."},
-    {"perks": ["Marathon"], "points": -6, "why": "Subsidises sprinting into trouble. Actively works against the positioning problem."},
-    {"perks": ["Second Chance"], "points": -4, "why": "Costs the Tier 3 slot that Ninja should own, and in TDM the enemy still banks the kill."},
-    {"perks": ["Scout"], "points": -3, "why": "A sniper perk on a class that isn't sniping."}
-   ]
-  },
-  "killstreakRealism": {
-   "note": "Scored on whether you will realistically collect the streaks you've picked. Total cost is compared against Hardline and against a TDM life expectancy of roughly 4–6 kills.",
-   "hardlineBonus": 5
-  }
+ "traits": {
+  "note": "Each rule fires off the build itself. Where a rule needs a number — reach, time-to-kill — the app pulls it live from weapons.json rather than repeating it here, so these lines can't drift from the weapon data.",
+  "rules": [
+   {
+    "when": { "perks": ["Ghost", "Ninja"] },
+    "excels": "Staying unseen. Off the enemy minimap even when a Spy Plane is up, and silent on foot — you can take the long way round and arrive where nobody is looking."
+   },
+   {
+    "when": { "perks": ["Hardline"] },
+    "excels": "Getting streaks out. Every reward comes a kill early, which is the difference between a Blackbird you talk about and one you actually call in."
+   },
+   {
+    "when": { "perks": ["Hardened"] },
+    "excels": "Winning trades you didn't start. Less flinch when you're hit first, so a fight you walked into blind is still winnable."
+   },
+   {
+    "when": { "perks": ["Flak Jacket", "Tactical Mask"] },
+    "excels": "Surviving the clutter. Explosives and stuns are how you die on a small map, and this stops both."
+   },
+   {
+    "when": { "perks": ["Sleight of Hand"] },
+    "excels": "Staying in the fight. The reload between two contacts is where a lot of deaths happen."
+   },
+   {
+    "when": { "perks": ["Lightweight"] },
+    "excels": "Covering ground. You get to the good spots before the people who want them."
+   },
+   {
+    "when": { "perks": ["Warlord"] },
+    "excels": "Fitting the gun to the ground. Two attachments means you don't have to choose between seeing the target and staying off the radar."
+   },
+   {
+    "when": { "perks": ["Marathon"] },
+    "struggles": "Knowing when to stop. Endless sprint mostly subsidises running into rooms you haven't cleared."
+   },
+   {
+    "when": { "perks": ["Second Chance"] },
+    "struggles": "Actually saving you. In Team Deathmatch the other team has already banked the kill, and it costs the slot Ninja wants."
+   },
+   {
+    "when": { "noneOfPerks": ["Ghost", "Hardline", "Flak Jacket", "Lightweight", "Scavenger"] },
+    "struggles": "The Tier 1 slot. Nothing in it is pulling weight — Ghost, Hardline or Flak Jacket all do more than what's there."
+   },
+   {
+    "when": { "noneOfPerks": ["Ninja", "Tactical Mask", "Hacker", "Marathon", "Second Chance"] },
+    "struggles": "The Tier 3 slot. Ninja alone is worth more than an empty one."
+   },
+   {
+    "when": { "attachment": "Suppressor" },
+    "excels": "Not showing up when you shoot. No dot on their minimap, so the first kill of a hold doesn't tell the map where you are.",
+    "struggles": "SUPPRESSOR_RANGE"
+   },
+   {
+    "when": { "attachment": "Extended Mag" },
+    "excels": "Long holds. More rounds before you're the one reloading in a doorway."
+   },
+   {
+    "when": { "attachment": "Dual Mag" },
+    "excels": "Back-to-back fights. The first reload is close to instant, which is the one that matters."
+   },
+   {
+    "when": { "attachment": "Rapid Fire" },
+    "excels": "Close-range trades — RAPID_FIRE"
+   },
+   {
+    "when": { "weaponClass": "SMG" },
+    "excels": "Room-to-room fighting. Fast to aim, fast to move, and it wins anything decided inside a doorway.",
+    "struggles": "Anything across open ground. WEAPON_REACH"
+   },
+   {
+    "when": { "weaponClass": "Sniper" },
+    "excels": "ONE_SHOT",
+    "struggles": "Being rushed. Aim-in is slow and a miss costs you MISS_PENALTY before you can fire again."
+   },
+   {
+    "when": { "weaponClass": "Shotgun" },
+    "excels": "ONE_SHOT",
+    "struggles": "Anything past the doorway. WEAPON_REACH"
+   },
+   {
+    "when": { "weaponClass": "LMG" },
+    "excels": "Holding a line. The magazine outlasts anyone trying to push through it.",
+    "struggles": "Reacting. Slow to aim and slow to move — you have to be set up before the fight starts."
+   },
+   {
+    "when": { "fireMode": "semi" },
+    "struggles": "TRIGGER_RATE"
+   },
+   {
+    "when": { "fireMode": "burst" },
+    "excels": "Landing a full burst at range — the whole burst hits for one trigger pull, so distance costs you nothing in accuracy.",
+    "struggles": "A burst that misses. There is a forced gap before the next one, and at close range that gap is the fight."
+   },
+   {
+    "when": { "reachUnder": 22 },
+    "struggles": "Reach. WEAPON_REACH"
+   },
+   {
+    "when": { "reachOver": 44 },
+    "excels": "Picking fights before the other side can answer. WEAPON_REACH"
+   },
+   {
+    "when": { "mapSizeIn": ["Tiny", "Small"], "reachOver": 38 },
+    "excels": "MAP_OVERKILL"
+   },
+   {
+    "when": { "mapSizeIn": ["Large"], "reachUnder": 25 },
+    "struggles": "MAP_UNDERGUNNED"
+   },
+   {
+    "when": { "mapSizeIn": ["Tiny", "Small"], "noneOfPerks": ["Flak Jacket"] },
+    "struggles": "Explosives. On ground this tight the grenades find you whether you deserve it or not, and there's no Flak Jacket here."
+   },
+   {
+    "when": { "mapSizeIn": ["Large"], "perks": ["Flak Jacket"] },
+    "struggles": "Getting value from Flak Jacket. On a map this size you'll be shot far more often than you'll be blown up."
+   }
+  ]
  }
 }

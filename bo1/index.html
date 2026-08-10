@@ -35,9 +35,6 @@
   <!-- ── WEAPONS ───────────────────────────────────────────── -->
   <section id="weapons" class="tab">
     <div class="filters">
-      <label>Level
-        <select id="level-filter"></select>
-      </label>
       <label>Class
         <select id="class-filter"></select>
       </label>
@@ -45,22 +42,22 @@
     <p class="hint" id="weapon-count"></p>
     <div id="weapon-list" class="list"></div>
     <div id="weapon-detail" class="detail hidden"></div>
-    <details class="ref">
-      <summary>Attachment reference</summary>
-      <div id="attachment-list"></div>
-    </details>
   </section>
 
   <!-- ── PERKS ─────────────────────────────────────────────── -->
   <section id="perks" class="tab">
     <p class="hint">All perks unlock for purchase at level 4. Pro needs all three challenges plus 3000 CoD Points.</p>
     <div id="perk-list"></div>
+    <details class="ref">
+      <summary>Which perks work together</summary>
+      <div id="perk-synergy"></div>
+    </details>
   </section>
 
   <!-- ── CLASSES ───────────────────────────────────────────── -->
   <section id="classes" class="tab">
     <div class="filters">
-      <label>Score against
+      <label>Read against
         <select id="score-map"></select>
       </label>
     </div>

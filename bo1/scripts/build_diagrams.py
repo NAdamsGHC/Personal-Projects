@@ -7,19 +7,25 @@ shipping clipped text.
 
 Layout rules:
   * Shapes carry SHORT labels only (a word or two, up to two lines).
-  * Everything discursive goes in the key block at the bottom, one item a line.
-  * The key block is sized from its content, so it can't overrun the canvas.
+  * Everything discursive goes in the key, which is NOT drawn into the SVG --
+    it is written to diagrams/keys.json and rendered as HTML under the image.
+    A 400-unit canvas displayed at 346px shrank every glyph by 13.5%, which put
+    the key text at about 7px on a phone. As HTML it renders at app body size,
+    wraps properly, and is no longer constrained to one short line per item.
   * Markers sit clear of text.
 
 Geometry is traced from the in-game minimaps in images/minimaps/.
 
 Run:  python scripts/build_diagrams.py
+Writes: diagrams/*.svg and diagrams/keys.json (both generated -- don't hand-edit)
 """
 
+import json
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(HERE), "diagrams")
+KEYS_OUT = os.path.join(OUT, "keys.json")
 
 # Measured against the app's sans stack: uppercase advance is about 0.62em
 # plus the tracking. Deliberately slightly pessimistic.
@@ -27,10 +33,12 @@ def text_w(s, size, tracking):
     return len(s) * (0.62 * size + tracking)
 
 
-LABEL_SIZE, LABEL_TRACK = 9.0, 0.7
-KEY_SIZE, KEY_TRACK = 8.6, 0.5
-TITLE_SIZE, TITLE_TRACK = 10.5, 1.0
-KEY_LINE_H = 12.5
+# Sized so that at the 346px the diagram gets inside a brief on a 375px phone,
+# a shape label lands at ~10px and the title at ~11.5px. The old 9.0 put them
+# at 7.8px, which is under the size anything is comfortably read at on a phone.
+LABEL_SIZE, LABEL_TRACK = 11.5, 0.4
+TITLE_SIZE, TITLE_TRACK = 13.0, 0.8
+LINE_H = 13.5
 
 CSS = """
 .terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
@@ -48,24 +56,19 @@ CSS = """
         font-size:%.1fpx;letter-spacing:%.1fpx}
 .ttl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
      font-size:%.1fpx;letter-spacing:%.1fpx;font-weight:600}
-.key{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-     font-size:%.1fpx;letter-spacing:%.1fpx}
-.keyhot{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-        font-size:%.1fpx;letter-spacing:%.1fpx}
 .pin{fill:#d98b4a}
-.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
+.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;font-weight:700}
 .link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
 """ % (LABEL_SIZE, LABEL_TRACK, LABEL_SIZE - 1, LABEL_TRACK - 0.2,
-       LABEL_SIZE - 1, LABEL_TRACK - 0.2, TITLE_SIZE, TITLE_TRACK,
-       KEY_SIZE, KEY_TRACK, KEY_SIZE, KEY_TRACK)
+       LABEL_SIZE - 1, LABEL_TRACK - 0.2, TITLE_SIZE, TITLE_TRACK)
 
 # Green = head here, red = stay out. The two colours carry the whole map at a
 # glance, which is the point of a diagram you read in a lobby.
 CSS += """
 .go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
 .golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-       font-size:9px;letter-spacing:0.7px}
-"""
+       font-size:%.1fpx;letter-spacing:%.1fpx}
+""" % (LABEL_SIZE, LABEL_TRACK)
 
 
 class Canvas:
@@ -74,6 +77,12 @@ class Canvas:
         self.parts, self.keys, self.pins = [], [], []
         self.title_note = title_note
         self.body_h = 0
+        # Every fit failure on the map is collected, not raised on the first one
+        # — one bad label per run makes fixing a size change take fourteen runs.
+        self.problems = []
+
+    def fail(self, msg):
+        self.problems.append("%s: %s" % (self.name, msg))
 
     # --- shapes -----------------------------------------------------------
     def path(self, d, cls="terr"):
@@ -99,10 +108,10 @@ class Canvas:
         """Text not tied to a box — still width-checked against the canvas."""
         for i, s in enumerate(lines):
             if x + text_w(s, LABEL_SIZE - 1, LABEL_TRACK - 0.2) > self.w - 4:
-                raise ValueError("%s: free text runs off canvas: %r" % (self.name, s))
+                self.fail("free text runs off canvas: %r" % s)
             self.parts.append('<text class="%s" x="%g" y="%g">%s</text>'
-                              % (cls, x, y + i * 11, esc(s)))
-        self.body_h = max(self.body_h, y + len(lines) * 11)
+                              % (cls, x, y + i * LINE_H, esc(s)))
+        self.body_h = max(self.body_h, y + len(lines) * LINE_H)
         return self
 
     def link(self, x1, y1, x2, y2):
@@ -125,21 +134,20 @@ class Canvas:
         size = LABEL_SIZE if cls != "lbl2" else LABEL_SIZE - 1
         for s in lines:
             if text_w(s, size, LABEL_TRACK) > maxw:
-                raise ValueError("%s: label %r needs %.0fpx, box gives %.0fpx"
-                                 % (self.name, s, text_w(s, size, LABEL_TRACK), maxw))
-        if len(lines) * 11 + 4 > boxh:
-            raise ValueError("%s: %d lines don't fit box height %g" % (self.name, len(lines), boxh))
-        top = y + (boxh - (len(lines) - 1) * 11) / 2 + 3
+                self.fail("label %r needs %.0fpx, box gives %.0fpx (widen to %.0f)"
+                          % (s, text_w(s, size, LABEL_TRACK), maxw,
+                             text_w(s, size, LABEL_TRACK) + 10))
+        if len(lines) * LINE_H + 4 > boxh:
+            self.fail("%d lines don't fit box height %g" % (len(lines), boxh))
+        top = y + (boxh - (len(lines) - 1) * LINE_H) / 2 + 4
         for i, s in enumerate(lines):
-            self.parts.append('<text class="%s" x="%g" y="%g">%s</text>' % (cls, x, top + i * 11, esc(s)))
+            self.parts.append('<text class="%s" x="%g" y="%g">%s</text>'
+                              % (cls, x, top + i * LINE_H, esc(s)))
 
     def render(self):
-        for s, _ in self.keys:
-            if 16 + text_w(s, KEY_SIZE, KEY_TRACK) > self.w - 4:
-                raise ValueError("%s: key line too long (%d chars): %r" % (self.name, len(s), s))
-        key_top = self.body_h + 18
-        zone_h = KEY_LINE_H + 2          # the green/red swatch row
-        h = key_top + zone_h + len(self.keys) * KEY_LINE_H + 6
+        """The SVG is geometry and short labels only. The key rides alongside in
+        keys.json and is drawn by the app as HTML."""
+        h = self.body_h + 14
         out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%g" height="%g" '
                'viewBox="0 0 %g %g" role="img" aria-label="%s tactical schematic, traced from '
                'the in-game minimap.">' % (self.w, h, self.w, h, esc(self.name)),
@@ -147,30 +155,20 @@ class Canvas:
                'patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" '
                'stroke-width="2.5" opacity="0.38"/></pattern>',
                '<style>%s</style></defs>' % CSS,
-               '<text class="ttl" x="8" y="15">%s</text>' % esc(self.name.upper())]
-        if self.title_note:
-            # the title is semibold, so it runs wider than the body measure
-            nx = 20 + len(self.name) * (0.68 * TITLE_SIZE + TITLE_TRACK)
-            if nx + text_w(self.title_note, KEY_SIZE, KEY_TRACK) < self.w - 4:
-                out.append('<text class="key" x="%g" y="15">%s</text>' % (nx, esc(self.title_note)))
-            else:
-                self.keys.insert(0, (self.title_note, False))
+               '<text class="ttl" x="8" y="17">%s</text>' % esc(self.name.upper())]
         out += self.parts
         for x, y, n in self.pins:
-            out.append('<circle class="pin" cx="%g" cy="%g" r="8"/>'
-                       '<text class="pinn" x="%g" y="%g">%s</text>' % (x, y, x - 2.5, y + 3.2, n))
-        # zone key: what the two colours mean, stated on every diagram
-        zy = key_top - 8
-        out.append('<rect class="go" x="8" y="%g" width="16" height="11" rx="2"/>' % zy)
-        out.append('<text class="key" x="30" y="%g">head for</text>' % (zy + 9))
-        out.append('<rect class="hot" x="92" y="%g" width="16" height="11" rx="2"/>' % zy)
-        out.append('<text class="keyhot" x="114" y="%g">avoid / cross fast</text>' % (zy + 9))
-        for i, (s, hot) in enumerate(self.keys):
-            yy = key_top + zone_h + i * KEY_LINE_H
-            out.append('<text class="%s" x="8" y="%g">%s</text>'
-                       % ("keyhot" if hot else "key", yy, esc(s)))
+            out.append('<circle class="pin" cx="%g" cy="%g" r="9"/>'
+                       '<text class="pinn" x="%g" y="%g">%s</text>' % (x, y, x - 3.1, y + 4, n))
         out.append('</svg>')
         return "\n".join(out)
+
+    def key_data(self):
+        return {
+            "name": self.name,
+            "note": self.title_note.lstrip("— ").strip(),
+            "lines": [{"text": s, "hot": hot} for s, hot in self.keys],
+        }
 
 
 def esc(s):
@@ -185,15 +183,15 @@ def nuketown():
     c = Canvas("Nuketown", 400, "— schematic")
     c.rect(6, 40, 388, 24, "s", ["SIDE LANE"])
     c.rect(6, 210, 388, 24, "s", ["SIDE LANE"])
-    c.rect(6, 100, 44, 74, "sp", ["SPAWN"])
-    c.rect(344, 100, 44, 74, "sp", ["SPAWN"])
+    c.rect(6, 100, 50, 74, "sp", ["SPAWN"])
+    c.rect(342, 100, 50, 74, "sp", ["SPAWN"])
     c.rect(58, 76, 96, 122, "go", ["HOUSE"], "golbl")
-    c.rect(58, 152, 44, 46, "s", ["GARAGE"])
+    c.rect(58, 152, 52, 46, "s", ["GARAGE"])
     c.rect(240, 76, 96, 122, "go", ["HOUSE"], "golbl")
-    c.rect(292, 152, 44, 46, "s", ["GARAGE"])
+    c.rect(284, 152, 52, 46, "s", ["GARAGE"])
     c.rect(162, 70, 70, 134, "hot", ["CENTRE"], "hotlbl")
-    c.rect(170, 66, 54, 16, "s", ["BUS"])
-    c.rect(170, 192, 54, 16, "s", ["TRUCK"])
+    c.rect(170, 64, 54, 20, "s", ["BUS"])
+    c.rect(170, 188, 54, 20, "s", ["TRUCK"])
     c.pin(144, 88, "1"); c.pin(250, 88, "1"); c.pin(238, 200, "2")
     c.key("Spawns are the back gardens — clear them fast")
     c.key("1  Upper floor — the view over the centre")
@@ -210,8 +208,8 @@ def firing_range():
     c.rect(180, 112, 100, 20, "hot", ["CONTAINER"], "hotlbl")
     c.rect(92, 112, 48, 70, "s", ["BACK", "ALLEY"])
     c.rect(148, 140, 116, 42, "go", ["TOP WOODEN"], "golbl")
-    c.rect(296, 140, 92, 34, "s", ["SNIPER PERCH"])
-    c.rect(296, 180, 92, 28, "s", ["THE NOOK"])
+    c.rect(294, 140, 98, 34, "s", ["SNIPER PERCH"])
+    c.rect(294, 180, 98, 28, "s", ["THE NOOK"])
     c.rect(148, 188, 116, 20, "s", ["SANDBAGS"])
     c.rect(148, 214, 116, 24, "hot", ["LOWER MID"], "hotlbl")
     c.rect(30, 186, 88, 34, "s", ["DOUBLE", "BARRELS"])
@@ -260,8 +258,8 @@ def radiation():
     c.rect(116, 30, 80, 26, "s", ["FAN AREA"])
     c.rect(204, 30, 80, 26, "s", ["THE ROOF"])
     c.rect(116, 62, 168, 24, "b", ["MIDDLE GATES"])
-    c.rect(116, 92, 80, 30, "s", ["DBL WINDOWS"])
-    c.rect(204, 92, 80, 30, "go", ["UPPER CTRL"], "golbl")
+    c.rect(116, 92, 80, 32, "s", ["DBL", "WINDOWS"])
+    c.rect(204, 92, 80, 32, "go", ["UPPER", "CTRL"], "golbl")
     c.rect(116, 128, 168, 52, "b", ["REACTOR ROOM"])
     c.rect(116, 186, 168, 22, "hot", ["BACK SIDE"], "hotlbl")
     c.rect(296, 30, 96, 38, "sp", ["BLACK OPS"])
@@ -285,9 +283,9 @@ def jungle():
     c.path("M108 82 L164 76 L180 104 L170 134 L120 138 L100 112 Z", "go")
     c.path("M240 94 L312 90 L334 122 L322 158 L264 166 L236 134 Z", "go")
     c.path("M150 148 L226 142 L264 168 L248 214 L190 234 L150 206 Z", "hot")
-    c.rect(60, 166, 62, 26, "s", ["SOG CAMP"])
-    c.rect(276, 34, 62, 26, "s", ["NE HUT"])
-    c.rect(300, 182, 62, 24, "s", ["E BLOCKS"])
+    c.rect(60, 166, 68, 26, "s", ["SOG CAMP"])
+    c.rect(276, 34, 68, 26, "s", ["NE HUT"])
+    c.rect(298, 182, 68, 26, "s", ["E BLOCKS"])
     c.free(186, 108, ["SMALL", "BRIDGE"], "hotlbl")
     c.free(196, 200, ["MID BRIDGE"], "hotlbl")
     c.pin(140, 96, "1"); c.pin(292, 112, "2")
@@ -307,7 +305,7 @@ def hanoi():
     c.path("M176 54 L204 46 L308 160 L288 180 Z", "hot")
     c.rect(92, 82, 112, 56, "go", ["PRISON", "2ND LEVELS"], "golbl")
     c.rect(92, 150, 100, 34, "s", ["CENTRAL AREA"])
-    c.rect(16, 130, 72, 32, "s", ["BACK HOUSE"])
+    c.rect(16, 128, 72, 36, "s", ["BACK", "HOUSE"])
     c.circle(300, 186, 10, "go")
     c.rect(230, 210, 100, 26, "go", ["TRUCKS"], "golbl")
     c.rect(120, 200, 100, 34, "hot", ["CENTRAL 2"], "hotlbl")
@@ -328,10 +326,10 @@ def havana():
     c.rect(20, 72, 138, 52, "go", ["CIGAR SHOP", "2ND LEVEL"], "golbl")
     c.rect(238, 72, 150, 52, "go", ["HOTEL", "2ND LEVEL"], "golbl")
     c.rect(30, 134, 118, 32, "s", ["FOUNTAIN"])
-    c.rect(20, 176, 100, 30, "s", ["BACK CAFE"])
-    c.rect(128, 176, 40, 30, "s", ["TRASH"])
-    c.rect(280, 134, 108, 32, "s", ["BAR"])
-    c.rect(236, 134, 40, 72, "s", ["ALLEY"])
+    c.rect(20, 176, 98, 30, "s", ["BACK CAFE"])
+    c.rect(122, 176, 46, 30, "s", ["TRASH"])
+    c.rect(282, 134, 106, 32, "s", ["BAR"])
+    c.rect(234, 134, 46, 72, "s", ["ALLEY"])
     c.rect(184, 176, 44, 30, "s", ["DUMP"])
     c.rect(238, 216, 150, 28, "b", ["THE SHELTER"])
     c.rect(20, 216, 118, 30, "hot", ["RED ROOMS"], "hotlbl")
@@ -352,8 +350,8 @@ def grid():
     c.rect(130, 148, 140, 76, "go", ["THE FACILITY", "2ND FLOOR"], "golbl")
     c.rect(44, 28, 68, 34, "s", ["HANGAR"])
     c.rect(44, 68, 68, 34, "s", ["PARKING"])
-    c.rect(6, 148, 50, 32, "s", ["W BLOCK"])
-    c.rect(54, 232, 74, 30, "s", ["LONG ALLEY"])
+    c.rect(6, 148, 60, 32, "s", ["W BLOCK"])
+    c.rect(50, 232, 80, 30, "s", ["LONG ALLEY"])
     c.rect(282, 24, 108, 30, "s", ["NE BLOCK"])
     c.rect(282, 62, 108, 42, "hot", ["EAST: OPEN", "GROUND"], "hotlbl")
     c.pin(228, 36, "1"); c.pin(256, 160, "2")
@@ -410,16 +408,16 @@ def launch():
     c = Canvas("Launch", 400, "— team map")
     c.circle(200, 60, 26, "b", 14)
     c.free(168, 30, ["ROCKET"], "lbl")
-    c.rect(176, 96, 48, 116, "hot", ["MIDDLE"], "hotlbl")
-    c.rect(108, 96, 62, 46, "go", ["3-STOREY"], "golbl")
-    c.rect(230, 96, 62, 46, "go", ["3-STOREY"], "golbl")
-    c.rect(150, 150, 100, 22, "s", ["MIRRORED BRIDGE"])
+    c.rect(166, 96, 66, 116, "hot", ["MIDDLE"], "hotlbl")
+    c.rect(106, 96, 58, 46, "go", ["THREE", "STOREY"], "golbl")
+    c.rect(234, 96, 58, 46, "go", ["THREE", "STOREY"], "golbl")
+    c.rect(142, 150, 116, 24, "s", ["MIRRORED BRIDGE"])
     c.rect(30, 96, 74, 34, "s", ["W STRUCTS"])
     c.rect(296, 96, 74, 34, "s", ["E STRUCTS"])
     c.rect(30, 138, 74, 24, "sp", ["SPETSNAZ"])
-    c.rect(296, 138, 74, 24, "sp", ["BLACK OPS"])
-    c.rect(112, 182, 176, 24, "s", ["BULLETPROOF BARRIERS"])
-    c.pin(158, 108, "1"); c.pin(242, 108, "1")
+    c.rect(292, 138, 80, 24, "sp", ["BLACK OPS"])
+    c.rect(112, 184, 176, 24, "s", ["BULLETPROOF BARRIERS"])
+    c.pin(156, 108, "1"); c.pin(242, 108, "1")
     c.key("1  Three-storey routes — bottom to top rocket")
     c.key("Identical both sides; one sprint to the top")
     c.key("Middle is split by rails — most deaths here", hot=True)
@@ -498,12 +496,12 @@ SLUGS = ["nuketown", "firing-range", "summit", "radiation", "jungle", "hanoi", "
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    built, problems = [], []
+    built, keys, problems = [], {}, []
     for slug, fn in zip(SLUGS, BUILDERS):
-        try:
-            built.append((slug, fn().render()))
-        except ValueError as e:
-            problems.append(str(e))
+        c = fn()
+        problems += c.problems
+        built.append((slug, c.render()))
+        keys[slug] = c.key_data()
     if problems:
         print("%d layout problems — nothing written:\n" % len(problems))
         for p in problems:
@@ -512,7 +510,12 @@ def main():
     for slug, svg in built:
         with open(os.path.join(OUT, slug + ".svg"), "w", encoding="utf-8") as fh:
             fh.write(svg)
+    with open(KEYS_OUT, "w", encoding="utf-8") as fh:
+        json.dump({"note": "Generated by scripts/build_diagrams.py — do not hand-edit.",
+                   "zones": {"go": "head for", "hot": "avoid, or cross fast"},
+                   "maps": keys}, fh, indent=1, ensure_ascii=False)
     print("wrote %d diagrams to %s" % (len(built), OUT))
+    print("wrote %s" % KEYS_OUT)
 
 
 if __name__ == "__main__":

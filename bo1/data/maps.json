@@ -5,9 +5,9 @@
   "tactics": "Where a map has a ZigZack IGN map-recon walkthrough, the callouts and positions come from that. Otherwise from BO1-era community guides where they exist, and reasoned from the layout where they don't. Each map's 'Checked against the wiki' list says which.",
   "confidence": "Each map lists what was verified against the wiki under 'Checked against the wiki'. Anything not listed there is inference.",
   "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project.",
-  "quick": "Battle type, style, class and must-haves follow from the sourced map content and the weapon data. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first.",
-  "attachments": "No map recommends a suppressor. On all six allowed assault rifles it costs 60-70% of full-damage range, which shows up as extra bullets to kill; its only unique benefit is hiding the firing dot on the enemy minimap, and that does not pay for the range on any map here. Ghost covers plane detection at no cost.",
-  "perks": "Tier 1 is the real choice and Ghost and Hardline compete for it: Ghost where long rotations make a flank worth hiding, Hardline where the map is a scrap and kills come fast. Hardened sits in Tier 2 so it costs neither — Pro reduces flinch, which keeps trades you didn't start winnable. Nuketown keeps Flak Jacket because explosives are the main killer there."
+  "quick": "Battle type and style follow from the sourced map content. The class called for is one of the eight in classes.json, picked for the ground and argued in one line — there are no separate perk recommendations, because a class is the unit you actually equip. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first.",
+  "attachments": "Attachments come with whichever class is called for. The suppressor costs 60-70% of full-damage range on every assault rifle, so where a suppressed class is recommended the brief says what it costs, and where reach matters more the brief says to take an unsuppressed one instead.",
+  "killstreaks": "Each map is set to the low set (3/4/5) or the high set (8/9/11) depending on whether the ground lets you hold a life. Streaks in Black Ops are kill-based and reset on death, so the map decides this, not the class."
  },
  "maps": [
   {
@@ -58,12 +58,6 @@
     }
    ],
    "trap": "Pushing past the bus and the truck. The moment your team is through the middle, the game has nowhere safe left on their end and starts spawning them behind your lines — so the kills you just got become shots in your back. On Nuketown the discipline is to hold your side of the vehicles, not to win the centre.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "3-shot kill to 19.5m covers the whole map, and a 0.2s aim-in wins the corner fights.",
-    "perk": "Flak Jacket",
-    "perkWhy": "The map is small enough that explosives are used liberally by everyone, and the two spawns are close enough for an opening grenade to reach."
-   },
    "deeper": [
     "Do not use the cars as cover — they explode when damaged, and the person shooting them knows that.",
     "At the start of the match, a short pause and then a grenade lobbed over the house can catch the enemy still leaving their garden. Expect one coming the other way.",
@@ -89,17 +83,10 @@
    "quick": {
     "battle": "CQB",
     "style": "Aggressive",
-    "weapon": "FAMAS",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Flak Jacket",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Attack Helicopter"
-    ],
-    "classLine": "Famas with extra rounds — fastest kill of the six at 128ms, and a deeper magazine so a pin doesn't end on a reload.",
+    "classId": "nuketown",
+    "classWhy": "Everything here happens inside twenty metres and half of it is explosive. The AKS-74U wins the doorway fights, Flak Jacket answers the grenades that decide this map, and Tactical Mask means a concussion through the window isn't a free kill for them.",
+    "streakSet": "low",
+    "streakWhy": "You will die a lot here and that's fine — the low set doesn't ask you to live. Napalm on the centre denies the one piece of ground everyone has to cross.",
     "pinLine": "Push to the side of their house, level with the garage — the fence line, not into the back garden. They spawn in the garden in front of you and you farm the gap. Step past the house corner and it flips."
    }
   },
@@ -151,12 +138,6 @@
     }
    ],
    "trap": "Moving without checking around you. The map is small and laid out so that the middle road and the crossings are covered from the garage, top wooden and the perch at once — run it blind and you're caught in a crossfire within seconds of spawning. Lower mid in particular is ground that gets peeked from above.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "3-shot kill to 39.4m covers every sightline here, and an assault rifle is what you want for watching the left flank from the sandbags.",
-    "perk": "Ghost",
-    "perkWhy": "Spy Planes go up constantly on a map this small, and the flanks only work if they can't see you take them."
-   },
    "deeper": [
     "If someone is in the tower, don't duel them — lob a grenade or two up. It's small and enclosed, and that's the intended answer.",
     "If you take an elevated spot, claymore the way up behind you, and don't stay scoped — the standard punishment here is a knife in the back.",
@@ -188,17 +169,10 @@
    "quick": {
     "battle": "CQB–Mid",
     "style": "Aggressive",
-    "weapon": "FAMAS",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Attack Helicopter",
-     "Napalm Strike"
-    ],
-    "classLine": "Famas, no silencer — you need the full 39.4m here, and the extra rounds keep you firing through a contested hold.",
+    "classId": "cqb",
+    "classWhy": "The Famas covers every sightline on the map at full 39.4m range, and the deep magazine matters because holding top wooden is one long fight rather than several short ones. Flak Jacket and Tactical Mask are there because the range and the garage both attract explosives.",
+    "streakSet": "low",
+    "streakWhy": "Fights come constantly and lives are short. Three, four and five are all reachable; a Napalm on the shooting range punishes the spawn everyone camps.",
     "pinLine": "Hold top wooden and the near edge of the shooting range. That range is full of their spawn points, so sit on its lip and they appear in front of you — walk into it and you own their spawn, which flips it."
    }
   },
@@ -250,12 +224,6 @@
     }
    ],
    "trap": "Back rooms. It's one of the four choke points and it should be avoided — but it's also the quickest route to the porch, which is exactly why people keep taking it and keep dying in it. The porch itself then attracts thrown equipment, so the fast route punishes you twice.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "The control room is a bottom-and-top SMG fight with short peeks — 3-shot kill to 19.5m and a 0.2s aim-in suits it.",
-    "perk": "Ninja",
-    "perkWhy": "Half a dozen entrances to one room means people arrive from everywhere. Footsteps are the only warning you get."
-   },
    "deeper": [
     "A Motion Sensor in the right corner of the control room covers four popular choke spots at once — the highest-value piece of equipment on this map.",
     "Toss a flash into middle hall; it very reliably catches people.",
@@ -288,17 +256,10 @@
    "quick": {
     "battle": "CQB–Mid",
     "style": "Stealth",
-    "weapon": "FAMAS",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Napalm Strike"
-    ],
-    "classLine": "Famas — the control room is a short fight with six ways in, so magazine depth beats optics.",
+    "classId": "stealth",
+    "classWhy": "The control room has six ways in, so being off their minimap while you sit in it is worth more than raw range — and nothing here is far enough away for the suppressed Galil's shorter reach to cost you. Hardened keeps the trades winnable when someone comes through a door behind you.",
+    "streakSet": "low",
+    "streakWhy": "A scrap in a confined space. Take the streaks you'll actually earn, and use the Counter-Spy Plane when your team keeps getting caught in the middle hall.",
     "pinLine": "Own the control room and hold the porch side of it. That keeps them spawning at their end and walking into the same two doorways. Don't cross past the porch into their corner."
    }
   },
@@ -350,12 +311,6 @@
     }
    ],
    "trap": "The basement tunnel, if you treat it as a safe route. It has wide open spaces and five access points, and moving through it quickly genuinely cuts the map in half — but it is almost as unsafe as running through the centre. The other one is the back side of the reactor room, a major choke where you should expect grenades and flashes.",
-   "loadout": {
-    "weapon": "Commando",
-    "weaponWhy": "3-shot kill to 45.7m with good handling — most fights here are outdoors at medium range.",
-    "perk": "Ghost",
-    "perkWhy": "On the fastest map in the game, the flank only works if it's not announced."
-   },
    "deeper": [
     "This is a pressure map: the team constantly pushing gives their opponents genuinely terrible spawns. Momentum matters more here than position.",
     "The large gates in the middle can be controlled from either side of the map and can swing a game — the control room switch opens them.",
@@ -387,17 +342,10 @@
    "quick": {
     "battle": "Mid",
     "style": "Aggressive",
-    "weapon": "Commando",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Napalm Strike"
-    ],
-    "classLine": "Commando with extra rounds — outdoor medium-range fights and constant pressure, so you empty magazines.",
+    "classId": "cqb",
+    "classWhy": "The fastest map in the rotation — contact is constant and mostly indoors or across the middle gates. The Famas handles both, and Flak Jacket earns its slot because the reactor room and the tunnel are where the grenades land.",
+    "streakSet": "low",
+    "streakWhy": "Nobody holds a long life on Radiation. Collect the low set and put the Napalm on the far side of the middle gates.",
     "pinLine": "The middle gates are the line. Hold them and they're squeezed into their third of the map; Napalm on the far side of the gates farms it. Push through and the basement tunnel behind you fills with respawns."
    }
   },
@@ -449,12 +397,6 @@
     }
    ],
    "trap": "Getting pushed back into your spawn points. On a map this quick, if your team is under pressure you start spawning all over the place rather than moving through the map, and it's very hard to recover. The middle bridge is the other one — it cuts the map in half and it's the fastest route, but you cross it with almost no cover.",
-   "loadout": {
-    "weapon": "AK-47",
-    "weaponWhy": "The map offers long views down its length, so reach pays — 3-shot kill to 45.7m. Run a Grip.",
-    "perk": "Ghost",
-    "perkWhy": "The crossings are watched; taking one unannounced is the difference."
-   },
    "deeper": [
     "SOG camp is a very popular spawn area and it's easy for the enemy to pin you in it when your team is under pressure.",
     "Both sides of the central route offer rocks and barrels to hide behind — the route is dangerous but it isn't coverless.",
@@ -484,17 +426,10 @@
    "quick": {
     "battle": "Mid–Long",
     "style": "Patient",
-    "weapon": "AK-47",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Ghost",
-     "Ninja"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "AK-47 and a clean sight — long views despite the foliage, and you often get one burst through a gap.",
+    "classId": "long-range",
+    "classWhy": "The one map where a suppressor genuinely pays: the foliage means most shots are taken through a gap at a target that doesn't know where you are, and Ghost plus a silent gun keeps it that way. Be honest about the cost — suppressed, the M16's three-shot kill stops at 26.4m rather than 58.4m, so if you'd rather trade openly across the bridges, take Baz instead.",
+    "streakSet": "high",
+    "streakWhy": "Long rotations and real cover mean you can string kills together. A Blackbird here is decisive, because knowing which way people are facing is the whole problem on this map.",
     "pinLine": "Hold your side of the small bridge and the rise above it. They have to cross to reach you, and they cross in the open. Push over the bridge into their camp and the spawns scatter behind you."
    }
   },
@@ -546,12 +481,6 @@
     }
    ],
    "trap": "The central areas. There isn't much cover in them and you're being looked down on from the high buildings, so cutting through the middle is the fast route from one end to the other and the unsafe one. On a map with only two levels, the danger is almost always from above rather than from a surprise angle.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "3-shot kill to 21m and a fast aim-in for the narrow passages and close encounters.",
-    "perk": "Hardened",
-    "perkWhy": "Close trades through doorways and thin walls, where reduced flinch decides who wins."
-   },
    "deeper": [
     "Only two levels to the whole map means fewer nooks for people to appear from — you can watch your six far more reliably here than on Summit or Villa.",
     "The flower pot gives angles from a position enemies usually don't expect.",
@@ -581,17 +510,10 @@
    "quick": {
     "battle": "CQB–Mid",
     "style": "Stealth",
-    "weapon": "FAMAS",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Napalm Strike"
-    ],
-    "classLine": "Famas — narrow passages and only two levels, so the fights are short, close and frequent.",
+    "classId": "chabba",
+    "classWhy": "Only two levels and narrow passages, so this is a map about arriving somewhere they aren't. Ghost and Ninja get you round the back; the suppressor keeps the first kill from telling the room. The Famas's reach is not the constraint here — the walls are.",
+    "streakSet": "low",
+    "streakWhy": "Short, frequent fights in tight ground. Take what you'll earn, and blind them with the Counter-Spy Plane when they've got the second levels.",
     "pinLine": "Take a second-level building over their central area and stay in it. They spawn below and come through the same doorways. Drop down into the far end of the street and you'll hand the spawns back."
    }
   },
@@ -643,12 +565,6 @@
     }
    ],
    "trap": "Main Street. The whole map is built so that both second levels and the sniper house look down it, which is why the advice is to move around the map rather than through the middle. If you must cross, cross fast and cross once.",
-   "loadout": {
-    "weapon": "M16",
-    "weaponWhy": "3-shot burst kill out to 58.4m — the reach that makes the second-level holds pay.",
-    "perk": "Ghost",
-    "perkWhy": "The route around the outside is the good one, and it only works if you're off their minimap."
-   },
    "deeper": [
     "A motion sensor in the trash bags tells you what's coming toward the fountain — a specifically recommended placement.",
     "The dumpster is an underrated spot: it looks at the back of the fountain, the hotel, the sniper house and the shelter from one position.",
@@ -677,17 +593,10 @@
    "quick": {
     "battle": "Mid–Long",
     "style": "Patient",
-    "weapon": "M16",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Ghost",
-     "Ninja"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "M16 with a sight — all 58.4m of that burst is what owns Main Street from a window. A silencer would cut it to 26m.",
+    "classId": "baz",
+    "classWhy": "Main Street is won from a second-floor window, and that needs every metre of the Famas's 39.4m — which is why this is Baz and not the suppressed Long Range class, where the same shot would fall out of full damage at 14m. Ghost keeps the window off their minimap without paying for it in range.",
+    "streakSet": "high",
+    "streakWhy": "If you hold a twin building you can live a long time up there. That's the map that justifies waiting for a Blackbird.",
     "pinLine": "Hold the upstairs of whichever twin building sits on their half — cigar shop or hotel — and watch the street below. They spawn beyond it and funnel past you. Cross into the shelter and the spawns swap ends."
    }
   },
@@ -739,12 +648,6 @@
     }
    ],
    "trap": "Treating it like a big map. Grid is relatively large but plays much smaller because of its many chokes — the doorways, the alley and the corners are where games are decided, not the open ground. Walking the open area outside the Black Ops spawn is the specific mistake, because it's sniper country.",
-   "loadout": {
-    "weapon": "Galil",
-    "weaponWhy": "3-shot kill to 45.7m handles the outdoor sightlines while staying usable in the two buildings.",
-    "perk": "Ghost",
-    "perkWhy": "With snipers holding the open ground, staying off the minimap is what lets you rotate at all."
-   },
    "deeper": [
     "The propane tanks give good cover in the parking lot area, and there's a crack you can shoot through to catch enemies using the red barrel.",
     "From the Spetsnaz spawn you can use the rooftop to patrol opposite sides of the map and watch for flankers.",
@@ -773,17 +676,10 @@
    "quick": {
     "battle": "Mid",
     "style": "Patient",
-    "weapon": "Galil",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Ghost",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "Galil with extra rounds — reach for the open corridor without dying indoors, and you'll fire a lot from one spot.",
+    "classId": "stealth",
+    "classWhy": "Grid is large but plays small — the fighting funnels into the facility and the corridor, and both are close enough that the suppressed Galil loses nothing that matters. Ghost is what lets you take the long way round to the corridor's far mouth without being announced.",
+    "streakSet": "high",
+    "streakWhy": "The chokes let you hold and live. Blackbird pays for itself the moment your team knows which doorway they're stacking behind.",
     "pinLine": "Hold the facility's second floor and the corridor's far mouth. Their spawns sit beyond it and the chokes bring them to you. Cross the corridor into their end and the open ground behind you becomes theirs."
    }
   },
@@ -835,12 +731,6 @@
     }
    ],
    "trap": "The open ground below the electrical tower. It's wide, it's overlooked from centre array, and it gets picked on by a lot of people. The rock area is the other one — a strong choke that's surrounded by spawns, so you can win a fight there and immediately have company.",
-   "loadout": {
-    "weapon": "M16",
-    "weaponWhy": "58.4m of 3-shot kill range for the long routes — though Array genuinely supports anything, so bring what you shoot well.",
-    "perk": "Ghost",
-    "perkWhy": "Rotations are long, and the back tunnel only works as a flank if you aren't on their minimap while you take it."
-   },
    "deeper": [
     "The truck at the doorway won't blow up, so the back of it is genuine cover. Once it has been destroyed, the wreck becomes an elevated position with angles into both spawns.",
     "The unfinished building has thin walls that will get you killed, but it offers a useful peek if you're just passing through.",
@@ -875,17 +765,10 @@
    "quick": {
     "battle": "Long",
     "style": "Patient",
-    "weapon": "M16",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Ghost",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "M16 with a sight — the longest reach available, on the most open map in the rotation.",
+    "classId": "baz",
+    "classWhy": "The most open map in the rotation, so reach is the whole argument — take the unsuppressed Famas and keep all 39.4m of it. A suppressor here would cut you to 14m on a map where fights start at forty, which is why Long Range isn't the call despite the name.",
+    "streakSet": "high",
+    "streakWhy": "Long sightlines and slow approaches mean lives can be long. This is the map for the high set — and the Blackbird is worth more here than anywhere else.",
     "pinLine": "Hold the relay station and just north of it, using the east side to rotate. That keeps them at their end crossing open snow to reach you. Push to their buildings and you're alone in the open."
    }
   },
@@ -937,12 +820,6 @@
     }
    ],
    "trap": "Playing middle house on the ground floor. It has four main entrances, which makes it a very risky area — you cannot watch them all, and people arrive from every side. The second level is what you actually came for; the ground floor is where you die.",
-   "loadout": {
-    "weapon": "Commando",
-    "weaponWhy": "3-shot kill to 45.7m with manageable recoil — the lanes are long enough to punish an SMG without demanding a full long-range build.",
-    "perk": "Ghost",
-    "perkWhy": "The flank routes through cat house and the factory only work if they can't see you take them."
-   },
    "deeper": [
     "The stairs give good cover against players rushing out of the Black Ops spawn, especially against the cat house windows.",
     "Verticality is the point of this map: silos, sniper perch, factory, catwalk, rafters and middle house's upper level are all elevated. Before you cross anything, look up.",
@@ -970,17 +847,10 @@
    "quick": {
     "battle": "Mid–Long",
     "style": "Anchor",
-    "weapon": "Commando",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Ghost",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "Commando with a sight — lanes long enough to punish a short gun, and you're often shooting down from height.",
+    "classId": "long-range",
+    "classWhy": "You spend this map shooting down from the middle house or the factory at people who haven't spotted you, which is exactly what Ghost and a suppressed gun are for. Warlord is what lets you keep a sight on it as well. If you'd rather contest the long lanes openly, Baz keeps the full range instead.",
+    "streakSet": "high",
+    "streakWhy": "Height and cover let you hold. Eight kills in a life is realistic here in a way it isn't on the small maps.",
     "pinLine": "Hold the middle house upper level and the silo side with it. From height you see them spawn and cross. Push down into the warehouse end and you lose the height and the spawns at the same time."
    }
   },
@@ -1032,12 +902,6 @@
     }
    ],
    "trap": "The middle. It's split in two by the railroad tracks and it is almost impossible to watch every angle — most firefights and most deaths start and end there. Solo pushes through it are the specific thing this map punishes.",
-   "loadout": {
-    "weapon": "Galil",
-    "weaponWhy": "45.7m of 3-shot range handles the medium-long lanes without being useless inside the structures.",
-    "perk": "Hardened",
-    "perkWhy": "A lot of fights here are through structures and at ranges where flinch decides the trade."
-   },
    "deeper": [
     "The barriers in the middle are bulletproof — real cover, not decoration. Use them rather than sprinting between them.",
     "Air strikes on the open back area of the Spetsnaz spawn are unusually effective because of the number of spawn points clustered there.",
@@ -1066,17 +930,10 @@
    "quick": {
     "battle": "Mid",
     "style": "Anchor",
-    "weapon": "Galil",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Ghost",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "Galil — medium lanes through structures, where flinch decides trades more than raw range.",
+    "classId": "xjawz",
+    "classWhy": "A team map where you anchor the three-storey and shoot across the middle, so the deep magazine and fast reload matter more than optics. Hardline is the point of this class — it drags the whole high set a kill closer, which is what makes it collectable at all.",
+    "streakSet": "high",
+    "streakWhy": "Anchoring the top of the three-storey is how you get a long life. With Hardline the set lands at seven, eight and ten.",
     "pinLine": "Hold the three-storey on their side of the rocket, up top. It looks down onto their spawning players from across the middle. Push into their back rooms and you're in the one place that's hard to escape."
    }
   },
@@ -1128,12 +985,6 @@
     }
    ],
    "trap": "The connector. The statue gives a great peek on it precisely because standing in it is bad — it's the ground the elevated positions are watching. The fountain route is the other one: it cuts the map quickly and runs you straight into a couple of chokes.",
-   "loadout": {
-    "weapon": "M16",
-    "weaponWhy": "3-shot kill to 45.7m — the map rewards distance from the houses, and this covers it without dying indoors.",
-    "perk": "Ghost",
-    "perkWhy": "Back road flanks are a live threat in both directions; taking one unannounced is the difference."
-   },
    "deeper": [
     "The garage and the bar both lead back to the pool — useful for getting home, and for knowing how they'll come at you.",
     "Double doors near the stairs lead through to the back road.",
@@ -1161,17 +1012,10 @@
    "quick": {
     "battle": "Mid–Long",
     "style": "Anchor",
-    "weapon": "M16",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Ghost",
-     "Ninja"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Blackbird"
-    ],
-    "classLine": "M16 from the mansion — it looks clean across to the sniper house, and reach is what makes that overlook pay.",
+    "classId": "baz",
+    "classWhy": "The mansion overlook only pays if you can reach the sniper house across from it, so keep the full 39.4m rather than suppressing it away. Ghost covers the overlook against Spy Planes, which is the realistic threat to a static hold here.",
+    "streakSet": "high",
+    "streakWhy": "The elevated holds let you live. Blackbird tells you when the back-road flank is coming, which is the death that ends most of these lives.",
     "pinLine": "Hold the mansion overlook and the statue side of the connector. Anyone leaving the hill has to cross open ground you already cover. Push onto the hill itself and the back road flanks open behind you."
    }
   },
@@ -1223,12 +1067,6 @@
     }
    ],
    "trap": "The control room, if you take it for granted. It's filled with objectives in most modes and it cuts right through the map, making it the quickest route from the Tropas spawn to the OP 40 spawn — which is precisely why it's a hot spot and why everyone is already looking at it.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "39.4m of 3-shot range with a 128ms kill — the compromise gun for a map that swings between the control room and the beach.",
-    "perk": "Ghost",
-    "perkWhy": "The left flank and the beach crossings are long enough that being on their minimap gets you killed before you arrive."
-   },
    "deeper": [
     "Just about any weapon is useful here — the real skill is playing to your gun's strengths rather than picking the 'best' one.",
     "The back bridge leads into upper Castro, an alternative to the contested centre stairs.",
@@ -1256,17 +1094,10 @@
    "quick": {
     "battle": "CQB–Long",
     "style": "Aggressive",
-    "weapon": "FAMAS",
-    "attachment": "Red Dot Sight",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Napalm Strike"
-    ],
-    "classLine": "Famas with a sight — the map swings from the control room to the beach, so take the compromise gun.",
+    "classId": "cqb",
+    "classWhy": "Crisis swings from the control room to the open beach, so the Famas is the compromise that works at both ends. Flak Jacket and Tactical Mask are for the centre stairs, which is the chokepoint everybody grenades.",
+    "streakSet": "low",
+    "streakWhy": "Aggressive map, short lives. Napalm on the centre stairs is the single highest-value thing you can call here.",
     "pinLine": "Hold the middle sandbags at the top of the rock hill. That's the spot for pushing back a team spawning beach side, and it oversees the whole section. Drop onto the beach and you're the one in the open."
    }
   },
@@ -1318,12 +1149,6 @@
     }
    ],
    "trap": "Standing still. Almost every area has multiple entrances, which makes holding anything nearly impossible — the map punishes teams that stop moving and rewards constant pressure. Crossing the main roads is the other reliable way to die, especially near their spawn buildings.",
-   "loadout": {
-    "weapon": "FAMAS",
-    "weaponWhy": "Fast and accurate with 39.4m of 3-shot range — enough for the long peeks without losing the close fights.",
-    "perk": "Ninja",
-    "perkWhy": "Multi-storey buildings with multiple entrances mean people are constantly above, below and behind. Footsteps are the warning."
-   },
    "deeper": [
     "The rabbit hole is reached by climbing a crate — you can skip the double climb by sprint-crouching instead, which saves a couple of seconds.",
     "The best way to push is to use the building openings and clear rooms as you move, rather than running the roads between them.",
@@ -1353,17 +1178,10 @@
    "quick": {
     "battle": "CQB–Mid",
     "style": "Aggressive",
-    "weapon": "FAMAS",
-    "attachment": "Extended Mag",
-    "perks": [
-     "Hardline",
-     "Hardened"
-    ],
-    "streaks": [
-     "Spy Plane",
-     "Napalm Strike"
-    ],
-    "classLine": "Famas with extra rounds — urban blocks, multiple entrances, short fights one after another.",
+    "classId": "cqb",
+    "classWhy": "Urban blocks with multiple entrances mean short fights one after another, and the deep magazine is what carries you through three of them without reloading. Flak Jacket matters because the blown-out building attracts claymores and grenades in equal measure.",
+    "streakSet": "low",
+    "streakWhy": "Constant contact and no safe ground. Take the set you'll finish rather than the one you'd like.",
     "pinLine": "Hold the blown-out building in the middle and the block facing their spawn side. They come up the main roads into your angle. Climb into their actual spawn buildings and the whole map turns around you."
    }
   }

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="404.5" viewBox="0 0 400 404.5" role="img" aria-label="WMD tactical schematic, traced from the in-game minimap.">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="330" viewBox="0 0 400 330" role="img" aria-label="WMD tactical schematic, traced from the in-game minimap.">
 <defs><pattern id="hz" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="8" stroke="#c25b4e" stroke-width="2.5" opacity="0.38"/></pattern>
 <style>
 .terr{fill:#1b2429;stroke:#55636e;stroke-width:1.4}
@@ -9,60 +9,47 @@
 .water{fill:#24343c;stroke:#8fb0aa;stroke-width:1}
 .hot{fill:url(#hz);stroke:#c25b4e;stroke-width:1}
 .lbl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-     font-size:9.0px;letter-spacing:0.7px}
+     font-size:11.5px;letter-spacing:0.4px}
 .lbl2{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-      font-size:8.0px;letter-spacing:0.5px}
+      font-size:10.5px;letter-spacing:0.2px}
 .hotlbl{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-        font-size:8.0px;letter-spacing:0.5px}
+        font-size:10.5px;letter-spacing:0.2px}
 .ttl{fill:#e6ecec;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-     font-size:10.5px;letter-spacing:1.0px;font-weight:600}
-.key{fill:#93a4a6;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-     font-size:8.6px;letter-spacing:0.5px}
-.keyhot{fill:#d99a90;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-        font-size:8.6px;letter-spacing:0.5px}
+     font-size:13.0px;letter-spacing:0.8px;font-weight:600}
 .pin{fill:#d98b4a}
-.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:9px;font-weight:700}
+.pinn{fill:#0b0f11;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;font-weight:700}
 .link{stroke:#55636e;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
 
 .go{fill:#1d3b2f;stroke:#5fb08a;stroke-width:1.5}
 .golbl{fill:#a9dcc0;font-family:ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
-       font-size:9px;letter-spacing:0.7px}
+       font-size:11.5px;letter-spacing:0.4px}
 </style></defs>
-<text class="ttl" x="8" y="15">WMD</text>
-<text class="key" x="44.42" y="15">— verticality is the map</text>
+<text class="ttl" x="8" y="17">WMD</text>
 <circle class="b" cx="300" cy="62" r="20"/>
 <circle cx="300" cy="62" r="11" fill="#2b353c" stroke="#8fb0aa" stroke-width="0.9"/>
 <text class="lbl" x="258" y="34">SILOS · EAST</text>
 <rect class="s" x="72" y="78" width="116" height="44" rx="2"/>
-<text class="lbl2" x="77" y="103">NORTH LANE</text>
+<text class="lbl2" x="77" y="104">NORTH LANE</text>
 <rect class="go" x="140" y="138" width="130" height="66" rx="2"/>
-<text class="golbl" x="145" y="168.5">MIDDLE HOUSE</text>
-<text class="golbl" x="145" y="179.5">4 ENTRANCES</text>
+<text class="golbl" x="145" y="168.25">MIDDLE HOUSE</text>
+<text class="golbl" x="145" y="181.75">4 ENTRANCES</text>
 <rect class="s" x="288" y="112" width="96" height="82" rx="2"/>
-<text class="lbl2" x="293" y="150.5">EAST</text>
-<text class="lbl2" x="293" y="161.5">STRUCTURE</text>
+<text class="lbl2" x="293" y="150.25">EAST</text>
+<text class="lbl2" x="293" y="163.75">STRUCTURE</text>
 <rect class="s" x="8" y="150" width="96" height="44" rx="2"/>
-<text class="lbl2" x="13" y="175">WEST WING</text>
+<text class="lbl2" x="13" y="176">WEST WING</text>
 <rect class="s" x="88" y="218" width="128" height="46" rx="2"/>
-<text class="lbl2" x="93" y="244">WAREHOUSE</text>
+<text class="lbl2" x="93" y="245">WAREHOUSE</text>
 <rect class="go" x="228" y="218" width="130" height="46" rx="2"/>
-<text class="golbl" x="233" y="244">FACTORY</text>
+<text class="golbl" x="233" y="245">FACTORY</text>
 <rect class="s" x="88" y="276" width="200" height="40" rx="2"/>
-<text class="lbl2" x="93" y="299">SOUTH SHEDS</text>
+<text class="lbl2" x="93" y="300">SOUTH SHEDS</text>
 <rect class="hot" x="140" y="96" width="130" height="30" rx="2"/>
-<text class="hotlbl" x="145" y="114">OPEN MIDDLE</text>
+<text class="hotlbl" x="145" y="115">OPEN MIDDLE</text>
 <rect class="sp" x="296" y="276" width="96" height="24" rx="2"/>
-<text class="lbl" x="301" y="291">EAST SPAWN</text>
+<text class="lbl" x="301" y="292">EAST SPAWN</text>
 <rect class="sp" x="8" y="202" width="96" height="24" rx="2"/>
-<text class="lbl" x="13" y="217">WEST SPAWN</text>
-<circle class="pin" cx="258" cy="150" r="8"/><text class="pinn" x="255.5" y="153.2">1</text>
-<circle class="pin" cx="198" cy="230" r="8"/><text class="pinn" x="195.5" y="233.2">2</text>
-<rect class="go" x="8" y="326" width="16" height="11" rx="2"/>
-<text class="key" x="30" y="335">head for</text>
-<rect class="hot" x="92" y="326" width="16" height="11" rx="2"/>
-<text class="keyhot" x="114" y="335">avoid / cross fast</text>
-<text class="key" x="8" y="348.5">1  Middle house — 2nd level is a 360 view</text>
-<text class="key" x="8" y="361">2  Factory — three entrances onto the middle</text>
-<text class="keyhot" x="8" y="373.5">Warehouse over the silos is a camper's haven</text>
-<text class="key" x="8" y="386">Rafters, catwalk, cat house, perch not placed</text>
+<text class="lbl" x="13" y="218">WEST SPAWN</text>
+<circle class="pin" cx="258" cy="150" r="9"/><text class="pinn" x="254.9" y="154">1</text>
+<circle class="pin" cx="198" cy="230" r="9"/><text class="pinn" x="194.9" y="234">2</text>
 </svg>
