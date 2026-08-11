@@ -72,10 +72,31 @@ pulled live from `weapons.json`. The rules live in `classes.json` under `traits`
 **Perk effects** come from the Call of Duty Wiki; **Pro challenges** from GameTipCenter.
 **Killstreak costs** come from the Call of Duty Wiki. **Unlock levels** come from bosslobbies.com.
 
-**Map tactics are opinion.** The open web on BO1 map strategy is thin, so the briefs are
-synthesis from map geometry and what community material exists. Layout facts and spawn ends are
-reliable; specific angles and routes are good starting points. They are meant to be corrected —
-edit `data/maps.json` after you play and the app picks it up on reload.
+**Spawn mechanics come from the game's own shipped scripts**, not from guides — a community dump
+of the 2010 PC build, whose spawn file is headed `Copyright (c) 2008 Certain Affinity`. That
+matters because it killed something this app used to say:
+
+> **The "70% rule" does not exist.** Earlier versions told you to hold 70% of the way to the
+> enemy spawn and not cross it. Grepping the entire spawn system for `70`, `70%` and `0.7`
+> returns one hit, and it is a Sentry Gun projecting its influence forwards. There is no
+> map-fraction test anywhere in Black Ops 1. The app now says what the code says: a live enemy
+> applies −150 to every spawn point within 53 m, a living teammate applies +10 within 18 m, and
+> flipping spawns is a question of how much ground your team's bodies cover — not of a line.
+
+The scores are shipped dvar defaults and a server can override them; the falloff curve is
+engine-side, so they are the penalty at the centre rather than throughout. Whether the July 2026
+re-release changed any of it has not been checked, and the app says so.
+
+**Map tactics are still largely opinion.** The open web on BO1 map strategy is thin, so the
+briefs remain synthesis from map geometry and what community material exists. Each map's
+"Checked against the wiki" list is the line between what is sourced and what is reasoning. They
+are meant to be corrected — edit `data/maps.json` after you play and the app picks it up on
+reload.
+
+Two things were deliberately **not** used, despite being tempting. Activision's own Map
+Spotlight articles for WMD and Launch are first-party and detailed, but they document the
+*Black Ops 4* remasters. And no callout name was invented: where a map has no verified
+vocabulary, the app says nothing rather than shipping a plausible guess onto a diagram.
 
 Attachment unlock requirements are deliberately absent: no source consulted gave figures worth
 trusting, and inventing them would be worse than omitting them.

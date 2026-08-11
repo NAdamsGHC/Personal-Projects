@@ -128,8 +128,9 @@ function renderBrief() {
   back.addEventListener("click", closeBrief);
   box.appendChild(back);
 
-  box.appendChild(el("div", "brief-head",
-    `<h2>${esc(m.name)}</h2><span class="size">${esc(m.size)} &middot; TDM</span>`));
+  const head = el("div", "brief-head",
+    `<h2>${esc(m.name)}</h2><span class="size">${esc(m.size)} &middot; TDM</span>`);
+  box.appendChild(head);
 
   // ── the lobby view: schematic, its key, the class, the streaks ──
   if (m.diagram) box.appendChild(diagramFigure(m));
@@ -150,7 +151,9 @@ function renderBrief() {
     box.appendChild(pin);
   }
 
-  // ── everything else, folded away ──
+  // ── the full brief. Built here, but inserted directly under the map name so
+  //    it is the first thing on the page — closed, because the lobby view below
+  //    it is what you read in the thirty seconds before a match starts. ──
   const brief = el("details", "ref brief-fold");
   brief.appendChild(el("summary", "", "Brief"));
   const box2 = el("div", "body");
@@ -185,6 +188,7 @@ function renderBrief() {
     ss.tells.forEach((t) => el2.appendChild(el("li", "", esc(t))));
     hb.appendChild(el2);
     if (ss.note) hb.appendChild(el("p", "", esc(ss.note)));
+    if (ss.correction) hb.appendChild(el("div", "note bad", esc(ss.correction)));
     hb.appendChild(el("p", "src", esc(ss.source)));
     how.appendChild(hb);
     spawnField.appendChild(how);
@@ -251,7 +255,7 @@ function renderBrief() {
     `Layout: ${esc(DATA.maps.source.layout)} Tactics: ${esc(DATA.maps.source.tactics)}`));
 
   brief.appendChild(box2);
-  box.appendChild(brief);
+  head.insertAdjacentElement("afterend", brief);
 }
 
 /* The schematic, plus its key as real HTML underneath. The key used to be drawn

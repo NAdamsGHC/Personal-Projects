@@ -7,7 +7,9 @@
   "images": "Map loading art and in-game minimaps from callofdutymaps.com. Game assets are property of Activision/Treyarch and are used here in a non-commercial fan project.",
   "quick": "Battle type and style follow from the sourced map content. The class called for is one of the eight in classes.json, picked for the ground and argued in one line — there are no separate perk recommendations, because a class is the unit you actually equip. The spawn-pinning line is reasoning from the 70% rule and each map's spawn geometry — it is the least verified part of the app, and the part worth correcting first.",
   "attachments": "Attachments come with whichever class is called for. The suppressor costs 60-70% of full-damage range on every assault rifle, so where a suppressed class is recommended the brief says what it costs, and where reach matters more the brief says to take an unsuppressed one instead.",
-  "killstreaks": "Each map is set to the low set (3/4/5) or the high set (8/9/11) depending on whether the ground lets you hold a life. Streaks in Black Ops are kill-based and reset on death, so the map decides this, not the class."
+  "killstreaks": "Each map is set to the low set (3/4/5) or the high set (8/9/11) depending on whether the ground lets you hold a life. Streaks in Black Ops are kill-based and reset on death, so the map decides this, not the class.",
+  "spawns": "The spawn mechanics are read from Black Ops 1's own shipped scripts rather than from guides. Where a number appears it is the shipped default and is stated as such.",
+  "research": "August 2026 review. Everything added was either reproduced against the game's own scripts or read from a page whose URL and title were captured in the same evaluation. Activision's Map Spotlight articles for WMD and Launch were rejected despite being first-party, because they document the Black Ops 4 remasters rather than the 2010 maps."
  },
  "maps": [
   {
@@ -64,7 +66,10 @@
     "The spawn tell: if you're upstairs and see a teammate running from the opposite house, or an enemy appears from beneath you, the spawns have already flipped — turn round and cover the balcony behind you.",
     "Attack helicopters are strong here because there's very little cover from above.",
     "Concussion grenades decide more fights here than guns do. Tactical Mask Pro is a genuine counter.",
-    "Rotate between the upper floor and the truck opening rather than living in one. On a map this small, two kills from the same window is all it takes for the next one to arrive with a grenade already cooking."
+    "Rotate between the upper floor and the truck opening rather than living in one. On a map this small, two kills from the same window is all it takes for the next one to arrive with a grenade already cooking.",
+    "The wiki's own callouts for this map are Green House, Green Yard and Green Garage on one side, Yellow House, Yellow Yard and Yellow Garage on the other, with the Street between them and the Cul de Sac at one end. Worth using — your squad will know what you mean.",
+    "The upper floor has three ways in: the stairs from the ground floor, a second set of stairs from the yard onto the deck, and the main window via a series of climbable objects. The window is the one to avoid — you are exposed to the centre and to the inside of the house at the same time.",
+    "A Claymore denies a 16 m radius of enemy spawn points at -450, three times what a living player does. On a map this small that is a real fraction of their spawn area, and it is why claymoring their side of the street does more than just catch runners."
    ],
    "verified": [
     "Two houses, two floors each, with a garage — map is nearly symmetrical (wiki)",
@@ -74,7 +79,13 @@
     "The opening by the truck controls three of the four chokepoints: garage, side path by the garage, and front door (2011 map guide)",
     "Pushing past the bus causes enemies to respawn behind your lines (2011 map guide)",
     "Cars explode when damaged and should not be used as cover (community guide)",
-    "Backyard spawn zones become killing fields immediately after the match starts (community guide)"
+    "Backyard spawn zones become killing fields immediately after the match starts (community guide)",
+    "Callouts: Cul de Sac, Green Yard, Green Garage, Green House, Street, Yellow Yard, Yellow Garage, Yellow House (wiki, Layout section)",
+    "Both teams spawn in the garden area of the backyard (wiki)",
+    "Three routes out of spawn: a road either side of the house, through the lower floor, or up to the upper floor (wiki)",
+    "The upper floor has three entry points, one of them the main window via climbable objects (wiki)",
+    "The window entrance is exposed to fire from the centre and from inside the building (wiki)",
+    "The centre suits SMGs and assault rifles, with tight corners that suit shotguns (wiki)"
    ],
    "diagram": "diagrams/nuketown.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Nuketown_(map)",
@@ -145,7 +156,10 @@
     "Snipers struggle: the map is too small for the ranges they need.",
     "Gas into a contested area creates enough confusion to take it.",
     "If you're running a suppressor, the FAMAS drops to a 3-shot kill inside 14m — across the middle that's a 4-shot kill.",
-    "The three routes are the map. With a teammate, hold one of them properly instead of both roaming — whoever owns a lane forces the enemy through the other two, which is where your team should be looking."
+    "The three routes are the map. With a teammate, hold one of them properly instead of both roaming — whoever owns a lane forces the enemy through the other two, which is where your team should be looking.",
+    "Almost nothing here is real cover. Contemporary guides describe nearly every surface on this map as wood or thin metal, so bullets go through it — if you can see their outline, you can shoot it.",
+    "The cargo container has three ways up and most players only ever watch one. The staircase is the obvious approach; the stack of tyres and the fence outside are the two that go unwatched.",
+    "The two spawns sit unusually close together here, and one of them is in a lowered area with three paths up to the main level. Whichever side you get, expect contact early."
    ],
    "verified": [
     "Tropas spawn is the northern end of the map; OP 40 spawn is the south (ZigZack, IGN map recon)",
@@ -160,7 +174,12 @@
     "A bathroom hut in the north-west has two exits with sightlines to critical points (Dominate Black Ops)",
     "Grenades lob into the high central tower reliably (Dominate Black Ops)",
     "Little aerial protection, so helicopter streaks are strong (Dominate Black Ops)",
-    "Favours SMGs, ARs and LMGs; shotguns for defending; snipers difficult (CoD Wiki)"
+    "Favours SMGs, ARs and LMGs; shotguns for defending; snipers difficult (CoD Wiki)",
+    "Nearly every surface is wood or thin metal, making bullet penetration easy (contemporary written guide)",
+    "The cargo container has three approaches; only the staircase is commonly covered (contemporary written guide)",
+    "One spawn is a lowered area with three pathways up to the higher main area (contemporary written guide)",
+    "The wiki recommends a Claymore or Motion Sensor here specifically because you will be constantly rushed",
+    "The two teams spawn dangerously close to each other (wiki)"
    ],
    "diagram": "diagrams/firing-range.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Firing_Range",
@@ -231,7 +250,9 @@
     "Double barrels gives a view of the Spetsnaz spawn buildings.",
     "Constant pressure matters more here than on bigger maps: pushing the enemy back is what keeps your spawns favourable.",
     "Lethal grenades and gas into the upper room of the compound shake people out of it.",
-    "Half a dozen entrances means the room remembers where you shot from. Take a kill or two from one peek, then change level or change window before they come back for you."
+    "Half a dozen entrances means the room remembers where you shot from. Take a kill or two from one peek, then change level or change window before they come back for you.",
+    "The cable car gives you away. Jumping into it makes it swing, and anyone who knows the map reads that movement — the guides are blunt about it, you are a sitting duck once they know you are in there.",
+    "The tower and the catwalk are both described as places people simply forget to check as they move around the map."
    ],
    "verified": [
     "One of the smaller maps, with four major choke points, each involving the control room (ZigZack, IGN map recon)",
@@ -247,7 +268,9 @@
     "A skinny bridge leads to the back of the Spetsnaz spawn; snipers shoot through the trees there (ZigZack)",
     "Around or through the electrical room is a quick route to the porch, and a grenade magnet (ZigZack)",
     "The centre compound is where most kills occur; grenades and gas into the upper room work (Dominate Black Ops)",
-    "Set in the Ural Mountains with severe drops on all sides (CoD Wiki)"
+    "Set in the Ural Mountains with severe drops on all sides (CoD Wiki)",
+    "Jumping into the cable car causes it to swing, and experienced players read that movement (wiki and a contemporary guide, independently)",
+    "The tower and catwalk are underchecked positions — players are not used to clearing them (contemporary written guide)"
    ],
    "diagram": "diagrams/summit.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Summit",
@@ -317,7 +340,9 @@
     "The conveyor belt in the reactor room leads to a catwalk lining the back of the room.",
     "From the gates you can peek across to the double windows.",
     "Lower Spetsnaz spawn has a few camping spots but is otherwise fairly empty.",
-    "This is the clearest map for holding a line rather than crossing it: own the middle gates and they're squeezed into their end of the map. Push past, and the basement tunnel behind you starts filling with players who just respawned."
+    "This is the clearest map for holding a line rather than crossing it: own the middle gates and they're squeezed into their end of the map. Push past, and the basement tunnel behind you starts filling with players who just respawned.",
+    "The centre blast doors are on buttons — one in a building, the other on the tower opposite. Close them when you are defending, open them when you are pushing. They will crush anyone caught between them as they shut.",
+    "The conveyor belt carries you to the rear of the facility, but there is a rock crusher on it that will kill you if you ride it too far."
    ],
    "verified": [
     "One of the fastest maps: constant pressure gives opponents terrible spawns (ZigZack, IGN map recon)",
@@ -333,7 +358,10 @@
     "The fan area gives an elevated position on players spawning Black Ops side; the roof is useful but exposed (ZigZack)",
     "The back side of the reactor room is a major choke point for grenades and flashes (ZigZack)",
     "The Spetsnaz lookout gives elevated shots across and down the centre; lower Spetsnaz spawn is fairly empty (ZigZack)",
-    "The basement tunnel has wide open spaces and five access points, and is almost as unsafe as the centre (ZigZack)"
+    "The basement tunnel has wide open spaces and five access points, and is almost as unsafe as the centre (ZigZack)",
+    "Buttons on both sides open and close the centre blast doors, which crush players caught between them (contemporary written guide)",
+    "One button is in a building, the other on the tower opposite (contemporary written guide)",
+    "The conveyor belt is a route to the rear of the facility, with a rock crusher on it that kills (callofdutymaps.com)"
    ],
    "diagram": "diagrams/radiation.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Radiation",
@@ -402,7 +430,10 @@
     "Both sides of the central route offer rocks and barrels to hide behind — the route is dangerous but it isn't coverless.",
     "Most things in the rebel area are climbable, which opens angles people don't check.",
     "Despite the foliage this map supports long-range weapons well, so don't automatically reach for an SMG.",
-    "Pressure here is defensive as much as offensive. Holding around the small bridge keeps them in their half; letting them push you back to your own spawn points is the losing state, and it's very hard to reverse."
+    "Pressure here is defensive as much as offensive. Holding around the small bridge keeps them in their half; letting them push you back to your own spawn points is the losing state, and it's very hard to reverse.",
+    "The cliff sniper spot is so well known that sitting in it now attracts hunters rather than kills. Guides from the period already treated it as common knowledge.",
+    "Expect a Claymore or a Motion Sensor behind anyone holding that ridge — a cooked grenade thrown on top of them is the documented answer.",
+    "One side of the map has an open area with no boundary, and running out into it kills you. It is a hard limit on how wide that flank goes."
    ],
    "verified": [
     "A very quick map; if your team is being pushed you spawn all over rather than moving through it (ZigZack, IGN map recon)",
@@ -417,7 +448,11 @@
     "The back tree gives amazing camouflage and a view over most objectives (ZigZack)",
     "Most things in the rebel area are climbable (ZigZack)",
     "The straight-through-the-middle route has rocks and barrels for cover but is shot into from elevated positions (ZigZack)",
-    "Classified as a large map by Treyarch; a ruined village and a military base split by a river (CoD Wiki)"
+    "Classified as a large map by Treyarch; a ruined village and a military base split by a river (CoD Wiki)",
+    "The high ridge is the sniper position and is now common knowledge, so snipers there get hunted (two contemporary guides)",
+    "Expect a Claymore or Motion Sensor placed behind snipers on the ridge (contemporary written guide)",
+    "One side has an open area with no boundaries where players are killed for leaving the map (contemporary written guide)",
+    "A landmine field runs around the perimeter (callofdutymaps.com)"
    ],
    "diagram": "diagrams/jungle.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Jungle_(Black_Ops)",
@@ -571,7 +606,9 @@
     "The back cafe peeks over the fountain, so you can contest it without standing in it.",
     "The shelter is the route to the OP 40 spawn — useful to know both for flanking and for understanding where they'll come from.",
     "If you run a suppressor here the M16 drops from a 3-shot kill at 58.4m to 26.4m, which undoes the reason to hold a second level.",
-    "The two second levels are your lanes: cigar shop and hotel. Hold one, put a teammate in the other, and Main Street belongs to your team without anyone having to stand in it."
+    "The two second levels are your lanes: cigar shop and hotel. Hold one, put a teammate in the other, and Main Street belongs to your team without anyone having to stand in it.",
+    "Claymores are close to expected here. Guides from the period warn that running through the buildings means there is likely one round every corner.",
+    "The long road is almost always covered by a sniper from one end or the other — that is the documented death on this map, not a subtle one."
    ],
    "verified": [
     "It's important to move around the map rather than through Main Street (ZigZack, IGN map recon)",
@@ -584,7 +621,11 @@
     "The shelter leads to the OP 40 spawn; the back rooms are home to campers (ZigZack)",
     "The red rooms get congested with grenades and knifers (ZigZack)",
     "The hotel has a similar layout to the cigar shop; its second level sees the shelter, fountain, cafe and cigar shop, with stairs to the back alley and the bar (ZigZack)",
-    "The map is the same shape as Crossfire from Call of Duty 4 (CoD Wiki)"
+    "The map is the same shape as Crossfire from Call of Duty 4 (CoD Wiki)",
+    "The long central road is almost always covered by a sniper from one of the ends (contemporary written guide)",
+    "Claymores are commonly placed around corners inside the buildings (contemporary written guide)",
+    "Havana is named as a map where Claymores are used to deny enemy spawn points (Neoseeker wiki)",
+    "Fighting is either in the streets or from the windows overlooking them (contemporary written guide)"
    ],
    "diagram": "diagrams/havana.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Havana",
@@ -739,7 +780,11 @@
     "Claymores are common on the guardhouse stairs and in the rooms — check before you move through.",
     "The pallet and forklift lead to the guard house; both are critical choke points for traffic.",
     "Don't run a suppressor here. Cutting your full-damage range on a map this open is self-sabotage.",
-    "The crane and the tower both reward one look and one kill, then leaving. Good players work out an elevated camper quickly, and on a map this open you are a long walk from anyone who could help."
+    "The crane and the tower both reward one look and one kill, then leaving. Good players work out an elevated camper quickly, and on a map this open you are a long walk from anyone who could help.",
+    "The east side is the quiet one. It has real cover and stays out of the main fight, which makes it the route for moving north to south and the sensible flank.",
+    "The centre structure sees most of the map but has a blind spot to the south-east. That is both how you approach it and what you have to watch when you hold it.",
+    "The documented mistake on Array is simply being flanked — the guides describe the whole map as leaving you open to someone arriving behind you.",
+    "There is a documented Jammer spot inside the circular building, best hidden on the lower floor."
    ],
    "verified": [
     "One of the larger maps, offering a handful of routes for both long-range and close combat; just about any weapon is usable (ZigZack, IGN map recon)",
@@ -756,7 +801,12 @@
     "Climbing the boxes to centre array avoids the popular routes and chokes (ZigZack)",
     "A window-to-railing spot peeks the propane tank and the main entrance of Array Tower (ZigZack)",
     "A back tunnel in bottom array is underused and gets you behind enemy lines quickly (ZigZack)",
-    "Centred on a large relay dish with surrounding buildings; large open areas make sniping prevalent (CoD Wiki)"
+    "Centred on a large relay dish with surrounding buildings; large open areas make sniping prevalent (CoD Wiki)",
+    "The eastern region has ample cover and stays relatively quiet, making it the north-south route (contemporary written guide)",
+    "The centre structure gives sightlines to most of the map, with a blind spot to the south-east (contemporary written guide)",
+    "The common death is being flanked — the map leaves you exposed to a sneak attack (contemporary written guide)",
+    "Climbing the large tower leaves you vulnerable to counter-snipers (two contemporary guides)",
+    "A Jammer placed inside the circular building, lower floor, is a documented spot (contemporary written guide)"
    ],
    "diagram": "diagrams/array.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Array",
@@ -990,7 +1040,8 @@
     "Double doors near the stairs lead through to the back road.",
     "There are three elevated positions in total; the mansion and the sniper house are two of them, and holding one of those is most of the game.",
     "Grenades roll downhill, which is in your favour from the mansion and against you from below.",
-    "Three elevated positions, and you only need one at a time — but move between them. Holding the same mansion window all game means the third player to die to it comes back with a plan for it."
+    "Three elevated positions, and you only need one at a time — but move between them. Holding the same mansion window all game means the third player to die to it comes back with a plan for it.",
+    "Flanking round the main building from either side works, but the entrances are the bit to be careful about — most of them get claymored."
    ],
    "verified": [
     "Tropas spawn mansion side at the pool; OP 40 spawn opposite at the hill (ZigZack, IGN map recon)",
@@ -1003,7 +1054,9 @@
     "Stairs give access to the back road and to market; double doors also lead to the back road (ZigZack)",
     "The statue gives a great peek on the connector from a safe distance (ZigZack)",
     "The garage and the bar both lead back to the pool (ZigZack)",
-    "A large house atop a cliff with a central courtyard of rock cover (CoD Wiki)"
+    "A large house atop a cliff with a central courtyard of rock cover (CoD Wiki)",
+    "Flanking around the main building from either side is viable, but most entrances are commonly claymored (contemporary written guide)",
+    "Second-floor windows are commonly held positions (two contemporary guides)"
    ],
    "diagram": "diagrams/villa.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Villa",
@@ -1154,7 +1207,8 @@
     "The best way to push is to use the building openings and clear rooms as you move, rather than running the roads between them.",
     "Climbing into an enemy spawn building lets you watch them advance up the map and shoot them in the back.",
     "The map is the basis for the campaign mission The Defector and resembles Hue City.",
-    "Multiple entrances cut both ways. They make holding ground impossible, but they also mean you can always re-enter a building from a different side to the one you left — which is how you punish anyone who set up watching your last route."
+    "Multiple entrances cut both ways. They make holding ground impossible, but they also mean you can always re-enter a building from a different side to the one you left — which is how you punish anyone who set up watching your last route.",
+    "The raised rubble in the centre is open from every side. Two independent guides say the same thing about it — once someone holds it, anyone climbing on is visible from a long way off."
    ],
    "verified": [
     "Most areas have multiple entrances, making it almost impossible to win unless your team is constantly moving (ZigZack, IGN map recon)",
@@ -1169,7 +1223,9 @@
     "The SOG lookout leads to the fruit market on the SOG spawn side, with a back area covering the middle and right (ZigZack)",
     "You can jump off the truck into the window as a quick route into the SOG lookout (ZigZack)",
     "A nook in the centre gives a good angle on enemies pushing; the NVA lookout usually holds a sniper and is reached by climbing the car or jumping from the sandbags (ZigZack)",
-    "Basis for the campaign mission The Defector; resembles Hue City (CoD Wiki)"
+    "Basis for the campaign mission The Defector; resembles Hue City (CoD Wiki)",
+    "The raised centre is open from all sides and leaves anyone on it visible from far away (two independent contemporary guides)",
+    "The third floor of the building to the north is the popular sniping position (contemporary written guide)"
    ],
    "diagram": "diagrams/cracked.svg",
    "minimapUrl": "https://callofduty.fandom.com/wiki/Cracked",
@@ -1187,21 +1243,23 @@
   }
  ],
  "spawnSystem": {
-  "how": "The game puts you in the safest spot that isn't blocked by an enemy, and it re-reads where both teams are standing constantly. The practical version is the 70% rule: measure the distance from your spawn to theirs, and treat 70% of the way as the line you hold rather than cross.",
-  "rule": "Hold at 70% and the enemy is squeezed into the remaining 30% of the map, spawning in a small area you can watch. Cross it and you're deep in their half, you appear on the radar of everyone who has just spawned, and they will come looking for you.",
+  "how": "Black Ops 1 does not spawn you near your team. It scores every spawn point on the map and picks the best one, and the score is dominated by one thing: how close a living enemy is. A live enemy applies -150 to every spawn point within 53 m of them. A living teammate applies +10 within 18 m — the same size as the random noise the game adds to every score, so it barely registers. You do not pull spawns towards your team. You push them away from the enemy.",
+  "rule": "Because the penalty is a sphere around each enemy, flipping the spawns is a question of coverage, not of crossing a line. Your team's spheres either blanket their spawn area more completely than they blanket yours, or they don't. That means the NUMBER of you pushed up matters more than how far any one of you goes — four players at moderate depth cover far more ground than one player deep.",
   "triggers": [
-   "Roughly three teammates pushing past the 70% line will flip the spawns",
-   "Even two of you at 80–90% is usually enough to trigger it",
-   "Wiping their whole side at once, leaving nowhere safe on their end",
-   "Standing on or near their spawn points",
-   "Leaning too heavily to one side — spawns can flip sideways, not just front to back"
+   "Your team's bodies collectively covering their spawn area — each of you denies a 53 m radius",
+   "Killing the enemies nearest their spawn: a dead enemy stops denying spawns instantly, which frees the ground up for them",
+   "Your own dead teammates — a corpse pushes YOUR team's next spawn away from that spot for 20 seconds",
+   "Placed equipment, which outweighs people: a Claymore denies a 16 m radius at -450, three times the penalty of a living enemy",
+   "A Napalm Strike, which lays four overlapping spheres along its run and denies a corridor roughly 120 m long"
   ],
   "tells": [
    "A teammate dies and respawns right next to you while you're near the enemy spawn — the map has flipped, go back",
    "Kills start arriving from a new direction",
-   "A part of the map that was busy goes quiet"
+   "A part of the map that was busy goes quiet",
+   "Enemy dots on the minimap need a Spy Plane, and it only lasts 20 seconds — the Spy Plane rig turns clockwise, the Counter-Spy Plane turns anticlockwise, which is how you tell whose is up"
   ],
-  "note": "Spawn behaviour is more predictable on long, rectangular maps and less so on large, square ones. A Spy Plane makes it easy to see, but the skill is reading it without one.",
-  "source": "Pub-stomping fundamentals video covering Black Ops 1 and 2 (transcript supplied); corroborated for BO1 on Nuketown by a 2011 map guide describing enemies respawning behind your lines once your team pushes past the bus."
+  "note": "Two things worth knowing that no amount of positioning fixes. Black Ops 1 has no directional component to player spawn influence at all — the code that would have spawned you behind your teammates is commented out in the shipped scripts, so which way anyone faces is irrelevant. And the game only checks 20 candidate spawn points for enemy line-of-sight before giving up and using the highest-scoring one regardless. That is why you sometimes appear in front of someone when nothing had flipped.",
+  "source": "Black Ops 1's own shipped game scripts (community dump of the 2010 PC build; the spawn file is headed Copyright (c) 2008 Certain Affinity). Scores and radii are the shipped dvar defaults and can be overridden by a server. Radii are given in the scripts as multiples of a 70-inch player height and converted here. The falloff curve is set to 'steep' for players and 'linear' for equipment, but its shape is engine-side, so these are the penalties at the centre, not throughout. Whether the July 2026 re-release changed any of this has not been checked.",
+  "correction": "Earlier versions of this app described a '70% rule' — hold 70% of the way to their spawn, don't cross it. That rule appears nowhere in Black Ops 1's spawn code. It has been removed rather than quietly reworded."
  }
 }
