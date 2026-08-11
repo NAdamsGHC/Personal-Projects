@@ -45,6 +45,7 @@
    "pellets": null,
    "fireMode": "burst",
    "fireModeLabel": "3-round burst",
+   "fireModeShort": "3RB",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -147,6 +148,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -249,6 +251,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -351,6 +354,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -453,6 +457,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -555,6 +560,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -659,6 +665,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -763,6 +770,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -865,6 +873,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -967,6 +976,7 @@
    "pellets": null,
    "fireMode": "burst",
    "fireModeLabel": "3-round burst",
+   "fireModeShort": "3RB",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1049,6 +1059,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -1169,6 +1180,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -1303,6 +1315,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -1394,6 +1407,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1502,6 +1516,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1588,6 +1603,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1708,6 +1724,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1816,6 +1833,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1904,6 +1922,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -1986,6 +2005,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -2092,6 +2112,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -2198,6 +2219,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -2304,6 +2326,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 3,
@@ -2386,6 +2409,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -2461,6 +2485,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -2536,6 +2561,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -2620,6 +2646,7 @@
    "pellets": null,
    "fireMode": "auto",
    "fireModeLabel": "Full auto",
+   "fireModeShort": "",
    "handFired": false,
    "killZones": {
     "head": 2,
@@ -2695,6 +2722,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -2787,6 +2815,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -2879,6 +2908,7 @@
    "pellets": null,
    "fireMode": "bolt",
    "fireModeLabel": "Bolt action",
+   "fireModeShort": "Bolt",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -2973,6 +3003,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3066,6 +3097,7 @@
    "pellets": 8,
    "fireMode": "break",
    "fireModeLabel": "Break action",
+   "fireModeShort": "Break",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3160,6 +3192,7 @@
    "pellets": 8,
    "fireMode": "pump",
    "fireModeLabel": "Pump action",
+   "fireModeShort": "Pump",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3261,6 +3294,7 @@
    "pellets": 8,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3370,6 +3404,7 @@
    "pellets": 8,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3459,6 +3494,7 @@
    "pellets": 8,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 1,
@@ -3546,6 +3582,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -3635,6 +3672,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -3724,6 +3762,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -3840,6 +3879,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -3929,6 +3969,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4045,6 +4086,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4134,6 +4176,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4243,6 +4286,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4332,6 +4376,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4448,6 +4493,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 2,
@@ -4537,6 +4583,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {
     "head": 3,
@@ -4626,6 +4673,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {},
    "oneShot": [],
@@ -4696,6 +4744,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {},
    "oneShot": [],
@@ -4766,6 +4815,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {},
    "oneShot": [],
@@ -4836,6 +4886,7 @@
    "pellets": null,
    "fireMode": "pump",
    "fireModeLabel": "Pump action",
+   "fireModeShort": "Pump",
    "handFired": true,
    "killZones": {},
    "oneShot": [],
@@ -4921,6 +4972,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {},
    "oneShot": [],
@@ -4983,6 +5035,7 @@
    "pellets": null,
    "fireMode": "semi",
    "fireModeLabel": "Semi-auto",
+   "fireModeShort": "Semi",
    "handFired": true,
    "killZones": {},
    "oneShot": [],

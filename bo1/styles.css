@@ -574,6 +574,9 @@ figure.diagram figcaption a { color: var(--accent); }
 
 .list { display: flex; flex-direction: column; gap: 6px; }
 
+/* Five things on one line at 375px. The name is the only part allowed to give
+   ground — everything to its right is a column you scan down, so it keeps its
+   width and never shrinks. */
 .row {
   appearance: none;
   width: 100%;
@@ -583,41 +586,58 @@ figure.diagram figcaption a { color: var(--accent); }
   border-radius: 2px;
   color: var(--text);
   font: inherit;
-  padding: 11px 12px;
+  padding: 11px 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
+  overflow: hidden;
 }
 .row:hover { border-color: var(--accent); }
 .row .nm {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 0.92rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .row .tag {
+  flex: 0 0 auto;
+  white-space: nowrap;
   font-size: 0.58rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dimmer);
   border: 1px solid var(--line);
-  padding: 2px 6px;
+  padding: 2px 5px;
   border-radius: 2px;
 }
 .row .reach {
+  flex: 0 0 auto;
   font-variant-numeric: tabular-nums;
   font-size: 0.76rem;
   color: var(--dimmer);
-  min-width: 52px;
+  min-width: 50px;
   text-align: right;
+  white-space: nowrap;
 }
 .row .ttk {
+  flex: 0 0 auto;
   font-variant-numeric: tabular-nums;
   font-size: 0.86rem;
   color: var(--hot);
-  min-width: 62px;
+  min-width: 54px;
   text-align: right;
+  white-space: nowrap;
+}
+
+/* On the narrowest phones the weapon name starts losing letters. The class tag
+   is the first thing to go — there's a class filter directly above the list. */
+@media (max-width: 359px) {
+  .row .tag:not(.mode) { display: none; }
 }
 
 .detail { padding-bottom: 8px; }

@@ -387,8 +387,9 @@ function renderWeaponList() {
 
   ws.forEach((w) => {
     const reach = w.profile[0] && w.profile[0].toM ? `${w.profile[0].toM} m` : "any range";
-    const mode = w.fireMode === "auto" ? "" :
-      `<span class="tag mode">${esc(w.fireModeLabel)}</span>`;
+    const mode = w.fireModeShort
+      ? `<span class="tag mode" title="${esc(w.fireModeLabel)}">${esc(w.fireModeShort)}</span>`
+      : "";
     const r = el("button", "row",
       `<span class="nm">${esc(w.name)}</span>
        ${mode}

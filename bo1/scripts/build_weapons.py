@@ -71,6 +71,11 @@ FIRE_MODE_LABEL = {
     BREAK: "Break action",
 }
 
+# The list row has five things on it at 375px and no room for a long label.
+FIRE_MODE_SHORT = {
+    AUTO: "", BURST_MODE: "3RB", SEMI: "Semi", PUMP: "Pump", BOLT: "Bolt", BREAK: "Break",
+}
+
 # Column indices in the Marvel4 sheet (3-row header, leaf labels on row 3).
 C_NAME = 0
 C_SPEED, C_ADS_MOVE = 1, 2
@@ -311,6 +316,7 @@ def main():
             "pellets": pellets,
             "fireMode": mode,
             "fireModeLabel": FIRE_MODE_LABEL[mode],
+            "fireModeShort": FIRE_MODE_SHORT[mode],
             "handFired": mode in MANUAL_MODES,
             "killZones": zones,
             "oneShot": one_shot,
