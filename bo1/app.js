@@ -568,11 +568,25 @@ function renderPerks() {
       ch.appendChild(ol);
       b.appendChild(ch);
       b.appendChild(el("div", "kv", `<div class="k">In TDM</div><div class="v">${esc(p.tdm)}</div>`));
+      /* Only some perks have been measured in-game. The numbers are hand-timed
+         community tests rather than datamined, so they sit apart from the
+         effect text and say where they came from. */
+      if (p.measured && p.measured.length) {
+        const mv = el("div", "kv");
+        mv.appendChild(el("div", "k", "Tested"));
+        const ul = el("ul", "challenges");
+        p.measured.forEach((m) => ul.appendChild(el("li", "", esc(m))));
+        mv.appendChild(ul);
+        b.appendChild(mv);
+      }
       b.appendChild(el("div", "kv", `<div class="k">In practice</div><div class="v"><strong>${esc(p.note)}</strong></div>`));
       dt.appendChild(b);
       box.appendChild(dt);
     });
   });
+  const s = DATA.perks.source;
+  box.appendChild(el("p", "src",
+    `Effects: ${esc(s.effects)}. Challenges: ${esc(s.challenges)}. ${esc(s.measured)}`));
   renderSynergy();
 }
 

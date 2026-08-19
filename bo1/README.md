@@ -33,7 +33,7 @@ and the Classes tab can't drift apart.
 |---|---|
 | **Pre-Match** | 14 base maps, one tap to a brief, side toggle, deeper notes below the fold |
 | **Weapons** | 36 entries at full depth (31 primaries + 5 pistols), sorted by time-to-kill |
-| **Perks** | All 15 — effect, Pro effect, all three Pro challenges, a TDM verdict, and which combinations pull together |
+| **Perks** | All 15 — effect, Pro effect, all three Pro challenges, a TDM verdict, measured figures where they exist, and which combinations pull together |
 | **Classes** | Eight presets, a builder, and a read on what each build excels at and struggles with |
 
 ## Where the data comes from
@@ -70,6 +70,14 @@ the map you pick and told what it excels at and struggles with, with every figur
 pulled live from `weapons.json`. The rules live in `classes.json` under `traits`.
 
 **Perk effects** come from the Call of Duty Wiki; **Pro challenges** from GameTipCenter.
+
+The **Tested** block on the five Tier 1 perks is a different kind of thing again, and the app
+labels it separately. Those are hand-timed in-game comparisons from a community breakdown of the
+Tier 1 perks — movement timings, starting-ammo counts, what Flak Jacket does and doesn't survive.
+Nobody datamined them and the person running the tests said himself he isn't an analyst, so they
+are the right order of magnitude rather than exact values. They earn their place because they
+settle arguments the effect text can't: *how much* faster is 7%, and *how much* ammo is "extra
+mags". One figure in the source was plainly misspoken and has been left out rather than repeated.
 **Killstreak costs** come from the Call of Duty Wiki. **Unlock levels** come from bosslobbies.com.
 
 **Spawn mechanics come from the game's own shipped scripts**, not from guides — a community dump

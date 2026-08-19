@@ -2,6 +2,7 @@
  "source": {
   "effects": "Call of Duty Wiki — Perks (Call of Duty: Black Ops section)",
   "challenges": "GameTipCenter — Black Ops full perk list and Pro perk challenge list",
+  "measured": "Tier 1 'Tested' figures are hand-timed in-game comparisons from a community breakdown of the Tier 1 perks, not datamined values. Treat them as the right order of magnitude rather than exact.",
   "note": "All perks are available for purchase at level 4. Pro requires all three challenges plus 3000 CoD Points on top of the 2000 base cost."
  },
  "perks": [
@@ -18,7 +19,13 @@
     "Get 10 Offense Medals by killing enemies near their objective"
    ],
    "tdm": "Fine, but 7% is smaller than it sounds and Tier 1 is where Ghost and Flak Jacket live. The Pro half — no falling damage — is the real prize, because it opens up drops you'd otherwise walk around.",
-   "note": "Speed only helps if you're going somewhere useful. If you're dying on the way to fights rather than in them, moving faster gets you there sooner and changes nothing. Best on players who already know the routes and want to reach them first."
+   "measured": [
+    "Strafing, and aiming down sights while strafing: roughly 0.14s saved on a short movement.",
+    "A full sprint across WMD to the middle flag: roughly 0.6s saved, with or without Marathon Pro.",
+    "Same sprint with a pistol out — already faster than running with a rifle — still about 0.44s faster with the perk, so swapping to your secondary narrows the gap rather than closing it.",
+    "Jungle's main cliff: survivable with no damage on Lightweight Pro, instantly lethal without it."
+   ],
+   "note": "Speed only helps if you're going somewhere useful. If you're dying on the way to fights rather than in them, moving faster gets you there sooner and changes nothing. Best on players who already know the routes and want to reach them first — half a second is the difference between pre-aiming a doorway and walking into someone who is already aiming at it. The free version of this perk is running with your pistol out; the free version of the Pro half is not taking the drop."
   },
   {
    "name": "Scavenger",
@@ -33,7 +40,14 @@
     "Resupply 150 times while using Scavenger"
    ],
    "tdm": "Strong if you hold an area and rack up kills without moving much. In TDM the bodies come to you.",
-   "note": "Rewards a patient, position-holding game. Worthless if you die every 30 seconds, because you never live long enough to run dry."
+   "measured": [
+    "FAMAS starting ammo: 30+60 stock, 30+240 on Scavenger Pro. With Extended Mag as well, 45+250.",
+    "For comparison, the attachments alone give 45+75 (Extended Mag) or 30+150 (Dual Mag) — Pro beats both and costs no attachment slot.",
+    "Most primaries cap at 240 in reserve however many packs you collect. The M60 is the exception: 100+300.",
+    "Secondaries gain too — the Olympia goes from 18 rounds in reserve to 40, the crossbow from 2 bolts to 5. The ballistic knife is the only weapon that gains nothing.",
+    "Launchers gain rockets, which is the quiet reason to run it: a Strela with Scavenger Pro takes three aircraft off the board instead of two."
+   ],
+   "note": "Rewards a patient, position-holding game. Worthless if you die every 30 seconds, because you never live long enough to run dry — that's a perk spent on a problem you don't have. The exception is a launcher class: extra rockets is anti-air for the whole team, which is the same job people take Ghost to solve privately."
   },
   {
    "name": "Ghost",
@@ -48,7 +62,12 @@
     "Destroy 1 enemy Sentry Gun"
    ],
    "tdm": "The default competitive pick. Spy Planes are everywhere at 3 kills, and being off the minimap is what makes a flank a flank.",
-   "note": "Know the limit: Ghost does NOT hide you from a Blackbird. If the enemy team hits 8, your flank is visible for the duration and you should play like it — that's the moment to hold an angle rather than take a route."
+   "measured": [
+    "Pro also takes you off attack helicopters, gunships, chopper gunners, IR scopes and sentry guns — nothing automated can lock onto you.",
+    "No red name or crosshair when you're aimed at. Prone with no name tag, you read as a dead body at range.",
+    "A non-suppressed gun, a Motion Sensor, a Camera Spike or a teammate standing next to you all give your position away regardless."
+   ],
+   "note": "Know the limit: Ghost does NOT hide you from a Blackbird. If the enemy team hits 8, your flank is visible for the duration and you should play like it — that's the moment to hold an angle rather than take a route. And it isn't automatic: a launcher shoots the plane down for the whole team instead of hiding one person from it. Ghost earns its slot when the enemy is spamming Spy Planes and nobody on your side is answering them."
   },
   {
    "name": "Flak Jacket",
@@ -63,7 +82,13 @@
     "Throw back 5 enemy Frag grenades"
    ],
    "tdm": "Map-dependent. On Nuketown and Firing Range the grenade traffic is constant and Flak Jacket is close to mandatory. On open maps it's a wasted slot.",
-   "note": "A map-specific perk, not a default. Carry it on the small maps and swap it out on the large ones — running it on Array or Launch is a slot you've given away."
+   "measured": [
+    "Survives a claymore, and a frag at the range that kills without it.",
+    "Covers exploding vehicles as well, which isn't advertised anywhere in the description.",
+    "Pro covers fire — napalm strikes and the flamethrower.",
+    "It is not immunity. Two frags still kill you, so does one frag on top of an already-damaged health bar, and so does a frag stacked with an exploding vehicle."
+   ],
+   "note": "A map-specific perk, not a default. Carry it on the small maps and swap it out on the large ones — running it on Array or Launch is a slot you've given away. What it really buys is the right to stay put: everyone else has to leave when the grenade lands, and the fight is won by whoever is still holding the room afterwards. It's also the best reaction perk in the game — if a lobby is throwing explosives at everything, change to it between matches."
   },
   {
    "name": "Hardline",
@@ -78,7 +103,12 @@
     "Share 10 Killstreak reward crates with teammates"
    ],
    "tdm": "Turns 3/4/5 into 2/3/4 and 8/9/11 into 7/8/10. The higher your streaks, the more it's worth.",
-   "note": "The perk that makes high killstreaks viable. If you're running anything at 8 or above, Hardline is close to mandatory — without it you need eight kills in a single life before your set-up pays out at all. Pair high streaks with Hardline, or drop the ceiling."
+   "measured": [
+    "A Spy Plane in the air within the opening seconds of a match is the tell that someone is running it — two kills, not three.",
+    "The same discount applies to the Counter Spy Plane, so a Hardline support set cycles both faster than the team throwing planes up.",
+    "Pro re-rolls a Care Package once. You can end up with something worse; that's the trade."
+   ],
+   "note": "The perk that makes high killstreaks viable. If you're running anything at 8 or above, Hardline is close to mandatory — without it you need eight kills in a single life before your set-up pays out at all. Pair high streaks with Hardline, or drop the ceiling. Worth being honest about the alternative, though: it doesn't win gunfights or keep you alive, and a perk that does either can earn the same streak by getting you one life further. If you're dying two and three kills short rather than one, the fix isn't Hardline — it's a lower streak set."
   },
   {
    "name": "Hardened",
