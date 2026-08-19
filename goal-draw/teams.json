@@ -2,36 +2,36 @@
   "season": "2026-27",
   "kickoff": "2026-08-21T20:00:00+01:00",
   "seasonEnd": "2027-05-30T18:00:00+01:00",
-  "status": "DRAFT",
+  "status": "FINAL",
   "players": {
-    "Baz": [
+    "Jez": [
       "MCI",
       "BHA",
-      "LEE",
+      "TOT",
       "HUL"
     ],
-    "Jez": [
-      "BOU",
-      "CHE",
-      "TOT",
-      "COV"
-    ],
     "Adam": [
-      "LIV",
-      "BRE",
-      "NFO",
-      "SUN"
-    ],
-    "Mikey": [
-      "MUN",
+      "BOU",
       "AVL",
-      "EVE",
-      "IPS"
+      "LEE",
+      "SUN"
     ],
     "Toz": [
       "ARS",
       "NEW",
       "FUL",
+      "COV"
+    ],
+    "Mikey": [
+      "MUN",
+      "BRE",
+      "EVE",
+      "IPS"
+    ],
+    "Baz": [
+      "LIV",
+      "CHE",
+      "NFO",
       "CRY"
     ]
   },
