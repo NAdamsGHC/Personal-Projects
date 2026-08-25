@@ -103,6 +103,15 @@ def main():
         "standins": STANDINS,
         "teams": teams,
     }
+    # The europe block is maintained by hand (cup winners, coefficient place) and
+    # isn't in the spreadsheet, so carry over whatever is already on disk.
+    if OUT.exists():
+        try:
+            prev = json.loads(OUT.read_text(encoding="utf-8"))
+            if prev.get("europe"):
+                out["europe"] = prev["europe"]
+        except ValueError:
+            pass
     OUT.write_text(json.dumps(out, indent=2), encoding="utf-8")
     print(f"Wrote {OUT} — status {out['status']}, "
           f"{len(players)} players, {len(teams)} team badges")

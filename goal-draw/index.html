@@ -157,6 +157,25 @@
   .ipdot { width: 6px; height: 6px; border-radius: 50%; background: #e5484d; display: inline-block;
     margin-left: 5px; vertical-align: 2px; animation: lvpulse 1.6s ease-in-out infinite; }
   .ipt { color: #e5484d; font-weight: 600; }
+  .auditbad { background: var(--redrow); border: 1px solid #e5484d; border-radius: 12px;
+    padding: 12px 16px; margin: 0 0 14px; font-size: 13px; color: #7a1420; line-height: 1.55; }
+  .auditbad ul { margin: 6px 0 0; padding-left: 18px; }
+  .plt td.inplay, .plt td.pts.inplay { color: #e5484d; }
+  .plt tr.euro td.pos { position: relative; }
+  .plt tr.euro td.pos::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .plt tr.ucl  td.pos::before { background: var(--emerald); }
+  .plt tr.uel  td.pos::before { background: var(--teal); }
+  .plt tr.uecl td.pos::before { background: var(--gold); }
+  .plt tr.euro.prov td.pos::before { background-image: repeating-linear-gradient(
+      45deg, rgba(255,255,255,.85) 0 3px, transparent 3px 6px); }
+  .eurokey { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 12px 18px 2px;
+    font-size: 11.5px; color: var(--muted); }
+  .eurokey span { display: flex; align-items: center; gap: 6px; }
+  .eurokey .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .eurokey .sw.ucl { background: var(--emerald); } .eurokey .sw.uel { background: var(--teal); }
+  .eurokey .sw.uecl { background: var(--gold); } .eurokey .sw.rel { background: #e5484d; }
+  .eurokey .sw.prov { background: var(--muted); background-image: repeating-linear-gradient(
+      45deg, rgba(255,255,255,.85) 0 3px, transparent 3px 6px); }
   @media (prefers-reduced-motion: reduce) { .lvdot { animation: none; } }
 
   .mwbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 2px; }
@@ -208,6 +227,8 @@
     <a class="tab" href="#pltable-card">PL table</a>
   </nav>
 
+  <div id="audit"></div>
+
   <section class="card" id="live-card" hidden>
     <h2 id="live-h"><span class="lvdot"></span>Live now<span class="h2chev">▾</span></h2>
     <div class="cardbody" id="live"></div>
@@ -235,6 +256,9 @@
 
   <footer>
     <div>Goals counted from the scoreline — own goals count for the team they're credited to. All 380 matches.</div>
+    <div>Numbers in <span class="ipt">red with a dot</span> mean one of that player's teams is playing right now,
+      so the score is provisional and can still change. Totals go solid at full time and are only ever final once
+      the match is over — every total is reconciled against the league table on each refresh.</div>
     <div>Tie-breaks: goals → goal difference → highest-scoring team → owns the champions → best avg league position.</div>
     <div>Data: <a href="https://fantasy.premierleague.com/" target="_blank" rel="noopener">Fantasy Premier League</a> (live scores, refreshed every few minutes), backed up by <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> · <a href="../worldcup-2026/">World Cup 2026 archive</a></div>
   </footer>
@@ -335,11 +359,18 @@ function computeStats(src, assignment, nameIdx) {
     matches.push({ ...m, a1, a2, sc, mw: round });
     for (const [a, mine, opp] of [[a1, 0, 1], [a2, 1, 0]]) {
       if (!a) continue;
-      teams[a] = teams[a] || { abbr: a, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0, recent: 0, lGF: 0, lGA: 0 };
+      teams[a] = teams[a] || { abbr: a, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0, recent: 0,
+                               lGF: 0, lGA: 0, lP: 0, lW: 0, lD: 0, lL: 0, lPts: 0, playing: false };
       const t = teams[a];
-      // goals in a match still being played — kept apart from GF so the PL table,
-      // form and tie-breaks stay on settled results only
-      if (m.live) { t.lGF += +m.live[mine] || 0; t.lGA += +m.live[opp] || 0; }
+      // A match in progress is kept in its own l* tally: settled figures stay
+      // untouched and auditable, while the t* figures below add the live one on top.
+      if (m.live) {
+        const m0 = +m.live[mine] || 0, m1 = +m.live[opp] || 0;
+        t.lGF += m0; t.lGA += m1; t.lP = 1; t.playing = true;
+        if (m0 > m1) { t.lW = 1; t.lPts = 3; }
+        else if (m0 === m1) { t.lD = 1; t.lPts = 1; }
+        else { t.lL = 1; t.lPts = 0; }
+      }
       if (!sc) continue;
       t.P++; t.GF += sc[mine]; t.GA += sc[opp];
       if (sc[mine] > sc[opp]) { t.W++; t.Pts += 3; }
@@ -362,33 +393,42 @@ function computeStats(src, assignment, nameIdx) {
       }
     }
   }
+  // t* = settled + anything in progress. Everything on screen reads these;
+  // the plain fields stay as the settled record the reconciliation checks against.
+  for (const t of Object.values(teams)) {
+    t.tGF = t.GF + t.lGF; t.tGA = t.GA + t.lGA; t.tP = t.P + t.lP;
+    t.tW = t.W + t.lW; t.tD = t.D + t.lD; t.tL = t.L + t.lL; t.tPts = t.Pts + t.lPts;
+  }
+
   // PL table
   const table = Object.values(teams).sort((x, y) =>
-    y.Pts - x.Pts || (y.GF - y.GA) - (x.GF - x.GA) || y.GF - x.GF ||
+    y.tPts - x.tPts || (y.tGF - y.tGA) - (x.tGF - x.tGA) || y.tGF - x.tGF ||
     CFG.teams[x.abbr].name.localeCompare(CFG.teams[y.abbr].name));
   table.forEach((t, i) => t.pos = i + 1);
-  const leader = table.length && table[0].P > 0 ? table[0].abbr : null;
+  const leader = table.length && table[0].tP > 0 ? table[0].abbr : null;
 
   // players
   const players = Object.entries(CFG.players).map(([name, picks]) => {
     const held = picks.map(p => assignment._map[p] || p); // effective abbrs
     const rows = picks.map((pick, i) => {
       const eff = held[i];
-      const st = teams[eff] || { P: 0, GF: 0, GA: 0, recent: 0, pos: null };
+      const st = teams[eff] || { P: 0, GF: 0, GA: 0, recent: 0, pos: null,
+                                 lGF: 0, lGA: 0, tGF: 0, tGA: 0, tP: 0, playing: false };
       return { pick, eff, standin: eff !== pick, st };
     });
-    const goals = rows.reduce((s, r) => s + r.st.GF, 0);
+    const goals = rows.reduce((s, r) => s + r.st.GF, 0);          // settled only
     const ga = rows.reduce((s, r) => s + r.st.GA, 0);
-    const live = rows.reduce((s, r) => s + (r.st.lGF || 0), 0);
+    const live = rows.reduce((s, r) => s + (r.st.lGF || 0), 0);    // in progress
     const liveGa = rows.reduce((s, r) => s + (r.st.lGA || 0), 0);
+    const playing = rows.some(r => r.st.playing);                  // any team on right now
     const recent = rows.reduce((s, r) => s + r.st.recent, 0);
-    const best = Math.max(...rows.map(r => r.st.GF), 0);
+    const best = Math.max(...rows.map(r => r.st.tGF || 0), 0);
     const hasChamp = leader ? rows.some(r => r.eff === leader) : false;
     const positions = rows.map(r => r.st.pos).filter(p => p);
     const avgPos = positions.length ? positions.reduce((a, b) => a + b, 0) / positions.length : 99;
     // `total` is what the table shows and sorts on — it moves during a match.
     // `goals` stays settled, so anything that must not wobble can still use it.
-    return { name, rows, goals, live, total: goals + live,
+    return { name, rows, goals, live, playing, total: goals + live,
              gd: (goals + live) - (ga + liveGa), recent, best, hasChamp, avgPos };
   });
   players.sort((x, y) => y.total - x.total || y.gd - x.gd || y.best - x.best ||
@@ -463,7 +503,7 @@ function renderDraw(S, assignment, mode) {
   const seasonOver = mode !== "replay" && S.matches.length > 0 && S.matches.every(m => m.sc);
   const rows = S.players.map((p, i) => {
     const lead = p.pos === 1 && p.total > 0;
-    const inplay = p.live > 0;
+    const inplay = p.playing;   // on as soon as one of their teams kicks off, 0-0 included
     const teamCells = p.rows.map(r => {
       const t = CFG.teams[r.eff] || { name: r.eff };
       const real = CFG.teams[r.pick] || { name: r.pick };
@@ -471,14 +511,15 @@ function renderDraw(S, assignment, mode) {
       const pos = r.st.pos ? `${r.st.pos}${["st","nd","rd"][((r.st.pos+90)%100-10)%10-1] || "th"}` : "—";
       return `<div class="tmini${r.standin ? " standin" : ""}">${chip(r.eff)}
         <span class="tn">${esc(t.name)}${note}</span>
-        <span class="ts"><span class="g${r.st.lGF ? " inplay" : ""}">${r.st.GF + (r.st.lGF || 0)}</span><span class="s">${
-          r.st.lGF ? `<span class="ipt">+${r.st.lGF} in play</span> · ` : ""}${pos} · GD ${r.st.GF - r.st.GA >= 0 ? "+" : ""}${r.st.GF - r.st.GA}</span></span></div>`;
+        <span class="ts"><span class="g${r.st.playing ? " inplay" : ""}">${r.st.tGF || 0}${
+          r.st.playing ? `<span class="ipdot"></span>` : ""}</span><span class="s">${pos} · GD ${
+          (r.st.tGF - r.st.tGA) >= 0 ? "+" : ""}${r.st.tGF - r.st.tGA}</span></span></div>`;
     }).join("");
     return `<tr class="prow${lead ? " lead" : ""}" data-i="${i}">
         <td class="pos">${p.pos}</td>
         <td class="l pname">${esc(p.name)}</td>
         <td class="big${inplay ? " inplay" : ""}" ${inplay
-          ? `title="${p.live} goal${p.live === 1 ? "" : "s"} still in play — settles at full time"` : ""}>${p.total}${
+          ? `title="A team of theirs is playing — settles at full time"` : ""}>${p.total}${
           inplay ? `<span class="ipdot" aria-label="in play"></span>` : ""}</td>
         <td class="plus">+${p.recent}</td>
         <td class="gd">${p.gd >= 0 ? "+" : ""}${p.gd}</td></tr>
@@ -514,6 +555,15 @@ function fxRow(m, assignment, withScore, live) {
 
 /* Matches in progress. Shown for information only — the goal totals below
    deliberately ignore them until the match is over and the score is final. */
+function renderAudit(audit) {
+  const el = document.getElementById("audit");
+  if (!el) return;
+  if (audit.ok) { el.innerHTML = ""; return; }
+  el.innerHTML = `<div class="auditbad"><b>Totals don't reconcile with the results.</b>
+    Treat the numbers below as unreliable until this clears.
+    <ul>${audit.issues.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`;
+}
+
 function renderLive(S, assignment, mode, src) {
   const card = document.getElementById("live-card");
   const el = document.getElementById("live");
@@ -521,13 +571,7 @@ function renderLive(S, assignment, mode, src) {
   STATE.anyLive = live.length > 0;
   if (!live.length) { card.hidden = true; el.innerHTML = ""; return; }
   card.hidden = false;
-  const checked = src && src.fetched
-    ? new Date(src.fetched).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
-    : null;
-  el.innerHTML = live.map(m => fxRow(m, assignment, false, true)).join("") +
-    `<div class="lvnote">These goals are <b>already in the totals</b> above, shown in
-     <span class="ipt">red</span> — they go solid once the match finishes. Scores can still change
-     if one gets chalked off.${checked ? ` Checked ${esc(checked)}.` : ""}</div>`;
+  el.innerHTML = live.map(m => fxRow(m, assignment, false, true)).join("");
 }
 
 function renderFixtures(S, assignment, mode, seasonSrc) {
@@ -580,27 +624,156 @@ function renderResults(S, assignment, mode) {
   if (n) n.addEventListener("click", () => go(1));
 }
 
+/* Which European competition each league position earns.
+   Rules per premierleague.com/en/european-qualification-explained:
+     - Champions League: the top four, or top five when England earns the extra
+       place on UEFA's association coefficient.
+     - Europa League: the next place down, plus the FA Cup winners.
+     - Conference League: the EFL Cup winners (play-off round).
+     - A cup winner who has already qualified passes their place to the next team
+       in the table that hasn't — except where they qualified by winning a European
+       trophy, in which case the Conference place is forfeited rather than passed on.
+     - An English club winning the Champions or Europa League enters next season's
+       Champions League as an extra entrant; a Conference League winner enters the
+       Europa League. Those never displace a league qualifier.
+   Cup winners aren't known until the spring, so until they're filled into
+   teams.json the affected places are marked provisional. */
+function europeanSlots(table, cfg) {
+  const E = (cfg.europe || {});
+  // England has held the extra place in recent seasons; treated as likely but
+  // flagged provisional until the coefficient is actually settled.
+  const clPlaces = E.extraChampionsLeaguePlace === false ? 4 : 5;
+  const clUnconfirmed = E.extraChampionsLeaguePlace == null;
+  const slots = {};
+  const order = table.map(t => t.abbr);
+  const set = (abbr, comp, why, provisional) => {
+    if (!abbr || slots[abbr]) return false;
+    slots[abbr] = { comp, why, provisional: !!provisional };
+    return true;
+  };
+  const nextFree = () => order.find(a => !slots[a]);
+
+  // trophy winners are placed first — they're additional to the league places
+  set(E.championsLeagueWinner, "UCL", "Champions League holders");
+  set(E.europaLeagueWinner, "UCL", "Europa League winners");
+
+  order.slice(0, clPlaces).forEach((a, i) =>
+    set(a, "UCL", "League position", clUnconfirmed && i === clPlaces - 1));
+
+  set(order[clPlaces], "UEL", "League position");
+  set(E.conferenceLeagueWinner, "UEL", "Conference League winners");
+
+  if (E.faCupWinner) {
+    if (!set(E.faCupWinner, "UEL", "FA Cup winners")) set(nextFree(), "UEL", "FA Cup winners already qualified");
+  } else {
+    set(nextFree(), "UEL", "FA Cup place, winners not yet known", true);
+  }
+
+  if (E.eflCupWinner) {
+    const already = slots[E.eflCupWinner];
+    if (!already) set(E.eflCupWinner, "UECL", "EFL Cup winners");
+    else if (already.why === "League position") set(nextFree(), "UECL", "EFL Cup winners already qualified");
+    // qualified by winning a European trophy: the Conference place is forfeited
+  } else {
+    set(nextFree(), "UECL", "EFL Cup place, winners not yet known", true);
+  }
+  return slots;
+}
+
+const COMPS = {
+  UCL:  { label: "Champions League", short: "UCL" },
+  UEL:  { label: "Europa League",    short: "UEL" },
+  UECL: { label: "Conference League",short: "UECL" }
+};
+
 function renderPLTable(S, assignment) {
   const el = document.getElementById("pltable");
-  if (!S.table.length || S.table[0].P === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
+  if (!S.table.length || S.table[0].tP === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
   const nTeams = S.table.length;
+  const slots = europeanSlots(S.table, CFG);
   el.innerHTML = `<table class="t plt">
-    <thead><tr><th></th><th></th><th>Club</th><th>Owner</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>GF</th><th>Pts</th></tr></thead>
+    <thead><tr><th></th><th></th><th>Club</th><th>Owner</th><th title="Points">Pts</th><th title="Played">P</th>
+      <th title="Wins">W</th><th title="Draws">D</th><th title="Losses">L</th>
+      <th title="Goals for">GF</th><th title="Goals against">GA</th><th title="Goal difference">GD</th></tr></thead>
     <tbody>${S.table.map(t => {
       const o = ownerOf(t.abbr, assignment);
       const cls = t.pos === 1 ? "champ" : (t.pos > nTeams - 3 ? "releg" : "");
-      return `<tr class="${cls}"><td class="pos">${t.pos}</td>
+      const sl = slots[t.abbr];
+      const euro = sl ? ` euro ${sl.comp.toLowerCase()}${sl.provisional ? " prov" : ""}` : "";
+      return `<tr class="${cls}${euro}"${sl ? ` title="${esc(COMPS[sl.comp].label)} — ${esc(sl.why)}"` : ""}><td class="pos">${t.pos}</td>
         <td class="chipcell">${chip(t.abbr)}</td>
         <td class="club">${esc(CFG.teams[t.abbr].name)}</td>
         <td class="ownercell">${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
-        <td>${t.P}</td><td>${t.W}</td><td>${t.D}</td><td>${t.L}</td>
-        <td>${t.GF - t.GA >= 0 ? "+" : ""}${t.GF - t.GA}</td><td>${t.GF}</td><td class="pts">${t.Pts}</td></tr>`;
-    }).join("")}</tbody></table>`;
+        <td class="pts${t.playing ? " inplay" : ""}">${t.tPts}${t.playing ? `<span class="ipdot"></span>` : ""}</td>
+        <td>${t.tP}</td><td>${t.tW}</td><td>${t.tD}</td><td>${t.tL}</td>
+        <td class="${t.playing ? "inplay" : ""}">${t.tGF}</td><td>${t.tGA}</td>
+        <td>${t.tGF - t.tGA >= 0 ? "+" : ""}${t.tGF - t.tGA}</td></tr>`;
+    }).join("")}</tbody></table>
+    <div class="eurokey">
+      <span><i class="sw ucl"></i>Champions League</span>
+      <span><i class="sw uel"></i>Europa League</span>
+      <span><i class="sw uecl"></i>Conference League</span>
+      <span><i class="sw prov"></i>Depends on the cups</span>
+      <span><i class="sw rel"></i>Relegation</span>
+    </div>
+    <div class="mwnote">European places follow the Premier League's published rules. Cup winners take
+      a place of their own, and if they've already qualified it passes down the table — so the striped
+      rows can still change hands. Fill the winners into teams.json once they're known.</div>`;
 }
 
 function wireCollapse(hid) {
   const h = document.getElementById(hid);
   h.addEventListener("click", () => h.closest("section").classList.toggle("collapsed"));
+}
+
+/* ---------- reconciliation ----------
+   The totals on the draw table are an aggregate; the league table is the record
+   they have to agree with. This walks the raw feed again, independently of
+   computeStats, and checks three things every single repaint:
+     1. each player's total == goals scored by their teams in the raw matches
+     2. each player's total == sum of their teams' GF in the league table
+     3. the settled part of every total is reproducible without live data
+   If any of them disagree the number on screen isn't trustworthy, so we say so
+   loudly rather than quietly showing a wrong score. */
+function reconcile(S, src, assignment, nameIdx) {
+  const issues = [];
+  const eff = a => (assignment._map && assignment._map[a]) || a;
+
+  // who owns which effective abbr, rebuilt from the config rather than reused
+  const owner = {};
+  for (const [player, picks] of Object.entries(CFG.players)) {
+    for (const pick of picks) owner[eff(pick)] = player;
+  }
+
+  // 1. re-tally straight from the feed
+  const tally = {}, settledTally = {};
+  for (const p of Object.keys(CFG.players)) { tally[p] = 0; settledTally[p] = 0; }
+  for (const m of src.matches || []) {
+    const a1 = nameIdx[norm(m.team1)], a2 = nameIdx[norm(m.team2)];
+    const ft = scoreOf(m), lv = m.live;
+    for (const [a, i] of [[a1, 0], [a2, 1]]) {
+      const who = a && owner[a];
+      if (!who) continue;
+      if (ft) { tally[who] += ft[i]; settledTally[who] += ft[i]; }
+      else if (lv) { tally[who] += +lv[i] || 0; }
+    }
+  }
+
+  const byAbbr = Object.fromEntries(S.table.map(t => [t.abbr, t]));
+  for (const p of S.players) {
+    if (tally[p.name] !== p.total) {
+      issues.push(`${p.name}: table shows ${p.total}, feed says ${tally[p.name]}`);
+    }
+    if (settledTally[p.name] !== p.goals) {
+      issues.push(`${p.name}: settled total ${p.goals} doesn't match feed's ${settledTally[p.name]}`);
+    }
+    // 2. against the league table's own GF column
+    const fromTable = p.rows.reduce((sum, r) => sum + ((byAbbr[r.eff] || {}).tGF || 0), 0);
+    if (fromTable !== p.total) {
+      issues.push(`${p.name}: total ${p.total} doesn't reconcile to league-table GF ${fromTable}`);
+    }
+  }
+  return { ok: issues.length === 0, issues };
 }
 
 /* ---------- repaint + polling ---------- */
@@ -624,7 +797,11 @@ function paint(src) {
   if (S.unknown.length) console.warn("Unmatched team names from data feed:", S.unknown);
   STATE.sig = sigOf(src);
   STATE.played = playedCount(src);
+  const audit = reconcile(S, src, assignment, nameIdx);
+  STATE.audit = audit;
+  if (!audit.ok) console.error("Goal totals failed reconciliation:", audit.issues);
   renderPills(mode, S);
+  renderAudit(audit);
   renderLive(S, assignment, mode, src);
   renderDraw(S, assignment, mode);
   renderFixtures(S, assignment, mode, seasonSrc);

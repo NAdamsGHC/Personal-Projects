@@ -228,5 +228,14 @@
         "dark_text": true
       }
     }
+  },
+  "europe": {
+    "_comment": "Inputs the results feed can't supply. Set as they become known; null means not yet decided.",
+    "extraChampionsLeaguePlace": null,
+    "faCupWinner": null,
+    "eflCupWinner": null,
+    "championsLeagueWinner": null,
+    "europaLeagueWinner": null,
+    "conferenceLeagueWinner": null
   }
 }
