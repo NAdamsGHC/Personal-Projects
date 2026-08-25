@@ -1,0 +1,49 @@
+name: Goal draw results
+
+# Pulls Premier League scores from the FPL API and commits them into
+# goal-draw/data/live-2026-27.json. The page reads that file same-origin,
+# so results land within minutes of full time instead of waiting a day or
+# two for openfootball to catch up. In-progress scores ride along in a
+# separate `live` field that the goal totals ignore.
+
+on:
+  schedule:
+    # Every 5 minutes across the hours a PL match can be under way (UTC).
+    # 5 minutes is the shortest interval GitHub honours, and it only commits
+    # when a goal goes in or a match starts or finishes.
+    - cron: "*/5 11-23 * * *"
+    # Daily safety net, in case a scheduled run was dropped.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: goal-draw-results
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch results
+        run: python goal-draw/scripts/fetch_results.py
+
+      - name: Commit if the scores changed
+        run: |
+          if [ -z "$(git status --porcelain goal-draw/data/live-2026-27.json)" ]; then
+            echo "No score changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add goal-draw/data/live-2026-27.json
+          git commit -m "Update goal draw results"
+          git push

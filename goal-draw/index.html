@@ -144,6 +144,15 @@
   .fx .mid { color: var(--muted); font-size: 12px; min-width: 44px; text-align: center; }
   .fx .mid.score { font-size: 16px; font-weight: 700; color: var(--ink); }
   .fx .own { font-size: 10px; color: var(--muted); font-weight: 600; }
+  /* live panel */
+  .fx.livefx .mid.score { color: var(--ink); }
+  .lvdot { width: 8px; height: 8px; border-radius: 50%; background: #e5484d;
+    display: inline-block; margin-right: 7px; animation: lvpulse 1.6s ease-in-out infinite; }
+  @keyframes lvpulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
+  .lvtag { font-size: 9.5px; font-weight: 700; letter-spacing: .6px; color: #fff;
+    background: #e5484d; border-radius: 4px; padding: 1px 4px; vertical-align: middle; margin-left: 6px; }
+  .lvnote { padding: 4px 18px 14px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  @media (prefers-reduced-motion: reduce) { .lvdot { animation: none; } }
 
   .mwbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 2px; }
   .mwbtn { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 10px;
@@ -194,6 +203,11 @@
     <a class="tab" href="#pltable-card">PL table</a>
   </nav>
 
+  <section class="card" id="live-card" hidden>
+    <h2 id="live-h"><span class="lvdot"></span>Live now<span class="h2chev">▾</span></h2>
+    <div class="cardbody" id="live"></div>
+  </section>
+
   <section class="card" id="draw-card">
     <h2 id="draw-h">Goal draw table<span class="h2chev">▾</span></h2>
     <div class="cardbody" id="draw"><div class="empty">Loading…</div></div>
@@ -217,15 +231,16 @@
   <footer>
     <div>Goals counted from the scoreline — own goals count for the team they're credited to. All 380 matches.</div>
     <div>Tie-breaks: goals → goal difference → highest-scoring team → owns the champions → best avg league position.</div>
-    <div>Data: <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> (updated roughly weekly) · <a href="../worldcup-2026/">World Cup 2026 archive</a></div>
+    <div>Data: <a href="https://fantasy.premierleague.com/" target="_blank" rel="noopener">Fantasy Premier League</a> (live scores, refreshed every few minutes), backed up by <a href="https://github.com/openfootball/football.json" target="_blank" rel="noopener">openfootball</a> · <a href="../worldcup-2026/">World Cup 2026 archive</a></div>
   </footer>
 </div>
 
 <script>
 "use strict";
-const SEASON_URL = "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json";
+const LIVE_URL   = "./data/live-2026-27.json";   // refreshed every 15 min by GitHub Actions from the FPL API
+const SEASON_URL = "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json"; // fallback
 const REPLAY_URL = "./data/replay-2025-26.json";
-const bust = "?v=" + Math.floor(Date.now() / 60000);
+const bust = () => "?v=" + Date.now();   // recomputed per request so polls aren't served from cache
 const opts = { cache: "no-store" };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -283,7 +298,7 @@ const chip = abbr => shirtSVG((CFG.teams[abbr] || {}).kit);
 
 /* ---------- data loading ---------- */
 async function fetchJSON(url) {
-  try { const r = await fetch(url + bust, opts); if (r.ok) return await r.json(); } catch (e) {}
+  try { const r = await fetch(url + bust(), opts); if (r.ok) return await r.json(); } catch (e) {}
   return null;
 }
 function playedCount(src) {
@@ -463,16 +478,35 @@ function renderDraw(S, assignment, mode) {
   }));
 }
 
-function fxRow(m, assignment, withScore) {
+function fxRow(m, assignment, withScore, live) {
   const t1 = CFG.teams[m.a1], t2 = CFG.teams[m.a2];
   const o1 = ownerOf(m.a1, assignment), o2 = ownerOf(m.a2, assignment);
-  const mid = withScore && m.sc ? `<span class="mid score">${m.sc[0]} – ${m.sc[1]}</span>`
+  const mid = live && m.live
+    ? `<span class="mid score">${+m.live[0]} – ${+m.live[1]}<span class="lvtag">LIVE</span></span>`
+    : withScore && m.sc ? `<span class="mid score">${m.sc[0]} – ${m.sc[1]}</span>`
     : `<span class="mid">${esc(m.time || "v")}</span>`;
-  return `<div class="fx">
+  return `<div class="fx${live ? " livefx" : ""}">
     <span class="home">${o1 ? `<span class="own">${esc(o1)}</span>` : ""}<span title="${t1 ? esc(t1.name) : esc(m.team1)}">${t1 ? m.a1 : esc(m.team1)}</span>${chip(m.a1)}</span>
     ${mid}
     <span class="away">${chip(m.a2)}<span title="${t2 ? esc(t2.name) : esc(m.team2)}">${t2 ? m.a2 : esc(m.team2)}</span>${o2 ? `<span class="own">${esc(o2)}</span>` : ""}</span>
   </div>`;
+}
+
+/* Matches in progress. Shown for information only — the goal totals below
+   deliberately ignore them until the match is over and the score is final. */
+function renderLive(S, assignment, mode, src) {
+  const card = document.getElementById("live-card");
+  const el = document.getElementById("live");
+  const live = mode === "live" ? S.matches.filter(m => m.live) : [];
+  STATE.anyLive = live.length > 0;
+  if (!live.length) { card.hidden = true; el.innerHTML = ""; return; }
+  card.hidden = false;
+  const checked = src && src.fetched
+    ? new Date(src.fetched).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+    : null;
+  el.innerHTML = live.map(m => fxRow(m, assignment, false, true)).join("") +
+    `<div class="lvnote">These goals <b>don't count towards the draw yet</b> — they're added to the
+     totals when the match finishes.${checked ? ` Scores checked ${esc(checked)}.` : ""}</div>`;
 }
 
 function renderFixtures(S, assignment, mode, seasonSrc) {
@@ -487,7 +521,7 @@ function renderFixtures(S, assignment, mode, seasonSrc) {
       First up: <b>kick-off Friday 21 August 2026, 8pm</b>.</div>`;
     return;
   }
-  const upcoming = S.matches.filter(m => !m.sc && m.date).sort((a, b) => a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
+  const upcoming = S.matches.filter(m => !m.sc && !m.live && m.date).sort((a, b) => a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
   if (!upcoming.length) { el.innerHTML = `<div class="empty">No fixtures left — that's a wrap on the season.</div>`; return; }
   const today = new Date().toISOString().slice(0, 10);
   const nextDate = (upcoming.find(m => m.date >= today) || upcoming[0]).date;
@@ -548,10 +582,56 @@ function wireCollapse(hid) {
   h.addEventListener("click", () => h.closest("section").classList.toggle("collapsed"));
 }
 
+/* ---------- repaint + polling ---------- */
+let STATE = null;
+
+// Signature of everything we display, so a poll that changed nothing repaints nothing.
+const sigOf = src => !src ? "" : (src.matches || [])
+  .map(m => m.score ? "F" + m.score.ft.join("-") : m.live ? "L" + m.live.join("-") : "")
+  .join(",");
+
+function paint(src) {
+  const { assignment, nameIdx, mode, seasonSrc } = STATE;
+  const S = computeStats(src, assignment, nameIdx);
+  if (S.unknown.length) console.warn("Unmatched team names from data feed:", S.unknown);
+  STATE.sig = sigOf(src);
+  STATE.played = playedCount(src);
+  renderPills(mode, S);
+  renderLive(S, assignment, mode, src);
+  renderDraw(S, assignment, mode);
+  renderFixtures(S, assignment, mode, seasonSrc);
+  renderResults(S, assignment, mode);
+  renderPLTable(S, assignment);
+  return S;
+}
+
+/* The snapshot is rebuilt server-side every few minutes, so poll it rather than
+   making people refresh. Faster while a match is on, idle otherwise, and paused
+   entirely on a background tab. */
+let poller = null;
+function schedulePoll() {
+  clearTimeout(poller);
+  poller = setTimeout(pollNow, STATE.anyLive ? 45000 : 300000);
+}
+async function pollNow() {
+  clearTimeout(poller);
+  if (document.visibilityState !== "hidden") {
+    const fresh = await fetchJSON(LIVE_URL);
+    // never let a bad or half-written snapshot take results away
+    if (fresh && playedCount(fresh) >= STATE.played && sigOf(fresh) !== STATE.sig) paint(fresh);
+  }
+  schedulePoll();
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && STATE && STATE.mode === "live") pollNow();
+});
+
 /* ---------- boot ---------- */
 async function init() {
   try {
-    CFG = await fetch("./teams.json" + bust, opts).then(r => r.json());
+    // Kick all three off together — they don't depend on each other.
+    const pending = [fetchJSON(LIVE_URL), fetchJSON(SEASON_URL)];
+    CFG = await fetch("./teams.json" + bust(), opts).then(r => r.json());
     const nameIdx = buildNameIndex();
 
     // owner lookup by drawn team
@@ -567,23 +647,21 @@ async function init() {
     }
     replayAssign._live = liveAssign;
 
-    const seasonSrc = await fetchJSON(SEASON_URL);
+    // Our own snapshot is normally hours ahead of openfootball, but fall back
+    // to whichever source has more results so a stalled refresh can't regress us.
+    const [snapshot, openfooty] = await Promise.all(pending);
+    const seasonSrc = playedCount(snapshot) >= playedCount(openfooty) ? snapshot : openfooty;
     const live = playedCount(seasonSrc) > 0 && Date.now() >= new Date(CFG.kickoff).getTime();
     const mode = live ? "live" : "replay";
     const src = live ? seasonSrc : await fetchJSON(REPLAY_URL);
     if (!src) throw new Error("no data source reachable");
     const assignment = live ? liveAssign : replayAssign;
 
-    const S = computeStats(src, assignment, nameIdx);
-    if (S.unknown.length) console.warn("Unmatched team names from data feed:", S.unknown);
-
-    renderPills(mode, S);
-    renderBanner(mode);
-    renderDraw(S, assignment, mode);
-    renderFixtures(S, assignment, mode, seasonSrc);
-    renderResults(S, assignment, mode);
-    renderPLTable(S, assignment);
-    ["draw-h", "fx-h", "results-h", "pltable-h"].forEach(wireCollapse);
+    STATE = { assignment, nameIdx, mode, seasonSrc, sig: null, played: 0, anyLive: false };
+    renderBanner(mode);   // owns a 1s countdown interval, so set it up once and never repaint it
+    paint(src);
+    ["live-h", "draw-h", "fx-h", "results-h", "pltable-h"].forEach(wireCollapse);
+    if (mode === "live") schedulePoll();
   } catch (err) {
     document.getElementById("draw").innerHTML =
       `<div class="err">Couldn't load the data — please refresh in a moment.<br><small>${esc(err.message || err)}</small></div>`;
