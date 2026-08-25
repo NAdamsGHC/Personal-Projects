@@ -201,15 +201,16 @@
   .mwsel { flex: 1; text-align: center; font-weight: 600; font-size: 14.5px; letter-spacing: .2px; }
   .mwnote { padding: 2px 18px 10px; font-size: 11.5px; color: var(--muted); }
 
-  #pltable { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .plscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .plt { min-width: 520px; }
-  /* short codes don't need the room the full club names do */
-  .plt.short { min-width: 430px; }
+  /* compact: four short columns, no minimum, so it never needs scrolling */
+  .plt.short { min-width: 0; width: 100%; }
+  .plt.short td.ownercell { width: auto; }
   .plt th, .plt td { text-align: center; }
   .plt td.chipcell { width: 34px; padding-right: 2px; }
   .plt td.chipcell .shirt { display: block; margin: 0 auto; }
   .plt td.club { font-weight: 600; }
-  .plbar { justify-content: flex-end; padding: 12px 18px 0; }
+  .plbar { justify-content: flex-end; padding: 12px 18px 0; max-width: 100%; }
   .plbar .mwbtn { flex: 0 0 auto; padding: 5px 11px; font-size: 12px; }
   .plt td.ownercell { width: 62px; }
   .plt .pts { font-weight: 700; }
@@ -699,21 +700,22 @@ function europeanSlots(table, cfg) {
   return slots;
 }
 
-/* Club names in the league table: 3-letter codes by default (the table carries
-   eleven columns and the codes are what the fixture rows already use), full
-   names on request. Remembered locally so it sticks between visits. */
-let PLABBR = null;
-function plAbbr() {
-  if (PLABBR === null) {
+/* Two shapes of league table. Compact is the default: short codes and just
+   points, played and goal difference, sized to fit a phone without scrolling.
+   Full swaps in the club names and the rest of the columns, and is allowed to
+   scroll sideways. Remembered locally so it sticks between visits. */
+let PLFULL = null;
+function plFull() {
+  if (PLFULL === null) {
     let v = null;
-    try { v = localStorage.getItem("gd-pl-abbr"); } catch (e) {}
-    PLABBR = v === null ? true : v === "1";
+    try { v = localStorage.getItem("gd-pl-full"); } catch (e) {}
+    PLFULL = v === "1";
   }
-  return PLABBR;
+  return PLFULL;
 }
-function setPlAbbr(on) {
-  PLABBR = on;
-  try { localStorage.setItem("gd-pl-abbr", on ? "1" : "0"); } catch (e) {}
+function setPlFull(on) {
+  PLFULL = on;
+  try { localStorage.setItem("gd-pl-full", on ? "1" : "0"); } catch (e) {}
 }
 
 const COMPS = {
@@ -727,14 +729,17 @@ function renderPLTable(S, assignment) {
   if (!S.table.length || S.table[0].tP === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
   const nTeams = S.table.length;
   const slots = europeanSlots(S.table, CFG);
-  const abbr = plAbbr();
+  const full = plFull();
+  const head = full
+    ? `<th title="Points">Pts</th><th title="Played">P</th><th title="Wins">W</th><th title="Draws">D</th>
+       <th title="Losses">L</th><th title="Goals for">GF</th><th title="Goals against">GA</th>
+       <th title="Goal difference">GD</th>`
+    : `<th title="Points">Pts</th><th title="Played">P</th><th title="Goal difference">GD</th>`;
   el.innerHTML = `<div class="mwbar plbar">
-      <button class="mwbtn" id="plabbr">${abbr ? "Show full names" : "Show short codes"}</button>
+      <button class="mwbtn" id="plfull">${full ? "Show compact table" : "Show full table"}</button>
     </div>
-    <table class="t plt${abbr ? " short" : ""}">
-    <thead><tr><th></th><th></th><th>Club</th><th>Owner</th><th title="Points">Pts</th><th title="Played">P</th>
-      <th title="Wins">W</th><th title="Draws">D</th><th title="Losses">L</th>
-      <th title="Goals for">GF</th><th title="Goals against">GA</th><th title="Goal difference">GD</th></tr></thead>
+    <div class="plscroll"><table class="t plt${full ? "" : " short"}">
+    <thead><tr><th></th><th></th><th>Club</th><th>Owner</th>${head}</tr></thead>
     <tbody>${S.table.map(t => {
       const o = ownerOf(t.abbr, assignment);
       const cls = t.pos === 1 ? "champ" : (t.pos > nTeams - 3 ? "releg" : "");
@@ -742,13 +747,13 @@ function renderPLTable(S, assignment) {
       const euro = sl ? ` euro ${sl.comp.toLowerCase()}${sl.provisional ? " prov" : ""}` : "";
       return `<tr class="${cls}${euro}"${sl ? ` title="${esc(COMPS[sl.comp].label)} — ${esc(sl.why)}"` : ""}><td class="pos">${t.pos}</td>
         <td class="chipcell">${chip(t.abbr)}</td>
-        <td class="club" title="${esc(CFG.teams[t.abbr].name)}">${abbr ? t.abbr : esc(CFG.teams[t.abbr].name)}</td>
+        <td class="club" title="${esc(CFG.teams[t.abbr].name)}">${full ? esc(CFG.teams[t.abbr].name) : t.abbr}</td>
         <td class="ownercell">${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
         <td class="pts${t.playing ? " inplay" : ""}">${t.tPts}${t.playing ? `<span class="ipdot"></span>` : ""}</td>
-        <td>${t.tP}</td><td>${t.tW}</td><td>${t.tD}</td><td>${t.tL}</td>
-        <td class="${t.playing ? "inplay" : ""}">${t.tGF}</td><td>${t.tGA}</td>
+        <td>${t.tP}</td>${full ? `<td>${t.tW}</td><td>${t.tD}</td><td>${t.tL}</td>
+        <td class="${t.playing ? "inplay" : ""}">${t.tGF}</td><td>${t.tGA}</td>` : ""}
         <td>${t.tGF - t.tGA >= 0 ? "+" : ""}${t.tGF - t.tGA}</td></tr>`;
-    }).join("")}</tbody></table>
+    }).join("")}</tbody></table></div>
     <div class="eurokey">
       <span><i class="sw ucl"></i>Champions League</span>
       <span><i class="sw uel"></i>Europa League</span>
@@ -760,8 +765,8 @@ function renderPLTable(S, assignment) {
     <div class="mwnote">European places follow the Premier League's published rules. Cup winners take
       a place of their own, and if they've already qualified it passes down the table — so the striped
       rows can still change hands. Fill the winners into teams.json once they're known.</div>`;
-  const btn = document.getElementById("plabbr");
-  if (btn) btn.addEventListener("click", () => { setPlAbbr(!plAbbr()); renderPLTable(S, assignment); });
+  const btn = document.getElementById("plfull");
+  if (btn) btn.addEventListener("click", () => { setPlFull(!plFull()); renderPLTable(S, assignment); });
 }
 
 function wireCollapse(hid) {
