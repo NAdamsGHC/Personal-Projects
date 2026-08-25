@@ -152,6 +152,11 @@
   .lvtag { font-size: 9.5px; font-weight: 700; letter-spacing: .6px; color: #fff;
     background: #e5484d; border-radius: 4px; padding: 1px 4px; vertical-align: middle; margin-left: 6px; }
   .lvnote { padding: 4px 18px 14px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  /* live totals: red while a match is on, solid ink once it's settled */
+  .t td.big.inplay, .tmini .g.inplay { color: #e5484d; }
+  .ipdot { width: 6px; height: 6px; border-radius: 50%; background: #e5484d; display: inline-block;
+    margin-left: 5px; vertical-align: 2px; animation: lvpulse 1.6s ease-in-out infinite; }
+  .ipt { color: #e5484d; font-weight: 600; }
   @media (prefers-reduced-motion: reduce) { .lvdot { animation: none; } }
 
   .mwbar { display: flex; align-items: center; gap: 10px; padding: 12px 18px 2px; }
@@ -237,7 +242,10 @@
 
 <script>
 "use strict";
-const LIVE_URL   = "./data/live-2026-27.json";   // refreshed every 15 min by GitHub Actions from the FPL API
+// Read the snapshot straight from the repo: a commit is visible immediately,
+// with no Pages rebuild in the way (and so no 10-builds-per-hour ceiling).
+const RAW_URL    = "https://raw.githubusercontent.com/NAdamsGHC/Personal-Projects/main/goal-draw/data/live-2026-27.json";
+const LIVE_URL   = "./data/live-2026-27.json";   // same copy via Pages, if raw is unreachable
 const SEASON_URL = "https://raw.githubusercontent.com/openfootball/football.json/master/2026-27/en.1.json"; // fallback
 const REPLAY_URL = "./data/replay-2025-26.json";
 const bust = () => "?v=" + Date.now();   // recomputed per request so polls aren't served from cache
@@ -327,9 +335,12 @@ function computeStats(src, assignment, nameIdx) {
     matches.push({ ...m, a1, a2, sc, mw: round });
     for (const [a, mine, opp] of [[a1, 0, 1], [a2, 1, 0]]) {
       if (!a) continue;
-      teams[a] = teams[a] || { abbr: a, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0, recent: 0 };
-      if (!sc) continue;
+      teams[a] = teams[a] || { abbr: a, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0, Pts: 0, recent: 0, lGF: 0, lGA: 0 };
       const t = teams[a];
+      // goals in a match still being played — kept apart from GF so the PL table,
+      // form and tie-breaks stay on settled results only
+      if (m.live) { t.lGF += +m.live[mine] || 0; t.lGA += +m.live[opp] || 0; }
+      if (!sc) continue;
       t.P++; t.GF += sc[mine]; t.GA += sc[opp];
       if (sc[mine] > sc[opp]) { t.W++; t.Pts += 3; }
       else if (sc[mine] === sc[opp]) { t.D++; t.Pts += 1; }
@@ -368,17 +379,22 @@ function computeStats(src, assignment, nameIdx) {
     });
     const goals = rows.reduce((s, r) => s + r.st.GF, 0);
     const ga = rows.reduce((s, r) => s + r.st.GA, 0);
+    const live = rows.reduce((s, r) => s + (r.st.lGF || 0), 0);
+    const liveGa = rows.reduce((s, r) => s + (r.st.lGA || 0), 0);
     const recent = rows.reduce((s, r) => s + r.st.recent, 0);
     const best = Math.max(...rows.map(r => r.st.GF), 0);
     const hasChamp = leader ? rows.some(r => r.eff === leader) : false;
     const positions = rows.map(r => r.st.pos).filter(p => p);
     const avgPos = positions.length ? positions.reduce((a, b) => a + b, 0) / positions.length : 99;
-    return { name, rows, goals, gd: goals - ga, recent, best, hasChamp, avgPos };
+    // `total` is what the table shows and sorts on — it moves during a match.
+    // `goals` stays settled, so anything that must not wobble can still use it.
+    return { name, rows, goals, live, total: goals + live,
+             gd: (goals + live) - (ga + liveGa), recent, best, hasChamp, avgPos };
   });
-  players.sort((x, y) => y.goals - x.goals || y.gd - x.gd || y.best - x.best ||
+  players.sort((x, y) => y.total - x.total || y.gd - x.gd || y.best - x.best ||
     (y.hasChamp - x.hasChamp) || x.avgPos - y.avgPos || x.name.localeCompare(y.name));
   // shared positions on full ladder tie
-  const keyOf = p => [p.goals, p.gd, p.best, p.hasChamp, p.avgPos.toFixed(2)].join("|");
+  const keyOf = p => [p.total, p.gd, p.best, p.hasChamp, p.avgPos.toFixed(2)].join("|");
   players.forEach((p, i) => {
     p.pos = (i > 0 && keyOf(p) === keyOf(players[i - 1])) ? players[i - 1].pos : i + 1;
   });
@@ -446,7 +462,8 @@ function renderDraw(S, assignment, mode) {
   }
   const seasonOver = mode !== "replay" && S.matches.length > 0 && S.matches.every(m => m.sc);
   const rows = S.players.map((p, i) => {
-    const lead = p.pos === 1 && p.goals > 0;
+    const lead = p.pos === 1 && p.total > 0;
+    const inplay = p.live > 0;
     const teamCells = p.rows.map(r => {
       const t = CFG.teams[r.eff] || { name: r.eff };
       const real = CFG.teams[r.pick] || { name: r.pick };
@@ -454,12 +471,15 @@ function renderDraw(S, assignment, mode) {
       const pos = r.st.pos ? `${r.st.pos}${["st","nd","rd"][((r.st.pos+90)%100-10)%10-1] || "th"}` : "—";
       return `<div class="tmini${r.standin ? " standin" : ""}">${chip(r.eff)}
         <span class="tn">${esc(t.name)}${note}</span>
-        <span class="ts"><span class="g">${r.st.GF}</span><span class="s">${pos} · GD ${r.st.GF - r.st.GA >= 0 ? "+" : ""}${r.st.GF - r.st.GA}</span></span></div>`;
+        <span class="ts"><span class="g${r.st.lGF ? " inplay" : ""}">${r.st.GF + (r.st.lGF || 0)}</span><span class="s">${
+          r.st.lGF ? `<span class="ipt">+${r.st.lGF} in play</span> · ` : ""}${pos} · GD ${r.st.GF - r.st.GA >= 0 ? "+" : ""}${r.st.GF - r.st.GA}</span></span></div>`;
     }).join("");
     return `<tr class="prow${lead ? " lead" : ""}" data-i="${i}">
         <td class="pos">${p.pos}</td>
         <td class="l pname">${esc(p.name)}</td>
-        <td class="big">${p.goals}</td>
+        <td class="big${inplay ? " inplay" : ""}" ${inplay
+          ? `title="${p.live} goal${p.live === 1 ? "" : "s"} still in play — settles at full time"` : ""}>${p.total}${
+          inplay ? `<span class="ipdot" aria-label="in play"></span>` : ""}</td>
         <td class="plus">+${p.recent}</td>
         <td class="gd">${p.gd >= 0 ? "+" : ""}${p.gd}</td></tr>
       <tr class="pdetail" data-d="${i}" hidden><td colspan="5">
@@ -469,7 +489,7 @@ function renderDraw(S, assignment, mode) {
       </td></tr>`;
   }).join("");
   el.innerHTML = `<table class="t">
-    <thead><tr><th></th><th class="l">Player</th><th title="Total goals">Goals</th>
+    <thead><tr><th></th><th class="l">Player</th><th title="Total goals — red while a match is in play">Goals</th>
       <th title="Goals in the 7 days up to the latest results">+7d</th><th title="Goal difference across their teams">GD</th></tr></thead>
     <tbody>${rows}</tbody></table>`;
   el.querySelectorAll(".prow").forEach(tr => tr.addEventListener("click", () => {
@@ -505,8 +525,9 @@ function renderLive(S, assignment, mode, src) {
     ? new Date(src.fetched).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
     : null;
   el.innerHTML = live.map(m => fxRow(m, assignment, false, true)).join("") +
-    `<div class="lvnote">These goals <b>don't count towards the draw yet</b> — they're added to the
-     totals when the match finishes.${checked ? ` Scores checked ${esc(checked)}.` : ""}</div>`;
+    `<div class="lvnote">These goals are <b>already in the totals</b> above, shown in
+     <span class="ipt">red</span> — they go solid once the match finishes. Scores can still change
+     if one gets chalked off.${checked ? ` Checked ${esc(checked)}.` : ""}</div>`;
 }
 
 function renderFixtures(S, assignment, mode, seasonSrc) {
@@ -586,6 +607,13 @@ function wireCollapse(hid) {
 let STATE = null;
 
 // Signature of everything we display, so a poll that changed nothing repaints nothing.
+// More settled results wins; on a tie, the more recently fetched snapshot does.
+const freshness = s => !s ? [-1, 0] : [playedCount(s), Date.parse(s.fetched || "") || 0];
+const freshest = (...srcs) => srcs.reduce((best, s) => {
+  const [bp, bt] = freshness(best), [sp, st] = freshness(s);
+  return (sp > bp || (sp === bp && st > bt)) ? s : best;
+}, null);
+
 const sigOf = src => !src ? "" : (src.matches || [])
   .map(m => m.score ? "F" + m.score.ft.join("-") : m.live ? "L" + m.live.join("-") : "")
   .join(",");
@@ -616,7 +644,7 @@ function schedulePoll() {
 async function pollNow() {
   clearTimeout(poller);
   if (document.visibilityState !== "hidden") {
-    const fresh = await fetchJSON(LIVE_URL);
+    const fresh = await fetchJSON(RAW_URL) || await fetchJSON(LIVE_URL);
     // never let a bad or half-written snapshot take results away
     if (fresh && playedCount(fresh) >= STATE.played && sigOf(fresh) !== STATE.sig) paint(fresh);
   }
@@ -630,7 +658,7 @@ document.addEventListener("visibilitychange", () => {
 async function init() {
   try {
     // Kick all three off together — they don't depend on each other.
-    const pending = [fetchJSON(LIVE_URL), fetchJSON(SEASON_URL)];
+    const pending = [fetchJSON(RAW_URL), fetchJSON(LIVE_URL), fetchJSON(SEASON_URL)];
     CFG = await fetch("./teams.json" + bust(), opts).then(r => r.json());
     const nameIdx = buildNameIndex();
 
@@ -649,8 +677,8 @@ async function init() {
 
     // Our own snapshot is normally hours ahead of openfootball, but fall back
     // to whichever source has more results so a stalled refresh can't regress us.
-    const [snapshot, openfooty] = await Promise.all(pending);
-    const seasonSrc = playedCount(snapshot) >= playedCount(openfooty) ? snapshot : openfooty;
+    const [raw, pages, openfooty] = await Promise.all(pending);
+    const seasonSrc = freshest(raw, pages, openfooty);
     const live = playedCount(seasonSrc) > 0 && Date.now() >= new Date(CFG.kickoff).getTime();
     const mode = live ? "live" : "replay";
     const src = live ? seasonSrc : await fetchJSON(REPLAY_URL);

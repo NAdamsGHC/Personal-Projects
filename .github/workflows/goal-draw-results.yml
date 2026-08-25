@@ -1,31 +1,43 @@
 name: Goal draw results
 
 # Pulls Premier League scores from the FPL API and commits them into
-# goal-draw/data/live-2026-27.json. The page reads that file same-origin,
-# so results land within minutes of full time instead of waiting a day or
-# two for openfootball to catch up. In-progress scores ride along in a
-# separate `live` field that the goal totals ignore.
+# goal-draw/data/live-2026-27.json, which the page reads directly from
+# raw.githubusercontent.com.
+#
+# Deliberately NOT a "run every 5 minutes" cron. GitHub's scheduler is
+# best-effort and is often late, so twelve firings an hour meant twelve
+# chances to be late. Instead a run is started a few times a day and then
+# polls FPL itself for several hours. The scheduler only has to be roughly
+# on time once per match window; everything after that is a sleep loop we
+# control, which gets scores out in ~30s rather than ~5 minutes.
 
 on:
   schedule:
-    # Every 5 minutes across the hours a PL match can be under way (UTC).
-    # 5 minutes is the shortest interval GitHub honours, and it only commits
-    # when a goal goes in or a match starts or finishes.
-    - cron: "*/5 11-23 * * *"
-    # Daily safety net, in case a scheduled run was dropped.
-    - cron: "0 6 * * *"
+    # Start of each block of fixtures (UTC). Each run then watches for hours.
+    - cron: "25 11 * * *"   # Saturday lunchtime kick-offs onward
+    - cron: "25 16 * * *"   # evening kick-offs
+    - cron: "0 6 * * *"     # short daily catch-up
   workflow_dispatch:
+    inputs:
+      minutes:
+        description: "How long to watch for (minutes)"
+        required: false
+        default: "120"
 
 permissions:
   contents: write
 
+# A new window supersedes one still running, so overlapping runs can't
+# both push and collide.
 concurrency:
   group: goal-draw-results
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  refresh:
+  watch:
     runs-on: ubuntu-latest
+    # Ceiling well under GitHub's 6-hour job limit.
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v7
 
@@ -33,17 +45,30 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch results
-        run: python goal-draw/scripts/fetch_results.py
-
-      - name: Commit if the scores changed
+      - name: Watch for score changes
+        env:
+          # 06:00 catch-up is a single pass; scheduled windows watch for hours.
+          WATCH_MINUTES: ${{ github.event.inputs.minutes || (github.event.schedule == '0 6 * * *' && '1' || '300') }}
+          POLL_SECONDS: "30"
         run: |
-          if [ -z "$(git status --porcelain goal-draw/data/live-2026-27.json)" ]; then
-            echo "No score changes — nothing to commit."
-            exit 0
-          fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add goal-draw/data/live-2026-27.json
-          git commit -m "Update goal draw results"
-          git push
+
+          FILE=goal-draw/data/live-2026-27.json
+          END=$(( $(date +%s) + WATCH_MINUTES * 60 ))
+
+          while :; do
+            python goal-draw/scripts/fetch_results.py || echo "fetch failed, will retry"
+
+            if [ -n "$(git status --porcelain $FILE)" ]; then
+              git add $FILE
+              git commit -m "Update goal draw results [skip ci]"
+              # Someone else may have pushed since checkout; rebase and retry once.
+              git push || { git pull --rebase --autostash && git push; }
+              echo "pushed at $(date -u +%H:%M:%S)"
+            fi
+
+            [ "$(date +%s)" -ge "$END" ] && break
+            sleep "$POLL_SECONDS"
+          done
+          echo "watch window finished"
