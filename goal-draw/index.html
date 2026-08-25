@@ -14,6 +14,8 @@
     --line: rgba(36,19,51,.10); --ink: #241333; --muted: #6f6781;
     --green: #00ff85; --emerald: #00814d; --teal: #0e7490; --purple: #38003c;
     --magenta: #e90052; --cyan: #04f5ff; --gold: #ffd54a; --goldrow: #ffe9a8; --redrow: #fde3e8;
+    --uclrow: #d8f0e5; --uclrow2: #ecf8f2; --uelrow: #d9ecf3; --uelrow2: #ecf6f9;
+    --ueclrow: #e9e2f4; --ueclrow2: #f4f1fa;
     --shadow: 0 8px 22px rgba(20,0,30,.28);
   }
   * { box-sizing: border-box; }
@@ -161,20 +163,33 @@
     padding: 12px 16px; margin: 0 0 14px; font-size: 13px; color: #7a1420; line-height: 1.55; }
   .auditbad ul { margin: 6px 0 0; padding-left: 18px; }
   .plt td.inplay, .plt td.pts.inplay { color: #e5484d; }
+  .plt tr.ucl  td { background: var(--uclrow); }
+  .plt tr.uel  td { background: var(--uelrow); }
+  .plt tr.uecl td { background: var(--ueclrow); }
+  /* not nailed down yet — same hue, half strength */
+  .plt tr.ucl.prov  td { background: var(--uclrow2); }
+  .plt tr.uel.prov  td { background: var(--uelrow2); }
+  .plt tr.uecl.prov td { background: var(--ueclrow2); }
+  /* leader and relegation keep their own colours where they overlap */
+  .plt tbody tr.champ td { background: var(--goldrow); }
+  .plt tbody tr.releg td { background: var(--redrow); }
   .plt tr.euro td.pos { position: relative; }
   .plt tr.euro td.pos::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
   .plt tr.ucl  td.pos::before { background: var(--emerald); }
   .plt tr.uel  td.pos::before { background: var(--teal); }
-  .plt tr.uecl td.pos::before { background: var(--gold); }
+  .plt tr.uecl td.pos::before { background: #6d4aa8; }
   .plt tr.euro.prov td.pos::before { background-image: repeating-linear-gradient(
       45deg, rgba(255,255,255,.85) 0 3px, transparent 3px 6px); }
   .eurokey { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 12px 18px 2px;
     font-size: 11.5px; color: var(--muted); }
   .eurokey span { display: flex; align-items: center; gap: 6px; }
   .eurokey .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
-  .eurokey .sw.ucl { background: var(--emerald); } .eurokey .sw.uel { background: var(--teal); }
-  .eurokey .sw.uecl { background: var(--gold); } .eurokey .sw.rel { background: #e5484d; }
-  .eurokey .sw.prov { background: var(--muted); background-image: repeating-linear-gradient(
+  .eurokey .sw.ucl { background: var(--uclrow); border: 1px solid var(--emerald); }
+  .eurokey .sw.uel { background: var(--uelrow); border: 1px solid var(--teal); }
+  .eurokey .sw.uecl { background: var(--ueclrow); border: 1px solid #6d4aa8; }
+  .eurokey .sw.rel { background: var(--redrow); border: 1px solid #e5484d; }
+  .eurokey .sw.champ { background: var(--goldrow); border: 1px solid #d9a400; }
+  .eurokey .sw.prov { background: #cfcbd8; background-image: repeating-linear-gradient(
       45deg, rgba(255,255,255,.85) 0 3px, transparent 3px 6px); }
   @media (prefers-reduced-motion: reduce) { .lvdot { animation: none; } }
 
@@ -188,10 +203,14 @@
 
   #pltable { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .plt { min-width: 520px; }
+  /* short codes don't need the room the full club names do */
+  .plt.short { min-width: 430px; }
   .plt th, .plt td { text-align: center; }
   .plt td.chipcell { width: 34px; padding-right: 2px; }
   .plt td.chipcell .shirt { display: block; margin: 0 auto; }
   .plt td.club { font-weight: 600; }
+  .plbar { justify-content: flex-end; padding: 12px 18px 0; }
+  .plbar .mwbtn { flex: 0 0 auto; padding: 5px 11px; font-size: 12px; }
   .plt td.ownercell { width: 62px; }
   .plt .pts { font-weight: 700; }
   .ownertag { font-size: 10px; font-weight: 600; letter-spacing: .2px;
@@ -680,6 +699,23 @@ function europeanSlots(table, cfg) {
   return slots;
 }
 
+/* Club names in the league table: 3-letter codes by default (the table carries
+   eleven columns and the codes are what the fixture rows already use), full
+   names on request. Remembered locally so it sticks between visits. */
+let PLABBR = null;
+function plAbbr() {
+  if (PLABBR === null) {
+    let v = null;
+    try { v = localStorage.getItem("gd-pl-abbr"); } catch (e) {}
+    PLABBR = v === null ? true : v === "1";
+  }
+  return PLABBR;
+}
+function setPlAbbr(on) {
+  PLABBR = on;
+  try { localStorage.setItem("gd-pl-abbr", on ? "1" : "0"); } catch (e) {}
+}
+
 const COMPS = {
   UCL:  { label: "Champions League", short: "UCL" },
   UEL:  { label: "Europa League",    short: "UEL" },
@@ -691,7 +727,11 @@ function renderPLTable(S, assignment) {
   if (!S.table.length || S.table[0].tP === 0) { el.innerHTML = `<div class="empty">Table appears once games have been played.</div>`; return; }
   const nTeams = S.table.length;
   const slots = europeanSlots(S.table, CFG);
-  el.innerHTML = `<table class="t plt">
+  const abbr = plAbbr();
+  el.innerHTML = `<div class="mwbar plbar">
+      <button class="mwbtn" id="plabbr">${abbr ? "Show full names" : "Show short codes"}</button>
+    </div>
+    <table class="t plt${abbr ? " short" : ""}">
     <thead><tr><th></th><th></th><th>Club</th><th>Owner</th><th title="Points">Pts</th><th title="Played">P</th>
       <th title="Wins">W</th><th title="Draws">D</th><th title="Losses">L</th>
       <th title="Goals for">GF</th><th title="Goals against">GA</th><th title="Goal difference">GD</th></tr></thead>
@@ -702,7 +742,7 @@ function renderPLTable(S, assignment) {
       const euro = sl ? ` euro ${sl.comp.toLowerCase()}${sl.provisional ? " prov" : ""}` : "";
       return `<tr class="${cls}${euro}"${sl ? ` title="${esc(COMPS[sl.comp].label)} — ${esc(sl.why)}"` : ""}><td class="pos">${t.pos}</td>
         <td class="chipcell">${chip(t.abbr)}</td>
-        <td class="club">${esc(CFG.teams[t.abbr].name)}</td>
+        <td class="club" title="${esc(CFG.teams[t.abbr].name)}">${abbr ? t.abbr : esc(CFG.teams[t.abbr].name)}</td>
         <td class="ownercell">${o ? `<span class="ownertag">${esc(o)}</span>` : ""}</td>
         <td class="pts${t.playing ? " inplay" : ""}">${t.tPts}${t.playing ? `<span class="ipdot"></span>` : ""}</td>
         <td>${t.tP}</td><td>${t.tW}</td><td>${t.tD}</td><td>${t.tL}</td>
@@ -713,12 +753,15 @@ function renderPLTable(S, assignment) {
       <span><i class="sw ucl"></i>Champions League</span>
       <span><i class="sw uel"></i>Europa League</span>
       <span><i class="sw uecl"></i>Conference League</span>
+      <span><i class="sw champ"></i>Leader</span>
       <span><i class="sw prov"></i>Depends on the cups</span>
       <span><i class="sw rel"></i>Relegation</span>
     </div>
     <div class="mwnote">European places follow the Premier League's published rules. Cup winners take
       a place of their own, and if they've already qualified it passes down the table — so the striped
       rows can still change hands. Fill the winners into teams.json once they're known.</div>`;
+  const btn = document.getElementById("plabbr");
+  if (btn) btn.addEventListener("click", () => { setPlAbbr(!plAbbr()); renderPLTable(S, assignment); });
 }
 
 function wireCollapse(hid) {
