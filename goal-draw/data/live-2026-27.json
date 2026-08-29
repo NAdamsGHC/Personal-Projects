@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-08-29T15:49:42Z",
+ "fetched": "2026-08-29T15:55:16Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -168,7 +168,7 @@
    "score": {
     "ft": [
      1,
-     0
+     1
     ]
    }
   },
@@ -178,10 +178,12 @@
    "time": "15:00",
    "team1": "Coventry City",
    "team2": "Hull City",
-   "live": [
-    0,
-    1
-   ]
+   "score": {
+    "ft": [
+     0,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 2",
