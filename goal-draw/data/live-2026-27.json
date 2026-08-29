@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-08-29T15:45:08Z",
+ "fetched": "2026-08-29T15:49:42Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -165,10 +165,12 @@
    "time": "15:00",
    "team1": "AFC Bournemouth",
    "team2": "Everton",
-   "live": [
-    1,
-    0
-   ]
+   "score": {
+    "ft": [
+     1,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 2",
