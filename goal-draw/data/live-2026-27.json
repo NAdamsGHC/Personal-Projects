@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-08-29T18:20:11Z",
+ "fetched": "2026-08-30T15:24:05Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -203,21 +203,39 @@
    "date": "2026-08-30",
    "time": "14:00",
    "team1": "Chelsea",
-   "team2": "Brighton & Hove Albion"
+   "team2": "Brighton & Hove Albion",
+   "score": {
+    "ft": [
+     4,
+     3
+    ]
+   }
   },
   {
    "round": "Matchday 2",
    "date": "2026-08-30",
    "time": "14:00",
    "team1": "Leeds United",
-   "team2": "Brentford"
+   "team2": "Brentford",
+   "score": {
+    "ft": [
+     1,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 2",
    "date": "2026-08-30",
    "time": "14:00",
    "team1": "Sunderland",
-   "team2": "Fulham"
+   "team2": "Fulham",
+   "score": {
+    "ft": [
+     1,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 2",
