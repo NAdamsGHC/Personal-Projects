@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-08-30T15:24:05Z",
+ "fetched": "2026-08-30T15:35:43Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -242,7 +242,11 @@
    "date": "2026-08-30",
    "time": "16:30",
    "team1": "Manchester United",
-   "team2": "Ipswich Town"
+   "team2": "Ipswich Town",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 2",
