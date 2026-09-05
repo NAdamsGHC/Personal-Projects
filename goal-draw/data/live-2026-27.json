@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-04T20:51:23Z",
+ "fetched": "2026-09-05T13:56:50Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -281,7 +281,13 @@
    "date": "2026-09-05",
    "time": "12:30",
    "team1": "Newcastle United",
-   "team2": "AFC Bournemouth"
+   "team2": "AFC Bournemouth",
+   "score": {
+    "ft": [
+     2,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 3",
