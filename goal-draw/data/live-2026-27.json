@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-05T15:31:49Z",
+ "fetched": "2026-09-05T15:36:24Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -307,7 +307,7 @@
    "team1": "Brighton & Hove Albion",
    "team2": "Leeds United",
    "live": [
-    0,
+    1,
     1
    ]
   },
