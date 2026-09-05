@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-05T15:42:00Z",
+ "fetched": "2026-09-05T15:51:39Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -297,7 +297,7 @@
    "team2": "Sunderland",
    "live": [
     1,
-    0
+    1
    ]
   },
   {
@@ -306,10 +306,12 @@
    "time": "15:00",
    "team1": "Brighton & Hove Albion",
    "team2": "Leeds United",
-   "live": [
-    1,
-    1
-   ]
+   "score": {
+    "ft": [
+     1,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 3",
@@ -328,10 +330,12 @@
    "time": "15:00",
    "team1": "Manchester City",
    "team2": "Coventry City",
-   "live": [
-    1,
-    0
-   ]
+   "score": {
+    "ft": [
+     1,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 3",
@@ -339,10 +343,12 @@
    "time": "15:00",
    "team1": "Nottingham Forest",
    "team2": "Tottenham Hotspur",
-   "live": [
-    0,
-    0
-   ]
+   "score": {
+    "ft": [
+     0,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 3",
