@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-05T15:56:44Z",
+ "fetched": "2026-09-05T16:01:49Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -295,10 +295,12 @@
    "time": "15:00",
    "team1": "Brentford",
    "team2": "Sunderland",
-   "live": [
-    1,
-    1
-   ]
+   "score": {
+    "ft": [
+     1,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 3",
