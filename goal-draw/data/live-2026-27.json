@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-06T17:28:12Z",
+ "fetched": "2026-09-10T15:04:18Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1306,23 +1306,9 @@
   {
    "round": "Matchday 17",
    "date": "2026-12-26",
-   "time": "15:00",
+   "time": "12:30",
    "team1": "Aston Villa",
    "team2": "Leeds United"
-  },
-  {
-   "round": "Matchday 17",
-   "date": "2026-12-26",
-   "time": "15:00",
-   "team1": "Coventry City",
-   "team2": "Chelsea"
-  },
-  {
-   "round": "Matchday 17",
-   "date": "2026-12-26",
-   "time": "15:00",
-   "team1": "Crystal Palace",
-   "team2": "Arsenal"
   },
   {
    "round": "Matchday 17",
@@ -1342,29 +1328,8 @@
    "round": "Matchday 17",
    "date": "2026-12-26",
    "time": "15:00",
-   "team1": "Hull City",
-   "team2": "Liverpool"
-  },
-  {
-   "round": "Matchday 17",
-   "date": "2026-12-26",
-   "time": "15:00",
    "team1": "Ipswich Town",
    "team2": "Brentford"
-  },
-  {
-   "round": "Matchday 17",
-   "date": "2026-12-26",
-   "time": "15:00",
-   "team1": "Manchester United",
-   "team2": "Nottingham Forest"
-  },
-  {
-   "round": "Matchday 17",
-   "date": "2026-12-26",
-   "time": "15:00",
-   "team1": "Newcastle United",
-   "team2": "Manchester City"
   },
   {
    "round": "Matchday 17",
@@ -1374,81 +1339,123 @@
    "team2": "AFC Bournemouth"
   },
   {
-   "round": "Matchday 18",
-   "date": "2026-12-30",
-   "time": "20:00",
-   "team1": "Aston Villa",
+   "round": "Matchday 17",
+   "date": "2026-12-26",
+   "time": "17:30",
+   "team1": "Hull City",
    "team2": "Liverpool"
   },
   {
-   "round": "Matchday 18",
-   "date": "2026-12-30",
+   "round": "Matchday 17",
+   "date": "2026-12-26",
    "time": "20:00",
+   "team1": "Newcastle United",
+   "team2": "Manchester City"
+  },
+  {
+   "round": "Matchday 17",
+   "date": "2026-12-27",
+   "time": "14:00",
    "team1": "Coventry City",
-   "team2": "Brentford"
+   "team2": "Chelsea"
   },
   {
-   "round": "Matchday 18",
-   "date": "2026-12-30",
-   "time": "20:00",
+   "round": "Matchday 17",
+   "date": "2026-12-27",
+   "time": "16:30",
+   "team1": "Manchester United",
+   "team2": "Nottingham Forest"
+  },
+  {
+   "round": "Matchday 17",
+   "date": "2026-12-27",
+   "time": "19:00",
    "team1": "Crystal Palace",
-   "team2": "AFC Bournemouth"
+   "team2": "Arsenal"
   },
   {
    "round": "Matchday 18",
-   "date": "2026-12-30",
-   "time": "20:00",
+   "date": "2026-12-29",
+   "time": "19:30",
+   "team1": "Hull City",
+   "team2": "Leeds United"
+  },
+  {
+   "round": "Matchday 18",
+   "date": "2026-12-29",
+   "time": "19:30",
+   "team1": "Tottenham Hotspur",
+   "team2": "Brighton & Hove Albion"
+  },
+  {
+   "round": "Matchday 18",
+   "date": "2026-12-29",
+   "time": "20:15",
    "team1": "Everton",
    "team2": "Manchester City"
   },
   {
    "round": "Matchday 18",
    "date": "2026-12-30",
-   "time": "20:00",
+   "time": "19:30",
+   "team1": "Coventry City",
+   "team2": "Brentford"
+  },
+  {
+   "round": "Matchday 18",
+   "date": "2026-12-30",
+   "time": "19:30",
+   "team1": "Crystal Palace",
+   "team2": "AFC Bournemouth"
+  },
+  {
+   "round": "Matchday 18",
+   "date": "2026-12-30",
+   "time": "19:30",
    "team1": "Fulham",
    "team2": "Arsenal"
   },
   {
    "round": "Matchday 18",
    "date": "2026-12-30",
-   "time": "20:00",
-   "team1": "Hull City",
-   "team2": "Leeds United"
-  },
-  {
-   "round": "Matchday 18",
-   "date": "2026-12-30",
-   "time": "20:00",
-   "team1": "Ipswich Town",
-   "team2": "Chelsea"
-  },
-  {
-   "round": "Matchday 18",
-   "date": "2026-12-30",
-   "time": "20:00",
+   "time": "19:30",
    "team1": "Manchester United",
    "team2": "Sunderland"
   },
   {
    "round": "Matchday 18",
    "date": "2026-12-30",
-   "time": "20:00",
+   "time": "19:30",
    "team1": "Newcastle United",
    "team2": "Nottingham Forest"
   },
   {
    "round": "Matchday 18",
    "date": "2026-12-30",
+   "time": "20:15",
+   "team1": "Aston Villa",
+   "team2": "Liverpool"
+  },
+  {
+   "round": "Matchday 18",
+   "date": "2026-12-30",
+   "time": "20:15",
+   "team1": "Ipswich Town",
+   "team2": "Chelsea"
+  },
+  {
+   "round": "Matchday 19",
+   "date": "2027-01-01",
    "time": "20:00",
-   "team1": "Tottenham Hotspur",
-   "team2": "Brighton & Hove Albion"
+   "team1": "Leeds United",
+   "team2": "Everton"
   },
   {
    "round": "Matchday 19",
    "date": "2027-01-02",
-   "time": "15:00",
-   "team1": "AFC Bournemouth",
-   "team2": "Aston Villa"
+   "time": "12:30",
+   "team1": "Brighton & Hove Albion",
+   "team2": "Manchester United"
   },
   {
    "round": "Matchday 19",
@@ -1468,36 +1475,8 @@
    "round": "Matchday 19",
    "date": "2027-01-02",
    "time": "15:00",
-   "team1": "Brighton & Hove Albion",
-   "team2": "Manchester United"
-  },
-  {
-   "round": "Matchday 19",
-   "date": "2027-01-02",
-   "time": "15:00",
-   "team1": "Chelsea",
-   "team2": "Newcastle United"
-  },
-  {
-   "round": "Matchday 19",
-   "date": "2027-01-02",
-   "time": "15:00",
-   "team1": "Leeds United",
-   "team2": "Everton"
-  },
-  {
-   "round": "Matchday 19",
-   "date": "2027-01-02",
-   "time": "15:00",
    "team1": "Liverpool",
    "team2": "Coventry City"
-  },
-  {
-   "round": "Matchday 19",
-   "date": "2027-01-02",
-   "time": "15:00",
-   "team1": "Manchester City",
-   "team2": "Tottenham Hotspur"
   },
   {
    "round": "Matchday 19",
@@ -1514,74 +1493,95 @@
    "team2": "Hull City"
   },
   {
+   "round": "Matchday 19",
+   "date": "2027-01-02",
+   "time": "17:30",
+   "team1": "AFC Bournemouth",
+   "team2": "Aston Villa"
+  },
+  {
+   "round": "Matchday 19",
+   "date": "2027-01-03",
+   "time": "14:00",
+   "team1": "Chelsea",
+   "team2": "Newcastle United"
+  },
+  {
+   "round": "Matchday 19",
+   "date": "2027-01-03",
+   "time": "16:30",
+   "team1": "Manchester City",
+   "team2": "Tottenham Hotspur"
+  },
+  {
    "round": "Matchday 20",
-   "date": "2027-01-06",
-   "time": "20:00",
+   "date": "2027-01-05",
+   "time": "19:30",
    "team1": "Arsenal",
    "team2": "Brentford"
   },
   {
    "round": "Matchday 20",
-   "date": "2027-01-06",
-   "time": "20:00",
+   "date": "2027-01-05",
+   "time": "19:30",
    "team1": "Brighton & Hove Albion",
    "team2": "AFC Bournemouth"
   },
   {
    "round": "Matchday 20",
+   "date": "2027-01-05",
+   "time": "19:30",
+   "team1": "Everton",
+   "team2": "Aston Villa"
+  },
+  {
+   "round": "Matchday 20",
+   "date": "2027-01-05",
+   "time": "19:30",
+   "team1": "Nottingham Forest",
+   "team2": "Hull City"
+  },
+  {
+   "round": "Matchday 20",
+   "date": "2027-01-05",
+   "time": "20:15",
+   "team1": "Sunderland",
+   "team2": "Liverpool"
+  },
+  {
+   "round": "Matchday 20",
    "date": "2027-01-06",
-   "time": "20:00",
+   "time": "19:30",
    "team1": "Crystal Palace",
    "team2": "Chelsea"
   },
   {
    "round": "Matchday 20",
    "date": "2027-01-06",
-   "time": "20:00",
-   "team1": "Everton",
-   "team2": "Aston Villa"
-  },
-  {
-   "round": "Matchday 20",
-   "date": "2027-01-06",
-   "time": "20:00",
+   "time": "19:30",
    "team1": "Fulham",
    "team2": "Tottenham Hotspur"
   },
   {
    "round": "Matchday 20",
    "date": "2027-01-06",
-   "time": "20:00",
+   "time": "19:30",
    "team1": "Ipswich Town",
    "team2": "Coventry City"
   },
   {
    "round": "Matchday 20",
    "date": "2027-01-06",
-   "time": "20:00",
+   "time": "20:15",
    "team1": "Leeds United",
    "team2": "Manchester City"
   },
   {
    "round": "Matchday 20",
-   "date": "2027-01-06",
+   "date": "2027-01-07",
    "time": "20:00",
    "team1": "Manchester United",
    "team2": "Newcastle United"
-  },
-  {
-   "round": "Matchday 20",
-   "date": "2027-01-06",
-   "time": "20:00",
-   "team1": "Nottingham Forest",
-   "team2": "Hull City"
-  },
-  {
-   "round": "Matchday 20",
-   "date": "2027-01-06",
-   "time": "20:00",
-   "team1": "Sunderland",
-   "team2": "Liverpool"
   },
   {
    "round": "Matchday 21",
