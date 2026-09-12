@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-12T15:42:20Z",
+ "fetched": "2026-09-12T15:47:26Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -443,10 +443,12 @@
    "time": "15:00",
    "team1": "Liverpool",
    "team2": "Fulham",
-   "live": [
-    0,
-    0
-   ]
+   "score": {
+    "ft": [
+     0,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 4",
