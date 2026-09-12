@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-12T15:52:32Z",
+ "fetched": "2026-09-12T15:57:39Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -399,10 +399,12 @@
    "time": "15:00",
    "team1": "AFC Bournemouth",
    "team2": "Brentford",
-   "live": [
-    2,
-    2
-   ]
+   "score": {
+    "ft": [
+     2,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 4",
@@ -436,10 +438,12 @@
    "time": "15:00",
    "team1": "Crystal Palace",
    "team2": "Ipswich Town",
-   "live": [
-    2,
-    2
-   ]
+   "score": {
+    "ft": [
+     2,
+     3
+    ]
+   }
   },
   {
    "round": "Matchday 4",
