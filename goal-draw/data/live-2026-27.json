@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-12T15:47:26Z",
+ "fetched": "2026-09-12T15:52:32Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -410,10 +410,12 @@
    "time": "15:00",
    "team1": "Aston Villa",
    "team2": "Nottingham Forest",
-   "live": [
-    1,
-    1
-   ]
+   "score": {
+    "ft": [
+     1,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 4",
@@ -421,10 +423,12 @@
    "time": "15:00",
    "team1": "Chelsea",
    "team2": "Hull City",
-   "live": [
-    2,
-    2
-   ]
+   "score": {
+    "ft": [
+     2,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 4",
