@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-12T14:16:12Z",
+ "fetched": "2026-09-12T14:17:14Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -433,7 +433,7 @@
    "team1": "Crystal Palace",
    "team2": "Ipswich Town",
    "live": [
-    0,
+    1,
     0
    ]
   },
