@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-10T15:04:18Z",
+ "fetched": "2026-09-12T14:16:12Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -398,35 +398,55 @@
    "date": "2026-09-12",
    "time": "15:00",
    "team1": "AFC Bournemouth",
-   "team2": "Brentford"
+   "team2": "Brentford",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 4",
    "date": "2026-09-12",
    "time": "15:00",
    "team1": "Aston Villa",
-   "team2": "Nottingham Forest"
+   "team2": "Nottingham Forest",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 4",
    "date": "2026-09-12",
    "time": "15:00",
    "team1": "Chelsea",
-   "team2": "Hull City"
+   "team2": "Hull City",
+   "live": [
+    1,
+    0
+   ]
   },
   {
    "round": "Matchday 4",
    "date": "2026-09-12",
    "time": "15:00",
    "team1": "Crystal Palace",
-   "team2": "Ipswich Town"
+   "team2": "Ipswich Town",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 4",
    "date": "2026-09-12",
    "time": "15:00",
    "team1": "Liverpool",
-   "team2": "Fulham"
+   "team2": "Fulham",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 4",
