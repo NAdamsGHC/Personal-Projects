@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-12T21:01:27Z",
+ "fetched": "2026-09-13T14:57:14Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -489,7 +489,13 @@
    "date": "2026-09-13",
    "time": "14:00",
    "team1": "Coventry City",
-   "team2": "Brighton & Hove Albion"
+   "team2": "Brighton & Hove Albion",
+   "score": {
+    "ft": [
+     0,
+     5
+    ]
+   }
   },
   {
    "round": "Matchday 4",
