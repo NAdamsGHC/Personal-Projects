@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-18T20:53:48Z",
+ "fetched": "2026-09-19T14:34:58Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -541,28 +541,46 @@
    "date": "2026-09-19",
    "time": "12:30",
    "team1": "Tottenham Hotspur",
-   "team2": "Aston Villa"
+   "team2": "Aston Villa",
+   "score": {
+    "ft": [
+     2,
+     3
+    ]
+   }
   },
   {
    "round": "Matchday 5",
    "date": "2026-09-19",
    "time": "15:00",
    "team1": "Brighton & Hove Albion",
-   "team2": "Arsenal"
+   "team2": "Arsenal",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 5",
    "date": "2026-09-19",
    "time": "15:00",
    "team1": "Everton",
-   "team2": "Ipswich Town"
+   "team2": "Ipswich Town",
+   "live": [
+    1,
+    0
+   ]
   },
   {
    "round": "Matchday 5",
    "date": "2026-09-19",
    "time": "15:00",
    "team1": "Newcastle United",
-   "team2": "Hull City"
+   "team2": "Hull City",
+   "live": [
+    2,
+    0
+   ]
   },
   {
    "round": "Matchday 5",
