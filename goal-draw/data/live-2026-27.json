@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-19T17:44:52Z",
+ "fetched": "2026-09-19T18:19:35Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -594,10 +594,12 @@
    "time": "17:30",
    "team1": "Nottingham Forest",
    "team2": "Coventry City",
-   "live": [
-    0,
-    1
-   ]
+   "score": {
+    "ft": [
+     0,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 5",
