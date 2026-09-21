@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-09-20T17:21:47Z",
+ "fetched": "2026-09-21T17:07:56Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -935,31 +935,24 @@
   },
   {
    "round": "Matchday 10",
+   "date": "2026-11-06",
+   "time": "20:00",
+   "team1": "Everton",
+   "team2": "Coventry City"
+  },
+  {
+   "round": "Matchday 10",
+   "date": "2026-11-07",
+   "time": "12:30",
+   "team1": "Leeds United",
+   "team2": "Tottenham Hotspur"
+  },
+  {
+   "round": "Matchday 10",
    "date": "2026-11-07",
    "time": "15:00",
    "team1": "Arsenal",
    "team2": "Hull City"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Brighton & Hove Albion",
-   "team2": "Brentford"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Crystal Palace",
-   "team2": "Liverpool"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Everton",
-   "team2": "Coventry City"
   },
   {
    "round": "Matchday 10",
@@ -971,37 +964,51 @@
   {
    "round": "Matchday 10",
    "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Ipswich Town",
-   "team2": "AFC Bournemouth"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Leeds United",
-   "team2": "Tottenham Hotspur"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
-   "team1": "Manchester United",
-   "team2": "Aston Villa"
-  },
-  {
-   "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
+   "time": "17:30",
    "team1": "Nottingham Forest",
    "team2": "Manchester City"
   },
   {
    "round": "Matchday 10",
-   "date": "2026-11-07",
-   "time": "15:00",
+   "date": "2026-11-08",
+   "time": "14:00",
+   "team1": "Brighton & Hove Albion",
+   "team2": "Brentford"
+  },
+  {
+   "round": "Matchday 10",
+   "date": "2026-11-08",
+   "time": "14:00",
+   "team1": "Crystal Palace",
+   "team2": "Liverpool"
+  },
+  {
+   "round": "Matchday 10",
+   "date": "2026-11-08",
+   "time": "14:00",
+   "team1": "Ipswich Town",
+   "team2": "AFC Bournemouth"
+  },
+  {
+   "round": "Matchday 10",
+   "date": "2026-11-08",
+   "time": "14:00",
    "team1": "Sunderland",
    "team2": "Chelsea"
+  },
+  {
+   "round": "Matchday 10",
+   "date": "2026-11-08",
+   "time": "16:30",
+   "team1": "Manchester United",
+   "team2": "Aston Villa"
+  },
+  {
+   "round": "Matchday 11",
+   "date": "2026-11-21",
+   "time": "12:30",
+   "team1": "Manchester City",
+   "team2": "Fulham"
   },
   {
    "round": "Matchday 11",
@@ -1021,13 +1028,6 @@
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
-   "team1": "Brentford",
-   "team2": "Everton"
-  },
-  {
-   "round": "Matchday 11",
-   "date": "2026-11-21",
-   "time": "15:00",
    "team1": "Chelsea",
    "team2": "Leeds United"
   },
@@ -1042,78 +1042,43 @@
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
-   "team1": "Hull City",
-   "team2": "Brighton & Hove Albion"
+   "team1": "Tottenham Hotspur",
+   "team2": "Ipswich Town"
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
-   "time": "15:00",
-   "team1": "Liverpool",
-   "team2": "Manchester United"
-  },
-  {
-   "round": "Matchday 11",
-   "date": "2026-11-21",
-   "time": "15:00",
-   "team1": "Manchester City",
-   "team2": "Fulham"
-  },
-  {
-   "round": "Matchday 11",
-   "date": "2026-11-21",
-   "time": "15:00",
+   "time": "17:30",
    "team1": "Newcastle United",
    "team2": "Arsenal"
   },
   {
    "round": "Matchday 11",
-   "date": "2026-11-21",
-   "time": "15:00",
-   "team1": "Tottenham Hotspur",
-   "team2": "Ipswich Town"
+   "date": "2026-11-22",
+   "time": "14:00",
+   "team1": "Hull City",
+   "team2": "Brighton & Hove Albion"
+  },
+  {
+   "round": "Matchday 11",
+   "date": "2026-11-22",
+   "time": "16:30",
+   "team1": "Liverpool",
+   "team2": "Manchester United"
+  },
+  {
+   "round": "Matchday 11",
+   "date": "2026-11-23",
+   "time": "20:00",
+   "team1": "Brentford",
+   "team2": "Everton"
   },
   {
    "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Arsenal",
-   "team2": "Manchester City"
-  },
-  {
-   "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Brighton & Hove Albion",
-   "team2": "Newcastle United"
-  },
-  {
-   "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Crystal Palace",
-   "team2": "Hull City"
-  },
-  {
-   "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Everton",
-   "team2": "Liverpool"
-  },
-  {
-   "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Fulham",
-   "team2": "AFC Bournemouth"
-  },
-  {
-   "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Ipswich Town",
-   "team2": "Aston Villa"
+   "date": "2026-11-27",
+   "time": "20:00",
+   "team1": "Nottingham Forest",
+   "team2": "Chelsea"
   },
   {
    "round": "Matchday 12",
@@ -1132,16 +1097,51 @@
   {
    "round": "Matchday 12",
    "date": "2026-11-28",
-   "time": "15:00",
-   "team1": "Nottingham Forest",
-   "team2": "Chelsea"
+   "time": "17:30",
+   "team1": "Ipswich Town",
+   "team2": "Aston Villa"
   },
   {
    "round": "Matchday 12",
-   "date": "2026-11-28",
-   "time": "15:00",
+   "date": "2026-11-29",
+   "time": "12:00",
+   "team1": "Everton",
+   "team2": "Liverpool"
+  },
+  {
+   "round": "Matchday 12",
+   "date": "2026-11-29",
+   "time": "14:05",
+   "team1": "Brighton & Hove Albion",
+   "team2": "Newcastle United"
+  },
+  {
+   "round": "Matchday 12",
+   "date": "2026-11-29",
+   "time": "14:05",
+   "team1": "Crystal Palace",
+   "team2": "Hull City"
+  },
+  {
+   "round": "Matchday 12",
+   "date": "2026-11-29",
+   "time": "14:05",
+   "team1": "Fulham",
+   "team2": "AFC Bournemouth"
+  },
+  {
+   "round": "Matchday 12",
+   "date": "2026-11-29",
+   "time": "14:05",
    "team1": "Sunderland",
    "team2": "Tottenham Hotspur"
+  },
+  {
+   "round": "Matchday 12",
+   "date": "2026-11-29",
+   "time": "16:30",
+   "team1": "Arsenal",
+   "team2": "Manchester City"
   },
   {
    "round": "Matchday 13",
