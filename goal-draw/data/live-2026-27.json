@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-10T11:38:16Z",
+ "fetched": "2026-10-10T16:18:01Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -659,38 +659,64 @@
    "time": "12:30",
    "team1": "Arsenal",
    "team2": "Leeds United",
-   "live": [
-    0,
-    0
-   ]
+   "score": {
+    "ft": [
+     2,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-10",
    "time": "15:00",
    "team1": "Aston Villa",
-   "team2": "Brentford"
+   "team2": "Brentford",
+   "score": {
+    "ft": [
+     2,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-10",
    "time": "15:00",
    "team1": "Chelsea",
-   "team2": "AFC Bournemouth"
+   "team2": "AFC Bournemouth",
+   "score": {
+    "ft": [
+     5,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-10",
    "time": "15:00",
    "team1": "Ipswich Town",
-   "team2": "Fulham"
+   "team2": "Fulham",
+   "score": {
+    "ft": [
+     2,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-10",
    "time": "15:00",
    "team1": "Sunderland",
-   "team2": "Brighton & Hove Albion"
+   "team2": "Brighton & Hove Albion",
+   "score": {
+    "ft": [
+     0,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 6",
