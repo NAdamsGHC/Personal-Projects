@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-10T18:25:51Z",
+ "fetched": "2026-10-11T16:41:43Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -736,21 +736,37 @@
    "date": "2026-10-11",
    "time": "14:00",
    "team1": "Crystal Palace",
-   "team2": "Nottingham Forest"
+   "team2": "Nottingham Forest",
+   "score": {
+    "ft": [
+     3,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-11",
    "time": "14:00",
    "team1": "Hull City",
-   "team2": "Everton"
+   "team2": "Everton",
+   "score": {
+    "ft": [
+     2,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 6",
    "date": "2026-10-11",
    "time": "16:30",
    "team1": "Liverpool",
-   "team2": "Manchester City"
+   "team2": "Manchester City",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 6",
