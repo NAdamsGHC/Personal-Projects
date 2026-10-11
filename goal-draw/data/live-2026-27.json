@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-11T17:24:33Z",
+ "fetched": "2026-10-11T17:26:04Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -763,12 +763,10 @@
    "time": "16:30",
    "team1": "Liverpool",
    "team2": "Manchester City",
-   "score": {
-    "ft": [
-     0,
-     3
-    ]
-   }
+   "live": [
+    0,
+    3
+   ]
   },
   {
    "round": "Matchday 6",
