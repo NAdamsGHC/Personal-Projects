@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-12T20:22:19Z",
+ "fetched": "2026-10-12T20:29:56Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -778,7 +778,7 @@
    "team2": "Newcastle United",
    "live": [
     2,
-    0
+    1
    ]
   },
   {
