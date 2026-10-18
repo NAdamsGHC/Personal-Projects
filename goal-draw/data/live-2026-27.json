@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-17T18:24:37Z",
+ "fetched": "2026-10-18T14:42:49Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -853,21 +853,33 @@
    "date": "2026-10-18",
    "time": "14:00",
    "team1": "AFC Bournemouth",
-   "team2": "Sunderland"
+   "team2": "Sunderland",
+   "live": [
+    2,
+    0
+   ]
   },
   {
    "round": "Matchday 7",
    "date": "2026-10-18",
    "time": "14:00",
    "team1": "Brighton & Hove Albion",
-   "team2": "Crystal Palace"
+   "team2": "Crystal Palace",
+   "live": [
+    4,
+    0
+   ]
   },
   {
    "round": "Matchday 7",
    "date": "2026-10-18",
    "time": "14:00",
    "team1": "Leeds United",
-   "team2": "Manchester United"
+   "team2": "Manchester United",
+   "live": [
+    1,
+    1
+   ]
   },
   {
    "round": "Matchday 7",
