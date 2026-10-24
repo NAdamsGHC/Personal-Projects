@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-24T15:43:11Z",
+ "fetched": "2026-10-24T15:53:16Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -945,10 +945,12 @@
    "time": "15:00",
    "team1": "Arsenal",
    "team2": "Everton",
-   "live": [
-    2,
-    0
-   ]
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 8",
@@ -956,10 +958,12 @@
    "time": "15:00",
    "team1": "Coventry City",
    "team2": "Fulham",
-   "live": [
-    0,
-    1
-   ]
+   "score": {
+    "ft": [
+     0,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 8",
