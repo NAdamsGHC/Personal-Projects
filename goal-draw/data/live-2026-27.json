@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-24T15:53:16Z",
+ "fetched": "2026-10-24T16:38:06Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -970,7 +970,11 @@
    "date": "2026-10-24",
    "time": "17:30",
    "team1": "Chelsea",
-   "team2": "Tottenham Hotspur"
+   "team2": "Tottenham Hotspur",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 8",
