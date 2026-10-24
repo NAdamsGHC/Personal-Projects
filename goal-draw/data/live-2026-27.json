@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-24T14:42:14Z",
+ "fetched": "2026-10-24T15:33:06Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -946,7 +946,7 @@
    "team1": "Arsenal",
    "team2": "Everton",
    "live": [
-    1,
+    2,
     0
    ]
   },
