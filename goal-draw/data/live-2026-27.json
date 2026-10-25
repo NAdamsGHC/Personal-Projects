@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-25T16:38:33Z",
+ "fetched": "2026-10-25T18:24:02Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1036,10 +1036,12 @@
    "time": "16:30",
    "team1": "Sunderland",
    "team2": "Leeds United",
-   "live": [
-    0,
-    0
-   ]
+   "score": {
+    "ft": [
+     0,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 9",
