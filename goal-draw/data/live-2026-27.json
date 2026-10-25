@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-25T15:49:05Z",
+ "fetched": "2026-10-25T15:54:08Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -997,10 +997,12 @@
    "time": "14:00",
    "team1": "Hull City",
    "team2": "Brentford",
-   "live": [
-    1,
-    1
-   ]
+   "score": {
+    "ft": [
+     1,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 8",
@@ -1008,10 +1010,12 @@
    "time": "14:00",
    "team1": "Liverpool",
    "team2": "Brighton & Hove Albion",
-   "live": [
-    2,
-    0
-   ]
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 8",
@@ -1019,10 +1023,12 @@
    "time": "14:00",
    "team1": "Manchester United",
    "team2": "AFC Bournemouth",
-   "live": [
-    0,
-    3
-   ]
+   "score": {
+    "ft": [
+     0,
+     3
+    ]
+   }
   },
   {
    "round": "Matchday 8",
