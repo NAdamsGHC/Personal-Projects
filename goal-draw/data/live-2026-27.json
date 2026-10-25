@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-25T15:33:55Z",
+ "fetched": "2026-10-25T15:49:05Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -984,10 +984,12 @@
    "time": "14:00",
    "team1": "Crystal Palace",
    "team2": "Newcastle United",
-   "live": [
-    0,
-    2
-   ]
+   "score": {
+    "ft": [
+     0,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 8",
