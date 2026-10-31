@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-31T20:47:07Z",
+ "fetched": "2026-10-31T20:56:43Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1141,7 +1141,7 @@
    "team1": "Aston Villa",
    "team2": "Fulham",
    "live": [
-    1,
+    0,
     0
    ]
   },
