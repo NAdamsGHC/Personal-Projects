@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-10-25T18:24:02Z",
+ "fetched": "2026-10-31T16:12:59Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1048,42 +1048,68 @@
    "date": "2026-10-31",
    "time": "12:30",
    "team1": "Chelsea",
-   "team2": "Manchester United"
+   "team2": "Manchester United",
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 9",
    "date": "2026-10-31",
    "time": "15:00",
    "team1": "AFC Bournemouth",
-   "team2": "Leeds United"
+   "team2": "Leeds United",
+   "live": [
+    1,
+    0
+   ]
   },
   {
    "round": "Matchday 9",
    "date": "2026-10-31",
    "time": "15:00",
    "team1": "Brentford",
-   "team2": "Nottingham Forest"
+   "team2": "Nottingham Forest",
+   "live": [
+    1,
+    0
+   ]
   },
   {
    "round": "Matchday 9",
    "date": "2026-10-31",
    "time": "15:00",
    "team1": "Coventry City",
-   "team2": "Sunderland"
+   "team2": "Sunderland",
+   "live": [
+    2,
+    0
+   ]
   },
   {
    "round": "Matchday 9",
    "date": "2026-10-31",
    "time": "15:00",
    "team1": "Hull City",
-   "team2": "Ipswich Town"
+   "team2": "Ipswich Town",
+   "live": [
+    0,
+    1
+   ]
   },
   {
    "round": "Matchday 9",
    "date": "2026-10-31",
    "time": "15:00",
    "team1": "Manchester City",
-   "team2": "Brighton & Hove Albion"
+   "team2": "Brighton & Hove Albion",
+   "live": [
+    0,
+    1
+   ]
   },
   {
    "round": "Matchday 9",
