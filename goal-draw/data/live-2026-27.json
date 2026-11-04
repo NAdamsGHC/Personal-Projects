@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-02T21:53:27Z",
+ "fetched": "2026-11-04T13:31:01Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1624,13 +1624,6 @@
   {
    "round": "Matchday 16",
    "date": "2026-12-19",
-   "time": "15:00",
-   "team1": "Nottingham Forest",
-   "team2": "Everton"
-  },
-  {
-   "round": "Matchday 16",
-   "date": "2026-12-19",
    "time": "17:30",
    "team1": "Liverpool",
    "team2": "Tottenham Hotspur"
@@ -1641,6 +1634,13 @@
    "time": "14:00",
    "team1": "Brighton & Hove Albion",
    "team2": "Ipswich Town"
+  },
+  {
+   "round": "Matchday 16",
+   "date": "2026-12-20",
+   "time": "14:00",
+   "team1": "Nottingham Forest",
+   "team2": "Everton"
   },
   {
    "round": "Matchday 16",
