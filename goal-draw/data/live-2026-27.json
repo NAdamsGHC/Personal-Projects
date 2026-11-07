@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-07T16:55:56Z",
+ "fetched": "2026-11-07T16:57:28Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1205,10 +1205,12 @@
    "time": "15:00",
    "team1": "Arsenal",
    "team2": "Hull City",
-   "live": [
-    1,
-    0
-   ]
+   "score": {
+    "ft": [
+     1,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 10",
