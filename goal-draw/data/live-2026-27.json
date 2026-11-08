@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-07T19:22:15Z",
+ "fetched": "2026-11-08T17:09:16Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1243,35 +1243,63 @@
    "date": "2026-11-08",
    "time": "14:00",
    "team1": "Brighton & Hove Albion",
-   "team2": "Brentford"
+   "team2": "Brentford",
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 10",
    "date": "2026-11-08",
    "time": "14:00",
    "team1": "Crystal Palace",
-   "team2": "Liverpool"
+   "team2": "Liverpool",
+   "score": {
+    "ft": [
+     1,
+     3
+    ]
+   }
   },
   {
    "round": "Matchday 10",
    "date": "2026-11-08",
    "time": "14:00",
    "team1": "Ipswich Town",
-   "team2": "AFC Bournemouth"
+   "team2": "AFC Bournemouth",
+   "score": {
+    "ft": [
+     1,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 10",
    "date": "2026-11-08",
    "time": "14:00",
    "team1": "Sunderland",
-   "team2": "Chelsea"
+   "team2": "Chelsea",
+   "score": {
+    "ft": [
+     1,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 10",
    "date": "2026-11-08",
    "time": "16:30",
    "team1": "Manchester United",
-   "team2": "Aston Villa"
+   "team2": "Aston Villa",
+   "live": [
+    1,
+    2
+   ]
   },
   {
    "round": "Matchday 11",
