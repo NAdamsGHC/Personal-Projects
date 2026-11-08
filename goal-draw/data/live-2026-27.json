@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-08T17:46:48Z",
+ "fetched": "2026-11-08T18:27:18Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1296,10 +1296,12 @@
    "time": "16:30",
    "team1": "Manchester United",
    "team2": "Aston Villa",
-   "live": [
-    2,
-    4
-   ]
+   "score": {
+    "ft": [
+     3,
+     4
+    ]
+   }
   },
   {
    "round": "Matchday 11",
