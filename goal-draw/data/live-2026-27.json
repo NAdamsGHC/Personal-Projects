@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-21T13:56:09Z",
+ "fetched": "2026-11-21T18:07:13Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1309,52 +1309,88 @@
    "time": "12:30",
    "team1": "Manchester City",
    "team2": "Fulham",
-   "live": [
-    1,
-    1
-   ]
+   "score": {
+    "ft": [
+     1,
+     1
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
    "team1": "AFC Bournemouth",
-   "team2": "Nottingham Forest"
+   "team2": "Nottingham Forest",
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
    "team1": "Aston Villa",
-   "team2": "Sunderland"
+   "team2": "Sunderland",
+   "score": {
+    "ft": [
+     0,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
    "team1": "Chelsea",
-   "team2": "Leeds United"
+   "team2": "Leeds United",
+   "score": {
+    "ft": [
+     1,
+     4
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
    "team1": "Coventry City",
-   "team2": "Crystal Palace"
+   "team2": "Crystal Palace",
+   "score": {
+    "ft": [
+     3,
+     2
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "15:00",
    "team1": "Tottenham Hotspur",
-   "team2": "Ipswich Town"
+   "team2": "Ipswich Town",
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-21",
    "time": "17:30",
    "team1": "Newcastle United",
-   "team2": "Arsenal"
+   "team2": "Arsenal",
+   "live": [
+    0,
+    0
+   ]
   },
   {
    "round": "Matchday 11",
