@@ -1,7 +1,7 @@
 {
  "name": "English Premier League 2026-27",
  "source": "Fantasy Premier League API",
- "fetched": "2026-11-21T19:23:56Z",
+ "fetched": "2026-11-22T18:35:52Z",
  "matches": [
   {
    "round": "Matchday 1",
@@ -1399,14 +1399,26 @@
    "date": "2026-11-22",
    "time": "14:00",
    "team1": "Hull City",
-   "team2": "Brighton & Hove Albion"
+   "team2": "Brighton & Hove Albion",
+   "score": {
+    "ft": [
+     2,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 11",
    "date": "2026-11-22",
    "time": "16:30",
    "team1": "Liverpool",
-   "team2": "Manchester United"
+   "team2": "Manchester United",
+   "score": {
+    "ft": [
+     4,
+     0
+    ]
+   }
   },
   {
    "round": "Matchday 11",
